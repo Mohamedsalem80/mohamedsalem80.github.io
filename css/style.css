@@ -1,0 +1,95 @@
+body {
+    font-size: 18px;
+    background-color: #eeeeee;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+    width: 97%;
+    padding: 10px;
+    display: flex;
+    margin: 20px auto;
+    border-radius: 12px;
+    flex-direction: column;
+    border: 1px solid #cccccc;
+    background-color: #ffffff;
+}
+
+.container .head {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.container .subhead {
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.container p {
+    text-align: justify;
+}
+
+.container .image {
+}
+
+header {    
+    width: 100%;
+    height: 70px;
+    display: flex;
+    color: #ffffff;
+    flex-direction: row;
+    background-color: #006c9e;
+    align-content: center;
+    justify-content: space-between;
+    align-items: stretch;
+    flex-wrap: wrap;
+}
+
+header .logo {
+    width: 80%;
+    padding: 10px;
+    font-size: 40px;
+    font-weight: bolder;
+    align-content: center;
+}
+
+header .menu-btn {
+    width: 10%;
+    padding: 14px;
+    text-align: end;
+    margin-right: 10px;
+    font-size: 26px;
+}
+
+@media (max-width: 575px) {
+    .collapse-mid {
+        display: none;
+    }
+}
+
+@media (min-width: 576px) {
+    .collapse-mid {
+        display: inline;
+    }
+}
+
+@media (min-width: 768px) {
+    .collapse-mid {
+        display: inline;
+    }
+}
+
+@media (min-width: 992px) {
+    .collapse-mid {
+        display: inline;
+    }
+}
+
+@media (min-width: 1200px) {
+    .collapse-mid {
+        display: inline;
+    }
+}
