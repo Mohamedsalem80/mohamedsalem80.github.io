@@ -76,28 +76,28 @@ function colorFillTiles(scheme, row){
 }
 
 function checkWord() {
+    var test = (pick+"").toUpperCase();
     if(allWords.includes(words[tryCnt].join("").toLowerCase())){
-        var test = (pick+"").toUpperCase();
-        result = [];
+        result = [0,0,0,0,0];
+        for (var i = 0; i < 5; i++) {
+            if(test[i] == words[tryCnt][i]){
+                test = test.split('');
+                test[i] = "*";
+                test = test.join('');
+                result[i] = 2;
+            }
+        }
         for(var i = 0; i < 5; i++){
             flag = 0;
             for(var j = 0; j < 5; j++){
                 if(test[j] == words[tryCnt][i]){
-                    if(i === j){
-                        flag = 2;
-                        test = test.split('');
-                        test[j] = flag + "";
-                        test = test.join('');
-                        break;
-                    } else {
-                        flag = 1;
-                        test = test.split('');
-                        test[j] = flag + "";
-                        test = test.join('');
-                    }
+                    flag = 1;
+                    test = test.split('');
+                    test[j] = flag + "";
+                    test = test.join('');
+                    result[i] = flag;
                 }
             }
-            result.push(flag);
         }
         colorFillTiles(result, tryCnt);
         if(result.join("") === "22222"){
