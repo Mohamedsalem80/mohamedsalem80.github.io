@@ -109,7 +109,7 @@ function checkWord() {
                 console.log("ended");
                 tryCnt = 10;
                 letCnt = 10;
-                window.alert("You Lost!");
+                window.alert("You Lost!.\nThe word is "+pick);
             } else {
                 tryCnt++;
                 letCnt = 0;
