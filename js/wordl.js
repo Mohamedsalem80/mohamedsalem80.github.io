@@ -18,21 +18,27 @@ function Mute(){
 }
 
 function playClickSound1() {
-    var audio = new Audio('sound/click-sound-1.mp3');
-    audio.volume = volumeSound;
-    audio.play();
+    if (volumeSound != 0) {
+        var audio = new Audio('sound/click-sound-1.mp3');
+        audio.volume = volumeSound;
+        audio.play();
+    }
 }
 
 function playClickSound2() {
-    var audio = new Audio('sound/click-sound-2.mp3');
-    audio.volume = volumeSound;
-    audio.play();
+    if (volumeSound != 0) {
+        var audio = new Audio('sound/click-sound-2.mp3');
+        audio.volume = volumeSound;
+        audio.play();
+    }
 }
 
 function playClickSound3() {
-    var audio = new Audio('sound/click-sound-3.mp3');
-    audio.volume = volumeSound;
-    audio.play();
+    if (volumeSound != 0) {
+        var audio = new Audio('sound/click-sound-3.mp3');
+        audio.volume = volumeSound;
+        audio.play();
+    }
 }
 
 function saveElementAsImage(elementId, filename) {
