@@ -246,13 +246,19 @@ header .menu-btn {
 }
 
 .scheme-2 {
-    border: 2px solid #1da413 !important;
-    background-color: #00ff3c !important;
+    border: 2px solid #2c8b25 !important;
+    background-color: #00c932 !important;
+    color: rgb(255, 255, 255);
 }
 
 .scheme-1 {
-    border: 2px solid #a49d13 !important;
-    background-color: #fff700 !important;
+    border: 2px solid #cca218 !important;
+    background-color: #ffc500 !important;
+}
+
+.scheme-0 {
+    border: 2px solid #222222 !important;
+    background-color: #444444 !important;
 }
 
 .options {
