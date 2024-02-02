@@ -38,11 +38,11 @@ var slinestr = "one";
 var elinestr = "one";
 changeSLine(slinestr);
 changeELine(elinestr);
-sline.addEventListener("change", function(){
+sline.addEventListener("input", function(){
     slinestr = sline.value;
     changeSLine(slinestr);
 });
-eline.addEventListener("change", function(){
+eline.addEventListener("input", function(){
     elinestr = eline.value;
     changeELine(elinestr);
 });
@@ -64,7 +64,7 @@ function changeSLine(line){
         });
         pl2.forEach(function(ele, key){
             ele.style.display = "inline-block";
-            pickup = pl1[1].value;
+            pickup = pl2[0].value;
         });
         pl3.forEach(function(ele, key){
             ele.style.display = "none";
@@ -78,7 +78,7 @@ function changeSLine(line){
         });
         pl3.forEach(function(ele, key){
             ele.style.display = "inline-block";
-            pickup = pl1[2].value;
+            pickup = pl3[0].value;
         });
     }
 }
@@ -100,7 +100,7 @@ function changeELine(line){
         });
         dl2.forEach(function(ele, key){
             ele.style.display = "inline-block";
-            dropoff = dl1[1].value;
+            dropoff = dl2[0].value;
         });
         dl3.forEach(function(ele, key){
             ele.style.display = "none";
@@ -114,17 +114,17 @@ function changeELine(line){
         });
         dl3.forEach(function(ele, key){
             ele.style.display = "inline-block";
-            dropoff = dl1[2].value;
+            dropoff = dl3[0].value;
         });
     }
 }
 pickups.forEach(function(ele, key){
-    ele.addEventListener("change", function(e){
+    ele.addEventListener("input", function(e){
         pickup = e.target.value;
     });
 });
 dropoffs.forEach(function(ele, key){
-    ele.addEventListener("change", function(e){
+    ele.addEventListener("input", function(e){
         dropoff = e.target.value;
     });
 });
