@@ -47,10 +47,10 @@ eline.addEventListener("change", function(){
     changeELine(elinestr);
 });
 function changeSLine(line){
-    pickup = "none";
     if(line == "one"){
         pl1.forEach(function(ele, key){
             ele.style.display = "inline-block";
+            pickup = pl1[0].value;
         });
         pl2.forEach(function(ele, key){
             ele.style.display = "none";
@@ -64,6 +64,7 @@ function changeSLine(line){
         });
         pl2.forEach(function(ele, key){
             ele.style.display = "inline-block";
+            pickup = pl1[1].value;
         });
         pl3.forEach(function(ele, key){
             ele.style.display = "none";
@@ -77,14 +78,15 @@ function changeSLine(line){
         });
         pl3.forEach(function(ele, key){
             ele.style.display = "inline-block";
+            pickup = pl1[2].value;
         });
     }
 }
 function changeELine(line){
-    dropoff = "none";
     if(line == "one"){
         dl1.forEach(function(ele, key){
             ele.style.display = "inline-block";
+            dropoff = dl1[0].value;
         });
         dl2.forEach(function(ele, key){
             ele.style.display = "none";
@@ -98,6 +100,7 @@ function changeELine(line){
         });
         dl2.forEach(function(ele, key){
             ele.style.display = "inline-block";
+            dropoff = dl1[1].value;
         });
         dl3.forEach(function(ele, key){
             ele.style.display = "none";
@@ -111,6 +114,7 @@ function changeELine(line){
         });
         dl3.forEach(function(ele, key){
             ele.style.display = "inline-block";
+            dropoff = dl1[2].value;
         });
     }
 }

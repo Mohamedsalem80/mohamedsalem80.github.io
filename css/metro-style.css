@@ -34,11 +34,11 @@ main {
     flex-direction: column;
     justify-content: space-evenly;
 }
-#z112{
+#z112 {
     width: 100%;
     padding: 4px;
 }
-#btn{
+#btn {
     width: 150px;
     padding: 2px;
     outline: none;
