@@ -25,15 +25,15 @@ var eline = document.getElementById("eline");
 var cost = document.getElementById("ticketCost");
 var cstats = document.getElementById("cstats");
 var pickups = document.querySelectorAll("[name=pickup]");
-var pickup = "none";
 var dropoffs = document.querySelectorAll("[name=dropoff]");
-var dropoff = "none";
 var pl1 = document.querySelectorAll(".pickupl1");
 var pl2 = document.querySelectorAll(".pickupl2");
 var pl3 = document.querySelectorAll(".pickupl3");
 var dl1 = document.querySelectorAll(".dropoff1");
 var dl2 = document.querySelectorAll(".dropoff2");
 var dl3 = document.querySelectorAll(".dropoff3");
+var pickup = "none";
+var dropoff = "none";
 var slinestr = "one";
 var elinestr = "one";
 changeSLine(slinestr);
@@ -129,6 +129,7 @@ dropoffs.forEach(function(ele, key){
     });
 });
 function calculateTicket(btn){
+    var transs = "";
     btn.blur();
     if((pickup == "none") || (dropoff == "none")) {
         stations.innerText = "Please select the stations";
@@ -147,15 +148,22 @@ function calculateTicket(btn){
             let m = destination(slinestr, pickup, ele);
             let n = destination(elinestr, dropoff, ele);
             if((m.length + n.length) < min1){
+                transs = ele;
                 min1 = (m.length + n.length);
                 n.pop()
                 routes = m.concat(n.reverse());
             }
         });
+        routes_str = routes.join(" → ");
+        if (pickup != transs && dropoff != transs) {
+            routes_str = routes_str.replace(transs, function(match, variable){
+                return `[${match} - transition station to line number ${elinestr}]`;
+            });
+        }
         var totalCost = coster(min1 - 1);
         cstats.innerText = (min1 - 1);
         cost.innerText = totalCost;
-        stations.innerText = routes.join(" → ");
+        stations.innerText = routes_str;
     }
 }
 function coster(stations){

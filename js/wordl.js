@@ -1,4 +1,4 @@
-const pick = allowedWords[Math.floor(Math.random() * 2310)];
+var pick = allowedWords[Math.floor(Math.random() * 2310)];
 var letCnt = 0;
 var tryCnt = 0;
 var words = [[],[],[],[],[],[]];
@@ -183,4 +183,21 @@ document.addEventListener('keyup', function(event) {
 });
 function downloadGame(){
     saveElementAsImage('game', 'wordl.png');
+}
+
+function resetGame(btn) {
+    for (let i = 0; i < 5; i++) {
+        for (let j = 0; j < 5; j++) {
+            fillTile(i, j, "");
+            words[i][j] = "";
+        }
+    }
+    letCnt = 0;
+    tryCnt = 0;
+    const tileEles = document.querySelectorAll(".tile");
+    tileEles.forEach(tile => {
+        tile.classList.remove("scheme-0", "scheme-1", "scheme-2");
+    });
+    pick = allowedWords[Math.floor(Math.random() * 2310)];
+    btn.blur();
 }
