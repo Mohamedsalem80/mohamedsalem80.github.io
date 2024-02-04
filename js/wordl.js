@@ -186,7 +186,7 @@ function downloadGame(){
 }
 
 function resetGame(btn) {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 6; i++) {
         for (let j = 0; j < 5; j++) {
             fillTile(i, j, "");
             words[i][j] = "";
