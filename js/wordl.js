@@ -108,7 +108,7 @@ function checkWord() {
             if(tryCnt > 4){
                 tryCnt = 10;
                 letCnt = 10;
-                notify('Sorry 😢, but you Lost!.\nThe word is ' + pick, 30000, "bad");
+                notify('Sorry 😢, but you Lost!.\nThe word is "' + pick + '"', 30000, "bad");
             } else {
                 tryCnt++;
                 letCnt = 0;
