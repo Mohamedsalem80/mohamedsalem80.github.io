@@ -401,29 +401,74 @@ header .menu-btn {
     }
 }
 
+#toast-container {
+    position: fixed;
+    top: 50px;
+    right: 50%;
+    transform: translate(50%, 0%);
+    z-index: 9999;
+}
+
+.toast {
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-top: 50px;
+    margin-bottom: 10px;
+    opacity: 0;
+    border: 1px solid #ffffff;
+    transition: all 0.5s ease-in-out;
+}
+
+.toast-default {
+    background-color: #0051ff;
+}
+
+.toast-good {
+    background-color: #0fc02a;
+}
+
+.toast-bad {
+    background-color: #ff1362;
+}
+
+.toast-warn {
+    background-color: #ffa913;
+}
+
+.toast.show {
+    margin-top: 0;
+    opacity: 1;
+}
+
+.toast.hide {
+    position: absolute;
+}
+
+
 @media (min-width: 1200px) {
     .collapse-mid {
         display: inline;
     }
     .container {
-        width: 97%;
+        width: 96%;
     }
     #logo {
-        max-width: 400px;
-        height: 400px;
+        max-width: 375px;
+        height: 375px;
     }
     .keyboard {
         width: fit-content;
         grid-template-columns: repeat(30, 1.5rem);
-        grid-template-rows: repeat(3, 3rem);
+        grid-template-rows: repeat(3, 2.95rem);
     }
     .tiles {
-        width: 435px;
-        height: 520px;
+        width: 415px;
+        height: 500px;
     }
     .tile {
-        width: 70px;
-        height: 70px;
-        font-size: 32px;
+        width: 65px;
+        height: 65px;
+        font-size: 28px;
     }
 }

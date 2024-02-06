@@ -101,21 +101,21 @@ function checkWord() {
         var result = query[0];
         colorFillTiles(result, tryCnt, query[1]);
         if(result.join("") === "22222"){
-            window.alert("You won!");
+            notify('🎉 You won! 🎉', 60000, "good");
             tryCnt = 10;
             letCnt = 10;
         } else {
             if(tryCnt > 4){
                 tryCnt = 10;
                 letCnt = 10;
-                window.alert("You Lost!.\nThe word is "+pick);
+                notify('Sorry 😢, but you Lost!.\nThe word is ' + pick, 30000, "bad");
             } else {
                 tryCnt++;
                 letCnt = 0;
             }
         }
     } else {
-        window.alert("Not a real word!");
+        notify('⚠ Not a real word!', 3000, "warn");
     }
 }
 
@@ -195,6 +195,8 @@ function resetGame(btn) {
     tryCnt = 0;
     const tileEles = document.querySelectorAll(".tile");
     const keyEles = document.querySelectorAll(".keyboard__key");
+    const toastContainer = document.getElementById('toast-container');
+    toastContainer.innerText = "";
     tileEles.forEach(tile => {
         tile.classList.remove("scheme-0", "scheme-1", "scheme-2");
     });
@@ -202,5 +204,31 @@ function resetGame(btn) {
         key.classList.remove("blocked");
     });
     pick = allowedWords[Math.floor(Math.random() * 2310)];
+
     btn.blur();
+}
+
+function notify(message, duration, style) {
+    message = message ? message : "";
+    duration = duration ? duration : 3000;
+    style = style ? style : "default";
+    showToast(message, style, duration);
+}
+
+function showToast(message, style = "default", duration = 3000) {
+    const toastContainer = document.getElementById('toast-container');
+    const toast = document.createElement('div');
+    toast.className = 'toast toast-' + style;
+    toast.textContent = message;
+    toastContainer.appendChild(toast);
+    setTimeout(() => {
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.add('hide');
+            toast.classList.remove('show');
+            setTimeout(() => {
+                toast.remove();
+            }, 350);
+        }, duration);
+    }, 100);
 }
