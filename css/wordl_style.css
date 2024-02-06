@@ -287,6 +287,12 @@ header .menu-btn {
     background-color: #581478;
 }
 
+.blocked {
+    background-color: #1f2848 !important;
+    box-shadow: 3px 3px 0 0 #03032b !important;
+    color: #ffffff;
+}
+
 @media (max-width: 575px) {
     .collapse-mid {
         display: none;

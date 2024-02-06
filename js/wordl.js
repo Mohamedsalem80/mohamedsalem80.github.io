@@ -4,7 +4,6 @@ var tryCnt = 0;
 var words = [[],[],[],[],[],[]];
 const volumeSoundDefault = 0.75;
 var volumeSound = 0.75;
-var blocked = [];
 const keys = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "Backspace", "A", "S", "D", "F", "G", "H", "J", "K", "L", "Enter", "Z", "X", "C", "V", "B", "N", "M"];
 
 function Mute(){
@@ -68,39 +67,39 @@ function fillTile(row, col, letter){
     tileEle.innerHTML = letter;
 }
 
-function colorFillTiles(scheme, row){
+function colorFillTiles(scheme, row, blocked){
     const rowEle = document.querySelectorAll(".tiles-row")[row];
     const tileEles = rowEle.querySelectorAll(".tile");
     tileEles.forEach(function(key, index){
         key.classList.add("scheme-"+scheme[index]);
     });
+    blocked.forEach(function(key, index){
+        document.getElementById(key).classList.add("blocked");
+    });
+}
+
+function playWord(main, word){
+    var result = [0, 0, 0, 0, 0];
+    var blocked = [];
+    for(var i = 0; i < 5; i++){
+        for(var j = 0; j < 5; j++){
+            if((i == j) && (word[i] == main[j])){
+                result[i] = 2;
+            } else if(word[i] == main[j] && (result[i] == 0)){
+                result[i] = 1;
+            }
+        }
+        if(result[i] == 0) blocked.push(word[i]);
+    }
+    return [result, blocked];
 }
 
 function checkWord() {
-    var test = (pick+"").toUpperCase();
     if(allWords.includes(words[tryCnt].join("").toLowerCase())){
-        result = [0,0,0,0,0];
-        for (var i = 0; i < 5; i++) {
-            if(test[i] == words[tryCnt][i]){
-                test = test.split('');
-                test[i] = "*";
-                test = test.join('');
-                result[i] = 2;
-            }
-        }
-        for(var i = 0; i < 5; i++){
-            flag = 0;
-            for(var j = 0; j < 5; j++){
-                if(test[j] == words[tryCnt][i]){
-                    flag = 1;
-                    test = test.split('');
-                    test[j] = flag + "";
-                    test = test.join('');
-                    result[j] = flag;
-                }
-            }
-        }
-        colorFillTiles(result, tryCnt);
+        var test = (pick+"").toUpperCase().split("");
+        var query = playWord(test, words[tryCnt]);
+        var result = query[0];
+        colorFillTiles(result, tryCnt, query[1]);
         if(result.join("") === "22222"){
             window.alert("You won!");
             tryCnt = 10;
@@ -195,8 +194,12 @@ function resetGame(btn) {
     letCnt = 0;
     tryCnt = 0;
     const tileEles = document.querySelectorAll(".tile");
+    const keyEles = document.querySelectorAll(".keyboard__key");
     tileEles.forEach(tile => {
         tile.classList.remove("scheme-0", "scheme-1", "scheme-2");
+    });
+    keyEles.forEach(key => {
+        key.classList.remove("blocked");
     });
     pick = allowedWords[Math.floor(Math.random() * 2310)];
     btn.blur();
