@@ -6,16 +6,19 @@ var network = {
 };
 var interchangeMatrix = {
     one: {
+        one: network["one"],
         two: ["Al Shohadaa", "Sadat"],
         three: ["Nasser"]
     },
     two: {
         one: ["Al Shohadaa", "Sadat"],
+        two: network["two"],
         three: ["Ataba"]
     },
     three: {
         one: ["Nasser"],
-        two: ["Ataba"]
+        two: ["Ataba"],
+        three: network["three"]
     }
 };
 var stations = document.getElementById("stations");

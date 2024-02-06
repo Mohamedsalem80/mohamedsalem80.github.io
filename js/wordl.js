@@ -4,6 +4,7 @@ var tryCnt = 0;
 var words = [[],[],[],[],[],[]];
 const volumeSoundDefault = 0.75;
 var volumeSound = 0.75;
+var blocked = [];
 const keys = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "Backspace", "A", "S", "D", "F", "G", "H", "J", "K", "L", "Enter", "Z", "X", "C", "V", "B", "N", "M"];
 
 function Mute(){
@@ -95,7 +96,7 @@ function checkWord() {
                     test = test.split('');
                     test[j] = flag + "";
                     test = test.join('');
-                    result[i] = flag;
+                    result[j] = flag;
                 }
             }
         }
@@ -106,7 +107,6 @@ function checkWord() {
             letCnt = 10;
         } else {
             if(tryCnt > 4){
-                console.log("ended");
                 tryCnt = 10;
                 letCnt = 10;
                 window.alert("You Lost!.\nThe word is "+pick);
