@@ -85,8 +85,10 @@ function playWord(main, word){
         for(var j = 0; j < 5; j++){
             if((i == j) && (word[i] == main[j])){
                 result[i] = 2;
+                main[j] = 2;
             } else if(word[i] == main[j] && (result[i] == 0)){
                 result[i] = 1;
+                main[j] = 1;
             }
         }
         if(result[i] == 0) blocked.push(word[i]);
