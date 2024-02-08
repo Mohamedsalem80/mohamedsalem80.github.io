@@ -189,8 +189,9 @@ document.addEventListener('keyup', function(event) {
         
     }
 });
-function downloadGame(){
+function downloadGame(btn){
     saveElementAsImage('game', 'wordl.png');
+    btn.blur();
 }
 
 function resetGame(btn) {
