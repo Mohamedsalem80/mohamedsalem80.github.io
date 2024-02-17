@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../img/icon.ico">
+    <title> Cairo Metro </title>
+    <link rel="stylesheet" href="../css/metro-style.css">
+    <link rel="stylesheet" href="../css/allpromax.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo-img">
+            <img src="../img/metro-logo.png" alt="metro logo" id="metro-logo" width="110" height="55">
+        </div>
+        <div class="logo-txt">
+            Cairo Metro
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <br>
+            <label>
+                <p>From</p>
+                Line: 
+                <select name="line" id="sline" autocomplete="off">
+                    <option value="one">Number 1</option>
+                    <option value="two">Number 2</option>
+                    <option value="three">Number 3</option>
+                </select>
+                &nbsp;&nbsp;&nbsp;
+                Station:
+                <select name="pickup" class="pickupl1" autocomplete="off">
+                    <option value="none" selected disabled> Station </option>
+                    <option value="Helwan"> Helwan </option>
+                    <option value="Ain Helwan"> Ain Helwan </option>
+                    <option value="Helwan University"> Helwan University </option>
+                    <option value="Wadi Hof"> Wadi Hof </option>
+                    <option value="Hadayeq Helwan"> Hadayeq Helwan </option>
+                    <option value="El-Maasara"> El-Maasara </option>
+                    <option value="Tora El-Asmant"> Tora El-Asmant </option>
+                    <option value="Kozzika"> Kozzika </option>
+                    <option value="Tora El-Balad"> Tora El-Balad </option>
+                    <option value="Thakanat El-Maadi"> Thakanat El-Maadi </option>
+                    <option value="Maadi"> Maadi </option>
+                    <option value="Hadayeq El-Maadi"> Hadayeq El-Maadi </option>
+                    <option value="Dar El-Salam"> Dar El-Salam </option>
+                    <option value="El-Zahraa'"> El-Zahraa' </option>
+                    <option value="Mar Girgis"> Mar Girgis </option>
+                    <option value="El-Malek El-Saleh"> El-Malek El-Saleh </option>
+                    <option value="AlSayyeda Zeinab"> AlSayyeda Zeinab </option>
+                    <option value="Saad Zaghloul"> Saad Zaghloul </option>
+                    <option value="Sadat"> Sadat </option>
+                    <option value="Nasser"> Nasser </option>
+                    <option value="Urabi"> Urabi </option>
+                    <option value="Al Shohadaa"> Al Shohadaa </option>
+                    <option value="Ghamra"> Ghamra </option>
+                    <option value="El-Demerdash"> El-Demerdash </option>
+                    <option value="Manshiet El-Sadr"> Manshiet El-Sadr </option>
+                    <option value="Kobri El-Qobba"> Kobri El-Qobba </option>
+                    <option value="Hammamat El-Qobba"> Hammamat El-Qobba </option>
+                    <option value="Saray El-Qobba"> Saray El-Qobba </option>
+                    <option value="Hadayeq El-Zaitoun"> Hadayeq El-Zaitoun </option>
+                    <option value="Helmeyet El-Zaitoun"> Helmeyet El-Zaitoun </option>
+                    <option value="El-Matareyya"> El-Matareyya </option>
+                    <option value="Ain Shams"> Ain Shams </option>
+                    <option value="Ezbet El-Nakhl"> Ezbet El-Nakhl </option>
+                    <option value="El-Marg"> El-Marg </option>
+                    <option value="New El-Marg"> New El-Marg </option>
+                </select>
+                <select name="pickup" class="pickupl2" autocomplete="off">
+                    <option value="none" selected disabled> Station </option>
+                    <option value="El Mounib"> El Mounib </option>
+                    <option value="Sakiat Mekki"> Sakiat Mekki </option>
+                    <option value="Omm el Misryeen"> Omm el Misryeen </option>
+                    <option value="Giza"> Giza </option>
+                    <option value="Faisal"> Faisal </option>
+                    <option value="Cairo University"> Cairo University </option>
+                    <option value="Bohooth"> Bohooth </option>
+                    <option value="Dokki"> Dokki </option>
+                    <option value="Opera"> Opera </option>
+                    <option value="Sadat"> Sadat </option>
+                    <option value="Naguib"> Naguib </option>
+                    <option value="Ataba"> Ataba </option>
+                    <option value="Al Shohadaa"> Al Shohadaa </option>
+                    <option value="Massara"> Massara </option>
+                    <option value="Road El-Farag"> Road El-Farag </option>
+                    <option value="Sainte Teresa"> Sainte Teresa </option>
+                    <option value="Khalafawy"> Khalafawy </option>
+                    <option value="Mezallat"> Mezallat </option>
+                    <option value="Koliet El-Zeraa"> Koliet El-Zeraa </option>
+                    <option value="Shobra El Kheima"> Shobra El Kheima </option>
+                </select>
+                <select name="pickup" class="pickupl3" autocomplete="off">
+                    <option value="none" selected disabled> Station </option>
+                    <option value="Adly Mansour"> Adly Mansour </option>
+                    <option value="Heykestep"> Heykestep </option>
+                    <option value="Omar Ibn Al Khattab"> Omar Ibn Al Khattab </option>
+                    <option value="Qebaa"> Qebaa </option>
+                    <option value="Hesham Barakat"> Hesham Barakat </option>
+                    <option value="El Nozha"> El Nozha </option>
+                    <option value="Nadi El Shams"> Nadi El Shams </option>
+                    <option value="Alf Maskan"> Alf Maskan </option>
+                    <option value="Heliopolis"> Heliopolis </option>
+                    <option value="Haroun"> Haroun </option>
+                    <option value="Al Ahram"> Al Ahram </option>
+                    <option value="Koleyet El Banat"> Koleyet El Banat </option>
+                    <option value="Cairo Stadium"> Cairo Stadium </option>
+                    <option value="Fair Zone"> Fair Zone </option>
+                    <option value="Abbassiya"> Abbassiya </option>
+                    <option value="Abdou Pasha"> Abdou Pasha </option>
+                    <option value="El Geish"> El Geish </option>
+                    <option value="Bab El Shaaria"> Bab El Shaaria </option>
+                    <option value="Ataba"> Ataba </option>
+                    <option value="Nasser"> Nasser </option>
+                    <option value="Maspero"> Maspero </option>
+                    <option value="Safaa Hegazy"> Safaa Hegazy </option>
+                    <option value="Kit Kat"> Kit Kat </option>
+                    <option value="Sudan St."> Sudan St. </option>
+                    <option value="Imbaba"> Imbaba </option>
+                    <option value="El Bohy"> El Bohy </option>
+                    <option value="El-Qawmia"> El-Qawmia </option>
+                    <option value="Ring Rd."> Ring Rd. </option>
+                    <option value="Road El farag corr"> Road El farag corr </option>
+                </select>
+            </label>
+            <br>
+            <label>
+                <p>To</p>
+                Line: 
+                <select name="line" id="eline" autocomplete="off">
+                    <option value="one">Number 1</option>
+                    <option value="two">Number 2</option>
+                    <option value="three">Number 3</option>
+                </select>
+                &nbsp;&nbsp;&nbsp;
+                Station:
+                <select name="dropoff" class="dropoff1" autocomplete="off">
+                    <option value="none" selected disabled> Station </option>
+                    <option value="Helwan"> Helwan </option>
+                    <option value="Ain Helwan"> Ain Helwan </option>
+                    <option value="Helwan University"> Helwan University </option>
+                    <option value="Wadi Hof"> Wadi Hof </option>
+                    <option value="Hadayeq Helwan"> Hadayeq Helwan </option>
+                    <option value="El-Maasara"> El-Maasara </option>
+                    <option value="Tora El-Asmant"> Tora El-Asmant </option>
+                    <option value="Kozzika"> Kozzika </option>
+                    <option value="Tora El-Balad"> Tora El-Balad </option>
+                    <option value="Thakanat El-Maadi"> Thakanat El-Maadi </option>
+                    <option value="Maadi"> Maadi </option>
+                    <option value="Hadayeq El-Maadi"> Hadayeq El-Maadi </option>
+                    <option value="Dar El-Salam"> Dar El-Salam </option>
+                    <option value="El-Zahraa'"> El-Zahraa' </option>
+                    <option value="Mar Girgis"> Mar Girgis </option>
+                    <option value="El-Malek El-Saleh"> El-Malek El-Saleh </option>
+                    <option value="AlSayyeda Zeinab"> AlSayyeda Zeinab </option>
+                    <option value="Saad Zaghloul"> Saad Zaghloul </option>
+                    <option value="Sadat"> Sadat </option>
+                    <option value="Nasser"> Nasser </option>
+                    <option value="Urabi"> Urabi </option>
+                    <option value="Al Shohadaa"> Al Shohadaa </option>
+                    <option value="Ghamra"> Ghamra </option>
+                    <option value="El-Demerdash"> El-Demerdash </option>
+                    <option value="Manshiet El-Sadr"> Manshiet El-Sadr </option>
+                    <option value="Kobri El-Qobba"> Kobri El-Qobba </option>
+                    <option value="Hammamat El-Qobba"> Hammamat El-Qobba </option>
+                    <option value="Saray El-Qobba"> Saray El-Qobba </option>
+                    <option value="Hadayeq El-Zaitoun"> Hadayeq El-Zaitoun </option>
+                    <option value="Helmeyet El-Zaitoun"> Helmeyet El-Zaitoun </option>
+                    <option value="El-Matareyya"> El-Matareyya </option>
+                    <option value="Ain Shams"> Ain Shams </option>
+                    <option value="Ezbet El-Nakhl"> Ezbet El-Nakhl </option>
+                    <option value="El-Marg"> El-Marg </option>
+                    <option value="New El-Marg"> New El-Marg </option>
+                </select>
+                <select name="dropoff" class="dropoff2" autocomplete="off">
+                    <option value="none" selected disabled> Station </option>
+                    <option value="El Mounib"> El Mounib </option>
+                    <option value="Sakiat Mekki"> Sakiat Mekki </option>
+                    <option value="Omm el Misryeen"> Omm el Misryeen </option>
+                    <option value="Giza"> Giza </option>
+                    <option value="Faisal"> Faisal </option>
+                    <option value="Cairo University"> Cairo University </option>
+                    <option value="Bohooth"> Bohooth </option>
+                    <option value="Dokki"> Dokki </option>
+                    <option value="Opera"> Opera </option>
+                    <option value="Sadat"> Sadat </option>
+                    <option value="Naguib"> Naguib </option>
+                    <option value="Ataba"> Ataba </option>
+                    <option value="Al Shohadaa"> Al Shohadaa </option>
+                    <option value="Massara"> Massara </option>
+                    <option value="Road El-Farag"> Road El-Farag </option>
+                    <option value="Sainte Teresa"> Sainte Teresa </option>
+                    <option value="Khalafawy"> Khalafawy </option>
+                    <option value="Mezallat"> Mezallat </option>
+                    <option value="Koliet El-Zeraa"> Koliet El-Zeraa </option>
+                    <option value="Shobra El Kheima"> Shobra El Kheima </option>
+                </select>
+                <select name="dropoff" class="dropoff3" autocomplete="off">
+                    <option value="none" selected disabled> Station </option>
+                    <option value="Adly Mansour"> Adly Mansour </option>
+                    <option value="Heykestep"> Heykestep </option>
+                    <option value="Omar Ibn Al Khattab"> Omar Ibn Al Khattab </option>
+                    <option value="Qebaa"> Qebaa </option>
+                    <option value="Hesham Barakat"> Hesham Barakat </option>
+                    <option value="El Nozha"> El Nozha </option>
+                    <option value="Nadi El Shams"> Nadi El Shams </option>
+                    <option value="Alf Maskan"> Alf Maskan </option>
+                    <option value="Heliopolis"> Heliopolis </option>
+                    <option value="Haroun"> Haroun </option>
+                    <option value="Al Ahram"> Al Ahram </option>
+                    <option value="Koleyet El Banat"> Koleyet El Banat </option>
+                    <option value="Cairo Stadium"> Cairo Stadium </option>
+                    <option value="Fair Zone"> Fair Zone </option>
+                    <option value="Abbassiya"> Abbassiya </option>
+                    <option value="Abdou Pasha"> Abdou Pasha </option>
+                    <option value="El Geish"> El Geish </option>
+                    <option value="Bab El Shaaria"> Bab El Shaaria </option>
+                    <option value="Ataba"> Ataba </option>
+                    <option value="Nasser"> Nasser </option>
+                    <option value="Maspero"> Maspero </option>
+                    <option value="Safaa Hegazy"> Safaa Hegazy </option>
+                    <option value="Kit Kat"> Kit Kat </option>
+                    <option value="Sudan St."> Sudan St. </option>
+                    <option value="Imbaba"> Imbaba </option>
+                    <option value="El Bohy"> El Bohy </option>
+                    <option value="El-Qawmia"> El-Qawmia </option>
+                    <option value="Ring Rd."> Ring Rd. </option>
+                    <option value="Road El farag corr"> Road El farag corr </option>
+                </select>
+            </label>
+            <br>
+            <div style="width: 100%;text-align:center;">
+                <button onclick="calculateTicket(this);" id="btn">Search</button>
+                <br>
+                <br>
+                <p id="z112" style="background-color: #eeeeee;">
+                    Stations: <span id="cstats">0</span>
+                    price: <span id="ticketCost">0</span>
+                    <br>
+                    Stations: <span id="stations">-</span>
+                </p>
+            </div>
+        </div>
+        <div class="container">
+            <img src="../img/metro-map.jpg" alt="metro map" id="metro-map" width="500px" height="500px">
+        </div>
+        <div class="container">
+            <br>
+            <a href="https://mohamedsalem80.github.io/"> <i class="fa-duotone fa-home"></i> Back to Home</a>
+            <br>
+        </div>
+    </main>
+    <footer>
+        <div class="footerbox" id="contact">
+            <div class="line" style="text-align: center; font-weight: 900; font-size: 14px;">
+                <a href="https://www.facebook.com/mohamed.solaiman.7796" target="_blank" rel="noopener noreferrer" style="color: #0038b2;">
+                    <i class="fa-brands fa-facebook"></i>
+                    Facebook
+                </a>  &nbsp; &nbsp; &nbsp;
+                <a href="https://discord.com/users/gomine79" target="_blank" rel="noopener noreferrer"  style="color: #6075c0;">
+                    <i class="fa-brands fa-discord"></i>
+                    Discord
+                </a>  &nbsp; &nbsp; &nbsp;
+                <a href="https://www.instagram.com/mo_salem510/" target="_blank" rel="noopener noreferrer"  style="color: #b072ca;">
+                    <i class="fa-brands fa-instagram"></i>
+                    Instagram
+                </a>  &nbsp; &nbsp; &nbsp;
+                <a href="https://github.com/Mohamedsalem80" target="_blank" rel="noopener noreferrer"  style="color: #121212;">
+                    <i class="fa-brands fa-github"></i>
+                    GitHub
+                </a>  &nbsp; &nbsp; &nbsp;
+                <a href="https://www.linkedin.com/in/mo-salem80/" target="_blank" rel="noopener noreferrer"  style="color: #0f0d9e;">
+                    <i class="fa-brands fa-linkedin"></i>
+                    LinkedIn
+                </a>  &nbsp; &nbsp; &nbsp;
+                <a href="https://www.kaggle.com/mohamedsalemmohamed" target="_blank" rel="noopener noreferrer"  style="color: #0d6e97;">
+                    <i class="fa-brands fa-kaggle"></i>
+                    Kaggle
+                </a>  &nbsp; &nbsp; &nbsp;
+                <a href="mailto:mohamed3salem1@gmail.com"  style="color: #c6a317;">
+                    <i class="fa-brands fa-google"></i>
+                    Gmail
+                </a>  &nbsp; &nbsp; &nbsp;
+                <a href="tel:+201027457807"  style="color: #19b956;">
+                    <i class="fa-duotone fa-phone"></i>
+                    Phone
+                </a>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; copyrights 2023 Mohamed Salem
+        </div>
+    </footer>
+<script src="../js/metro-script.js?v=1.1.2"></script>
+</body>
+</html>
