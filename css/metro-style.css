@@ -11,23 +11,12 @@ body {
     background-color: #f0f8ff;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-header {
-    width: 100%;
-    height: 65px;
-    display: flex;
-    padding: 10px;
-    font-size: 32px;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    background-color: #0088ff;
-}
 main {
     display: flex;
     color: #333333;
     flex-direction: column;
 }
-.container {
+.container1 {
     display: flex;
     max-width: 500px;
     align-items: center;
@@ -40,7 +29,7 @@ main {
 }
 #btn {
     width: 150px;
-    padding: 2px;
+    padding: 5px;
     outline: none;
     font-size: 16px;
     color: #ffffff;
@@ -108,7 +97,7 @@ a:visited {
 }
 
 @media (max-width: 575px) {
-    .container {
+    .container, .container1 {
         max-width: 350px;
     }
     #metro-map {
@@ -119,16 +108,17 @@ a:visited {
         width: 100px;
         height: 50px;
     }
-    header {
-        height: 55px;
-    }
     select {
         width: 100px;
+        font-size: 14px;
+    }
+    label {
+        font-size: 16px;
     }
 }
 
 @media (min-width: 576px) {
-    .container {
+    .container, .container1 {
         max-width: 500px;
     }
     #metro-map {
@@ -139,10 +129,11 @@ a:visited {
         width: 110px;
         height: 55px;
     }
-    header {
-        height: 65px;
-    }
     select {
         width: 125px;
+        font-size: 18px;
+    }
+    label {
+        font-size: 20px;
     }
 }
