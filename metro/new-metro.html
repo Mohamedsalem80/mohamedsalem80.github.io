@@ -2,40 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="../img/icon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../img/icon.ico">
+    <title> Cairo Metro </title>
+    <link rel="stylesheet" href="../css/metro-style.css">
     <link rel="stylesheet" href="../css/allpromax.min.css">
-    <link rel="stylesheet" href="../css/normalize.min.css">
-    <link rel="stylesheet" href="../css/cv-style.css?v=1.1.1">
-    <link rel="stylesheet" href="../css/metro-style.css?v=1.0.1">
-    <title>Mohamed Salem</title>
 </head>
 <body>
-    <div class="menu">
-        <ul>
-            <li><a href="https://mohamedsalem80.github.io/">Home</a></li>
-            <li><a href="#contact">Contact me</a></li>
-        </ul>
-    </div>
     <header>
-        <div class="logo">
-            Mohamed <span class="collapse-mid">Salem</span>
+        <div class="logo-img">
+            <img src="../img/metro-logo.png" alt="metro logo" id="metro-logo" width="110" height="55">
         </div>
-        <div class="menu-btn menu-btn-c">
-            <i class="fa-duotone fa-bars menu-btn-c"></i>  
+        <div class="logo-txt">
+            Cairo Metro
         </div>
     </header>
     <main>
-        <div class="container" style="background-color: transparent; border: 0; text-align: center; margin-top: 85px; box-shadow: none;">
-            <span>
-                <span class="head"> Cairo Metro </span> <span>🚄</span>
-            </span>
-            <p style="text-align: center;">
-                <strong> A ticket price and route finder for Cairo metro stations.</strong><br>
-                <strong> <span  class="subhead"> Please feel free to contact me </span> 😊 </strong><br>
-            </p>
-        </div>
-        <div class="container1">
+        <div class="container">
             <br>
             <label>
                 <p>From</p>
@@ -145,7 +128,7 @@
             <label>
                 <p>To</p>
                 Line: 
-                <select name="line" id="eline" autocomplete="off" style="font-size: 18px;">
+                <select name="line" id="eline" autocomplete="off">
                     <option value="one">Number 1</option>
                     <option value="two">Number 2</option>
                     <option value="three">Number 3</option>
@@ -259,13 +242,18 @@
                 </p>
             </div>
         </div>
-        <div class="container1">
+        <div class="container">
             <img src="../img/metro-map.jpg" alt="metro map" id="metro-map" width="500px" height="500px">
+        </div>
+        <div class="container">
+            <br>
+            <a href="https://mohamedsalem80.github.io/"> <i class="fa-duotone fa-home"></i> Back to Home</a>
+            <br>
         </div>
     </main>
     <footer>
         <div class="footerbox" id="contact">
-            <div class="line" style="text-align: center; font-weight: 900; font-size: 20px;">
+            <div class="line" style="text-align: center; font-weight: 900; font-size: 14px;">
                 <a href="https://www.facebook.com/mohamed.solaiman.7796" target="_blank" rel="noopener noreferrer" style="color: #0038b2;">
                     <i class="fa-brands fa-facebook"></i>
                     Facebook
@@ -301,41 +289,9 @@
             </div>
         </div>
         <div class="copyright">
-            &copy; copyrights 2024 Mohamed Salem
+            &copy; copyrights 2023 Mohamed Salem
         </div>
     </footer>
-<script src="../js/maven.min.js"></script>
 <script src="../js/metro-script.js?v=1.1.2"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    var menu = document.querySelector(".menu");
-    var header = document.querySelector("header");
-    mvn(".menu").slideToggle(1);
-    mvn(".menu").slideToggle(1);
-
-    window.onclick = function(event) {
-        if(event.target.matches('.menu-btn-c')){
-            if(window.scrollY-(window.innerHeight/32) > 0){
-                mvn("header").classToggle("mini");
-            }
-            mvn(".menu").slideToggle();
-        } else {
-            if (mvn(".menu")[0].style.display != "none") {
-                if((window.scrollY-(window.innerHeight/24) > 0)){
-                    header.classList.add("mini");
-                }
-                mvn(".menu").slideToggle();
-            }
-        }
-    }
-    window.addEventListener("scroll", function(e){
-        if((window.scrollY-(window.innerHeight/24) > 0) && !(menu.style.display == "block")){
-            header.classList.add("mini");
-        } else {
-            header.classList.remove("mini");
-        }
-    });
-});
-</script>
 </body>
 </html>

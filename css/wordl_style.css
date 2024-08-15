@@ -19,6 +19,23 @@ main {
     align-items: center;
 }
 
+.top40 {
+    top: 40px !important;
+}
+
+.mini {
+    height: 40px;
+    background-color: #50B0F27f;
+}
+
+.mini .logo {
+    font-size: 26px !important;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
 #logo {
     max-width: 500px;
     height: auto;
@@ -80,7 +97,7 @@ a:visited {
     display: flex;
     flex-direction: column;
     padding: 10px;  
-    margin: 30px auto;
+    margin: 15px auto;
     justify-content: space-around;
 }
 
@@ -108,7 +125,7 @@ a:visited {
     background-color: #aaaaaa;
 }
 
-header {
+header {    
     height: 70px;
     display: flex;
     flex-wrap: wrap;
@@ -117,8 +134,10 @@ header {
     flex-direction: row;
     align-items: stretch;
     align-content: center;
-    background-color: #0051ff;
+    background-color: #008deeed;
     justify-content: space-between;
+    position: fixed;
+    transition: all 0.4s ease-in-out;
 }
 
 header .logo {
@@ -126,6 +145,7 @@ header .logo {
     font-size: 40px;
     font-weight: bolder;
     align-content: center;
+    transition: all 0.3s ease-in-out;
 }
 
 header .menu-btn {
@@ -133,6 +153,7 @@ header .menu-btn {
     text-align: end;
     font-size: 26px;
     margin-right: 10px;
+    z-index: 100;
 }
 
 .menu {
@@ -140,8 +161,9 @@ header .menu-btn {
     width: 100%;
     top: 70px;
     color: #ffffff;
-    position: absolute;
-    background: #008ddd;
+    position: fixed;
+    z-index: 100;
+    background: #008deeed;
 }
 
 .menu ul {
@@ -160,15 +182,17 @@ header .menu-btn {
     color: #ffffff;
     font-weight: 700;
     text-decoration: none;
+    border: 1px solid transparent;
     transition: all 0.5s ease-in-out;
 }
 
 .menu ul li a:hover{
-    background-color: #006c9e;
+    background: #008dee;
+    border: 1px solid white;
 }
 
 .keyboard {
-    margin: 30px auto;
+    margin: 15px auto;
     background-color: #fcf0e4;
     border-radius: 5px;
     box-shadow: 5px 5px 10px 3px rgba(0, 0, 0, 0.5);
