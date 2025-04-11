@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<meta name="description" content="Mivex - MavenJS is a fast and light open-sourced JavaScript library that eases creation and manipulation of web applications">
+	<meta name="keywords" content="Mivex, JavaScript, Library, Open Source, Web Development, Web Applications, MavenJS, Fast, Light, Manipulation, Creation">
+	<meta name="author" content="Mohamed Salem">
+	<meta name="designer" content="Mivex - Mohamed Salem">
+	<meta name="language" content="English">
+	<meta name="Revisit-After" content="1 days">
+	<meta name="robots" content="index, follow">
+	<meta name="distribution" content="Global">
+
+	<meta name="msapplication-config" content="favicon/browserconfig.xml">
+	<meta name="msapplication-TileColor" content="#a92a01">
+	
+	<meta name="theme-color" content="#a92a01">
+	
+	<link rel="manifest" href="favicon/site.webmanifest">
+	
+	<meta property="og:title" content="Mivex - MavenJS light and fast" />
+	<meta property="og:description" content="Mivex - MavenJS is a fast and light open-sourced JavaScript library that eases creation and manipulation of web applications" />
+	<meta property="og:url" content="https://mohamedsalem80.github.io/mavenjs/" />
+	<meta property="og:site_name" content="Mivex" />
+	<meta property="og:image" content="https://mohamedsalem80.github.io/mavenjs/favicon/social-preview.jpg" />
+	<meta property="og:type" content="website" />
+	
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Mivex - MavenJS light and fast" />
+	<meta name="twitter:description" content="Mivex - MavenJS is a fast and light open-sourced JavaScript library that eases creation and manipulation of web applications" />
+	<meta name="twitter:image" content="https://mohamedsalem80.github.io/mavenjs/favicon/social-preview.jpg" />
+	
+	<link rel="apple-touch-icon" href="favicon/mavenjs.png" />
+	<link rel="apple-touch-icon" href="favicon/mavenjs-48x48.png" sizes="48x48" type="image/png" />
+	<link rel="apple-touch-icon" href="favicon/mavenjs-64x64.png" sizes="64x64" type="image/png" />
+	<link rel="apple-touch-icon" href="favicon/mavenjs-72x72.png" sizes="72x72" type="image/png" />
+	<link rel="apple-touch-icon" href="favicon/mavenjs-96x96.png" sizes="96x96" type="image/png" />
+	<link rel="apple-touch-icon" href="favicon/mavenjs-128x128.png" sizes="128x128" type="image/png" />
+	<link rel="apple-touch-icon" href="favicon/mavenjs-144x144.png" sizes="144x144" type="image/png" />
+	<link rel="apple-touch-icon" href="favicon/mavenjs-180x180.png" sizes="180x180" type="image/png" />
+	<link rel="apple-touch-icon" href="favicon/mavenjs-192x192.png" sizes="192x192" type="image/png" />
+	<link rel="apple-touch-icon" href="favicon/mavenjs-256x256.png" sizes="256x256" type="image/png" />
+	<link rel="apple-touch-icon" href="favicon/mavenjs-384x384.png" sizes="384x384" type="image/png" />
+	<link rel="apple-touch-icon" href="favicon/mavenjs-512x512.png" sizes="512x512" type="image/png" />
+	
+	<link rel="icon" type="image/png" sizes="16x16" href="favicon/mavenjs-16x16.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="favicon/mavenjs-32x32.png">
+	<link rel="shortcut icon" href="favicon/mavenjs.ico">
+	<link rel="canonical" href="https://mohamedsalem80.github.io/">
+
+	<title>Mivex | MavenJS</title>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/prism.css">
+</head>
+<body>
+	<header>
+		<div class="logo">
+			<img src="../favicon/mivex-72x72.png" alt="Mivex" style="width: 32px;">
+			Mivex
+		</div>
+		<div class="version">
+			<select id="versionSelector">
+				<option value="1.1.0" selected>1.1.0</option>
+				<option value="1.0.0">1.0.0</option>
+			</select>
+		</div>
+	</header>
+	<main>
+		<div class="hero">
+			<img src="../img/mavenjs.png" alt="mars">
+			<p>Fast and light open-sourced JavaScript library that eases creation and manipulation of web applications.</p>
+			<p>
+				<a class="btn-30" href="https://github.com/Mohamedsalem80/mavenjs/releases">
+					<span class="text-container">
+						<span class="text">Download</span>
+					</span>
+				</a>
+			  </p>
+		</div>
+		<div class="documentation">
+			<h2>Documentation</h2>
+			<br>
+			<hr>
+			<input type="text" class="search-box" id="searchInput" placeholder="Search function...">
+			<br>
+			<div id="functionList"></div>
+		</div>
+	</main>
+	<footer>
+		<div class="inspiration">
+			<div class="inspiration-top">
+        <p>
+          The name "maven" is inspired by NASA's MAVEN mission to Mars, which stands for Mars Atmosphere and Volatile Evolution. This mission aims to study the Martian atmosphere and its evolution over time.
+        </p>
+        <p>
+          Similarly, mavenjs is designed to explore and manipulate the web environment efficiently and effectively. It also draws inspiration from jQuery, a popular JavaScript library that simplifies HTML document traversing, event handling, and animation.
+        </p>
+        <p>
+          The name "maven" reflects the library's goal of being a reliable and efficient tool for web developers.
+        </p>
+			</div>
+			<div class="inspiration-bottom">
+				<img src="../img/maven-cover-2.jpg" alt="NASA MAVEN Mission">
+			</div>
+		</div>
+		<div class="copyright">
+			Copyright © 2022-2025 Mivex. All rights reserved. 
+		</div>
+	</footer>
+<script src="../js/prism.js"></script>
+<script>
+	const functionsData = {
+  "functions": [
+    {
+      "name": "add()",
+      "description": "Adds an old maven object to the new object",
+      "code": "var oldObject = mvn('div');\nvar newObject = mvn('p');\nnewObject.add(oldObject);",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "addClass()",
+      "description": "Add class to elements class list",
+      "code": "mvn('.myElement').addClass('highlight');",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "addSelf()",
+      "description": "Adds maven object to it self",
+      "code": "var divs = mvn('div');\nvar allElements = divs.addSelf();",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "after()",
+      "description": "Add html content after an element",
+      "code": "mvn('.myItem').after('<p>Appended after</p>');",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "ajax()",
+      "description": "Sets up an ajax request",
+      "code": "mvn.ajax({\n  url: '/api/data',\n  method: 'GET',\n  success: function(data) {\n    console.log(data);\n  },\n  error: function(error) {\n    console.error(error);\n  }\n});",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "append()",
+      "description": "Add html content at the end element",
+      "code": "mvn('.myList').append('<li>New item</li>');",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "attr()",
+      "description": "If Attribute is given, it's set to elements else gets attribute from elements",
+      "code": "// Set an attribute\nmvn('a').attr('href', 'https://example.com');\n\n// Get an attribute\nvar linkHref = mvn('a').attr('href');",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "before()",
+      "description": "Add html content before an element",
+      "code": "mvn('.myItem').before('<p>Appended before</p>');",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "children()",
+      "description": "Returns elements childern as a list",
+      "code": "var firstDivChildren = mvn('div').children();",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "classToggle()",
+      "description": "Toggles class at elements class list",
+      "code": "mvn('.myButton').classToggle('active');",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "contains()",
+      "description": "Filters selected elements by content",
+      "code": "var containsText = mvn('div').contains('Hello');",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "copy()",
+      "description": "Copies a given text to users clipboard",
+      "code": "mvn.copy('Text to be copied');",
+      "version": "v1.0.2"
+    },
+    {
+      "name": "css()",
+      "description": "Manipulates elements css properties",
+      "code": "// Set a CSS property\nmvn('.myDiv').css('color', 'blue');\n\n// Get a CSS property\nvar backgroundColor = mvn('.myDiv').css('background-color');",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "data()",
+      "description": "Set or get data from elements",
+      "code": "// Set data\nmvn('.myDiv').data('userId', 123);\n\n// Get data\nvar userId = mvn('.myDiv').data('userId');",
+      "version": "v1.0.1"
+    },
+    {
+      "name": "each()",
+      "description": "Loops over the selected elements with given function",
+      "code": "mvn('li').each(function(index, element) {\n  console.log('Element at index ' + index + ': ' + mvn(element).text());\n});",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "empty()",
+      "description": "Empties elements content",
+      "code": "mvn('.myDiv').empty();",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "fadeToggle()",
+      "description": "Animates fade to element",
+      "code": "mvn('.fadeElement').fadeToggle('slow');",
+      "version": "v1.0.1"
+    },
+    {
+      "name": "filter()",
+      "description": "Filters selected elements",
+      "code": "var redDivs = mvn('div').filter('.red');",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "find()",
+      "description": "Fined elements using css selctor by SELECTAR",
+      "code": "var spanInsideDiv = mvn('div').find('span');",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "has()",
+      "description": "Filters selected elements by atteributes",
+      "code": "var hasId = mvn('div').has('[id]');",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "hasClass()",
+      "description": "Checks if element has certain class",
+      "code": "var hasActiveClass = mvn('.myButton').hasClass('active');\nconsole.log(hasActiveClass);",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "hide()",
+      "description": "Sets elements display to none",
+      "code": "mvn('.visibleDiv').hide();",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "html()",
+      "description": "If string is passed changes element html content to it else return elements html content as a list",
+      "code": "// Set HTML content\nmvn('.myDiv').html('<p>New content</p>');\n\n// Get HTML content\nvar htmlContent = mvn('.myDiv').html();\nconsole.log(htmlContent);",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "is()",
+      "description": "Filters selected elements by comarison",
+      "code": "var isRed = mvn('.myDiv').is('.red');\nconsole.log(isRed);",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "len()",
+      "description": "Returns input element value length",
+      "code": "var inputLength = mvn('input').len();\nconsole.log(inputLength);",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "map()",
+      "description": "Maps over the selected elements with given function",
+      "code": "var textArray = mvn('li').map(function(index, element) {\n  return mvn(element).text();\n}).toArray();\nconsole.log(textArray);",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "nextAll()",
+      "description": "Returns elements next siblings as a list",
+      "code": "var firstLiNext = mvn('li:first').nextAll();",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "not()",
+      "description": "Filters selected elements by diversion",
+      "code": "var notRedDivs = mvn('div').not('.red');",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "off()",
+      "description": "Dettaches a function from element at certain event",
+      "code": "function handleClick() {\n  console.log('Button clicked!');\n}\n\nmvn('.myButton').on('click', handleClick);\n\n// Later, to detach the event listener:\nmvn('.myButton').off('click', handleClick);",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "on()",
+      "description": "Attaches a function to elements given event",
+      "code": "mvn('.myButton').on('click', function() {\n  console.log('Button clicked!');\n});",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "parents()",
+      "description": "Returns elements parents as a lists",
+      "code": "var spanParents = mvn('span').parents();",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "prepend()",
+      "description": "Add html content at the beggining element",
+      "code": "mvn('.myList').prepend('<li>First item</li>');",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "prevAll()",
+      "description": "Returns elements previos siblings as a list",
+      "code": "var lastLiPrev = mvn('li:last').prevAll();",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "prop()",
+      "description": "If a property is given its set to elements else returns property value",
+      "code": "// Set a property\nmvn('input').prop('disabled', true);\n\n// Get a property\nvar isChecked = mvn('input[type=\"checkbox\"]').prop('checked');",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "ready()",
+      "description": "Takes a function and run it when the page is done loading",
+      "code": "mvn.ready(function() {\n  console.log('Page is ready!');\n});",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "remove()",
+      "description": "Removes elements",
+      "code": "mvn('.toBeRemoved').remove();",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "removeAttr()",
+      "description": "Removes Attribute from elements",
+      "code": "mvn('.myElement').removeAttr('data-id');",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "removeClass()",
+      "description": "Removes class to elements class list",
+      "code": "mvn('.highlight').removeClass('highlight');",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "removeProp()",
+      "description": "Removes a property from elements",
+      "code": "mvn('.myElement').removeProp('disabled');",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "scroll()",
+      "description": "Attaches a function to scroll on given elements",
+      "code": "mvn(window).scroll(function() {\n  console.log('Scrolled!');\n});",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "scrollTo()",
+      "description": "Scrolls to given coordinates",
+      "code": "// Scroll to x: 100px, y: 200px\nmvn(window).scrollTo(100, 200);",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "serialize()",
+      "description": "Modifies URI given form values",
+      "code": "var serializedData = mvn('#myForm').serialize();\nconsole.log(serializedData);",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "show()",
+      "description": "Sets element display to block",
+      "code": "mvn('.hiddenDiv').show();",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "siblings()",
+      "description": "Returns elements siblings as a list",
+      "code": "var middleLiSiblings = mvn('li:eq(1)').siblings();",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "slice()",
+      "description": "Slices the maven object",
+      "code": "// Get the first two elements\nvar firstTwo = mvn('li').slice(0, 2);\n\n// Get elements starting from index 1\nvar fromIndexOne = mvn('li').slice(1);",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "slideToggle()",
+      "description": "Animates slide to element",
+      "code": "mvn('.slideElement').slideToggle('fast');",
+      "version": "v1.0.1"
+    },
+    {
+      "name": "stringImport()",
+      "description": "Imports a javascript file into the web page throught a script tag",
+      "code": "mvn.stringImport('/path/to/your/script.js');",
+      "version": "v1.0.2"
+    },
+    {
+      "name": "submit()",
+      "description": "Submit selected forms",
+      "code": "mvn('#myForm').submit();",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "text()",
+      "description": "If string is passed changes element text content to it else return elements text content as a list",
+      "code": "// Set text content\nmvn('.myParagraph').text('This is new text.');\n\n// Get text content\nvar textContent = mvn('.myParagraph').text();\nconsole.log(textContent);",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "toArray()",
+      "description": "Returns an array from the maven object",
+      "code": "var elementsArray = mvn('div').toArray();",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "trigger()",
+      "description": "Triggers a given event",
+      "code": "mvn('.myButton').trigger('click');",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "val()",
+      "description": "Returns input element value",
+      "code": "var inputValue = mvn('input').val();\nconsole.log(inputValue);",
+      "version": "v1.0.0"
+    },
+    {
+      "name": "Xss()",
+      "description": "Clears input from cross site scripting attacks through string",
+      "code": `var userInput = '&lt;script&gt;alert("XSS")&lt;/script&gt;UserInput';\nvar safeInput = mvn.Xss(userInput);\nconsole.log(safeInput);`,
+      "version": "v1.0.0"
+    }
+  ]
+}
+
+let current = 'v1.1.0';
+
+function compareVersions(version1, version2) {
+	const v1Parts = version1.replace('v', '').split('.').map(num => parseInt(num, 10));
+	const v2Parts = version2.replace('v', '').split('.').map(num => parseInt(num, 10));
+	
+	for (let i = 0; i < Math.max(v1Parts.length, v2Parts.length); i++) {
+		const part1 = v1Parts[i] || 0;
+		const part2 = v2Parts[i] || 0;
+		
+		if (part1 < part2) return -1;
+		if (part1 > part2) return 1;
+	}
+	
+	return 0;
+}
+
+function renderDocumentation(functions, currentVersion) {
+			const container = document.getElementById('functionList');
+			container.innerHTML = '';
+			const filteredFunctions = functions.filter(func => {
+				return compareVersions(func.version, currentVersion) <= 0;
+			});
+
+			filteredFunctions.forEach(func => {
+				const functionElement = document.createElement('div');
+				functionElement.innerHTML = `
+					<br>
+					<p><strong>${func.name}</strong> | Version: ${func.version}</p>
+					<p>${func.description}</p>
+					<br>
+					<pre><code class="language-javascript">${func.code}</code></pre>
+					<hr>
+					<br>
+				`;
+				container.appendChild(functionElement);
+			});
+		}
+
+		document.getElementById('searchInput').addEventListener('input', function(e) {
+			const searchQuery = e.target.value.toLowerCase();
+			const filteredFunctions = functionsData.functions.filter(func => 
+				func.name.toLowerCase().includes(searchQuery)
+			);
+			renderDocumentation(filteredFunctions, current);
+			Prism.highlightAll();
+		});
+
+		document.getElementById('versionSelector').addEventListener('change', function(e) {
+			current = e.target.value;
+			renderDocumentation(functionsData.functions, current);
+			Prism.highlightAll();
+		});
+
+		renderDocumentation(functionsData.functions, current);
+</script>
+</body>
+</html>
