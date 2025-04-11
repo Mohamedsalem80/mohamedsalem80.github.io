@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<browserconfig>
+    <msapplication>
+        <tile>
+            <square70x70logo src="favicon/mivex-70x70.png"/>
+            <square150x150logo src="favicon/mivex-150x150.png"/>
+            <wide310x150logo src="favicon/mivex-310x150.png"/>
+            <square310x310logo src="favicon/mivex-310x310.png"/>
+            <TileColor>#000000</TileColor>
+        </tile>
+        <window>
+            <color>#000000</color>
+        </window>
+    </msapplication>
+</browserconfig>

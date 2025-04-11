@@ -2,217 +2,347 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="../img/icon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/allpromax.min.css">
-    <link rel="stylesheet" href="../css/normalize.min.css">
-    <link rel="stylesheet" href="../css/wordl_style.css?v=2.0.0">
-    <title>WORDL</title>
+
+    <meta name="description" content="Mivex - WORDL Black & Gold UI words game">
+	<meta name="keywords" content="Mivex, WORDL, WORDLE, game, black, gold, UI, design, template">
+	<meta name="author" content="Mohamed Salem">
+	<meta name="designer" content="Mivex - Mohamed Salem">
+	<meta name="language" content="English">
+	<meta name="Revisit-After" content="1 days">
+	<meta name="robots" content="index, follow">
+	<meta name="distribution" content="Global">
+
+	<meta name="msapplication-config" content="favicon/browserconfig.xml">
+	<meta name="msapplication-TileColor" content="#000000">
+	
+	<meta name="theme-color" content="#000000">
+	
+	<link rel="manifest" href="favicon/site.webmanifest">
+	
+	<meta property="og:title" content="WORDL play with elegance" />
+	<meta property="og:description" content="Mivex - WORDL Black & Gold UI words game" />
+	<meta property="og:url" content="https://mohamedsalem80.github.io/wordl/" />
+	<meta property="og:site_name" content="WORDL" />
+	<meta property="og:image" content="https://mohamedsalem80.github.io/wordl/favicon/social-preview.jpg" />
+	<meta property="og:type" content="website" />
+	
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="WORDL play with elegance" />
+	<meta name="twitter:description" content="Mivex - WORDL Black & Gold UI words game" />
+	<meta name="twitter:image" content="https://mohamedsalem80.github.io/wordl/favicon/social-preview.jpg" />
+	
+	<link rel="apple-touch-icon" href="favicon/wordl.png" />
+	<link rel="apple-touch-icon" href="favicon/wordl-48x48.png" sizes="48x48" type="image/png" />
+	<link rel="apple-touch-icon" href="favicon/wordl-64x64.png" sizes="64x64" type="image/png" />
+	<link rel="apple-touch-icon" href="favicon/wordl-72x72.png" sizes="72x72" type="image/png" />
+	<link rel="apple-touch-icon" href="favicon/wordl-96x96.png" sizes="96x96" type="image/png" />
+	<link rel="apple-touch-icon" href="favicon/wordl-128x128.png" sizes="128x128" type="image/png" />
+	<link rel="apple-touch-icon" href="favicon/wordl-144x144.png" sizes="144x144" type="image/png" />
+	<link rel="apple-touch-icon" href="favicon/wordl-180x180.png" sizes="180x180" type="image/png" />
+	<link rel="apple-touch-icon" href="favicon/wordl-192x192.png" sizes="192x192" type="image/png" />
+	<link rel="apple-touch-icon" href="favicon/wordl-256x256.png" sizes="256x256" type="image/png" />
+	<link rel="apple-touch-icon" href="favicon/wordl-384x384.png" sizes="384x384" type="image/png" />
+	<link rel="apple-touch-icon" href="favicon/wordl-512x512.png" sizes="512x512" type="image/png" />
+	
+	<link rel="icon" type="image/png" sizes="16x16" href="favicon/wordl-16x16.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="favicon/wordl-32x32.png">
+	<link rel="shortcut icon" href="favicon/wordl.ico">
+	<link rel="canonical" href="https://mohamedsalem80.github.io/wordl/">
+
+    <title> Mivex | WORDL </title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div id="toast-container"></div>
-    <div class="menu">
-        <ul>
-            <li><a href="https://mohamedsalem80.github.io/">Home</a></li>
-            <li><a href="#contact">Contact me</a></li>
-            <li><a href="#sound" onclick="Mute();" id="mute">Mute</a></li>
-        </ul>
-    </div>
-    <header>
-        <div class="logo">
-            WORDL
-        </div>
-        <div class="menu-btn menu-btn-c">
-            <i class="fa-duotone fa-bars menu-btn-c"></i>  
+    <header class="container">
+        <div class="header">
+            <div class="logo">
+                <img src="../favicon/mivex-72x72.png" alt="Mivex" style="width: 32px;">
+                Mivex | WORDL
+            </div>
+            <div class="menu-opt">
+                <input type="checkbox" id="menu-toggle" class="menu-toggle" style="display: none;">
+                <div class="menu-list">
+                    <a class="menu-item" onclick="resetGame(this);">Restart</a>
+                    <a class="menu-item" onclick="downloadGame();">Download</a>
+                    <a class="menu-item" onclick="toggleMute();" id="mute">Mute</a>
+                </div>
+                <label for="menu-toggle">
+                    <span id="menu-icon">
+                        <svg fill="#ffffff" width="22px" height="22px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 9.249h28c0.69 0 1.25-0.56 1.25-1.25s-0.56-1.25-1.25-1.25v0h-28c-0.69 0-1.25 0.56-1.25 1.25s0.56 1.25 1.25 1.25v0zM30 14.75h-28c-0.69 0-1.25 0.56-1.25 1.25s0.56 1.25 1.25 1.25v0h28c0.69 0 1.25-0.56 1.25-1.25s-0.56-1.25-1.25-1.25v0zM30 22.75h-28c-0.69 0-1.25 0.56-1.25 1.25s0.56 1.25 1.25 1.25v0h28c0.69 0 1.25-0.56 1.25-1.25s-0.56-1.25-1.25-1.25v0z"></path>
+                        </svg>
+                    </span>
+                </label>
+            </div>
         </div>
     </header>
     <main>
-        <div style="height: 85px;">
-        </div>
-        <div class="tiles" id="game">
-            <div class="tiles-row">
-                <div class="tile"></div>
-                <div class="tile"></div>
-                <div class="tile"></div>
-                <div class="tile"></div>
-                <div class="tile"></div>
+        <div class="gold-word-container" id="game">
+            <div class="gold-word-container-r"></div>
+            <div class="words-container">
+                <div class="words-row tiles-row">
+                    <div class="letter-cell tile"></div>
+                    <div class="letter-cell tile"></div>
+                    <div class="letter-cell tile"></div>
+                    <div class="letter-cell tile"></div>
+                    <div class="letter-cell tile"></div>
+                </div>
+                <div class="words-row tiles-row">
+                    <div class="letter-cell tile"></div>
+                    <div class="letter-cell tile"></div>
+                    <div class="letter-cell tile"></div>
+                    <div class="letter-cell tile"></div>
+                    <div class="letter-cell tile"></div>
+                </div>
+                <div class="words-row tiles-row">
+                    <div class="letter-cell tile"></div>
+                    <div class="letter-cell tile"></div>
+                    <div class="letter-cell tile"></div>
+                    <div class="letter-cell tile"></div>
+                    <div class="letter-cell tile"></div>
+                </div>
+                <div class="words-row tiles-row">
+                    <div class="letter-cell tile"></div>
+                    <div class="letter-cell tile"></div>
+                    <div class="letter-cell tile"></div>
+                    <div class="letter-cell tile"></div>
+                    <div class="letter-cell tile"></div>
+                </div>
+                <div class="words-row tiles-row">
+                    <div class="letter-cell tile"></div>
+                    <div class="letter-cell tile"></div>
+                    <div class="letter-cell tile"></div>
+                    <div class="letter-cell tile"></div>
+                    <div class="letter-cell tile"></div>
+                </div>
+                <div class="words-row tiles-row">
+                    <div class="letter-cell tile"></div>
+                    <div class="letter-cell tile"></div>
+                    <div class="letter-cell tile"></div>
+                    <div class="letter-cell tile"></div>
+                    <div class="letter-cell tile"></div>
+                </div>
             </div>
-            
-            <div class="tiles-row">
-                <div class="tile"></div>
-                <div class="tile"></div>
-                <div class="tile"></div>
-                <div class="tile"></div>
-                <div class="tile"></div>
-            </div>
-            
-            <div class="tiles-row">
-                <div class="tile"></div>
-                <div class="tile"></div>
-                <div class="tile"></div>
-                <div class="tile"></div>
-                <div class="tile"></div>
-            </div>
-            
-            <div class="tiles-row">
-                <div class="tile"></div>
-                <div class="tile"></div>
-                <div class="tile"></div>
-                <div class="tile"></div>
-                <div class="tile"></div>
-            </div>
-            
-            <div class="tiles-row">
-                <div class="tile"></div>
-                <div class="tile"></div>
-                <div class="tile"></div>
-                <div class="tile"></div>
-                <div class="tile"></div>
-            </div>
-            
-            <div class="tiles-row">
-                <div class="tile"></div>
-                <div class="tile"></div>
-                <div class="tile"></div>
-                <div class="tile"></div>
-                <div class="tile"></div>
-            </div>
-        </div>
-        <div class="options">
-            <button onclick="downloadGame();" class="opt-btn">
-                download
-            </button>
-            <button onclick="resetGame(this);" class="opt-btn">
-                restart
-            </button>
-        </div>
-        <p class="muting" style="text-align: center; cursor: help; font-size: 18px; margin: 10px;">
-            You can mute keyboard clicks from top menu ↗ 
-        </p>
-        <div class="keyboard">
-            <!-- Row 1 -->
-            <button class="keyboard__key keyboard__key--general col-span-3" id="Q">Q</button>
-            <button class="keyboard__key keyboard__key--general col-span-3" id="W">W</button>
-            <button class="keyboard__key keyboard__key--general col-span-3" id="E">E</button>
-            <button class="keyboard__key keyboard__key--general col-span-3" id="R">R</button>
-            <button class="keyboard__key keyboard__key--general col-span-3" id="T">T</button>
-            <button class="keyboard__key keyboard__key--general col-span-3" id="Y">Y</button>
-            <button class="keyboard__key keyboard__key--general col-span-3" id="U">U</button>
-            <button class="keyboard__key keyboard__key--general col-span-3" id="I">I</button>
-            <button class="keyboard__key keyboard__key--general col-span-3" id="O">O</button>
-            <button class="keyboard__key keyboard__key--general col-span-3" id="P">P</button>
-            <!-- Row 2 -->
-            <button class="keyboard__key keyboard__key--general col-span-4" id="A">A</button>
-            <button class="keyboard__key keyboard__key--general col-span-3" id="S">S</button>
-            <button class="keyboard__key keyboard__key--general col-span-3" id="D">D</button>
-            <button class="keyboard__key keyboard__key--general col-span-3" id="F">F</button>
-            <button class="keyboard__key keyboard__key--general col-span-4" id="G">G</button>
-            <button class="keyboard__key keyboard__key--general col-span-3" id="H">H</button>
-            <button class="keyboard__key keyboard__key--general col-span-3" id="J">J</button>
-            <button class="keyboard__key keyboard__key--general col-span-3" id="K">K</button>
-            <button class="keyboard__key keyboard__key--general col-span-4" id="L">L</button>
-            <!-- Row 3 -->
-            <button class="keyboard__key keyboard__key--special col-span-4" id="Backspace">↩</button>
-            <button class="keyboard__key keyboard__key--general col-span-3" id="Z">Z</button>
-            <button class="keyboard__key keyboard__key--general col-span-3" id="X">X</button>
-            <button class="keyboard__key keyboard__key--general col-span-3" id="C">C</button>
-            <button class="keyboard__key keyboard__key--general col-span-3" id="V">V</button>
-            <button class="keyboard__key keyboard__key--general col-span-3" id="B">B</button>
-            <button class="keyboard__key keyboard__key--general col-span-3" id="N">N</button>
-            <button class="keyboard__key keyboard__key--general col-span-3" id="M">M</button>
-            <button class="keyboard__key keyboard__key--special col-span-5" id="Enter">Enter</button>
         </div>
     </main>
+    <div class="keyboard">
+        <!-- Row 1 -->
+        <button class="keyboard__key keyboard__key--general col-span-3" id="Q">Q</button>
+        <button class="keyboard__key keyboard__key--general col-span-3" id="W">W</button>
+        <button class="keyboard__key keyboard__key--general col-span-3" id="E">E</button>
+        <button class="keyboard__key keyboard__key--general col-span-3" id="R">R</button>
+        <button class="keyboard__key keyboard__key--general col-span-3" id="T">T</button>
+        <button class="keyboard__key keyboard__key--general col-span-3" id="Y">Y</button>
+        <button class="keyboard__key keyboard__key--general col-span-3" id="U">U</button>
+        <button class="keyboard__key keyboard__key--general col-span-3" id="I">I</button>
+        <button class="keyboard__key keyboard__key--general col-span-3" id="O">O</button>
+        <button class="keyboard__key keyboard__key--general col-span-3" id="P">P</button>
+        <!-- Row 2 -->
+        <button class="keyboard__key keyboard__key--general col-span-4" id="A">A</button>
+        <button class="keyboard__key keyboard__key--general col-span-3" id="S">S</button>
+        <button class="keyboard__key keyboard__key--general col-span-3" id="D">D</button>
+        <button class="keyboard__key keyboard__key--general col-span-3" id="F">F</button>
+        <button class="keyboard__key keyboard__key--general col-span-4" id="G">G</button>
+        <button class="keyboard__key keyboard__key--general col-span-3" id="H">H</button>
+        <button class="keyboard__key keyboard__key--general col-span-3" id="J">J</button>
+        <button class="keyboard__key keyboard__key--general col-span-3" id="K">K</button>
+        <button class="keyboard__key keyboard__key--general col-span-4" id="L">L</button>
+        <!-- Row 3 -->
+        <button class="keyboard__key keyboard__key--special col-span-4" id="Backspace">↩</button>
+        <button class="keyboard__key keyboard__key--general col-span-3" id="Z">Z</button>
+        <button class="keyboard__key keyboard__key--general col-span-3" id="X">X</button>
+        <button class="keyboard__key keyboard__key--general col-span-3" id="C">C</button>
+        <button class="keyboard__key keyboard__key--general col-span-3" id="V">V</button>
+        <button class="keyboard__key keyboard__key--general col-span-3" id="B">B</button>
+        <button class="keyboard__key keyboard__key--general col-span-3" id="N">N</button>
+        <button class="keyboard__key keyboard__key--general col-span-3" id="M">M</button>
+        <button class="keyboard__key keyboard__key--special col-span-5" id="Enter">Enter</button>
+    </div>
+
     <footer>
-        <div class="footerbox" id="contact">
-            <div class="line" style="text-align: center; font-weight: 900; font-size: 20px;">
-                <a href="https://www.facebook.com/mohamed.solaiman.7796" target="_blank" rel="noopener noreferrer" style="color: #0038b2;">
-                    <i class="fa-brands fa-facebook"></i>
-                    Facebook 
-                </a>  &nbsp; &nbsp; &nbsp;
-                <a href="https://discord.com/users/gomine79" target="_blank" rel="noopener noreferrer"  style="color: #6075c0;">
-                    <i class="fa-brands fa-discord"></i>
-                    Discord
-                </a>  &nbsp; &nbsp; &nbsp;
-                <a href="https://www.instagram.com/mo_salem510/" target="_blank" rel="noopener noreferrer"  style="color: #b072ca;">
-                    <i class="fa-brands fa-instagram"></i>
-                    Instagram
-                </a>  &nbsp; &nbsp; &nbsp;
-                <a href="https://github.com/Mohamedsalem80" target="_blank" rel="noopener noreferrer"  style="color: #121212;">
-                    <i class="fa-brands fa-github"></i>
-                    GitHub
-                </a>  &nbsp; &nbsp; &nbsp;
-                <a href="https://www.linkedin.com/in/mo-salem80/" target="_blank" rel="noopener noreferrer"  style="color: #0f0d9e;">
-                    <i class="fa-brands fa-linkedin"></i>
-                    LinkedIn
-                </a>  &nbsp; &nbsp; &nbsp;
-                <a href="https://www.kaggle.com/mohamedsalemmohamed" target="_blank" rel="noopener noreferrer"  style="color: #0d6e97;">
-                    <i class="fa-brands fa-kaggle"></i>
-                    Kaggle
-                </a>  &nbsp; &nbsp; &nbsp;
-                <a href="mailto:mohamed3salem1@gmail.com"  style="color: #c6a317;">
-                    <i class="fa-brands fa-google"></i>
-                    Gmail
-                </a>  &nbsp; &nbsp; &nbsp;
-                <a href="tel:+201027457807"  style="color: #19b956;">
-                    <i class="fa-duotone fa-phone"></i>
-                    Phone
-                </a>
-            </div>
-        </div>
-        <div class="copyright">
-            &copy; copyrights 2023 Mohamed Salem
-        </div>
+        Copyright © 2022-2025 Mivex. All rights reserved.
     </footer>
-<script src="../js/maven.min.js"></script>
-<script src="../js/allwords.js"></script>
 <script src="../js/html2canvas.min.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var menu = document.querySelector(".menu");
-        var header = document.querySelector("header");
-        mvn(".menu").slideToggle(1);
-        mvn(".menu").slideToggle(1);
-        mvn(".menu").slideToggle();
-    
-        window.onclick = function(event) {
-            console.log("in");
-            if(event.target.matches('.menu-btn-c')){
-                console.log("in btn");
-                if(window.scrollY-(window.innerHeight/32) > 0){
-                    console.log("in head");
-                    mvn("header").classToggle("mini");
-                }
-                mvn(".menu").slideToggle();
-            } else {
-                console.log("in else");
-                if (mvn(".menu")[0].style.display != "none") {
-                    if((window.scrollY-(window.innerHeight/24) > 0)){
-                        header.classList.add("mini");
-                    }
-                    mvn(".menu").slideToggle();
-                }
-            }
-        }
-        window.addEventListener("scroll", function(e){
-            if((window.scrollY-(window.innerHeight/24) > 0) && !(menu.style.display == "block")){
-                header.classList.add("mini");
-            } else {
-                header.classList.remove("mini");
-            }
-        });
-    });
-    </script>
+<script src="../js/allwords.js"></script>
 <script>
 const allowedWords = [ "aback", "abase", "abate", "abbey", "abbot", "abhor", "abide", "abled", "abode", "abort", "about", "above", "abuse", "abyss", "acorn", "acrid", "actor", "acute", "adage", "adapt", "adept", "admin", "admit", "adobe", "adopt", "adore", "adorn", "adult", "affix", "afire", "afoot", "afoul", "after", "again", "agape", "agate", "agent", "agile", "aging", "aglow", "agony", "agree", "ahead", "aider", "aisle", "alarm", "album", "alert", "algae", "alibi", "alien", "align", "alike", "alive", "allay", "alley", "allot", "allow", "alloy", "aloft", "alone", "along", "aloof", "aloud", "alpha", "altar", "alter", "amass", "amaze", "amber", "amble", "amend", "amiss", "amity", "among", "ample", "amply", "amuse", "angel", "anger", "angle", "angry", "angst", "anime", "ankle", "annex", "annoy", "annul", "anode", "antic", "anvil", "aorta", "apart", "aphid", "aping", "apnea", "apple", "apply", "apron", "aptly", "arbor", "ardor", "arena", "argue", "arise", "armor", "aroma", "arose", "array", "arrow", "arson", "artsy", "ascot", "ashen", "aside", "askew", "assay", "asset", "atoll", "atone", "attic", "audio", "audit", "augur", "aunty", "avail", "avert", "avian", "avoid", "await", "awake", "award", "aware", "awash", "awful", "awoke", "axial", "axiom", "axion", "azure", "bacon", "badge", "badly", "bagel", "baggy", "baker", "baler", "balmy", "banal", "banjo", "barge", "baron", "basal", "basic", "basil", "basin", "basis", "baste", "batch", "bathe", "baton", "batty", "bawdy", "bayou", "beach", "beady", "beard", "beast", "beech", "beefy", "befit", "began", "begat", "beget", "begin", "begun", "being", "belch", "belie", "belle", "belly", "below", "bench", "beret", "berry", "berth", "beset", "betel", "bevel", "bezel", "bible", "bicep", "biddy", "bigot", "bilge", "billy", "binge", "bingo", "biome", "birch", "birth", "bison", "bitty", "black", "blade", "blame", "bland", "blank", "blare", "blast", "blaze", "bleak", "bleat", "bleed", "bleep", "blend", "bless", "blimp", "blind", "blink", "bliss", "blitz", "bloat", "block", "bloke", "blond", "blood", "bloom", "blown", "bluer", "bluff", "blunt", "blurb", "blurt", "blush", "board", "boast", "bobby", "boney", "bongo", "bonus", "booby", "boost", "booth", "booty", "booze", "boozy", "borax", "borne", "bosom", "bossy", "botch", "bough", "boule", "bound", "bowel", "boxer", "brace", "braid", "brain", "brake", "brand", "brash", "brass", "brave", "bravo", "brawl", "brawn", "bread", "break", "breed", "briar", "bribe", "brick", "bride", "brief", "brine", "bring", "brink", "briny", "brisk", "broad", "broil", "broke", "brood", "brook", "broom", "broth", "brown", "brunt", "brush", "brute", "buddy", "budge", "buggy", "bugle", "build", "built", "bulge", "bulky", "bully", "bunch", "bunny", "burly", "burnt", "burst", "bused", "bushy", "butch", "butte", "buxom", "buyer", "bylaw", "cabal", "cabby", "cabin", "cable", "cacao", "cache", "cacti", "caddy", "cadet", "cagey", "cairn", "camel", "cameo", "canal", "candy", "canny", "canoe", "canon", "caper", "caput", "carat", "cargo", "carol", "carry", "carve", "caste", "catch", "cater", "catty", "caulk", "cause", "cavil", "cease", "cedar", "cello", "chafe", "chaff", "chain", "chair", "chalk", "champ", "chant", "chaos", "chard", "charm", "chart", "chase", "chasm", "cheap", "cheat", "check", "cheek", "cheer", "chess", "chest", "chick", "chide", "chief", "child", "chili", "chill", "chime", "china", "chirp", "chock", "choir", "choke", "chord", "chore", "chose", "chuck", "chump", "chunk", "churn", "chute", "cider", "cigar", "cinch", "circa", "civic", "civil", "clack", "claim", "clamp", "clang", "clank", "clash", "clasp", "class", "clean", "clear", "cleat", "cleft", "clerk", "click", "cliff", "climb", "cling", "clink", "cloak", "clock", "clone", "close", "cloth", "cloud", "clout", "clove", "clown", "cluck", "clued", "clump", "clung", "coach", "coast", "cobra", "cocoa", "colon", "color", "comet", "comfy", "comic", "comma", "conch", "condo", "conic", "copse", "coral", "corer", "corny", "couch", "cough", "could", "count", "coupe", "court", "coven", "cover", "covet", "covey", "cower", "coyly", "crack", "craft", "cramp", "crane", "crank", "crash", "crass", "crate", "crave", "crawl", "craze", "crazy", "creak", "cream", "credo", "creed", "creek", "creep", "creme", "crepe", "crept", "cress", "crest", "crick", "cried", "crier", "crime", "crimp", "crisp", "croak", "crock", "crone", "crony", "crook", "cross", "croup", "crowd", "crown", "crude", "cruel", "crumb", "crump", "crush", "crust", "crypt", "cubic", "cumin", "curio", "curly", "curry", "curse", "curve", "curvy", "cutie", "cyber", "cycle", "cynic", "daddy", "daily", "dairy", "daisy", "dally", "dance", "dandy", "datum", "daunt", "dealt", "death", "debar", "debit", "debug", "debut", "decal", "decay", "decor", "decoy", "decry", "defer", "deign", "deity", "delay", "delta", "delve", "demon", "demur", "denim", "dense", "depot", "depth", "derby", "deter", "detox", "deuce", "devil", "diary", "dicey", "digit", "dilly", "dimly", "diner", "dingo", "dingy", "diode", "dirge", "dirty", "disco", "ditch", "ditto", "ditty", "diver", "dizzy", "dodge", "dodgy", "dogma", "doing", "dolly", "donor", "donut", "dopey", "doubt", "dough", "dowdy", "dowel", "downy", "dowry", "dozen", "draft", "drain", "drake", "drama", "drank", "drape", "drawl", "drawn", "dread", "dream", "dress", "dried", "drier", "drift", "drill", "drink", "drive", "droit", "droll", "drone", "drool", "droop", "dross", "drove", "drown", "druid", "drunk", "dryer", "dryly", "duchy", "dully", "dummy", "dumpy", "dunce", "dusky", "dusty", "dutch", "duvet", "dwarf", "dwell", "dwelt", "dying", "eager", "eagle", "early", "earth", "easel", "eaten", "eater", "ebony", "eclat", "edict", "edify", "eerie", "egret", "eight", "eject", "eking", "elate", "elbow", "elder", "elect", "elegy", "elfin", "elide", "elite", "elope", "elude", "email", "embed", "ember", "emcee", "empty", "enact", "endow", "enema", "enemy", "enjoy", "ennui", "ensue", "enter", "entry", "envoy", "epoch", "epoxy", "equal", "equip", "erase", "erect", "erode", "error", "erupt", "essay", "ester", "ether", "ethic", "ethos", "etude", "evade", "event", "every", "evict", "evoke", "exact", "exalt", "excel", "exert", "exile", "exist", "expel", "extol", "extra", "exult", "eying", "fable", "facet", "faint", "fairy", "faith", "false", "fancy", "fanny", "farce", "fatal", "fatty", "fault", "fauna", "favor", "feast", "fecal", "feign", "fella", "felon", "femme", "femur", "fence", "feral", "ferry", "fetal", "fetch", "fetid", "fetus", "fever", "fewer", "fiber", "ficus", "field", "fiend", "fiery", "fifth", "fifty", "fight", "filer", "filet", "filly", "filmy", "filth", "final", "finch", "finer", "first", "fishy", "fixer", "fizzy", "fjord", "flack", "flail", "flair", "flake", "flaky", "flame", "flank", "flare", "flash", "flask", "fleck", "fleet", "flesh", "flick", "flier", "fling", "flint", "flirt", "float", "flock", "flood", "floor", "flora", "floss", "flour", "flout", "flown", "fluff", "fluid", "fluke", "flume", "flung", "flunk", "flush", "flute", "flyer", "foamy", "focal", "focus", "foggy", "foist", "folio", "folly", "foray", "force", "forge", "forgo", "forte", "forth", "forty", "forum", "found", "foyer", "frail", "frame", "frank", "fraud", "freak", "freed", "freer", "fresh", "friar", "fried", "frill", "frisk", "fritz", "frock", "frond", "front", "frost", "froth", "frown", "froze", "fruit", "fudge", "fugue", "fully", "fungi", "funky", "funny", "furor", "furry", "fussy", "fuzzy", "gaffe", "gaily", "gamer", "gamma", "gamut", "gassy", "gaudy", "gauge", "gaunt", "gauze", "gavel", "gawky", "gayer", "gayly", "gazer", "gecko", "geeky", "geese", "genie", "genre", "ghost", "ghoul", "giant", "giddy", "gipsy", "girly", "girth", "given", "giver", "glade", "gland", "glare", "glass", "glaze", "gleam", "glean", "glide", "glint", "gloat", "globe", "gloom", "glory", "gloss", "glove", "glyph", "gnash", "gnome", "godly", "going", "golem", "golly", "gonad", "goner", "goody", "gooey", "goofy", "goose", "gorge", "gouge", "gourd", "grace", "grade", "graft", "grail", "grain", "grand", "grant", "grape", "graph", "grasp", "grass", "grate", "grave", "gravy", "graze", "great", "greed", "green", "greet", "grief", "grill", "grime", "grimy", "grind", "gripe", "groan", "groin", "groom", "grope", "gross", "group", "grout", "grove", "growl", "grown", "gruel", "gruff", "grunt", "guard", "guava", "guess", "guest", "guide", "guild", "guile", "guilt", "guise", "gulch", "gully", "gumbo", "gummy", "guppy", "gusto", "gusty", "gypsy", "habit", "hairy", "halve", "handy", "happy", "hardy", "harem", "harpy", "harry", "harsh", "haste", "hasty", "hatch", "hater", "haunt", "haute", "haven", "havoc", "hazel", "heady", "heard", "heart", "heath", "heave", "heavy", "hedge", "hefty", "heist", "helix", "hello", "hence", "heron", "hilly", "hinge", "hippo", "hippy", "hitch", "hoard", "hobby", "hoist", "holly", "homer", "honey", "honor", "horde", "horny", "horse", "hotel", "hotly", "hound", "house", "hovel", "hover", "howdy", "human", "humid", "humor", "humph", "humus", "hunch", "hunky", "hurry", "husky", "hussy", "hutch", "hydro", "hyena", "hymen", "hyper", "icily", "icing", "ideal", "idiom", "idiot", "idler", "idyll", "igloo", "iliac", "image", "imbue", "impel", "imply", "inane", "inbox", "incur", "index", "inept", "inert", "infer", "ingot", "inlay", "inlet", "inner", "input", "inter", "intro", "ionic", "irate", "irony", "islet", "issue", "itchy", "ivory", "jaunt", "jazzy", "jelly", "jerky", "jetty", "jewel", "jiffy", "joint", "joist", "joker", "jolly", "joust", "judge", "juice", "juicy", "jumbo", "jumpy", "junta", "junto", "juror", "kappa", "karma", "kayak", "kebab", "khaki", "kinky", "kiosk", "kitty", "knack", "knave", "knead", "kneed", "kneel", "knelt", "knife", "knock", "knoll", "known", "koala", "krill", "label", "labor", "laden", "ladle", "lager", "lance", "lanky", "lapel", "lapse", "large", "larva", "lasso", "latch", "later", "lathe", "latte", "laugh", "layer", "leach", "leafy", "leaky", "leant", "leapt", "learn", "lease", "leash", "least", "leave", "ledge", "leech", "leery", "lefty", "legal", "leggy", "lemon", "lemur", "leper", "level", "lever", "libel", "liege", "light", "liken", "lilac", "limbo", "limit", "linen", "liner", "lingo", "lipid", "lithe", "liver", "livid", "llama", "loamy", "loath", "lobby", "local", "locus", "lodge", "lofty", "logic", "login", "loopy", "loose", "lorry", "loser", "louse", "lousy", "lover", "lower", "lowly", "loyal", "lucid", "lucky", "lumen", "lumpy", "lunar", "lunch", "lunge", "lupus", "lurch", "lurid", "lusty", "lying", "lymph", "lyric", "macaw", "macho", "macro", "madam", "madly", "mafia", "magic", "magma", "maize", "major", "maker", "mambo", "mamma", "mammy", "manga", "mange", "mango", "mangy", "mania", "manic", "manly", "manor", "maple", "march", "marry", "marsh", "mason", "masse", "match", "matey", "mauve", "maxim", "maybe", "mayor", "mealy", "meant", "meaty", "mecca", "medal", "media", "medic", "melee", "melon", "mercy", "merge", "merit", "merry", "metal", "meter", "metro", "micro", "midge", "midst", "might", "milky", "mimic", "mince", "miner", "minim", "minor", "minty", "minus", "mirth", "miser", "missy", "mocha", "modal", "model", "modem", "mogul", "moist", "molar", "moldy", "money", "month", "moody", "moose", "moral", "moron", "morph", "mossy", "motel", "motif", "motor", "motto", "moult", "mound", "mount", "mourn", "mouse", "mouth", "mover", "movie", "mower", "mucky", "mucus", "muddy", "mulch", "mummy", "munch", "mural", "murky", "mushy", "music", "musky", "musty", "myrrh", "nadir", "naive", "nanny", "nasal", "nasty", "natal", "naval", "navel", "needy", "neigh", "nerdy", "nerve", "never", "newer", "newly", "nicer", "niche", "niece", "night", "ninja", "ninny", "ninth", "noble", "nobly", "noise", "noisy", "nomad", "noose", "north", "nosey", "notch", "novel", "nudge", "nurse", "nutty", "nylon", "nymph", "oaken", "obese", "occur", "ocean", "octal", "octet", "odder", "oddly", "offal", "offer", "often", "olden", "older", "olive", "ombre", "omega", "onion", "onset", "opera", "opine", "opium", "optic", "orbit", "order", "organ", "other", "otter", "ought", "ounce", "outdo", "outer", "outgo", "ovary", "ovate", "overt", "ovine", "ovoid", "owing", "owner", "oxide", "ozone", "paddy", "pagan", "paint", "paler", "palsy", "panel", "panic", "pansy", "papal", "paper", "parer", "parka", "parry", "parse", "party", "pasta", "paste", "pasty", "patch", "patio", "patsy", "patty", "pause", "payee", "payer", "peace", "peach", "pearl", "pecan", "pedal", "penal", "pence", "penne", "penny", "perch", "peril", "perky", "pesky", "pesto", "petal", "petty", "phase", "phone", "phony", "photo", "piano", "picky", "piece", "piety", "piggy", "pilot", "pinch", "piney", "pinky", "pinto", "piper", "pique", "pitch", "pithy", "pivot", "pixel", "pixie", "pizza", "place", "plaid", "plain", "plait", "plane", "plank", "plant", "plate", "plaza", "plead", "pleat", "plied", "plier", "pluck", "plumb", "plume", "plump", "plunk", "plush", "poesy", "point", "poise", "poker", "polar", "polka", "polyp", "pooch", "poppy", "porch", "poser", "posit", "posse", "pouch", "pound", "pouty", "power", "prank", "prawn", "preen", "press", "price", "prick", "pride", "pried", "prime", "primo", "print", "prior", "prism", "privy", "prize", "probe", "prone", "prong", "proof", "prose", "proud", "prove", "prowl", "proxy", "prude", "prune", "psalm", "pubic", "pudgy", "puffy", "pulpy", "pulse", "punch", "pupil", "puppy", "puree", "purer", "purge", "purse", "pushy", "putty", "pygmy", "quack", "quail", "quake", "qualm", "quark", "quart", "quash", "quasi", "queen", "queer", "quell", "query", "quest", "queue", "quick", "quiet", "quill", "quilt", "quirk", "quite", "quota", "quote", "quoth", "rabbi", "rabid", "racer", "radar", "radii", "radio", "rainy", "raise", "rajah", "rally", "ralph", "ramen", "ranch", "randy", "range", "rapid", "rarer", "raspy", "ratio", "ratty", "raven", "rayon", "razor", "reach", "react", "ready", "realm", "rearm", "rebar", "rebel", "rebus", "rebut", "recap", "recur", "recut", "reedy", "refer", "refit", "regal", "rehab", "reign", "relax", "relay", "relic", "remit", "renal", "renew", "repay", "repel", "reply", "rerun", "reset", "resin", "retch", "retro", "retry", "reuse", "revel", "revue", "rhino", "rhyme", "rider", "ridge", "rifle", "right", "rigid", "rigor", "rinse", "ripen", "riper", "risen", "riser", "risky", "rival", "river", "rivet", "roach", "roast", "robin", "robot", "rocky", "rodeo", "roger", "rogue", "roomy", "roost", "rotor", "rouge", "rough", "round", "rouse", "route", "rover", "rowdy", "rower", "royal", "ruddy", "ruder", "rugby", "ruler", "rumba", "rumor", "rupee", "rural", "rusty", "sadly", "safer", "saint", "salad", "sally", "salon", "salsa", "salty", "salve", "salvo", "sandy", "saner", "sappy", "sassy", "satin", "satyr", "sauce", "saucy", "sauna", "saute", "savor", "savoy", "savvy", "scald", "scale", "scalp", "scaly", "scamp", "scant", "scare", "scarf", "scary", "scene", "scent", "scion", "scoff", "scold", "scone", "scoop", "scope", "score", "scorn", "scour", "scout", "scowl", "scram", "scrap", "scree", "screw", "scrub", "scrum", "scuba", "sedan", "seedy", "segue", "seize", "semen", "sense", "sepia", "serif", "serum", "serve", "setup", "seven", "sever", "sewer", "shack", "shade", "shady", "shaft", "shake", "shaky", "shale", "shall", "shalt", "shame", "shank", "shape", "shard", "share", "shark", "sharp", "shave", "shawl", "shear", "sheen", "sheep", "sheer", "sheet", "sheik", "shelf", "shell", "shied", "shift", "shine", "shiny", "shire", "shirk", "shirt", "shoal", "shock", "shone", "shook", "shoot", "shore", "shorn", "short", "shout", "shove", "shown", "showy", "shrew", "shrub", "shrug", "shuck", "shunt", "shush", "shyly", "siege", "sieve", "sight", "sigma", "silky", "silly", "since", "sinew", "singe", "siren", "sissy", "sixth", "sixty", "skate", "skier", "skiff", "skill", "skimp", "skirt", "skulk", "skull", "skunk", "slack", "slain", "slang", "slant", "slash", "slate", "sleek", "sleep", "sleet", "slept", "slice", "slick", "slide", "slime", "slimy", "sling", "slink", "sloop", "slope", "slosh", "sloth", "slump", "slung", "slunk", "slurp", "slush", "slyly", "smack", "small", "smart", "smash", "smear", "smell", "smelt", "smile", "smirk", "smite", "smith", "smock", "smoke", "smoky", "smote", "snack", "snail", "snake", "snaky", "snare", "snarl", "sneak", "sneer", "snide", "sniff", "snipe", "snoop", "snore", "snort", "snout", "snowy", "snuck", "snuff", "soapy", "sober", "soggy", "solar", "solid", "solve", "sonar", "sonic", "sooth", "sooty", "sorry", "sound", "south", "sower", "space", "spade", "spank", "spare", "spark", "spasm", "spawn", "speak", "spear", "speck", "speed", "spell", "spelt", "spend", "spent", "sperm", "spice", "spicy", "spied", "spiel", "spike", "spiky", "spill", "spilt", "spine", "spiny", "spire", "spite", "splat", "split", "spoil", "spoke", "spoof", "spook", "spool", "spoon", "spore", "sport", "spout", "spray", "spree", "sprig", "spunk", "spurn", "spurt", "squad", "squat", "squib", "stack", "staff", "stage", "staid", "stain", "stair", "stake", "stale", "stalk", "stall", "stamp", "stand", "stank", "stare", "stark", "start", "stash", "state", "stave", "stead", "steak", "steal", "steam", "steed", "steel", "steep", "steer", "stein", "stern", "stick", "stiff", "still", "stilt", "sting", "stink", "stint", "stock", "stoic", "stoke", "stole", "stomp", "stone", "stony", "stood", "stool", "stoop", "store", "stork", "storm", "story", "stout", "stove", "strap", "straw", "stray", "strip", "strut", "stuck", "study", "stuff", "stump", "stung", "stunk", "stunt", "style", "suave", "sugar", "suing", "suite", "sulky", "sully", "sumac", "sunny", "super", "surer", "surge", "surly", "sushi", "swami", "swamp", "swarm", "swash", "swath", "swear", "sweat", "sweep", "sweet", "swell", "swept", "swift", "swill", "swine", "swing", "swirl", "swish", "swoon", "swoop", "sword", "swore", "sworn", "swung", "synod", "syrup", "tabby", "table", "taboo", "tacit", "tacky", "taffy", "taint", "taken", "taker", "tally", "talon", "tamer", "tango", "tangy", "taper", "tapir", "tardy", "tarot", "taste", "tasty", "tatty", "taunt", "tawny", "teach", "teary", "tease", "teddy", "teeth", "tempo", "tenet", "tenor", "tense", "tenth", "tepee", "tepid", "terra", "terse", "testy", "thank", "theft", "their", "theme", "there", "these", "theta", "thick", "thief", "thigh", "thing", "think", "third", "thong", "thorn", "those", "three", "threw", "throb", "throw", "thrum", "thumb", "thump", "thyme", "tiara", "tibia", "tidal", "tiger", "tight", "tilde", "timer", "timid", "tipsy", "titan", "tithe", "title", "toast", "today", "toddy", "token", "tonal", "tonga", "tonic", "tooth", "topaz", "topic", "torch", "torso", "torus", "total", "totem", "touch", "tough", "towel", "tower", "toxic", "toxin", "trace", "track", "tract", "trade", "trail", "train", "trait", "tramp", "trash", "trawl", "tread", "treat", "trend", "triad", "trial", "tribe", "trice", "trick", "tried", "tripe", "trite", "troll", "troop", "trope", "trout", "trove", "truce", "truck", "truer", "truly", "trump", "trunk", "truss", "trust", "truth", "tryst", "tubal", "tuber", "tulip", "tulle", "tumor", "tunic", "turbo", "tutor", "twang", "tweak", "tweed", "tweet", "twice", "twine", "twirl", "twist", "twixt", "tying", "udder", "ulcer", "ultra", "umbra", "uncle", "uncut", "under", "undid", "undue", "unfed", "unfit", "unify", "union", "unite", "unity", "unlit", "unmet", "unset", "untie", "until", "unwed", "unzip", "upper", "upset", "urban", "urine", "usage", "usher", "using", "usual", "usurp", "utile", "utter", "vague", "valet", "valid", "valor", "value", "valve", "vapid", "vapor", "vault", "vaunt", "vegan", "venom", "venue", "verge", "verse", "verso", "verve", "vicar", "video", "vigil", "vigor", "villa", "vinyl", "viola", "viper", "viral", "virus", "visit", "visor", "vista", "vital", "vivid", "vixen", "vocal", "vodka", "vogue", "voice", "voila", "vomit", "voter", "vouch", "vowel", "vying", "wacky", "wafer", "wager", "wagon", "waist", "waive", "waltz", "warty", "waste", "watch", "water", "waver", "waxen", "weary", "weave", "wedge", "weedy", "weigh", "weird", "welch", "welsh", "whack", "whale", "wharf", "wheat", "wheel", "whelp", "where", "which", "whiff", "while", "whine", "whiny", "whirl", "whisk", "white", "whole", "whoop", "whose", "widen", "wider", "widow", "width", "wield", "wight", "willy", "wimpy", "wince", "winch", "windy", "wiser", "wispy", "witch", "witty", "woken", "woman", "women", "woody", "wooer", "wooly", "woozy", "wordy", "world", "worry", "worse", "worst", "worth", "would", "wound", "woven", "wrack", "wrath", "wreak", "wreck", "wrest", "wring", "wrist", "write", "wrong", "wrote", "wrung", "wryly", "yacht", "yearn", "yeast", "yield", "young", "youth", "zebra", "zesty", "zonal"];
 </script>
-<script src="../js/wordl.js?v=1.4.3"></script>
 <script>
-    mvn(".menu").slideToggle(0);
-    mvn(".menu").slideToggle(0);
-    mvn(".menu-btn-c").on("click", function(){
-        mvn(".menu").slideToggle();
+const volumeSoundDefault = 0.75;
+let volumeSound = volumeSoundDefault;
+let letCnt = 0;
+let tryCnt = 0;
+let pick = allowedWords[Math.floor(Math.random() * 2310)];
+const words = Array.from({ length: 6 }, () => []);
+const keys = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "Backspace", "A", "S", "D", "F", "G", "H", "J", "K", "L", "Enter", "Z", "X", "C", "V", "B", "N", "M"];
+
+function toggleMute() {
+    const eleMute = document.getElementById("mute");
+    volumeSound = volumeSound ? 0 : volumeSoundDefault;
+    eleMute.innerText = volumeSound ? "Mute" : "Unmute";
+}
+
+function playSound(soundFile) {
+    if (volumeSound) {
+        const audio = new Audio(soundFile);
+        audio.volume = volumeSound;
+        audio.play();
+    }
+}
+
+function saveElementAsImage(elementId, filename = 'element_image.png') {
+    html2canvas(document.getElementById(elementId)).then(canvas => {
+        const dataUrl = canvas.toDataURL('image/png');
+        const link = document.createElement('a');
+        link.href = dataUrl;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     });
+}
+
+function fillTile(row, col, letter) {
+    document.querySelectorAll(".tiles-row")[row].querySelectorAll(".tile")[col].innerHTML = letter;
+}
+
+function colorFillTiles(scheme, row, blocked) {
+    const rowEle = document.querySelectorAll(".tiles-row")[row];
+    scheme.forEach((color, index) => rowEle.querySelectorAll(".tile")[index].classList.add("scheme-" + color));
+    blocked.forEach(key => document.getElementById(key).classList.add("blocked"));
+}
+
+function playWord(main, word) {
+    const result = Array(5).fill(0);
+    const blocked = [];
+    const unmatched = [...main];
+    word.forEach((char, index) => {
+        if (char === unmatched[index]) {
+            result[index] = 2;
+            unmatched[index] = null;
+        }
+    });
+    word.forEach((char, index) => {
+        if (result[index] === 0 && unmatched.includes(char)) {
+            result[index] = 1;
+            unmatched[unmatched.indexOf(char)] = null;
+        } else if (result[index] === 0) {
+            blocked.push(char);
+        }
+    });
+    return [result, blocked];
+}
+
+function checkWord() {
+    const currentWord = words[tryCnt].join("").toLowerCase();
+    if (allWords.includes(currentWord)) {
+        const test = pick.toUpperCase().split("");
+        const [result, blocked] = playWord(test, words[tryCnt]);
+        colorFillTiles(result, tryCnt, blocked);
+        if (result.every(num => num === 2)) {
+            notify('🎉 You won! 🎉', 60000, "good");
+            tryCnt = 10;
+            letCnt = 10;
+        } else if (tryCnt > 4) {
+            notify(`Sorry 😢, but you Lost!\nThe word is "${pick}"`, 30000, "bad");
+            tryCnt = 10;
+            letCnt = 10;
+        } else {
+            tryCnt++;
+            letCnt = 0;
+        }
+    } else {
+        notify('⚠ Not a real word!', 3000, "warn");
+    }
+}
+
+keys.forEach(key => {
+    const keyElement = document.getElementById(key);
+    keyElement.addEventListener("click", () => {
+        const keyPressEvent = new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true });
+        document.dispatchEvent(keyPressEvent);
+        setTimeout(() => {
+            const keyUpEvent = new KeyboardEvent('keyup', { key, bubbles: true, cancelable: true });
+            document.dispatchEvent(keyUpEvent);
+        }, 1);
+    });
+});
+
+window.addEventListener("keydown", ({ key }) => {
+    if (keys.includes(key.toUpperCase())) {
+        document.getElementById(key.toUpperCase()).classList.add("active");
+    }
+});
+
+window.addEventListener("keyup", ({ key }) => {
+    if (keys.includes(key.toUpperCase())) {
+        document.getElementById(key.toUpperCase()).classList.remove("active");
+    }
+});
+
+document.addEventListener('keyup', function(event) {
+    if ((letCnt > 4 || tryCnt > 5) && !keys.includes(event.key)) {
+        playSound('sound/click-sound-3.mp3');
+    } else if (event.key === "Backspace" && letCnt === 0) {
+        playSound('sound/click-sound-3.mp3');
+    } else if (event.key === "Enter" && letCnt !== 5) {
+        playSound('sound/click-sound-3.mp3');
+    } else if (keys.includes(event.key.toUpperCase())) {
+        playSound('sound/click-sound-1.mp3');
+        fillTile(tryCnt, letCnt, event.key.toUpperCase());
+        words[tryCnt][letCnt++] = event.key.toUpperCase();
+    } else if (keys.includes(event.key)) {
+        playSound('sound/click-sound-2.mp3');
+        if (event.key === "Backspace" && letCnt > 0) {
+            words[tryCnt][--letCnt] = "";
+            fillTile(tryCnt, letCnt, "");
+        } else if (event.key === "Enter") {
+            checkWord();
+        }
+    }
+});
+
+function downloadGame() {
+    const a = Math.floor(Math.random() * 1000);
+    saveElementAsImage('game', `wordl${a}.png`);
+}
+
+function resetGame() {
+    for (let i = 0; i < 6; i++) {
+        for (let j = 0; j < 5; j++) {
+            fillTile(i, j, "");
+            words[i][j] = "";
+        }
+    }
+    letCnt = 0;
+    tryCnt = 0;
+    document.querySelectorAll(".tile").forEach(tile => tile.classList.remove("scheme-0", "scheme-1", "scheme-2"));
+    document.querySelectorAll(".keyboard__key").forEach(key => key.classList.remove("blocked"));
+    document.getElementById('toast-container').innerText = "";
+    pick = allowedWords[Math.floor(Math.random() * 2310)];
+}
+
+function notify(message = "", duration = 3000, style = "default") {
+    showToast(message, style, duration);
+}
+
+function showToast(message, style = "default", duration = 3000) {
+    const toastContainer = document.getElementById('toast-container');
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${style}`;
+    toast.textContent = message;
+    toastContainer.appendChild(toast);
+    setTimeout(() => {
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.add('hide');
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 350);
+        }, duration);
+    }, 100);
+}
 </script>
 </body>
 </html>

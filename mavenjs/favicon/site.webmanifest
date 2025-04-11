@@ -1,0 +1,24 @@
+{
+    "name": "Mivex - MavenJS light and fast",
+    "short_name": "MavenJS",
+    "description": "Mivex - MavenJS is a fast and light open-sourced JavaScript library designed for creating dynamic web applications, simplifying DOM manipulation, and enhancing user interactivity with minimal effort.",
+    "start_url": "/mavenjs/index.html",
+    "display": "standalone",
+    "background_color": "#a92a01",
+    "theme_color": "#a92a01",
+    "icons": [
+      {
+        "src": "mavenjs-192x192.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+      {
+        "src": "mavenjs-512x512.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ],
+    "orientation": "portrait",
+    "scope": "/mavenjs/",
+    "lang": "en"
+}
