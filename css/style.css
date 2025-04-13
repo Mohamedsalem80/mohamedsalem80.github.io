@@ -396,23 +396,29 @@ position: relative;
 }
 
 #services .services .service {
+	display: flex;
+	flex-direction: column;
 	color: #000000;
 	max-width: 20rem;
 	background-color: #ffffff;
 	padding: 2rem;
 	border-radius: 2rem;
+	height: 100%;
 }
 
 #services .services .service .service-icon {
 	overflow: hidden;
 	width: 100%;
+	aspect-ratio: 1/1;
 	transition: all ease 0.3s;
-	border-radius: 5rem;
+	border-radius: 2rem;
 	transform: scale(0.9);
+	border: 1px solid #eee;
+    box-shadow: 2px 3px 14px #ccc;
 }
 
 #services .services .service .service-icon:hover {
-	transform: scale(1);
+	transform: scale(0.95);
 }
 
 #services .services .service .service-title {
@@ -788,15 +794,3 @@ body {
 		justify-content: space-around;
 	}
 }
-
-.sr-only {
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	padding: 0;
-	margin: -1px;
-	overflow: hidden;
-	clip: rect(0, 0, 0, 0);
-	white-space: nowrap;
-	border: 0;
-  }
