@@ -777,7 +777,7 @@ body {
 	}
 	.contact-container {
 		flex-direction: column;
-		max-width: 95vw;
+		max-width: 70vw;
 	}
 
 	.contact-container .contact-quote {
