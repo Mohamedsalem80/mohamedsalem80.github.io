@@ -349,6 +349,11 @@ footer {
         grid-template-columns: repeat(30, 0.35rem);
         grid-template-rows: repeat(3, 2.6rem);
     }
+
+    .keyboard__key--general::before {
+        top: 2px;
+        left: 2px;
+    }
 }
 
 @media (min-width: 576px) {
@@ -359,8 +364,8 @@ footer {
     }
 
     .keyboard__key--general::before {
-        top: 5px;
-        left: 5px;
+        top: 3px;
+        left: 3px;
     }
 }
 
@@ -372,8 +377,8 @@ footer {
     }
 
     .keyboard__key--general::before {
-        top: 6px;
-        left: 6px;
+        top: 3px;
+        left: 3px;
     }
 }
 
@@ -385,8 +390,8 @@ footer {
     }
 
     .keyboard__key--general::before {
-        top: 7px;
-        left: 7px;
+        top: 4px;
+        left: 4px;
     }
 }
 
