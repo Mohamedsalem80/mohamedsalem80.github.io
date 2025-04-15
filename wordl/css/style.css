@@ -357,6 +357,11 @@ footer {
         grid-template-columns: repeat(30, 0.6rem);
         grid-template-rows: repeat(3, 2.7rem);
     }
+
+    .keyboard__key--general::before {
+        top: 5px;
+        left: 5px;
+    }
 }
 
 @media (min-width: 768px) {
@@ -365,6 +370,11 @@ footer {
         grid-template-columns: repeat(30, 0.85rem);
         grid-template-rows: repeat(3, 2.8rem);
     }
+
+    .keyboard__key--general::before {
+        top: 6px;
+        left: 6px;
+    }
 }
 
 @media (min-width: 992px) {
@@ -372,6 +382,11 @@ footer {
         width: fit-content;
         grid-template-columns: repeat(30, 1.25rem);
         grid-template-rows: repeat(3, 2.9rem);
+    }
+
+    .keyboard__key--general::before {
+        top: 7px;
+        left: 7px;
     }
 }
 
