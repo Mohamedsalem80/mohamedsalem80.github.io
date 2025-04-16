@@ -83,7 +83,7 @@
 			<h2>Documentation</h2>
 			<br>
 			<hr>
-			<input type="text" class="search-box" id="searchInput" placeholder="Search function...">
+			<input type="text" class="search-box" id="searchInput" placeholder="Search function..." pattern="^[a-zA-Z]+$" title="Only letters are allowed.">
 			<br>
 			<div id="functionList"></div>
 		</div>
@@ -474,7 +474,7 @@ function renderDocumentation(functions, currentVersion) {
 		}
 
 		document.getElementById('searchInput').addEventListener('input', function(e) {
-			const searchQuery = e.target.value.toLowerCase();
+      const searchQuery = e.target.value.toLowerCase().replace(/[^a-z]/g, '');
 			const filteredFunctions = functionsData.functions.filter(func => 
 				func.name.toLowerCase().includes(searchQuery)
 			);
