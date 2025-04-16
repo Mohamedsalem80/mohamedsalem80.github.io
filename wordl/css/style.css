@@ -179,7 +179,7 @@ main {
     height: 520px;
     padding: 0.5rem;
     border-radius: 1rem;
-    background-image: url('../img/golden.jpg');
+    background-image: linear-gradient(to right, #da8b26 0%, #fee487 40%, #f3c14e 100%);
     background-repeat: no-repeat;
     background-size: cover;
 }
