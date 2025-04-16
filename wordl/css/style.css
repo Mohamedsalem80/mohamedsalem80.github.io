@@ -203,7 +203,7 @@ main {
     border-radius: 0.5rem;
     background-color: #161618d0;
     /* background-image: linear-gradient(to top, #010203, #47555F); */
-    background-image: url('../img/glitter.jpg');
+    background-image: url('../img/glitter.webp');
     background-repeat: no-repeat;
     background-size: cover;
     color: #ffffff;
