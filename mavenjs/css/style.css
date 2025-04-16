@@ -324,3 +324,8 @@ footer .copyright {
         align-items: center;
     }
 }
+
+.logo-link {
+    text-decoration: none;
+    color: #fff;
+}

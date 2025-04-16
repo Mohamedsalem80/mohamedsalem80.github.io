@@ -451,3 +451,8 @@ footer {
 .toast.hide {
     position: absolute;
 }
+
+.logo-link {
+    text-decoration: none;
+    color: #fff;
+}
