@@ -92,6 +92,27 @@ main .hero {
 main .hero img {
     width: 22rem;
     height: 22rem;
+    border-radius: 50%;
+    animation: rotate-shadow 4s infinite linear;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+@keyframes rotate-shadow {
+    0% {
+        box-shadow: 12px 12px 20px rgba(255, 169, 127, 0.75), -3px -3px 12px rgba(255, 169, 127, 0.5);
+    }
+    25% {
+        box-shadow: 12px -12px 20px rgba(255, 169, 127, 0.75), -3px 3px 12px rgba(255, 169, 127, 0.5);
+    }
+    50% {
+        box-shadow: -12px -12px 20px rgba(255, 169, 127, 0.75), 3px 3px 12px rgba(255, 169, 127, 0.5);
+    }
+    75% {
+        box-shadow: -12px 12px 20px rgba(255, 169, 127, 0.75), 3px -3px 12px rgba(255, 169, 127, 0.5);
+    }
+    100% {
+        box-shadow: 12px 12px 20px rgba(255, 169, 127, 0.75), -3px -3px 12px rgba(255, 169, 127, 0.5);
+    }
 }
 
 main .documentation {
