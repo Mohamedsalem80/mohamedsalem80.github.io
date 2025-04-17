@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mivex | Metrom</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #212121;
+            background-image: linear-gradient(to bottom, #121212 , #212121);
+            color: #fff;
+        }
+
+        header {
+            height: 80px;
+            display: flex;
+            flex-direction: row;
+            color: #fff;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #ffffff;
+            /* background-image: linear-gradient(to bottom, #000 , #121212); */
+        }
+
+        header .container {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        header .logo {
+            height: 100%;
+            display: flex;
+        }
+        
+        header .back {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        
+        header .back a {
+            /* text-decoration: none; */
+            color: #39C630;
+            font-size: 18px;
+            transition: all 0.3s ease-in-out;
+            padding: 0.5rem;
+        }
+
+        header .back a:hover {
+            background-color: #5FA31A;
+            color: #fff;
+            border-radius: 5px;
+        }
+        header .back a:active {
+            background-color: #4E8A16;
+            color: #fff;
+        }
+        
+        header .back a:focus {
+            outline: 2px solid #69B41E;
+            color: #fff;
+        }
+        
+        header .back a:focus-visible {
+            outline: 2px dashed #69B41E;
+            color: #fff;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        main .hero {
+            height: calc(100vh - 80px);
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        main .hero .hero-text {
+            width: 35%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 1.75rem;
+            color: #fff;
+            text-align: center;
+        }
+
+        main .hero .hero-text .slogan {
+            font-size: 3rem;
+            font-weight: 600;
+            color: #39C630;
+            margin: 1rem auto;
+        }
+
+        main .hero .parallax {
+            width: 65%;
+            height: 100%;
+            display: flex;
+        }
+
+        main .hero .parallax .parallax-layer img {
+            width: 100%;
+            height: auto;
+        }
+
+        .container {
+            height: 100%;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 80rem;
+            padding-left: 2rem;
+            padding-right: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: stretch;
+        }
+
+
+
+
+        footer {
+            background-color: #fff;
+            color: #0a9300;
+            font-weight: bolder;
+            text-align: center;
+            padding: 0.5rem;
+        }
+
+
+        @media (max-width: 992px) {
+            main .hero {
+                flex-direction: column;
+                height: 100%;
+            }
+
+            main .hero .hero-text {
+                width: 100%;
+                height: auto;
+                font-size: 1.25rem;
+                margin-bottom: 1rem;
+            }
+
+            main .hero .hero-text .slogan {
+                font-size: 2rem;
+                font-weight: 600;
+                color: #39C630;
+                margin: 1rem auto;
+            }
+
+            main .hero .parallax {
+                width: 100%;
+                height: auto;
+            }
+
+            main .hero .parallax img {
+                width: 100%;
+                height: auto;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="favicon/metrom-21.png" alt="">
+            </div>
+    
+            <div class="back">
+                <a href="/">Back</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="hero">
+                <div class="hero-text">
+                    <div class="slogan">
+                        Guiding You, Station by Station.
+                    </div>
+    
+                    <div class="more">
+                        From your first stop to your final destination, Metrom guides you through every station with ease, clarity, and confidence.
+                    </div>
+                </div>
+                <div class="parallax mx-auto me-lg-0" style="max-width: 600px; pointer-events: none;">
+                    <div class="parallax-layer" data-depth="0.1" style="position: relative; display: block; left: 0px; top: 0px; transform: translate(6.5px, -3.1px);">
+                        <img src="img/metrom-layer-1.png" alt="Layer" width="1024">
+                    </div>
+                    <div class="parallax-layer" data-depth="0.13" style="position: absolute; display: block; left: 0px; top: 0px; transform: translate(8.4px, -4px);">
+                        <img src="img/metrom-layer-2.png" alt="Layer"  width="1024">
+                    </div>
+                    <div class="parallax-layer" data-depth="-0.12" style="position: absolute; display: block; left: 0px; top: 0px; transform: translate(-7.7px, 3.7px);">
+                        <img src="img/metrom-layer-3.png" alt="Layer"  width="1024">
+                    </div>
+                    <div class="parallax-layer" data-depth="0.1" style="position: absolute; display: block; left: 0px; top: 0px; transform: translate(17.4px, -8.4px);">
+                        <img src="img/metrom-layer-4.png" alt="Layer"  width="1024" height="512">
+                    </div>
+                    <div class="parallax-layer zindex-1" data-depth="-0.11" style="position: absolute; display: block; left: 0px; top: 0px; transform: translate(6.5px, -3.1px);">
+                        <img src="img/metrom-layer-5.png" alt="Layer"  width="1024">
+                    </div>
+                    <div class="parallax-layer zindex-1" data-depth="0.28" style="position: absolute; display: block; left: 0px; top: 0px; transform: translate(-18.1px, 8.7px);">
+                        <img src="img/metrom-layer-6.png" alt="Layer"  width="1024">
+                    </div>
+                    <div class="parallax-layer zindex-1" data-depth="0.11" style="position: absolute; display: block; left: 0px; top: 0px; transform: translate(6.5px, -3.1px);">
+                        <img src="img/metrom-layer-7.png" alt="Layer"  width="1024">
+                    </div>
+                    <div class="parallax-layer zindex-1" data-depth="0.22" style="position: absolute; display: block; left: 0px; top: 0px; transform: translate(-18.1px, 8.7px);">
+                        <img src="img/metrom-layer-8.png" alt="Layer"  width="1024">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="application">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <h2>Download Metrom</h2>
+                            <p>Available on iOS and Android</p>
+                            <a href="#" class="btn btn-primary">Download Now</a>
+                            <a href="https://www.example.com" class="btn btn-secondary">Learn More</a>
+    
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        Copyright © 2022-2025 Mivex. All rights reserved.
+    </footer>
+<script src="js/parallax.min.js?v=2.0.0"></script>
+<script>
+    const parallaxElement = document.querySelector('.parallax');
+    if (parallaxElement) {
+        new Parallax(parallaxElement);
+    }
+</script>
+</body>
+</html>
