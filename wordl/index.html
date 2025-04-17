@@ -353,6 +353,7 @@ function resetGame() {
     document.getElementById('toast-container').innerText = "";
     pick = allowedWords[Math.floor(Math.random() * 2310)];
     gamedone = false;
+    wordsUsed = [];
     notify("New game started!", 1500, "default");
 }
 
