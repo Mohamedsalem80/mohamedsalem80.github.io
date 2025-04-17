@@ -241,28 +241,21 @@ main {
     padding: 10px;
     color: #ffffff;
 }
+/* 
+.keyboard__key--general {
+    border: 1px solid #ffffff;
+} */
 
-.keyboard__key--general::before {
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    content: "";
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background-color: #fff;
-}
-
-.keyboard__key.blocked::before {
+.keyboard__key.blocked {
     background-color: #444444;
 }
 
-.keyboard__key.schm-1::before {
-    background-color: #FFDC71;
+.keyboard__key.schm-1 {
+    background-color: #ffbf00;
 }
 
-.keyboard__key.schm-2::before {
-    background-color: #00FF00;
+.keyboard__key.schm-2 {
+    background-color: #1aaf00;
 }
 
 .keyboard__key:hover,
