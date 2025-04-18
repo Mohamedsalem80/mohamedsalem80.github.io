@@ -13,8 +13,8 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #212121;
-            background-image: linear-gradient(to bottom, #121212 , #212121);
+            background-color: #275c52;
+            /* background-image: linear-gradient(to bottom, #121212 , #212121); */
             color: #fff;
         }
 
@@ -25,7 +25,9 @@
             color: #fff;
             align-items: center;
             justify-content: space-between;
-            background-color: #ffffff;
+            background-color: #275c52;
+            /* border-bottom: #ccc 2px solid;
+            box-shadow: 1px 1px 15px #2121217d; */
             /* background-image: linear-gradient(to bottom, #000 , #121212); */
         }
 
@@ -49,30 +51,46 @@
         }
         
         header .back a {
-            /* text-decoration: none; */
-            color: #39C630;
+            text-decoration: none;
+            position: relative;
+            color: #fcfffc;
             font-size: 18px;
             transition: all 0.3s ease-in-out;
             padding: 0.5rem;
+            margin: 0 1rem;
+            overflow: hidden;
+            /* text-decoration: overline; */
+        }
+
+        header .back a::before, header .back a::after {
+            content: '';
+            display: block;
+            width: 0%;
+            height: 2px;
+            background-color: #fcfffc;
+            position: absolute;
+            transition: width 0.3s ease;
+        }
+
+        header .back a::before {
+            bottom: 0;
+            left: 0;
+        }
+
+        header .back a::after {
+            top: 0;
+            right: 0;
+        }
+
+        header .back a:hover::before {
+            width: 100%;
+        }
+
+        header .back a:hover::after {
+            width: 100%;
         }
 
         header .back a:hover {
-            background-color: #5FA31A;
-            color: #fff;
-            border-radius: 5px;
-        }
-        header .back a:active {
-            background-color: #4E8A16;
-            color: #fff;
-        }
-        
-        header .back a:focus {
-            outline: 2px solid #69B41E;
-            color: #fff;
-        }
-        
-        header .back a:focus-visible {
-            outline: 2px dashed #69B41E;
             color: #fff;
         }
 
@@ -100,8 +118,9 @@
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
-            font-size: 1.75rem;
-            color: #fff;
+            font-size: 1.5rem;
+            color: #5E3AF9;
+            color: #FFF;
             text-align: center;
         }
 
@@ -109,6 +128,7 @@
             font-size: 3rem;
             font-weight: 600;
             color: #39C630;
+            color: #F6C358;
             margin: 1rem auto;
         }
 
@@ -116,6 +136,7 @@
             width: 65%;
             height: 100%;
             display: flex;
+            overflow: hidden;
         }
 
         main .hero .parallax .parallax-layer img {
@@ -140,8 +161,8 @@
 
 
         footer {
-            background-color: #fff;
-            color: #0a9300;
+            background-color: #25524A;
+            color: #eee;
             font-weight: bolder;
             text-align: center;
             padding: 0.5rem;
@@ -164,7 +185,6 @@
             main .hero .hero-text .slogan {
                 font-size: 2rem;
                 font-weight: 600;
-                color: #39C630;
                 margin: 1rem auto;
             }
 
@@ -189,7 +209,9 @@
             </div>
     
             <div class="back">
-                <a href="/">Back</a>
+                <a href="#start">Start</a>
+                <a href="#about">About</a>
+                <a href="/">Mivex</a>
             </div>
         </div>
     </header>
@@ -207,28 +229,31 @@
                     </div>
                 </div>
                 <div class="parallax mx-auto me-lg-0" style="max-width: 600px; pointer-events: none;">
-                    <div class="parallax-layer" data-depth="0.1" style="position: relative; display: block; left: 0px; top: 0px; transform: translate(6.5px, -3.1px);">
+                    <div class="parallax-layer" data-depth="-0.1" style="position: relative; display: block; left: 0px; top: 0px; transform: translate(6.5px, -3.1px);">
                         <img src="img/metrom-layer-1.png" alt="Layer" width="1024">
                     </div>
-                    <div class="parallax-layer" data-depth="0.13" style="position: absolute; display: block; left: 0px; top: 0px; transform: translate(8.4px, -4px);">
+                    <div class="parallax-layer" data-depth="0.1" style="position: absolute; display: block; left: 0px; top: 0px; transform: translate(8.4px, -4px);">
                         <img src="img/metrom-layer-2.png" alt="Layer"  width="1024">
                     </div>
-                    <div class="parallax-layer" data-depth="-0.12" style="position: absolute; display: block; left: 0px; top: 0px; transform: translate(-7.7px, 3.7px);">
+                    <div class="parallax-layer" data-depth="-0.15" style="position: absolute; display: block; left: 0px; top: 0px; transform: translate(-7.7px, 3.7px);">
                         <img src="img/metrom-layer-3.png" alt="Layer"  width="1024">
                     </div>
-                    <div class="parallax-layer" data-depth="0.1" style="position: absolute; display: block; left: 0px; top: 0px; transform: translate(17.4px, -8.4px);">
-                        <img src="img/metrom-layer-4.png" alt="Layer"  width="1024" height="512">
+                    <div class="parallax-layer" data-depth="0.15" style="position: absolute; display: block; left: 0px; top: 0px; transform: translate(17.4px, -8.4px);">
+                        <img src="img/metrom-layer-4-1.png" alt="Layer"  width="1024" height="512">
                     </div>
-                    <div class="parallax-layer zindex-1" data-depth="-0.11" style="position: absolute; display: block; left: 0px; top: 0px; transform: translate(6.5px, -3.1px);">
+                    <div class="parallax-layer" data-depth="-0.2" style="position: absolute; display: block; left: 0px; top: 0px; transform: translate(17.4px, -8.4px);">
+                        <img src="img/metrom-layer-4-2.png" alt="Layer"  width="1024" height="512">
+                    </div>
+                    <div class="parallax-layer zindex-1" data-depth="0.2" style="position: absolute; display: block; left: 0px; top: 0px; transform: translate(6.5px, -3.1px);">
                         <img src="img/metrom-layer-5.png" alt="Layer"  width="1024">
                     </div>
-                    <div class="parallax-layer zindex-1" data-depth="0.28" style="position: absolute; display: block; left: 0px; top: 0px; transform: translate(-18.1px, 8.7px);">
+                    <div class="parallax-layer zindex-1" data-depth="-0.25" style="position: absolute; display: block; left: 0px; top: 0px; transform: translate(-18.1px, 8.7px);">
                         <img src="img/metrom-layer-6.png" alt="Layer"  width="1024">
                     </div>
-                    <div class="parallax-layer zindex-1" data-depth="0.11" style="position: absolute; display: block; left: 0px; top: 0px; transform: translate(6.5px, -3.1px);">
+                    <div class="parallax-layer zindex-1" data-depth="0.25" style="position: absolute; display: block; left: 0px; top: 0px; transform: translate(6.5px, -3.1px);">
                         <img src="img/metrom-layer-7.png" alt="Layer"  width="1024">
                     </div>
-                    <div class="parallax-layer zindex-1" data-depth="0.22" style="position: absolute; display: block; left: 0px; top: 0px; transform: translate(-18.1px, 8.7px);">
+                    <div class="parallax-layer zindex-1" data-depth="0.1" style="position: absolute; display: block; left: 0px; top: 0px; transform: translate(-18.1px, 8.7px);">
                         <img src="img/metrom-layer-8.png" alt="Layer"  width="1024">
                     </div>
                 </div>
