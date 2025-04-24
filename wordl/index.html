@@ -154,7 +154,7 @@
         <button class="keyboard__key keyboard__key--general col-span-3" id="K">K</button>
         <button class="keyboard__key keyboard__key--general col-span-4" id="L">L</button>
         <!-- Row 3 -->
-        <button class="keyboard__key keyboard__key--special col-span-4" id="Backspace">↩</button>
+        <button class="keyboard__key keyboard__key--special col-span-4" id="BACKSPACE">↩</button>
         <button class="keyboard__key keyboard__key--general col-span-3" id="Z">Z</button>
         <button class="keyboard__key keyboard__key--general col-span-3" id="X">X</button>
         <button class="keyboard__key keyboard__key--general col-span-3" id="C">C</button>
@@ -162,7 +162,7 @@
         <button class="keyboard__key keyboard__key--general col-span-3" id="B">B</button>
         <button class="keyboard__key keyboard__key--general col-span-3" id="N">N</button>
         <button class="keyboard__key keyboard__key--general col-span-3" id="M">M</button>
-        <button class="keyboard__key keyboard__key--special col-span-5" id="Enter">Enter</button>
+        <button class="keyboard__key keyboard__key--special col-span-5" id="ENTER">Enter</button>
     </div>
 
     <footer>
@@ -252,6 +252,7 @@ function playWord(main, word) {
 
 function checkWord() {
     const currentWord = words[tryCnt].join("").toLowerCase();
+
     if (wordsUsed.includes(currentWord)) {
         notify('⚠ Word already used!', 3000, "warn");
         return;
@@ -280,6 +281,12 @@ function checkWord() {
 // === Key & Event Handling ===
 keys.forEach(key => {
     const keyElement = document.getElementById(key);
+    if (key == "ENTER") {
+        key = "Enter";
+    } else if (key == "BACKSPACE") {
+        key = "Backspace";
+    }
+
     keyElement?.addEventListener("click", () => {
         const keyPressEvent = new KeyboardEvent('keydown', { key, bubbles: true });
         document.dispatchEvent(keyPressEvent);
