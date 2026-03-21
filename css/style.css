@@ -1554,6 +1554,27 @@ body {
 	}
 }
 
+@media (max-width: 768px) {
+	.container {
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
+	}
+
+	#projects .projects {
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+
+	#projects .projects .project {
+		width: calc(100% - 0px);
+		max-width: 90vw;
+	}
+
+	#services .services .service {
+		min-width: 180px;
+	}
+}
+
 @media (max-width: 576px) {
 	#web-dev .section-content {
 		max-width: min(320px, 88vw);
@@ -1565,9 +1586,20 @@ body {
 		padding: 0.7rem;
 	}
 
+	.container {
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
+
 	#projects .projects .project {
-		width: 92vw;
+		width: 90vw;
 		min-width: 0;
+		max-width: 90vw;
+	}
+
+	#services .services .service {
+		min-width: 150px;
+		max-width: 85vw;
 	}
 
 	.contact-container .contacts .contacts-row {
