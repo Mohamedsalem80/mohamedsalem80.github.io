@@ -1,0 +1,1672 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO & Description -->
+    <meta name="description" content="Metrom - Cairo Metro Route Planner. Plan your journey, find the best routes, check fares, and navigate Cairo's metro network with real-time assistance.">
+    <meta name="keywords" content="Cairo Metro Route Planner, Metro Navigation, Cairo Subway Routes, Public Transport Planner, Station Finder, Cairo Transportation">
+    <meta name="author" content="Mohamed Salem">
+    <meta name="designer" content="Cairo Metro Navigator">
+    <meta name="language" content="English">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="Revisit-After" content="7 days">
+    <meta name="distribution" content="Global">
+    
+    <!-- Theme & Browser Config -->
+    <meta name="theme-color" content="#1e483f">
+    <meta name="msapplication-TileColor" content="#1e483f">
+    
+    <!-- Open Graph (Social Sharing) -->
+    <meta property="og:title" content="Metrom - Cairo Metro Route Planner">
+    <meta property="og:description" content="Interactive Cairo metro route planner with real-time navigation, station information, and fare calculations for all Cairo Metro lines.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mohamedsalem80.github.io/metrom/main.html">
+    <meta property="og:site_name" content="Cairo Metro Navigator">
+    <meta property="og:image" content="https://mohamedsalem80.github.io/metrom/favicon/metrom-og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="ar_EG">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Metrom - Cairo Metro Route Planner">
+    <meta name="twitter:description" content="Plan your Cairo metro journey with real-time route guidance and station information.">
+    <meta name="twitter:image" content="https://mohamedsalem80.github.io/metrom/favicon/metrom-og-image.jpg">
+    <meta name="twitter:site" content="@MetroNavigator">
+    
+    <!-- Canonical URL -->
+    <meta rel="canonical" href="https://mohamedsalem80.github.io/metrom/main.html">
+    
+    <!-- Favicon Set -->
+    <link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <meta name="msapplication-TileImage" content="favicon/ms-icon-144x144.png">
+    <title>Metrom - Cairo Metro Route Planner</title>
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""
+    >
+    <link rel="stylesheet" href="css/metro.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html" title="Cairo Metro Navigator Home">
+                    <img src="favicon/metrom-21.png" alt="Cairo Metro Navigator Logo">
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="#metroMap">Map</a>
+                <a href="#fares">Fares</a>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <div class="page-title">
+            <h1>Plan Your Cairo Metro Journey</h1>
+            <p>Select your starting point and destination to find the best route</p>
+        </div>
+
+        <div class="planner-container">
+            <div class="planner-section" id="planner">
+                <h2>From (Starting Point)</h2>
+                <label>
+                    <p>Select Line:</p>
+                    <div class="label-row">
+                        <select name="line" id="sline" autocomplete="off">
+                            <option value="">Choose a line...</option>
+                            <option value="one">Line 1 (Helwan - El Marg)</option>
+                            <option value="two">Line 2 (El Monib - Shubra Al Khaimah)</option>
+                            <option value="three">Line 3 (Adly Mansour - Ring Road)</option>
+                        </select>
+                    </div>
+                </label>
+                <label>
+                    <p>Select Station:</p>
+                    <select name="pickup" class="pickupl1" autocomplete="off">
+                        <option value="">-- Choose station --</option>
+                        <option value="Helwan">Helwan</option>
+                        <option value="Ain Helwan">Ain Helwan</option>
+                        <option value="Helwan University">Helwan University</option>
+                        <option value="Wadi Hof">Wadi Hof</option>
+                        <option value="Hadayeq Helwan">Hadayeq Helwan</option>
+                        <option value="Elmasraa">Elmasraa</option>
+                        <option value="Tura El-Asmant">Tura El-Asmant</option>
+                        <option value="Kozzika">Kozzika</option>
+                        <option value="Tura El-Balad">Tura El-Balad</option>
+                        <option value="Sakanat El-Maadi">Sakanat El-Maadi</option>
+                        <option value="Maadi">Maadi</option>
+                        <option value="Hadayeq El-Maadi">Hadayeq El-Maadi</option>
+                        <option value="Dar El-Salam">Dar El-Salam</option>
+                        <option value="El-Zahraa">El-Zahraa</option>
+                        <option value="Mar Girgis">Mar Girgis</option>
+                        <option value="El-Malek El-Saleh">El-Malek El-Saleh</option>
+                        <option value="Al-Sayeda Zeinab">Al-Sayeda Zeinab</option>
+                        <option value="Saad Zaghloul">Saad Zaghloul</option>
+                        <option value="Sadat">Sadat</option>
+                        <option value="Nasser">Nasser</option>
+                        <option value="Urabi">Urabi</option>
+                        <option value="Al Shohadaa">Al Shohadaa</option>
+                        <option value="Ghamra">Ghamra</option>
+                        <option value="El-Demerdash">El-Demerdash</option>
+                        <option value="Manshiet El-Sadr">Manshiet El-Sadr</option>
+                        <option value="Kobri El-Qobba">Kobri El-Qobba</option>
+                        <option value="Hammamat El-Qobba">Hammamat El-Qobba</option>
+                        <option value="Saray El-Qobba">Saray El-Qobba</option>
+                        <option value="Hadayeq El-Zaitoun">Hadayeq El-Zaitoun</option>
+                        <option value="Helmeyet El-Zaitoun">Helmeyet El-Zaitoun</option>
+                        <option value="El-Matareyya">El-Matareyya</option>
+                        <option value="Ain Shams">Ain Shams</option>
+                        <option value="Ezbet El-Nakhl">Ezbet El-Nakhl</option>
+                        <option value="El-Marg">El-Marg</option>
+                        <option value="New El-Marg">New El-Marg</option>
+                    </select>
+                    <select name="pickup" class="pickupl2" style="display:none;" autocomplete="off">
+                        <option value="">-- Choose station --</option>
+                        <option value="El Monib">El Monib</option>
+                        <option value="Sakiat Mekky">Sakiat Mekky</option>
+                        <option value="Omm El-Masryeen">Omm El-Masryeen</option>
+                        <option value="Giza">Giza</option>
+                        <option value="Faisal">Faisal</option>
+                        <option value="Cairo University">Cairo University</option>
+                        <option value="Bohooth">Bohooth</option>
+                        <option value="Dokki">Dokki</option>
+                        <option value="Opera">Opera</option>
+                        <option value="Sadat">Sadat</option>
+                        <option value="Mohamed Naguib">Mohamed Naguib</option>
+                        <option value="Ataba">Ataba</option>
+                        <option value="Al Shohadaa">Al Shohadaa</option>
+                        <option value="Masarra">Masarra</option>
+                        <option value="Rod El-Farag">Rod El-Farag</option>
+                        <option value="St. Teresa">St. Teresa</option>
+                        <option value="Khalafawy">Khalafawy</option>
+                        <option value="Mezallat">Mezallat</option>
+                        <option value="Koliet El-Zeraa">Koliet El-Zeraa</option>
+                        <option value="Shubra Al Khaimah">Shubra Al Khaimah</option>
+                    </select>
+                    <select name="pickup" class="pickupl3" style="display:none;" autocomplete="off">
+                        <option value="">-- Choose station --</option>
+                        <option value="Adly Mansour">Adly Mansour</option>
+                        <option value="Heykestep">Heykestep</option>
+                        <option value="Omar Ibn Al Khattab">Omar Ibn Al Khattab</option>
+                        <option value="Qebaa">Qebaa</option>
+                        <option value="Hesham Barakat">Hesham Barakat</option>
+                        <option value="El Nozha">El Nozha</option>
+                        <option value="Nadi El Shams">Nadi El Shams</option>
+                        <option value="Alf Maskan">Alf Maskan</option>
+                        <option value="Heliopolis">Heliopolis</option>
+                        <option value="Haroun">Haroun</option>
+                        <option value="Al Ahram">Al Ahram</option>
+                        <option value="Koleyet El Banat">Koleyet El Banat</option>
+                        <option value="Cairo Stadium">Cairo Stadium</option>
+                        <option value="Fair Zone">Fair Zone</option>
+                        <option value="Abbassiya">Abbassiya</option>
+                        <option value="Abdou Pasha">Abdou Pasha</option>
+                        <option value="El Geish">El Geish</option>
+                        <option value="Bab El Shaaria">Bab El Shaaria</option>
+                        <option value="Ataba">Ataba</option>
+                        <option value="Nasser">Nasser</option>
+                        <option value="Maspero">Maspero</option>
+                        <option value="Safaa Hegazy">Safaa Hegazy</option>
+                        <option value="Kit Kat">Kit Kat</option>
+                        <option value="Sudan St.">Sudan St.</option>
+                        <option value="Imbaba">Imbaba</option>
+                        <option value="El Bohy">El Bohy</option>
+                        <option value="El-Qawmia">El-Qawmia</option>
+                        <option value="Ring Rd.">Ring Rd.</option>
+                        <option value="Rod El Farag Corridor">Rod El Farag Corridor</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="planner-section">
+                <h2>To (Destination)</h2>
+                <label>
+                    <p>Select Line:</p>
+                    <div class="label-row">
+                        <select name="line" id="eline" autocomplete="off">
+                            <option value="">Choose a line...</option>
+                            <option value="one">Line 1 (Helwan - El Marg)</option>
+                            <option value="two">Line 2 (El Monib - Shubra Al Khaimah)</option>
+                            <option value="three">Line 3 (Adly Mansour - Ring Road)</option>
+                        </select>
+                    </div>
+                </label>
+                <label>
+                    <p>Select Station:</p>
+                    <select name="dropoff" class="dropoff1" autocomplete="off">
+                        <option value="">-- Choose station --</option>
+                        <option value="Helwan">Helwan</option>
+                        <option value="Ain Helwan">Ain Helwan</option>
+                        <option value="Helwan University">Helwan University</option>
+                        <option value="Wadi Hof">Wadi Hof</option>
+                        <option value="Hadayeq Helwan">Hadayeq Helwan</option>
+                        <option value="Elmasraa">Elmasraa</option>
+                        <option value="Tura El-Asmant">Tura El-Asmant</option>
+                        <option value="Kozzika">Kozzika</option>
+                        <option value="Tura El-Balad">Tura El-Balad</option>
+                        <option value="Sakanat El-Maadi">Sakanat El-Maadi</option>
+                        <option value="Maadi">Maadi</option>
+                        <option value="Hadayeq El-Maadi">Hadayeq El-Maadi</option>
+                        <option value="Dar El-Salam">Dar El-Salam</option>
+                        <option value="El-Zahraa">El-Zahraa</option>
+                        <option value="Mar Girgis">Mar Girgis</option>
+                        <option value="El-Malek El-Saleh">El-Malek El-Saleh</option>
+                        <option value="Al-Sayeda Zeinab">Al-Sayeda Zeinab</option>
+                        <option value="Saad Zaghloul">Saad Zaghloul</option>
+                        <option value="Sadat">Sadat</option>
+                        <option value="Nasser">Nasser</option>
+                        <option value="Urabi">Urabi</option>
+                        <option value="Al Shohadaa">Al Shohadaa</option>
+                        <option value="Ghamra">Ghamra</option>
+                        <option value="El-Demerdash">El-Demerdash</option>
+                        <option value="Manshiet El-Sadr">Manshiet El-Sadr</option>
+                        <option value="Kobri El-Qobba">Kobri El-Qobba</option>
+                        <option value="Hammamat El-Qobba">Hammamat El-Qobba</option>
+                        <option value="Saray El-Qobba">Saray El-Qobba</option>
+                        <option value="Hadayeq El-Zaitoun">Hadayeq El-Zaitoun</option>
+                        <option value="Helmeyet El-Zaitoun">Helmeyet El-Zaitoun</option>
+                        <option value="El-Matareyya">El-Matareyya</option>
+                        <option value="Ain Shams">Ain Shams</option>
+                        <option value="Ezbet El-Nakhl">Ezbet El-Nakhl</option>
+                        <option value="El-Marg">El-Marg</option>
+                        <option value="New El-Marg">New El-Marg</option>
+                    </select>
+                    <select name="dropoff" class="dropoff2" style="display:none;" autocomplete="off">
+                        <option value="">-- Choose station --</option>
+                        <option value="El Monib">El Monib</option>
+                        <option value="Sakiat Mekky">Sakiat Mekky</option>
+                        <option value="Omm El-Masryeen">Omm El-Masryeen</option>
+                        <option value="Giza">Giza</option>
+                        <option value="Faisal">Faisal</option>
+                        <option value="Cairo University">Cairo University</option>
+                        <option value="Bohooth">Bohooth</option>
+                        <option value="Dokki">Dokki</option>
+                        <option value="Opera">Opera</option>
+                        <option value="Sadat">Sadat</option>
+                        <option value="Mohamed Naguib">Mohamed Naguib</option>
+                        <option value="Ataba">Ataba</option>
+                        <option value="Al Shohadaa">Al Shohadaa</option>
+                        <option value="Masarra">Masarra</option>
+                        <option value="Rod El-Farag">Rod El-Farag</option>
+                        <option value="St. Teresa">St. Teresa</option>
+                        <option value="Khalafawy">Khalafawy</option>
+                        <option value="Mezallat">Mezallat</option>
+                        <option value="Koliet El-Zeraa">Koliet El-Zeraa</option>
+                        <option value="Shubra Al Khaimah">Shubra Al Khaimah</option>
+                    </select>
+                    <select name="dropoff" class="dropoff3" style="display:none;" autocomplete="off">
+                        <option value="">-- Choose station --</option>
+                        <option value="Adly Mansour">Adly Mansour</option>
+                        <option value="Heykestep">Heykestep</option>
+                        <option value="Omar Ibn Al Khattab">Omar Ibn Al Khattab</option>
+                        <option value="Qebaa">Qebaa</option>
+                        <option value="Hesham Barakat">Hesham Barakat</option>
+                        <option value="El Nozha">El Nozha</option>
+                        <option value="Nadi El Shams">Nadi El Shams</option>
+                        <option value="Alf Maskan">Alf Maskan</option>
+                        <option value="Heliopolis">Heliopolis</option>
+                        <option value="Haroun">Haroun</option>
+                        <option value="Al Ahram">Al Ahram</option>
+                        <option value="Koleyet El Banat">Koleyet El Banat</option>
+                        <option value="Cairo Stadium">Cairo Stadium</option>
+                        <option value="Fair Zone">Fair Zone</option>
+                        <option value="Abbassiya">Abbassiya</option>
+                        <option value="Abdou Pasha">Abdou Pasha</option>
+                        <option value="El Geish">El Geish</option>
+                        <option value="Bab El Shaaria">Bab El Shaaria</option>
+                        <option value="Ataba">Ataba</option>
+                        <option value="Nasser">Nasser</option>
+                        <option value="Maspero">Maspero</option>
+                        <option value="Safaa Hegazy">Safaa Hegazy</option>
+                        <option value="Kit Kat">Kit Kat</option>
+                        <option value="Sudan St.">Sudan St.</option>
+                        <option value="Imbaba">Imbaba</option>
+                        <option value="El Bohy">El Bohy</option>
+                        <option value="El-Qawmia">El-Qawmia</option>
+                        <option value="Ring Rd.">Ring Rd.</option>
+                        <option value="Rod El Farag Corridor">Rod El Farag Corridor</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button onclick="calculateTicket()" class="btn btn-primary">Find Route & Price</button>
+            <button id="startTravelBtn" onclick="startTravelMode()" class="btn btn-primary">Start Traveling</button>
+            <button onclick="resetForm()" class="btn btn-secondary">Reset</button>
+        </div>
+
+        <div id="travelStatus" class="travel-status">Travel mode is off.</div>
+
+                <section class="coord-tools" id="coordTools">
+            <h2>Find Closest Station by Coordinates</h2>
+            <p style="color: #b0c4c1;">Enter your current coordinates and destination coordinates, or use live location.</p>
+            <div class="coord-grid">
+                <label>
+                    <p>Current Latitude</p>
+                    <input id="currentLat" type="number" step="any" placeholder="e.g. 30.0444">
+                </label>
+                <label>
+                    <p>Current Longitude</p>
+                    <input id="currentLng" type="number" step="any" placeholder="e.g. 31.2357">
+                </label>
+                <label>
+                    <p>Destination Latitude</p>
+                    <input id="destLat" type="number" step="any" placeholder="e.g. 30.0100">
+                </label>
+                <label>
+                    <p>Destination Longitude</p>
+                    <input id="destLng" type="number" step="any" placeholder="e.g. 31.2000">
+                </label>
+            </div>
+            <div class="coord-actions">
+                <button type="button" class="btn btn-secondary" onclick="getLiveLocation()">Use Live Location</button>
+                <button type="button" class="btn btn-primary" onclick="findClosestStationNow()">Closest Station To Me</button>
+                <button type="button" class="btn btn-primary" onclick="findClosestStartEndStations()">Find Closest Start &amp; End</button>
+            </div>
+            <div id="coordResult" class="coord-result">Closest-station results will appear here.</div>
+        </section>
+
+        <div id="resultsContainer" class="results">
+            <div class="result-item">
+                <div class="result-item-header">
+                    <span class="result-item-icon">Fare</span>
+                    <h3>Your Journey Summary</h3>
+                </div>
+                <div class="result-item-content">
+                    <div class="result-stat">
+                        <div class="result-stat-label">Total Stations</div>
+                        <div class="result-stat-value" id="cstats">0</div>
+                    </div>
+                    <div class="result-stat">
+                        <div class="result-stat-label">Ticket Price</div>
+                        <div class="result-stat-value" id="ticketCost">-</div>
+                    </div>
+                    <div class="result-stat">
+                        <div class="result-stat-label">Elderly / Army / Police</div>
+                        <div class="result-stat-value" id="elderlyCost">-</div>
+                    </div>
+                    <div class="result-stat">
+                        <div class="result-stat-label">Special Needs</div>
+                        <div class="result-stat-value" id="specialNeedsCost">-</div>
+                    </div>
+                </div>
+                <div class="route-visualization">
+                    <div class="route-label">Complete Route</div>
+                    <div class="route-stations" id="stationsList"></div>
+                    <div class="route-path" id="stations"></div>
+                </div>
+            </div>
+        </div>
+
+        <section class="fares-section" id="fares" role="region" aria-label="Ticket Fares">
+            <h2>Metro Fare Table</h2>
+            <div class="fares-table-wrap">
+                <table class="fares-table">
+                    <thead>
+                        <tr>
+                            <th>Distance</th>
+                            <th>Ticket Price (Lines 1,2,3)</th>
+                            <th>Elderly (Over 60) / Army / Police</th>
+                            <th>Special Needs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Up to 9 stations</td>
+                            <td>8 EGP</td>
+                            <td>4 EGP</td>
+                            <td>5 EGP</td>
+                        </tr>
+                        <tr>
+                            <td>10 to 16 stations</td>
+                            <td>10 EGP</td>
+                            <td>5 EGP</td>
+                            <td>5 EGP</td>
+                        </tr>
+                        <tr>
+                            <td>17 to 23 stations</td>
+                            <td>15 EGP</td>
+                            <td>8 EGP</td>
+                            <td>5 EGP</td>
+                        </tr>
+                        <tr>
+                            <td>24 to 39 stations</td>
+                            <td>20 EGP</td>
+                            <td>10 EGP</td>
+                            <td>5 EGP</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="metro-map" id="metroMap" role="region" aria-label="Interactive Metro Map" style="margin-top: 3rem;">
+            <h2>Cairo Metro Network Map</h2>
+            <p style="color: #b0c4c1; margin-bottom: 1rem;">Interactive non-satellite map with station coordinates</p>
+            <div id="stationMap" class="station-map"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Mivex &copy; 2026 | Navigate Cairo's Metro Network with Ease</p>
+    </footer>
+
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""
+    ></script>
+
+    <script>
+        // Cairo Metro Network Data
+        var lines = ["one", "two", "three"];
+        var network = {
+            one: ["Helwan", "Ain Helwan", "Helwan University", "Wadi Hof", "Hadayeq Helwan", "Elmasraa", "Tura El-Asmant", "Kozzika", "Tura El-Balad", "Sakanat El-Maadi", "Maadi", "Hadayeq El-Maadi", "Dar El-Salam", "El-Zahraa", "Mar Girgis", "El-Malek El-Saleh", "Al-Sayeda Zeinab", "Saad Zaghloul", "Sadat", "Nasser", "Urabi", "Al Shohadaa", "Ghamra", "El-Demerdash", "Manshiet El-Sadr", "Kobri El-Qobba", "Hammamat El-Qobba", "Saray El-Qobba", "Hadayeq El-Zaitoun", "Helmeyet El-Zaitoun", "El-Matareyya", "Ain Shams", "Ezbet El-Nakhl", "El-Marg", "New El-Marg"],
+            two: ["El Monib", "Sakiat Mekky", "Omm El-Masryeen", "Giza", "Faisal", "Cairo University", "Bohooth", "Dokki", "Opera", "Sadat", "Mohamed Naguib", "Ataba", "Al Shohadaa", "Masarra", "Rod El-Farag", "St. Teresa", "Khalafawy", "Mezallat", "Koliet El-Zeraa", "Shubra Al Khaimah"],
+            three: ["Adly Mansour", "Heykestep","Omar Ibn Al Khattab", "Qebaa", "Hesham Barakat", "El Nozha", "Nadi El Shams", "Alf Maskan", "Heliopolis", "Haroun", "Al Ahram", "Koleyet El Banat", "Cairo Stadium", "Fair Zone", "Abbassiya", "Abdou Pasha", "El Geish", "Bab El Shaaria", "Ataba", "Nasser", "Maspero", "Safaa Hegazy", "Kit Kat", "Sudan St.", "Imbaba", "El Bohy", "El-Qawmia", "Ring Rd.", "Rod El Farag Corridor"]
+        };
+
+        // Interchange stations between lines
+        var interchangeMatrix = {
+            one: {
+                one: network["one"],
+                two: ["Al Shohadaa", "Sadat"],
+                three: ["Nasser"]
+            },
+            two: {
+                one: ["Al Shohadaa", "Sadat"],
+                two: network["two"],
+                three: ["Ataba"]
+            },
+            three: {
+                one: ["Nasser"],
+                two: ["Ataba"],
+                three: network["three"]
+            }
+        };
+
+        // DOM Elements
+        var stations = document.getElementById("stations");
+        var z112 = document.getElementById("resultsContainer");
+        var sline = document.getElementById("sline");
+        var eline = document.getElementById("eline");
+        var cost = document.getElementById("ticketCost");
+        var elderlyCost = document.getElementById("elderlyCost");
+        var specialNeedsCost = document.getElementById("specialNeedsCost");
+        var cstats = document.getElementById("cstats");
+        var startTravelBtn = document.getElementById("startTravelBtn");
+        var travelStatus = document.getElementById("travelStatus");
+        var currentLat = document.getElementById("currentLat");
+        var currentLng = document.getElementById("currentLng");
+        var destLat = document.getElementById("destLat");
+        var destLng = document.getElementById("destLng");
+        var coordResult = document.getElementById("coordResult");
+        var pickups = document.querySelectorAll("[name=pickup]");
+        var dropoffs = document.querySelectorAll("[name=dropoff]");
+        var pl1 = document.querySelectorAll(".pickupl1");
+        var pl2 = document.querySelectorAll(".pickupl2");
+        var pl3 = document.querySelectorAll(".pickupl3");
+        var dl1 = document.querySelectorAll(".dropoff1");
+        var dl2 = document.querySelectorAll(".dropoff2");
+        var dl3 = document.querySelectorAll(".dropoff3");
+
+        // State variables
+        var pickup = "none";
+        var dropoff = "none";
+        var slinestr = "one";
+        var elinestr = "one";
+        var travelWatchId = null;
+
+        function initPlannerControls() {
+            sline.value = slinestr;
+            eline.value = elinestr;
+            changeSLine(slinestr);
+            changeELine(elinestr);
+
+            function onStartLineChange() {
+                slinestr = sline.value || "one";
+                changeSLine(slinestr);
+            }
+
+            function onEndLineChange() {
+                elinestr = eline.value || "one";
+                changeELine(elinestr);
+            }
+
+            // Support both events to avoid browser inconsistencies on select elements.
+            sline.addEventListener("change", onStartLineChange);
+            sline.addEventListener("input", onStartLineChange);
+            eline.addEventListener("change", onEndLineChange);
+            eline.addEventListener("input", onEndLineChange);
+
+            pickups.forEach(function(ele){
+                ele.addEventListener("change", function(e){
+                    pickup = e.target.value;
+                });
+            });
+
+            dropoffs.forEach(function(ele){
+                ele.addEventListener("change", function(e){
+                    dropoff = e.target.value;
+                });
+            });
+        }
+
+        // Initialize
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", initPlannerControls);
+        } else {
+            initPlannerControls();
+        }
+
+        function changeSLine(line){
+            if(line !== "one" && line !== "two" && line !== "three") line = "one";
+
+            if(line == "one"){
+                pl1.forEach(function(ele){
+                    ele.style.display = "block";
+                    ele.disabled = false;
+                });
+                pl2.forEach(function(ele){
+                    ele.style.display = "none";
+                    ele.disabled = true;
+                });
+                pl3.forEach(function(ele){
+                    ele.style.display = "none";
+                    ele.disabled = true;
+                });
+            } else if(line == "two"){
+                pl1.forEach(function(ele){
+                    ele.style.display = "none";
+                    ele.disabled = true;
+                });
+                pl2.forEach(function(ele){
+                    ele.style.display = "block";
+                    ele.disabled = false;
+                });
+                pl3.forEach(function(ele){
+                    ele.style.display = "none";
+                    ele.disabled = true;
+                });
+            } else if(line == "three"){
+                pl1.forEach(function(ele){
+                    ele.style.display = "none";
+                    ele.disabled = true;
+                });
+                pl2.forEach(function(ele){
+                    ele.style.display = "none";
+                    ele.disabled = true;
+                });
+                pl3.forEach(function(ele){
+                    ele.style.display = "block";
+                    ele.disabled = false;
+                });
+            }
+
+            // Always read pickup from the visible line select.
+            var activePickup = getActivePickupSelect(line);
+            if (activePickup && activePickup.selectedIndex === 0 && activePickup.options.length > 1) {
+                activePickup.selectedIndex = 1;
+            }
+            pickup = activePickup ? activePickup.value : "";
+        }
+
+        function changeELine(line){
+            if(line !== "one" && line !== "two" && line !== "three") line = "one";
+
+            if(line == "one"){
+                dl1.forEach(function(ele){
+                    ele.style.display = "block";
+                    ele.disabled = false;
+                });
+                dl2.forEach(function(ele){
+                    ele.style.display = "none";
+                    ele.disabled = true;
+                });
+                dl3.forEach(function(ele){
+                    ele.style.display = "none";
+                    ele.disabled = true;
+                });
+            } else if(line == "two"){
+                dl1.forEach(function(ele){
+                    ele.style.display = "none";
+                    ele.disabled = true;
+                });
+                dl2.forEach(function(ele){
+                    ele.style.display = "block";
+                    ele.disabled = false;
+                });
+                dl3.forEach(function(ele){
+                    ele.style.display = "none";
+                    ele.disabled = true;
+                });
+            } else if(line == "three"){
+                dl1.forEach(function(ele){
+                    ele.style.display = "none";
+                    ele.disabled = true;
+                });
+                dl2.forEach(function(ele){
+                    ele.style.display = "none";
+                    ele.disabled = true;
+                });
+                dl3.forEach(function(ele){
+                    ele.style.display = "block";
+                    ele.disabled = false;
+                });
+            }
+
+            // Always read dropoff from the visible line select.
+            var activeDropoff = getActiveDropoffSelect(line);
+            if (activeDropoff && activeDropoff.selectedIndex === 0 && activeDropoff.options.length > 1) {
+                activeDropoff.selectedIndex = 1;
+            }
+            dropoff = activeDropoff ? activeDropoff.value : "";
+        }
+
+        function getActivePickupSelect(line){
+            if(line === "one") return pl1[0] || null;
+            if(line === "two") return pl2[0] || null;
+            return pl3[0] || null;
+        }
+
+        function getActiveDropoffSelect(line){
+            if(line === "one") return dl1[0] || null;
+            if(line === "two") return dl2[0] || null;
+            return dl3[0] || null;
+        }
+
+        function resetForm(){
+            slinestr = "one";
+            elinestr = "one";
+            sline.value = "one";
+            eline.value = "one";
+
+            pl1.forEach(function(ele){ ele.selectedIndex = 0; });
+            pl2.forEach(function(ele){ ele.selectedIndex = 0; });
+            pl3.forEach(function(ele){ ele.selectedIndex = 0; });
+            dl1.forEach(function(ele){ ele.selectedIndex = 0; });
+            dl2.forEach(function(ele){ ele.selectedIndex = 0; });
+            dl3.forEach(function(ele){ ele.selectedIndex = 0; });
+
+            changeSLine(slinestr);
+            changeELine(elinestr);
+
+            pickup = "";
+            dropoff = "";
+            cstats.innerText = "0";
+            cost.innerText = "-";
+            elderlyCost.innerText = "-";
+            specialNeedsCost.innerText = "-";
+            stations.textContent = "";
+            stations.classList.remove('show');
+            document.getElementById('stationsList').innerHTML = "";
+            z112.classList.remove('show');
+            stopTravelMode(true);
+            clearMapHighlights();
+            if (window.metroMapState && window.metroMapState.travelLayer) {
+                window.metroMapState.travelLayer.clearLayers();
+            }
+            if (travelStatus) {
+                travelStatus.innerText = 'Travel mode is off.';
+            }
+        }
+
+        function normalizeStationName(name) {
+            return String(name || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+        }
+
+        function lineIdToPlannerValue(lineId) {
+            if (lineId === 'Line 1') return 'one';
+            if (lineId === 'Line 2') return 'two';
+            return 'three';
+        }
+
+        function plannerStationName(lineId, stationName) {
+            var aliases = {
+                'Line 1': {
+                    'Hadayek Helwan': 'Hadayeq Helwan',
+                    'El-Maasara': 'Elmasraa',
+                    'Tora El-Asmant': 'Tura El-Asmant',
+                    'Tora El-Balad': 'Tura El-Balad',
+                    'Hadayek El-Maadi': 'Hadayeq El-Maadi',
+                    'Al-Shohadaa': 'Al Shohadaa'
+                },
+                'Line 2': {
+                    'El-Mounib': 'El Monib',
+                    'El Giza': 'Giza',
+                    'El Bohoth': 'Bohooth',
+                    'Attaba': 'Ataba',
+                    'Road El-Farag': 'Rod El-Farag',
+                    'Kolleyyet El-Zeraa': 'Koliet El-Zeraa',
+                    'Shubra El-Kheima': 'Shubra Al Khaimah',
+                    'Al-Shohadaa': 'Al Shohadaa'
+                },
+                'Line 3': {
+                    'El Haykestep': 'Heykestep',
+                    'Omar Ibn El-Khattab': 'Omar Ibn Al Khattab',
+                    'Qobaa': 'Qebaa',
+                    'El-Nozha': 'El Nozha',
+                    'Nadi El-Shams': 'Nadi El Shams',
+                    'Heliopolis Square': 'Heliopolis',
+                    'Al-Ahram': 'Al Ahram',
+                    'Stadium': 'Cairo Stadium',
+                    'Abbassia': 'Abbassiya',
+                    'Attaba': 'Ataba',
+                    'Sudan': 'Sudan St.',
+                    'Ring Road': 'Ring Rd.',
+                    'Rod al-Farag Corridor': 'Rod El Farag Corridor'
+                }
+            };
+
+            if (aliases[lineId] && aliases[lineId][stationName]) {
+                return aliases[lineId][stationName];
+            }
+            return stationName;
+        }
+
+        function haversineKm(lat1, lng1, lat2, lng2) {
+            var R = 6371;
+            var dLat = (lat2 - lat1) * Math.PI / 180;
+            var dLng = (lng2 - lng1) * Math.PI / 180;
+            var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                Math.sin(dLng / 2) * Math.sin(dLng / 2);
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            return R * c;
+        }
+
+        function findNearestStation(lat, lng) {
+            var stations = window.metroGeoStations || [];
+            if (stations.length === 0) return null;
+
+            var nearest = null;
+            var minDistance = Number.MAX_VALUE;
+
+            stations.forEach(function(st) {
+                var dist = haversineKm(lat, lng, st.lat, st.lng);
+                if (dist < minDistance) {
+                    minDistance = dist;
+                    nearest = {
+                        name: st.name,
+                        lineId: st.lineId,
+                        lineValue: st.lineValue,
+                        plannerName: st.plannerName,
+                        lat: st.lat,
+                        lng: st.lng,
+                        distanceKm: dist
+                    };
+                }
+            });
+
+            return nearest;
+        }
+
+        function getGeoStationByPlanner(lineValue, stationName) {
+            var stations = window.metroGeoStations || [];
+            var wanted = normalizeStationName(stationName);
+
+            for (var i = 0; i < stations.length; i++) {
+                var st = stations[i];
+                if (st.lineValue === lineValue && normalizeStationName(st.plannerName) === wanted) {
+                    return st;
+                }
+            }
+
+            for (var j = 0; j < stations.length; j++) {
+                var st2 = stations[j];
+                if (normalizeStationName(st2.plannerName) === wanted) {
+                    return st2;
+                }
+            }
+
+            return null;
+        }
+
+        function clearMapHighlights() {
+            if (!window.metroMapState) return;
+            if (window.metroMapState.routeLayer) {
+                window.metroMapState.routeLayer.clearLayers();
+            }
+            if (window.metroMapState.contextLayer) {
+                window.metroMapState.contextLayer.clearLayers();
+            }
+        }
+
+        function startTravelMode() {
+            if (travelWatchId !== null) {
+                stopTravelMode(false);
+                return;
+            }
+
+            if (!navigator.geolocation) {
+                travelStatus.innerText = 'Travel mode unavailable: geolocation is not supported by this browser.';
+                return;
+            }
+
+            // Ensure we have a route to follow.
+            if (!window.currentRouteGeoPoints || window.currentRouteGeoPoints.length < 2) {
+                calculateTicket();
+            }
+
+            if (!window.currentRouteGeoPoints || window.currentRouteGeoPoints.length < 2) {
+                travelStatus.innerText = 'Please find a valid route first, then start traveling.';
+                return;
+            }
+
+            if (window.metroMapState && window.metroMapState.travelLayer) {
+                window.metroMapState.travelLayer.clearLayers();
+            }
+
+            startTravelBtn.innerText = 'Stop Traveling';
+            startTravelBtn.classList.remove('btn-primary');
+            startTravelBtn.classList.add('btn-secondary');
+            travelStatus.innerText = 'Travel mode active. Waiting for live location updates...';
+
+            travelWatchId = navigator.geolocation.watchPosition(function(pos) {
+                updateTravelMap(pos.coords.latitude, pos.coords.longitude, Number(pos.coords.accuracy || 0));
+            }, function(err) {
+                travelStatus.innerText = 'Travel mode error: ' + err.message;
+            }, {
+                enableHighAccuracy: true,
+                maximumAge: 1000,
+                timeout: 20000
+            });
+        }
+
+        function stopTravelMode(silent) {
+            if (travelWatchId !== null) {
+                navigator.geolocation.clearWatch(travelWatchId);
+                travelWatchId = null;
+            }
+
+            if (startTravelBtn) {
+                startTravelBtn.innerText = 'Start Traveling';
+                startTravelBtn.classList.remove('btn-secondary');
+                startTravelBtn.classList.add('btn-primary');
+            }
+
+            if (!silent && travelStatus) {
+                travelStatus.innerText = 'Travel mode stopped.';
+            }
+
+            if (window.metroMapState && window.metroMapState.travelLayer) {
+                window.metroMapState.travelLayer.clearLayers();
+            }
+        }
+
+        function updateTravelMap(lat, lng, accuracyMeters) {
+            if (!window.metroMapState || !window.metroMapState.map || !window.metroMapState.travelLayer) return;
+            if (!window.currentRouteGeoPoints || window.currentRouteGeoPoints.length < 2) return;
+
+            var map = window.metroMapState.map;
+            var travelLayer = window.metroMapState.travelLayer;
+            var userPoint = [lat, lng];
+            var routePoints = window.currentRouteGeoPoints;
+
+            var nearestIdx = 0;
+            var nearestDist = Number.MAX_VALUE;
+            for (var i = 0; i < routePoints.length; i++) {
+                var d = haversineKm(lat, lng, routePoints[i].lat, routePoints[i].lng);
+                if (d < nearestDist) {
+                    nearestDist = d;
+                    nearestIdx = i;
+                }
+            }
+
+            var nearestStation = routePoints[nearestIdx];
+            var remaining = routePoints.slice(nearestIdx).map(function(p) { return [p.lat, p.lng]; });
+
+            travelLayer.clearLayers();
+
+            L.circleMarker(userPoint, {
+                radius: 8,
+                color: '#0d47a1',
+                weight: 2,
+                fillColor: '#42A5F5',
+                fillOpacity: 1
+            }).bindPopup('You are here').addTo(travelLayer);
+
+            L.circleMarker([nearestStation.lat, nearestStation.lng], {
+                radius: 9,
+                color: '#1b5e20',
+                weight: 2,
+                fillColor: '#66BB6A',
+                fillOpacity: 1
+            }).bindPopup('Nearest route station: ' + nearestStation.plannerName).addTo(travelLayer);
+
+            L.polyline([userPoint, [nearestStation.lat, nearestStation.lng]], {
+                color: '#90CAF9',
+                weight: 4,
+                dashArray: '8,8',
+                opacity: 0.95
+            }).addTo(travelLayer);
+
+            if (remaining.length > 1) {
+                L.polyline(remaining, {
+                    color: '#FFC107',
+                    weight: 5,
+                    opacity: 0.95
+                }).addTo(travelLayer);
+            }
+
+            if (!window.travelMapFollowingInitialized) {
+                map.fitBounds(L.latLngBounds([userPoint, [nearestStation.lat, nearestStation.lng]]), { padding: [36, 36] });
+                window.travelMapFollowingInitialized = true;
+            } else {
+                map.panTo(userPoint, { animate: true, duration: 0.6 });
+            }
+
+            var accText = Number.isFinite(accuracyMeters) ? (' (±' + accuracyMeters.toFixed(0) + ' m)') : '';
+            travelStatus.innerText =
+                'Traveling live: nearest station is ' + nearestStation.plannerName +
+                ' on ' + nearestStation.lineId +
+                ' at ~' + nearestDist.toFixed(2) + ' km from your current location' + accText + '.';
+        }
+
+        function showRouteOnMap(routeStations, startLine, endLine, transferStation) {
+            if (!window.metroMapState || !window.metroMapState.map) return;
+
+            var routeLayer = window.metroMapState.routeLayer;
+            var map = window.metroMapState.map;
+            var points = [];
+            var switched = false;
+            var transferNorm = normalizeStationName(transferStation || '');
+
+            if (routeLayer) {
+                routeLayer.clearLayers();
+            }
+
+            routeStations.forEach(function(name, idx) {
+                var activeLine = startLine;
+                if (startLine !== endLine && switched) {
+                    activeLine = endLine;
+                }
+
+                var st = getGeoStationByPlanner(activeLine, name);
+                if (!st && startLine !== endLine) {
+                    st = getGeoStationByPlanner(endLine, name) || getGeoStationByPlanner(startLine, name);
+                }
+                if (st) points.push(st);
+
+                if (!switched && transferNorm && normalizeStationName(name) === transferNorm && idx !== 0) {
+                    switched = true;
+                }
+            });
+
+            if (points.length === 0) return;
+
+            var latLngs = points.map(function(p) { return [p.lat, p.lng]; });
+            window.currentRouteGeoPoints = points;
+            L.polyline(latLngs, {
+                color: '#9C27B0',
+                weight: 6,
+                opacity: 0.95
+            }).addTo(routeLayer);
+
+            L.circleMarker([points[0].lat, points[0].lng], {
+                radius: 8,
+                color: '#1b5e20',
+                weight: 2,
+                fillColor: '#4CAF50',
+                fillOpacity: 1
+            }).bindPopup('Route start: ' + points[0].plannerName).addTo(routeLayer);
+
+            var endPoint = points[points.length - 1];
+            L.circleMarker([endPoint.lat, endPoint.lng], {
+                radius: 8,
+                color: '#8e0000',
+                weight: 2,
+                fillColor: '#F44336',
+                fillOpacity: 1
+            }).bindPopup('Route end: ' + endPoint.plannerName).addTo(routeLayer);
+
+            // Mark transfer station on the map
+            if (transferStation && transferNorm) {
+                points.forEach(function(point) {
+                    if (normalizeStationName(point.plannerName) === transferNorm) {
+                        L.circleMarker([point.lat, point.lng], {
+                            radius: 10,
+                            color: '#FF9800',
+                            weight: 3,
+                            fillColor: '#FFC107',
+                            fillOpacity: 1
+                        }).bindPopup('Transfer station: ' + point.plannerName + ' ⇄').addTo(routeLayer);
+                    }
+                });
+            }
+
+            map.fitBounds(L.latLngBounds(latLngs), { padding: [36, 36] });
+        }
+
+        function showNearestPointOnMap(userLat, userLng, nearest) {
+            if (!window.metroMapState || !window.metroMapState.map || !nearest) return;
+
+            clearMapHighlights();
+            var contextLayer = window.metroMapState.contextLayer;
+            var map = window.metroMapState.map;
+
+            var userPoint = [userLat, userLng];
+            var stationPoint = [nearest.lat, nearest.lng];
+
+            L.circleMarker(userPoint, {
+                radius: 7,
+                color: '#0d47a1',
+                weight: 2,
+                fillColor: '#42A5F5',
+                fillOpacity: 1
+            }).bindPopup('Your position').addTo(contextLayer);
+
+            L.circleMarker(stationPoint, {
+                radius: 8,
+                color: '#1b5e20',
+                weight: 2,
+                fillColor: '#66BB6A',
+                fillOpacity: 1
+            }).bindPopup('Closest station: ' + nearest.name + ' (' + nearest.lineId + ')').addTo(contextLayer);
+
+            L.polyline([userPoint, stationPoint], {
+                color: '#81D4FA',
+                weight: 4,
+                dashArray: '8,8',
+                opacity: 0.9
+            }).addTo(contextLayer);
+
+            map.fitBounds(L.latLngBounds([userPoint, stationPoint]), { padding: [42, 42] });
+        }
+
+        function showNearestStartEndOnMap(curLat, curLng, dstLat, dstLng, nearestStart, nearestEnd) {
+            if (!window.metroMapState || !window.metroMapState.map || !nearestStart || !nearestEnd) return;
+
+            clearMapHighlights();
+            var contextLayer = window.metroMapState.contextLayer;
+            var map = window.metroMapState.map;
+
+            var currentPoint = [curLat, curLng];
+            var destinationPoint = [dstLat, dstLng];
+            var startStationPoint = [nearestStart.lat, nearestStart.lng];
+            var endStationPoint = [nearestEnd.lat, nearestEnd.lng];
+
+            L.circleMarker(currentPoint, {
+                radius: 6,
+                color: '#0d47a1',
+                weight: 2,
+                fillColor: '#42A5F5',
+                fillOpacity: 1
+            }).bindPopup('Current location').addTo(contextLayer);
+
+            L.circleMarker(destinationPoint, {
+                radius: 6,
+                color: '#4a148c',
+                weight: 2,
+                fillColor: '#BA68C8',
+                fillOpacity: 1
+            }).bindPopup('Destination coordinate').addTo(contextLayer);
+
+            L.circleMarker(startStationPoint, {
+                radius: 8,
+                color: '#1b5e20',
+                weight: 2,
+                fillColor: '#4CAF50',
+                fillOpacity: 1
+            }).bindPopup('Closest start station: ' + nearestStart.name).addTo(contextLayer);
+
+            L.circleMarker(endStationPoint, {
+                radius: 8,
+                color: '#8e0000',
+                weight: 2,
+                fillColor: '#F44336',
+                fillOpacity: 1
+            }).bindPopup('Closest end station: ' + nearestEnd.name).addTo(contextLayer);
+
+            L.polyline([currentPoint, startStationPoint], {
+                color: '#80DEEA',
+                weight: 4,
+                dashArray: '8,8',
+                opacity: 0.9
+            }).addTo(contextLayer);
+
+            L.polyline([destinationPoint, endStationPoint], {
+                color: '#FFAB91',
+                weight: 4,
+                dashArray: '8,8',
+                opacity: 0.9
+            }).addTo(contextLayer);
+
+            map.fitBounds(L.latLngBounds([currentPoint, destinationPoint, startStationPoint, endStationPoint]), { padding: [42, 42] });
+        }
+
+        function setPlannerStation(lineValue, stationName, isStart) {
+            if (isStart) {
+                slinestr = lineValue;
+                sline.value = lineValue;
+                changeSLine(lineValue);
+                var sSel = getActivePickupSelect(lineValue);
+                if (sSel) {
+                    var wanted = normalizeStationName(stationName);
+                    for (var i = 0; i < sSel.options.length; i++) {
+                        if (normalizeStationName(sSel.options[i].value) === wanted) {
+                            sSel.selectedIndex = i;
+                            pickup = sSel.options[i].value;
+                            break;
+                        }
+                    }
+                }
+            } else {
+                elinestr = lineValue;
+                eline.value = lineValue;
+                changeELine(lineValue);
+                var dSel = getActiveDropoffSelect(lineValue);
+                if (dSel) {
+                    var wanted2 = normalizeStationName(stationName);
+                    for (var j = 0; j < dSel.options.length; j++) {
+                        if (normalizeStationName(dSel.options[j].value) === wanted2) {
+                            dSel.selectedIndex = j;
+                            dropoff = dSel.options[j].value;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        function getLiveLocation() {
+            if (!navigator.geolocation) {
+                coordResult.innerText = 'Live location is not supported in this browser.';
+                return;
+            }
+
+            coordResult.innerText = 'Fetching live location... waiting for best GPS fix.';
+
+            var best = null;
+            var done = false;
+            var watchId = null;
+
+            function finishWithBest() {
+                if (done) return;
+                done = true;
+
+                if (watchId !== null) {
+                    navigator.geolocation.clearWatch(watchId);
+                }
+
+                if (!best) {
+                    coordResult.innerText = 'Could not get live location. Please enter coordinates manually.';
+                    return;
+                }
+
+                currentLat.value = best.coords.latitude.toFixed(6);
+                currentLng.value = best.coords.longitude.toFixed(6);
+
+                var acc = Number(best.coords.accuracy || 0);
+                var qualityNote = '';
+                if (acc > 500) {
+                    qualityNote = ' Warning: low accuracy fix. Consider entering coordinates manually.';
+                } else if (acc > 100) {
+                    qualityNote = ' Medium accuracy fix.';
+                } else {
+                    qualityNote = ' High accuracy fix.';
+                }
+
+                coordResult.innerText =
+                    'Live location set to ' + best.coords.latitude.toFixed(6) + ', ' + best.coords.longitude.toFixed(6) +
+                    ' (accuracy ±' + acc.toFixed(0) + ' m).' + qualityNote;
+            }
+
+            watchId = navigator.geolocation.watchPosition(function(pos) {
+                if (!best || pos.coords.accuracy < best.coords.accuracy) {
+                    best = pos;
+                }
+
+                // Good enough GPS fix; stop early.
+                if (pos.coords.accuracy <= 30) {
+                    finishWithBest();
+                }
+            }, function(err) {
+                if (!done) {
+                    coordResult.innerText = 'Could not get live location: ' + err.message;
+                }
+                if (watchId !== null) {
+                    navigator.geolocation.clearWatch(watchId);
+                }
+            }, {
+                enableHighAccuracy: true,
+                timeout: 20000,
+                maximumAge: 0
+            });
+
+            // Collect readings for a short window, then use the best one.
+            setTimeout(finishWithBest, 12000);
+        }
+
+        function findClosestStationNow() {
+            var lat = parseFloat(currentLat.value);
+            var lng = parseFloat(currentLng.value);
+            if (!Number.isFinite(lat) || !Number.isFinite(lng)) {
+                coordResult.innerText = 'Please enter valid current coordinates.';
+                return;
+            }
+
+            var nearest = findNearestStation(lat, lng);
+            if (!nearest) {
+                coordResult.innerText = 'Station coordinate data is not loaded yet.';
+                return;
+            }
+
+            coordResult.innerText = 'Closest station now: ' + nearest.name + ' (' + nearest.lineId + ') - approx ' + nearest.distanceKm.toFixed(2) + ' km away.';
+            showNearestPointOnMap(lat, lng, nearest);
+        }
+
+        function findClosestStartEndStations() {
+            var curLat = parseFloat(currentLat.value);
+            var curLng = parseFloat(currentLng.value);
+            var dstLat = parseFloat(destLat.value);
+            var dstLng = parseFloat(destLng.value);
+
+            if (!Number.isFinite(curLat) || !Number.isFinite(curLng) || !Number.isFinite(dstLat) || !Number.isFinite(dstLng)) {
+                coordResult.innerText = 'Please enter valid current and destination coordinates.';
+                return;
+            }
+
+            var nearestStart = findNearestStation(curLat, curLng);
+            var nearestEnd = findNearestStation(dstLat, dstLng);
+            if (!nearestStart || !nearestEnd) {
+                coordResult.innerText = 'Station coordinate data is not loaded yet.';
+                return;
+            }
+
+            setPlannerStation(lineIdToPlannerValue(nearestStart.lineId), nearestStart.plannerName, true);
+            setPlannerStation(lineIdToPlannerValue(nearestEnd.lineId), nearestEnd.plannerName, false);
+
+            coordResult.innerText =
+                'Closest start: ' + nearestStart.name + ' (' + nearestStart.lineId + ') - ' + nearestStart.distanceKm.toFixed(2) + ' km. ' +
+                'Closest destination: ' + nearestEnd.name + ' (' + nearestEnd.lineId + ') - ' + nearestEnd.distanceKm.toFixed(2) + ' km. Route fields auto-filled.';
+
+            calculateTicket();
+            showNearestStartEndOnMap(curLat, curLng, dstLat, dstLng, nearestStart, nearestEnd);
+        }
+
+        function fareBreakdown(stations){
+            // Fare tiers from the provided table image.
+            if(stations <= 9){
+                return { regular: "8 EGP", elderly: "4 EGP", special: "5 EGP" };
+            } else if(stations <= 16){
+                return { regular: "10 EGP", elderly: "5 EGP", special: "5 EGP" };
+            } else if(stations <= 23){
+                return { regular: "15 EGP", elderly: "8 EGP", special: "5 EGP" };
+            } else {
+                return { regular: "20 EGP", elderly: "10 EGP", special: "5 EGP" };
+            }
+        }
+
+        function destination(line, start, end){
+            if((start == end)) return [start];
+            var route = [];
+            var stats = network[line];
+            var found = 0;
+            for(var i = 0; i < stats.length; i++){
+                if(stats[i] == start || stats[i] == end) found++;
+                if(found != 0){
+                    route.push(stats[i]);
+                }
+                if(found == 2) break;
+            }
+            if(stats.indexOf(start) < stats.indexOf(end)){
+                return route;
+            } else if(stats.indexOf(start) > stats.indexOf(end)){
+                return route.reverse();
+            } else {
+                return [start];
+            }
+        }
+
+        function calculateTicket(){
+            var transs = "";
+
+            // Read directly from currently active selects to avoid stale state.
+            slinestr = sline.value || "one";
+            elinestr = eline.value || "one";
+            var activePickupSelect = getActivePickupSelect(slinestr);
+            var activeDropoffSelect = getActiveDropoffSelect(elinestr);
+            pickup = activePickupSelect ? activePickupSelect.value : "";
+            dropoff = activeDropoffSelect ? activeDropoffSelect.value : "";
+            
+            if(!pickup || !dropoff) {
+                document.getElementById('stationsList').innerHTML = '<div style="color: #b0c4c1; padding: 1rem; text-align: center;">Please select the stations</div>';
+                stations.textContent = '';
+                return;
+            }
+            
+            if(slinestr == elinestr){
+                // Same line
+                var totals = destination(slinestr, pickup, dropoff);
+                var sameLineCount = totals.length;
+                var sameLineFares = fareBreakdown(sameLineCount);
+                cstats.innerText = sameLineCount;
+                cost.innerText = sameLineFares.regular;
+                elderlyCost.innerText = sameLineFares.elderly;
+                specialNeedsCost.innerText = sameLineFares.special;
+                generateStationBadges(totals, null);
+                stations.textContent = totals.join(" → ");
+                stations.classList.add('show');
+                showRouteOnMap(totals, slinestr, elinestr, null);
+            } else {
+                // Different lines - need transfer
+                routes = [];
+                var min1 = 1000;
+                interchangeMatrix[slinestr][elinestr].forEach(function(ele){
+                    let m = destination(slinestr, pickup, ele);
+                    let n = destination(elinestr, dropoff, ele);
+                    if((m.length + n.length) < min1){
+                        transs = ele;
+                        min1 = (m.length + n.length);
+                        n.pop();
+                        routes = m.concat(n.reverse());
+                    }
+                });
+                var transferCount = (min1 - 1);
+                var transferFares = fareBreakdown(transferCount);
+                cstats.innerText = transferCount;
+                cost.innerText = transferFares.regular;
+                elderlyCost.innerText = transferFares.elderly;
+                specialNeedsCost.innerText = transferFares.special;
+                generateStationBadges(routes, transs);
+                stations.textContent = routes.join(" → ");
+                stations.classList.add('show');
+                showRouteOnMap(routes, slinestr, elinestr, transs);
+            }
+            
+            // Show results with animation
+            z112.classList.add('show');
+            setTimeout(() => {
+                z112.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+
+        function generateStationBadges(stationArray, transferStation) {
+            var stationsList = document.getElementById('stationsList');
+            stationsList.innerHTML = '';
+            
+            stationArray.forEach(function(station, index) {
+                var badge = document.createElement('span');
+                badge.className = 'station-badge';
+                
+                // Mark start station
+                if (index === 0) {
+                    badge.classList.add('start');
+                }
+                // Mark end station
+                else if (index === stationArray.length - 1) {
+                    badge.classList.add('end');
+                }
+                // Mark transfer station
+                else if (transferStation && station === transferStation) {
+                    badge.classList.add('transfer');
+                }
+                
+                badge.textContent = station;
+                stationsList.appendChild(badge);
+                
+                // Add connector between stations
+                if (index < stationArray.length - 1) {
+                    var connector = document.createElement('span');
+                    connector.className = 'station-connector';
+                    connector.textContent = '→';
+                    stationsList.appendChild(connector);
+                }
+            });
+        }
+
+        function dmsToDecimal(dmsPart) {
+            var match = dmsPart.match(/(\d+)°(\d+)′(\d+)″([NSEW])/);
+            if (!match) return null;
+            var deg = parseInt(match[1], 10);
+            var min = parseInt(match[2], 10);
+            var sec = parseInt(match[3], 10);
+            var hemi = match[4];
+            var dec = deg + (min / 60) + (sec / 3600);
+            if (hemi === 'S' || hemi === 'W') dec = -dec;
+            return dec;
+        }
+
+        function parseLatLng(dmsCoord) {
+            var parts = dmsCoord.split(' ');
+            if (parts.length < 2) return null;
+            var lat = dmsToDecimal(parts[0]);
+            var lng = dmsToDecimal(parts[1]);
+            if (lat === null || lng === null) return null;
+            return [lat, lng];
+        }
+
+        function buildStationMap() {
+            var mapEl = document.getElementById('stationMap');
+            if (!mapEl || typeof L === 'undefined') return;
+
+            var line1Stations = [
+                { name: 'Helwan', coord: '29°50′56″N 31°20′3″E', opened: '1987' },
+                { name: 'Ain Helwan', coord: '29°51′46″N 31°19′30″E', opened: '1987' },
+                { name: 'Helwan University', coord: '29°52′8″N 31°19′13″E', opened: '2002' },
+                { name: 'Wadi Hof', coord: '29°52′46″N 31°18′48″E', opened: '1995' },
+                { name: 'Hadayek Helwan', coord: '29°53′50″N 31°18′15″E', opened: '1997' },
+                { name: 'El-Maasara', coord: '29°54′22″N 31°17′59″E', opened: '1987' },
+                { name: 'Tora El-Asmant', coord: '29°55′33″N 31°17′16″E', opened: '1987' },
+                { name: 'Kozzika', coord: '29°56′10″N 31°16′54″E', opened: '1993' },
+                { name: 'Tora El-Balad', coord: '29°56′47″N 31°16′25″E', opened: '1987' },
+                { name: 'Sakanat El-Maadi', coord: '29°57′10″N 31°15′48″E', opened: '1992' },
+                { name: 'Maadi', coord: '29°57′35″N 31°15′29″E', opened: '1995' },
+                { name: 'Hadayek El-Maadi', coord: '29°58′12″N 31°15′2″E', opened: '1992' },
+                { name: 'Dar El-Salam', coord: '29°58′55″N 31°14′32″E', opened: '1988' },
+                { name: 'El-Zahraa', coord: '29°59′43″N 31°13′54″E', opened: '1997' },
+                { name: 'Mar Girgis', coord: '30°0′21″N 31°13′46″E', opened: '1992' },
+                { name: 'El-Malek El-Saleh', coord: '30°1′1″N 31°13′51″E', opened: '1995' },
+                { name: 'Al-Sayeda Zeinab', coord: '30°1′45″N 31°14′7″E', opened: '1987' },
+                { name: 'Saad Zaghloul', coord: '30°2′12″N 31°14′17″E', opened: '1987' },
+                { name: 'Sadat', coord: '30°2′40″N 31°14′8″E', opened: '1987' },
+                { name: 'Nasser', coord: '30°3′13″N 31°14′20″E', opened: '1987' },
+                { name: 'Orabi', coord: '30°3′27″N 31°14′33″E', opened: '1987' },
+                { name: 'Al-Shohadaa', coord: '30°3′43″N 31°14′46″E', opened: '1987' },
+                { name: 'Ghamra', coord: '30°4′8″N 31°15′53″E', opened: '1989' },
+                { name: 'El-Demerdash', coord: '30°4′38″N 31°16′40″E', opened: '2005' },
+                { name: 'Manshiet El-Sadr', coord: '30°4′56″N 31°17′16″E', opened: '1989' },
+                { name: 'Kobri El-Qobba', coord: '30°5′13″N 31°17′38″E', opened: '1989' },
+                { name: 'Hammamat El-Qobba', coord: '30°5′25″N 31°17′53″E', opened: '1989' },
+                { name: 'Saray El-Qobba', coord: '30°5′53″N 31°18′17″E', opened: '1989' },
+                { name: 'Hadayeq El-Zaitoun', coord: '30°6′19″N 31°18′36″E', opened: '1989' },
+                { name: 'Helmeyet El-Zaitoun', coord: '30°6′52″N 31°18′50″E', opened: '1989' },
+                { name: 'El-Matareyya', coord: '30°7′17″N 31°18′50″E', opened: '1989' },
+                { name: 'Ain Shams', coord: '30°7′52″N 31°19′9″E', opened: '1989' },
+                { name: 'Ezbet El-Nakhl', coord: '30°8′21″N 31°19′28″E', opened: '1989' },
+                { name: 'El-Marg', coord: '30°9′8″N 31°20′8″E', opened: '1989' },
+                { name: 'New El-Marg', coord: '30°9′48″N 31°20′18″E', opened: '1999' }
+            ];
+
+            var line2Stations = [
+                { name: 'El-Mounib', coord: '29°58′53″N 31°12′43″E', opened: '2005' },
+                { name: 'Sakiat Mekky', coord: '29°59′44″N 31°12′31″E', opened: '2005' },
+                { name: 'Omm El-Masryeen', coord: '30°0′19″N 31°12′29″E', opened: '2000' },
+                { name: 'El Giza', coord: '30°0′38″N 31°12′25″E', opened: '2000' },
+                { name: 'Faisal', coord: '30°1′2″N 31°12′14″E', opened: '2000' },
+                { name: 'Cairo University', coord: '30°1′34″N 31°12′4″E', opened: '1999' },
+                { name: 'El Bohoth', coord: '30°2′9″N 31°12′1″E', opened: '1999' },
+                { name: 'Dokki', coord: '30°2′18″N 31°12′43″E', opened: '1999' },
+                { name: 'Opera', coord: '30°2′31″N 31°13′31″E', opened: '1999' },
+                { name: 'Sadat', coord: '30°2′40″N 31°14′8″E', opened: '1987' },
+                { name: 'Mohamed Naguib', coord: '30°2′43″N 31°14′39″E', opened: '1998' },
+                { name: 'Attaba', coord: '30°3′9″N 31°14′49″E', opened: '1998' },
+                { name: 'Al-Shohadaa', coord: '30°3′43″N 31°14′46″E', opened: '1987' },
+                { name: 'Masarra', coord: '30°4′16″N 31°14′42″E', opened: '1996' },
+                { name: 'Road El-Farag', coord: '30°4′50″N 31°14′44″E', opened: '1996' },
+                { name: 'St. Teresa', coord: '30°5′18″N 31°14′44″E', opened: '1996' },
+                { name: 'Khalafawy', coord: '30°5′53″N 31°14′43″E', opened: '1996' },
+                { name: 'Mezallat', coord: '30°6′18″N 31°14′48″E', opened: '1996' },
+                { name: 'Kolleyyet El-Zeraa', coord: '30°6′50″N 31°14′55″E', opened: '1996' },
+                { name: 'Shubra El-Kheima', coord: '30°7′21″N 31°14′41″E', opened: '1996' }
+            ];
+
+            var line3Stations = [
+                { name: 'Adly Mansour', coord: '30°8′49″N 31°25′17″E', opened: '2020' },
+                { name: 'El Haykestep', coord: '30°8′38″N 31°24′17″E', opened: '2020' },
+                { name: 'Omar Ibn El-Khattab', coord: '30°8′26″N 31°23′39″E', opened: '2020' },
+                { name: 'Qobaa', coord: '30°8′5″N 31°23′2″E', opened: '2020' },
+                { name: 'Hesham Barakat', coord: '30°7′52″N 31°22′22″E', opened: '2020' },
+                { name: 'El-Nozha', coord: '30°7′42″N 31°21′36″E', opened: '2020' },
+                { name: 'Nadi El-Shams', coord: '30°7′20″N 31°20′38″E', opened: '2019' },
+                { name: 'Alf Maskan', coord: '30°7′5″N 31°20′23″E', opened: '2019' },
+                { name: 'Heliopolis Square', coord: '30°6′29″N 31°20′17″E', opened: '2019' },
+                { name: 'Haroun', coord: '30°6′4″N 31°19′58″E', opened: '2019' },
+                { name: 'Al-Ahram', coord: '30°5′29″N 31°19′35″E', opened: '2014' },
+                { name: 'Koleyet El-Banat', coord: '30°5′1″N 31°19′44″E', opened: '2014' },
+                { name: 'Stadium', coord: '30°4′23″N 31°19′3″E', opened: '2014' },
+                { name: 'Fair Zone', coord: '30°4′24″N 31°18′4″E', opened: '2014' },
+                { name: 'Abbassia', coord: '30°4′11″N 31°16′51″E', opened: '2012' },
+                { name: 'Abdou Pasha', coord: '30°3′53″N 31°16′29″E', opened: '2012' },
+                { name: 'El Geish', coord: '30°3′43″N 31°16′1″E', opened: '2012' },
+                { name: 'Bab El Shaaria', coord: '30°3′14″N 31°15′22″E', opened: '2012' },
+                { name: 'Attaba', coord: '30°3′9″N 31°14′49″E', opened: '1998' },
+                { name: 'Nasser', coord: '30°3′13″N 31°14′20″E', opened: '1987' },
+                { name: 'Maspero', coord: '30°3′20″N 31°13′56″E', opened: '2022' },
+                { name: 'Safaa Hegazy', coord: '30°3′45″N 31°13′21″E', opened: '2022' },
+                { name: 'Kit Kat', coord: '30°4′0″N 31°12′47″E', opened: '2022' },
+                { name: 'Sudan', coord: '30°4′11″N 31°12′19″E', opened: '2024' },
+                { name: 'Imbaba', coord: '30°4′33″N 31°12′27″E', opened: '2024' },
+                { name: 'El-Bohy', coord: '30°4′56″N 31°12′38″E', opened: '2024' },
+                { name: 'El-Qawmia', coord: '30°5′36″N 31°12′32″E', opened: '2024' },
+                { name: 'Ring Road', coord: '30°5′47″N 31°11′59″E', opened: '2024' },
+                { name: 'Rod al-Farag Corridor', coord: '30°6′7″N 31°11′3″E', opened: '2024' },
+                { name: 'Tawfikia', coord: '30°3′55″N 31°12′9″E', opened: '2024' },
+                { name: 'Wadi El Nile', coord: '30°3′30″N 31°12′4″E', opened: '2024' },
+                { name: 'Gamat El Dowal', coord: '30°3′3″N 31°11′59″E', opened: '2024' },
+                { name: 'Boulak El Dakrour', coord: '30°2′10″N 31°11′47″E', opened: '2024' },
+                { name: 'Cairo University', coord: '30°1′34″N 31°12′4″E', opened: '1999' }
+            ];
+
+            var map = L.map('stationMap', {
+                zoomControl: true,
+                attributionControl: false
+            }).setView([30.045, 31.24], 11);
+
+            // Non-satellite basemap (street/light style).
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                subdomains: 'abcd',
+                maxZoom: 19,
+                attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
+            }).addTo(map);
+
+            L.control.attribution({ prefix: false }).addTo(map);
+
+            var linesMeta = [
+                { id: 'Line 1', color: '#2E86DE', stations: line1Stations },
+                { id: 'Line 2', color: '#E74C3C', stations: line2Stations },
+                {
+                    id: 'Line 3',
+                    color: '#27AE60',
+                    stations: line3Stations,
+                    segments: [
+                        ['Adly Mansour', 'El Haykestep', 'Omar Ibn El-Khattab', 'Qobaa', 'Hesham Barakat', 'El-Nozha', 'Nadi El-Shams', 'Alf Maskan', 'Heliopolis Square', 'Haroun', 'Al-Ahram', 'Koleyet El-Banat', 'Stadium', 'Fair Zone', 'Abbassia', 'Abdou Pasha', 'El Geish', 'Bab El Shaaria', 'Attaba', 'Nasser', 'Maspero', 'Safaa Hegazy', 'Kit Kat'],
+                        ['Kit Kat', 'Sudan', 'Imbaba', 'El-Bohy', 'El-Qawmia', 'Ring Road', 'Rod al-Farag Corridor'],
+                        ['Kit Kat', 'Tawfikia', 'Wadi El Nile', 'Gamat El Dowal', 'Boulak El Dakrour', 'Cairo University']
+                    ]
+                }
+            ];
+
+            var bounds = [];
+            var labelMarkers = [];
+            var geoStations = [];
+
+            linesMeta.forEach(function(line) {
+                var latlngs = [];
+
+                line.stations.forEach(function(st) {
+                    var latlng = parseLatLng(st.coord);
+                    if (!latlng) return;
+
+                    latlngs.push(latlng);
+                    bounds.push(latlng);
+                    geoStations.push({
+                        name: st.name,
+                        plannerName: plannerStationName(line.id, st.name),
+                        lineId: line.id,
+                        lineValue: lineIdToPlannerValue(line.id),
+                        lat: latlng[0],
+                        lng: latlng[1]
+                    });
+
+                    var marker = L.circleMarker(latlng, {
+                        radius: 5,
+                        color: '#102a27',
+                        weight: 2,
+                        fillColor: line.color,
+                        fillOpacity: 0.95
+                    }).addTo(map);
+
+                    marker.bindPopup(
+                        '<strong>' + st.name + '</strong><br>' +
+                        'Line: ' + line.id + '<br>' +
+                        'Opened: ' + st.opened + '<br>' +
+                        'Coord: ' + st.coord
+                    );
+
+                    marker.bindTooltip(st.name, {
+                        permanent: true,
+                        direction: 'top',
+                        offset: [0, -8],
+                        className: 'station-label'
+                    });
+
+                    labelMarkers.push(marker);
+                });
+
+                if (line.segments && line.segments.length > 0) {
+                    line.segments.forEach(function(seg) {
+                        var segLatLngs = seg.map(function(stationName) {
+                            var station = line.stations.find(function(item) { return item.name === stationName; });
+                            return station ? parseLatLng(station.coord) : null;
+                        }).filter(function(v) { return !!v; });
+
+                        if (segLatLngs.length > 1) {
+                            L.polyline(segLatLngs, {
+                                color: line.color,
+                                weight: 4,
+                                opacity: 0.9
+                            }).addTo(map);
+                        }
+                    });
+                } else if (latlngs.length > 1) {
+                    L.polyline(latlngs, {
+                        color: line.color,
+                        weight: 4,
+                        opacity: 0.9
+                    }).addTo(map);
+                }
+            });
+
+            if (bounds.length > 0) {
+                map.fitBounds(bounds, { padding: [24, 24] });
+                if (map.getZoom() < 11) {
+                    map.setZoom(11);
+                }
+            }
+
+            function updateStationLabels() {
+                var showLabels = map.getZoom() >= 13;
+                labelMarkers.forEach(function(marker) {
+                    if (showLabels) {
+                        marker.openTooltip();
+                    } else {
+                        marker.closeTooltip();
+                    }
+                });
+            }
+
+            map.on('zoomend', updateStationLabels);
+            updateStationLabels();
+
+            window.metroGeoStations = geoStations;
+            window.metroMapState = {
+                map: map,
+                routeLayer: L.layerGroup().addTo(map),
+                contextLayer: L.layerGroup().addTo(map),
+                travelLayer: L.layerGroup().addTo(map)
+            };
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', buildStationMap);
+        } else {
+            buildStationMap();
+        }
+
+        // Ensure inline HTML handlers can always resolve these functions.
+        window.calculateTicket = calculateTicket;
+        window.resetForm = resetForm;
+        window.getLiveLocation = getLiveLocation;
+        window.findClosestStationNow = findClosestStationNow;
+        window.findClosestStartEndStations = findClosestStartEndStations;
+        window.startTravelMode = startTravelMode;
+    </script>
+</body>
+</html>
+
+

@@ -1,0 +1,1100 @@
+/* ========================================
+   UNIFIED METROM STYLESHEET
+   Consolidated CSS for index.html and main.html
+   ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0f3a34 0%, #1a483f 50%, #275c52 100%);
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ========================================
+   HEADER STYLES
+   ======================================== */
+
+header {
+    height: 80px;
+    display: flex;
+    flex-direction: row;
+    color: #fff;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, #1e483f 0%, #275c52 100%);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+}
+
+header .container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 80rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+header .logo {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header .logo a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+header .logo img {
+    max-height: 60px;
+    transition: transform 0.3s ease;
+}
+
+header .logo img:hover {
+    transform: scale(1.05);
+}
+
+header .nav-links,
+header .back {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    font-size: 18px;
+}
+
+header a {
+    text-decoration: none;
+    position: relative;
+    color: #fcfffc;
+    font-size: 18px;
+    transition: all 0.3s ease-in-out;
+    padding: 0.5rem;
+    margin: 0 1rem;
+    overflow: hidden;
+}
+
+header a::before,
+header a::after {
+    content: '';
+    display: block;
+    width: 0%;
+    height: 2px;
+    background-color: #fcfffc;
+    position: absolute;
+    transition: width 0.3s ease;
+}
+
+header a::before {
+    bottom: 0;
+    left: 0;
+}
+
+header a::after {
+    top: 0;
+    right: 0;
+}
+
+header a:hover::before {
+    width: 100%;
+}
+
+header a:hover::after {
+    width: 100%;
+}
+
+header a:hover {
+    color: #fff;
+}
+
+/* ========================================
+   MAIN & CONTAINER STYLES
+   ======================================== */
+
+main {
+    width: 100%;
+    flex: 1 0 auto;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* Index.html specific main styling */
+main#home {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: linear-gradient(180deg, rgba(31, 72, 63, 0.5) 0%, rgba(39, 92, 82, 0.3) 100%);
+}
+
+.container {
+    height: 100%;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 80rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+}
+
+/* ========================================
+   HERO SECTION STYLES
+   ======================================== */
+
+main .hero {
+    height: calc(100vh - 80px);
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    overflow: hidden;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem;
+}
+
+main .hero .hero-text {
+    width: 35%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #FFF;
+    text-align: center;
+    gap: 1.5rem;
+}
+
+main .hero .hero-text .slogan {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #F6C358;
+    margin: 0;
+    line-height: 1.2;
+    letter-spacing: -1px;
+    background: linear-gradient(135deg, #F6C358, #ffd580);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+main .hero .hero-text .more {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #d1d5d4;
+    font-weight: 300;
+    max-width: 90%;
+}
+
+main .hero .parallax {
+    width: 65%;
+    height: 100%;
+    display: flex;
+    overflow: hidden;
+}
+
+main .hero .parallax .parallax-layer img {
+    width: 100%;
+    height: auto;
+}
+
+/* ========================================
+   APPLICATION SECTION STYLES
+   ======================================== */
+
+.application {
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #1a483f 0%, #275c52 100%);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.application h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #F6C358;
+    letter-spacing: -0.5px;
+}
+
+.application p {
+    font-size: 1.1rem;
+    color: #b0c4c1;
+    margin-bottom: 2rem;
+    font-weight: 300;
+}
+
+/* ========================================
+   BUTTON STYLES
+   ======================================== */
+
+.download-buttons,
+.action-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.btn {
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+}
+
+.btn-primary {
+    background-color: #F6C358;
+    color: #1a483f;
+    box-shadow: 0 4px 15px rgba(246, 195, 88, 0.3);
+}
+
+.btn-primary:hover {
+    background-color: #ffd580;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(246, 195, 88, 0.4);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: #F6C358;
+    border: 2px solid #F6C358;
+}
+
+.btn-secondary:hover {
+    background-color: #F6C358;
+    color: #1a483f;
+    transform: translateY(-2px);
+}
+
+.btn-secondary:active {
+    transform: translateY(0);
+}
+
+/* ========================================
+   FEATURES SECTION STYLES
+   ======================================== */
+
+.features {
+    padding: 3rem 2rem;
+    background-color: #1e483f;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.feature-card {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.feature-card:hover {
+    background-color: rgba(246, 195, 88, 0.08);
+    border-color: rgba(246, 195, 88, 0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+.feature-card h3 {
+    color: #F6C358;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.feature-card p {
+    color: #b0c4c1;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* ========================================
+   FOOTER STYLES
+   ======================================== */
+
+footer {
+    background-color: #0f3a34;
+    border-top: 1px solid rgba(246, 195, 88, 0.2);
+    padding: 2rem 1rem;
+    text-align: center;
+    margin-top: auto;
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #b0c4c1;
+}
+
+/* ========================================
+   ACCESSIBILITY STYLES
+   ======================================== */
+
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #F6C358;
+    color: #1a483f;
+    padding: 8px;
+    text-decoration: none;
+    z-index: 100;
+    font-weight: 600;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+/* ========================================
+   PAGE TITLE STYLES
+   ======================================== */
+
+.page-title {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.page-title h1 {
+    font-size: 2.5rem;
+    color: #F6C358;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.page-title p {
+    color: #b0c4c1;
+    font-size: 1.1rem;
+}
+
+/* ========================================
+   METRO LINES BANNER STYLES
+   ======================================== */
+
+.metro-lines-banner {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 1rem 0 2.2rem;
+    padding: 0.9rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(246, 195, 88, 0.18);
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+}
+
+.metro-lines-banner img {
+    width: 100%;
+    height: 86px;
+    object-fit: contain;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0.4rem;
+}
+
+/* ========================================
+   PLANNER SECTION STYLES
+   ======================================== */
+
+.planner-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.planner-section {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+}
+
+.planner-section h2 {
+    color: #F6C358;
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+label {
+    display: block;
+    margin-bottom: 1.5rem;
+}
+
+label p {
+    color: #F6C358;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.label-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+select {
+    flex: 1;
+    min-width: 150px;
+    padding: 0.75rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: 1px solid rgba(246, 195, 88, 0.3);
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+select:hover {
+    border-color: rgba(246, 195, 88, 0.6);
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+select:focus {
+    outline: none;
+    border-color: #F6C358;
+    box-shadow: 0 0 10px rgba(246, 195, 88, 0.3);
+}
+
+select option {
+    background-color: #1a483f;
+    color: #fff;
+}
+
+.separator {
+    text-align: center;
+    color: #F6C358;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* ========================================
+   RESULTS STYLES
+   ======================================== */
+
+.results {
+    background: linear-gradient(135deg, rgba(31, 72, 63, 0.6) 0%, rgba(39, 92, 82, 0.4) 100%);
+    border: 2px solid rgba(246, 195, 88, 0.4);
+    padding: 2.5rem;
+    border-radius: 16px;
+    margin-top: 3rem;
+    display: none;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+}
+
+.results.show {
+    display: block;
+}
+
+.result-item {
+    background: linear-gradient(135deg, rgba(246, 195, 88, 0.12) 0%, rgba(246, 195, 88, 0.05) 100%);
+    border: 2px solid rgba(246, 195, 88, 0.3);
+    border-left: 6px solid #F6C358;
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.result-item:hover {
+    border-color: rgba(246, 195, 88, 0.6);
+    box-shadow: 0 8px 24px rgba(246, 195, 88, 0.15);
+}
+
+.result-item:last-child {
+    margin-bottom: 0;
+}
+
+.result-item-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.result-item-icon {
+    font-size: 1.8rem;
+    min-width: 40px;
+}
+
+.result-item h3 {
+    color: #F6C358;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+.result-item-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.result-stat {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid rgba(246, 195, 88, 0.2);
+}
+
+.result-stat-label {
+    color: #b0c4c1;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+}
+
+.result-stat-value {
+    color: #F6C358;
+    font-size: 1.5rem;
+    font-weight: 700;
+    animation: countUp 0.5s ease-out;
+}
+
+@keyframes countUp {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ========================================
+   ROUTE VISUALIZATION STYLES
+   ======================================== */
+
+.route-visualization {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-top: 1.5rem;
+    border: 1px solid rgba(246, 195, 88, 0.15);
+}
+
+.route-label {
+    color: #F6C358;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.route-label::before {
+    content: 'Route';
+    font-size: 1rem;
+}
+
+.route-stations {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding: 1rem 0;
+    scroll-behavior: smooth;
+}
+
+.route-stations::-webkit-scrollbar {
+    height: 4px;
+}
+
+.route-stations::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.route-stations::-webkit-scrollbar-thumb {
+    background: rgba(246, 195, 88, 0.5);
+    border-radius: 10px;
+}
+
+.route-stations::-webkit-scrollbar-thumb:hover {
+    background: rgba(246, 195, 88, 0.8);
+}
+
+.station-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, rgba(246, 195, 88, 0.2) 0%, rgba(246, 195, 88, 0.08) 100%);
+    border: 2px solid rgba(246, 195, 88, 0.4);
+    color: #d1d5d4;
+    padding: 0.6rem 1rem;
+    border-radius: 20px;
+    white-space: nowrap;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: default;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.station-badge:hover {
+    background: linear-gradient(135deg, rgba(246, 195, 88, 0.3) 0%, rgba(246, 195, 88, 0.15) 100%);
+    border-color: rgba(246, 195, 88, 0.7);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(246, 195, 88, 0.2);
+}
+
+.station-badge.start {
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.3) 0%, rgba(76, 175, 80, 0.1) 100%);
+    border-color: rgba(76, 175, 80, 0.6);
+    color: #4CAF50;
+    font-weight: 700;
+}
+
+.station-badge.start::before {
+    content: "\1F7E2";
+    font-size: 0.8rem;
+}
+
+.station-badge.end {
+    background: linear-gradient(135deg, rgba(244, 67, 54, 0.3) 0%, rgba(244, 67, 54, 0.1) 100%);
+    border-color: rgba(244, 67, 54, 0.6);
+    color: #F44336;
+    font-weight: 700;
+}
+
+.station-badge.end::after {
+    content: "\1F3C1";
+    font-size: 0.8rem;
+}
+
+.station-badge.transfer {
+    background: linear-gradient(135deg, rgba(255, 152, 0, 0.3) 0%, rgba(255, 152, 0, 0.1) 100%);
+    border-color: rgba(255, 152, 0, 0.6);
+    color: #FF9800;
+    font-weight: 700;
+}
+
+.station-badge.transfer::before {
+    content: "\1F504";
+    font-size: 0.8rem;
+}
+
+.station-connector {
+    display: inline-flex;
+    align-items: center;
+    font-size: 1.2rem;
+    color: rgba(246, 195, 88, 0.6);
+    font-weight: bold;
+    animation: pulse 2s infinite;
+    min-width: 30px;
+    justify-content: center;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+.route-path {
+    color: #d1d5d4;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    word-break: break-word;
+    font-weight: 500;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    border-left: 3px solid rgba(246, 195, 88, 0.3);
+    margin-top: 1rem;
+    display: none;
+}
+
+.route-path.show {
+    display: block;
+    animation: slideInLeft 0.4s ease-out;
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.route-path strong {
+    color: #F6C358;
+    font-weight: 700;
+}
+
+.transition-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, rgba(246, 195, 88, 0.25) 0%, rgba(246, 195, 88, 0.15) 100%);
+    color: #F6C358;
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    border: 2px solid rgba(246, 195, 88, 0.5);
+    margin: 0.2rem 0.4rem;
+    box-shadow: 0 2px 8px rgba(246, 195, 88, 0.2);
+    letter-spacing: 0.5px;
+}
+
+/* ========================================
+   MAP STYLES
+   ======================================== */
+
+.metro-map {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+.metro-map h2 {
+    color: #F6C358;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+.metro-map img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.station-map {
+    width: 100%;
+    height: 560px;
+    border-radius: 10px;
+    border: 1px solid rgba(246, 195, 88, 0.25);
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+    background: radial-gradient(circle at 30% 20%, #234f47 0%, #153b35 55%, #0f2f2a 100%);
+}
+
+.station-label {
+    background: rgba(15, 58, 52, 0.9);
+    color: #f3f7f6;
+    border: 1px solid rgba(246, 195, 88, 0.35);
+    border-radius: 6px;
+    padding: 2px 6px;
+    font-size: 11px;
+    font-weight: 600;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+.leaflet-tooltip.station-label:before {
+    border-top-color: rgba(246, 195, 88, 0.35);
+}
+
+/* ========================================
+   FARES SECTION STYLES
+   ======================================== */
+
+.fares-section {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 12px;
+    margin-top: 2rem;
+    backdrop-filter: blur(10px);
+}
+
+.fares-section h2 {
+    color: #F6C358;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.fares-section p {
+    color: #b0c4c1;
+    margin-bottom: 1rem;
+}
+
+.fares-table-wrap {
+    overflow-x: auto;
+}
+
+.fares-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 680px;
+    background: rgba(0, 0, 0, 0.22);
+    border: 1px solid rgba(246, 195, 88, 0.25);
+}
+
+.fares-table th,
+.fares-table td {
+    border: 1px solid rgba(246, 195, 88, 0.3);
+    padding: 0.8rem 0.9rem;
+    text-align: left;
+}
+
+.fares-table th {
+    color: #F6C358;
+    background: rgba(246, 195, 88, 0.1);
+    font-weight: 700;
+}
+
+.fares-table td {
+    color: #e0ecea;
+}
+
+/* ========================================
+   COORDINATE TOOLS STYLES
+   ======================================== */
+
+.coord-tools {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin: 1rem 0 2rem;
+    backdrop-filter: blur(10px);
+}
+
+.coord-tools h2 {
+    color: #F6C358;
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+}
+
+.coord-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+    gap: 0.9rem;
+    margin-top: 1rem;
+}
+
+.coord-grid label {
+    margin-bottom: 0;
+}
+
+.coord-grid input {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: 1px solid rgba(246, 195, 88, 0.3);
+    border-radius: 6px;
+    font-size: 0.95rem;
+}
+
+.coord-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-top: 1rem;
+}
+
+.coord-result,
+.travel-status {
+    margin-top: 1rem;
+    color: #d8ece9;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(246, 195, 88, 0.25);
+    border-radius: 8px;
+    padding: 0.8rem;
+    font-size: 0.92rem;
+    line-height: 1.5;
+}
+
+/* ========================================
+   RESPONSIVE MEDIA QUERIES
+   ======================================== */
+
+@media (max-width: 992px) {
+    main .hero {
+        flex-direction: column;
+        height: 100%;
+    }
+
+    main .hero .hero-text {
+        width: 100%;
+        height: auto;
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+        padding: 2rem 1rem;
+    }
+
+    main .hero .hero-text .slogan {
+        font-size: 2rem;
+        font-weight: 600;
+        margin: 1rem auto;
+    }
+
+    main .hero .hero-text .more {
+        font-size: 1rem;
+    }
+
+    main .hero .parallax {
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+    }
+
+    main .hero .parallax img {
+        width: 100%;
+        height: auto;
+    }
+
+    .download-buttons,
+    .action-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn {
+        justify-content: center;
+    }
+
+    .application h2 {
+        font-size: 1.8rem;
+    }
+
+    .application p {
+        font-size: 1rem;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 0 1rem;
+    }
+
+    header .nav-links,
+    header .back {
+        gap: 1rem;
+    }
+
+    .planner-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .page-title h1 {
+        font-size: 1.8rem;
+    }
+
+    .metro-lines-banner {
+        grid-template-columns: 1fr;
+    }
+
+    .metro-lines-banner img {
+        height: 72px;
+    }
+
+    .label-row {
+        flex-direction: column;
+    }
+
+    .coord-grid {
+        grid-template-columns: 1fr;
+    }
+
+    select {
+        width: 100%;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .results {
+        padding: 1.5rem;
+    }
+
+    .result-item {
+        padding: 1.5rem;
+    }
+
+    .result-item-content {
+        grid-template-columns: 1fr;
+    }
+
+    .route-path {
+        font-size: 0.9rem;
+    }
+
+    .station-map {
+        height: 430px;
+    }
+}

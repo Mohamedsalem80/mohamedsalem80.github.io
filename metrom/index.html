@@ -3,229 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mivex | Metrom</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #275c52;
-            /* background-image: linear-gradient(to bottom, #121212 , #212121); */
-            color: #fff;
-        }
-
-        header {
-            height: 80px;
-            display: flex;
-            flex-direction: row;
-            color: #fff;
-            align-items: center;
-            justify-content: space-between;
-            background-color: #275c52;
-            /* border-bottom: #ccc 2px solid;
-            box-shadow: 1px 1px 15px #2121217d; */
-            /* background-image: linear-gradient(to bottom, #000 , #121212); */
-        }
-
-        header .container {
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-        }
-        
-        header .logo {
-            height: 100%;
-            display: flex;
-        }
-        
-        header .back {
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-        }
-        
-        header .back a {
-            text-decoration: none;
-            position: relative;
-            color: #fcfffc;
-            font-size: 18px;
-            transition: all 0.3s ease-in-out;
-            padding: 0.5rem;
-            margin: 0 1rem;
-            overflow: hidden;
-            /* text-decoration: overline; */
-        }
-
-        header .back a::before, header .back a::after {
-            content: '';
-            display: block;
-            width: 0%;
-            height: 2px;
-            background-color: #fcfffc;
-            position: absolute;
-            transition: width 0.3s ease;
-        }
-
-        header .back a::before {
-            bottom: 0;
-            left: 0;
-        }
-
-        header .back a::after {
-            top: 0;
-            right: 0;
-        }
-
-        header .back a:hover::before {
-            width: 100%;
-        }
-
-        header .back a:hover::after {
-            width: 100%;
-        }
-
-        header .back a:hover {
-            color: #fff;
-        }
-
-        main {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        
-        main .hero {
-            height: calc(100vh - 80px);
-            display: flex;
-            flex-direction: row;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        main .hero .hero-text {
-            width: 35%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 1.5rem;
-            color: #5E3AF9;
-            color: #FFF;
-            text-align: center;
-        }
-
-        main .hero .hero-text .slogan {
-            font-size: 3rem;
-            font-weight: 600;
-            color: #39C630;
-            color: #F6C358;
-            margin: 1rem auto;
-        }
-
-        main .hero .parallax {
-            width: 65%;
-            height: 100%;
-            display: flex;
-            overflow: hidden;
-        }
-
-        main .hero .parallax .parallax-layer img {
-            width: 100%;
-            height: auto;
-        }
-
-        .container {
-            height: 100%;
-            width: 100%;
-            margin-left: auto;
-            margin-right: auto;
-            max-width: 80rem;
-            padding-left: 2rem;
-            padding-right: 2rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: stretch;
-        }
-
-
-
-
-        footer {
-            background-color: #25524A;
-            color: #eee;
-            font-weight: bolder;
-            text-align: center;
-            padding: 0.5rem;
-        }
-
-
-        @media (max-width: 992px) {
-            main .hero {
-                flex-direction: column;
-                height: 100%;
-            }
-
-            main .hero .hero-text {
-                width: 100%;
-                height: auto;
-                font-size: 1.25rem;
-                margin-bottom: 1rem;
-            }
-
-            main .hero .hero-text .slogan {
-                font-size: 2rem;
-                font-weight: 600;
-                margin: 1rem auto;
-            }
-
-            main .hero .parallax {
-                width: 100%;
-                height: auto;
-            }
-
-            main .hero .parallax img {
-                width: 100%;
-                height: auto;
-            }
-        }
-
-    </style>
+    
+    <!-- SEO & Description -->
+    <meta name="description" content="Cairo Metro Navigator - Your easy guide to Cairo's subway system. Find routes, plan journeys, track fares, and navigate Cairo's metro network with ease.">
+    <meta name="keywords" content="Cairo Metro, Metro Navigator, Route Planner, Cairo Subway, Train Navigation, Public Transport, Egypt Metro">
+    <meta name="author" content="Mohamed Salem">
+    <meta name="designer" content="Cairo Metro Navigator">
+    <meta name="language" content="English">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="Revisit-After" content="7 days">
+    <meta name="distribution" content="Global">
+    
+    <!-- Theme & Browser Config -->
+    <meta name="theme-color" content="#1e483f">
+    <meta name="msapplication-TileColor" content="#1e483f">
+    
+    <!-- Open Graph (Social Sharing) -->
+    <meta property="og:title" content="Cairo Metro Navigator - Your Easy Guide to Cairo's Subway">
+    <meta property="og:description" content="Plan your journey through Cairo's metro network with our interactive route planner. Real-time navigation, station information, and fare calculations.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mohamedsalem80.github.io/metrom/">
+    <meta property="og:site_name" content="Cairo Metro Navigator">
+    <meta property="og:image" content="https://mohamedsalem80.github.io/metrom/favicon/metrom-og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="ar_EG">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cairo Metro Navigator - Your Easy Guide to Cairo's Subway">
+    <meta name="twitter:description" content="Plan your journey through Cairo's metro network with our interactive route planner.">
+    <meta name="twitter:image" content="https://mohamedsalem80.github.io/metrom/favicon/metrom-og-image.jpg">
+    <meta name="twitter:site" content="@MetroNavigator">
+    
+    <!-- Canonical URL -->
+    <meta rel="canonical" href="https://mohamedsalem80.github.io/metrom/">
+    
+    <!-- Favicon Set -->
+    <link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <meta name="msapplication-TileImage" content="favicon/ms-icon-144x144.png">
+    <title>Cairo Metro Navigator - Your Easy Guide to Cairo's Subway</title>
+    <link rel="stylesheet" href="css/metro.css">
 </head>
 <body>
     <header>
         <div class="container">
             <div class="logo">
-                <img src="favicon/metrom-21.png" alt="">
+                <a href="index.html" title="Cairo Metro Navigator Home">
+                    <img src="favicon/metrom-21.png" alt="Cairo Metro Navigator Logo">
+                </a>
             </div>
     
             <div class="back">
-                <a href="#start">Start</a>
-                <a href="#about">About</a>
-                <a href="/">Mivex</a>
+                <a href="/">Home</a>
+                <a href="#features">Features</a>
+                <a href="main.html">🗺️ Route Planner</a>
             </div>
         </div>
     </header>
 
-    <main>
+    <main id="home">
         <div class="container">
             <div class="hero">
                 <div class="hero-text">
                     <div class="slogan">
-                        Guiding You, Station by Station.
+                        Navigate Cairo Metro with Ease
                     </div>
     
                     <div class="more">
-                        From your first stop to your final destination, Metrom guides you through every station with ease, clarity, and confidence.
+                        Find your way through Cairo's metro system. Get real-time station information, route planning, and fare details for your journey.
                     </div>
                 </div>
                 <div class="parallax mx-auto me-lg-0" style="max-width: 600px; pointer-events: none;">
@@ -259,25 +119,49 @@
                 </div>
             </div>
         </div>
-        <div class="container">
-            <div class="application">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 text-center">
-                            <h2>Download Metrom</h2>
-                            <p>Available on iOS and Android</p>
-                            <a href="#" class="btn btn-primary">Download Now</a>
-                            <a href="https://www.example.com" class="btn btn-secondary">Learn More</a>
-    
-                            
-                        </div>
+        <div class="application">
+            <div class="container">
+                <div style="text-align: center;">
+                    <h2>Start Your Journey</h2>
+                    <p>Use our service to explore Cairo Metro easily</p>
+                    <div class="download-buttons">
+                    <a href="main.html" class="btn btn-primary" role="button">🗺️ Open Route Planner</a>
+                    <a href="#features" class="btn btn-secondary" role="button">📖 Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="features" id="features" role="region" aria-label="Platform Features">
+            <div class="container">
+                <div style="text-align: center; margin-bottom: 1rem;">
+                    <h2 style="color: #F6C358; font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">Features</h2>
+                    <p style="color: #b0c4c1;">Everything you need to navigate Cairo Metro</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>🗺️ Complete Metro Map</h3>
+                        <p>Interactive map of all three Cairo Metro lines with accurate station information and connections.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🎟️ Fare Information</h3>
+                        <p>Get accurate fare prices for any journey between stations on Cairo Metro lines.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>📍 Coordinate Search</h3>
+                        <p>Find the closest metro station by entering your GPS coordinates or current location.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>📱 Mobile Friendly</h3>
+                        <p>Access metro information anytime, anywhere on your phone while traveling in Cairo.</p>
                     </div>
                 </div>
             </div>
         </div>
     </main>
     <footer>
-        Copyright © 2022-2025 Mivex. All rights reserved.
+        <!-- Contact section removed, use footer for copyright only -->
+        <p>Mivex &copy; 2026 | Navigate Cairo's Metro Network with Ease</p>
     </footer>
 <script src="js/parallax.min.js?v=2.0.0"></script>
 <script>
