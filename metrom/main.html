@@ -71,7 +71,7 @@
         <div class="container">
             <div class="logo">
                 <a href="index.html" title="Cairo Metro Navigator Home">
-                    <img src="favicon/metrom-21.png" alt="Cairo Metro Navigator Logo">
+                    <img src="favicon/metrom-22.png" alt="Cairo Metro Navigator Logo" width="60" height="60" loading="lazy" decoding="async">
                 </a>
             </div>
             <div class="nav-links">
@@ -523,5 +523,14 @@
     ></script>
 
     <script src="js/metro-script.min.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('sw.js').catch(function() {
+                    // Service worker registration can fail on some private/incognito sessions.
+                });
+            });
+        }
+    </script>
 </body>
 </html>
