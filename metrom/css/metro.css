@@ -411,6 +411,75 @@ footer p {
 }
 
 /* ========================================
+   TABS LAYOUT STYLES
+   ======================================== */
+
+.tabs-shell {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(246, 195, 88, 0.16);
+    border-radius: 16px;
+    padding: 1.25rem;
+    backdrop-filter: blur(10px);
+}
+
+.tabs-nav {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+}
+
+.tab-btn {
+    border: 1px solid rgba(246, 195, 88, 0.35);
+    background: rgba(12, 47, 41, 0.9);
+    color: #d8ece9;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 10px;
+    padding: 0.85rem 1rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.tab-btn:hover {
+    border-color: rgba(246, 195, 88, 0.6);
+    color: #fff;
+}
+
+.tab-btn.active {
+    background: linear-gradient(135deg, #F6C358 0%, #ffd580 100%);
+    color: #173c35;
+    border-color: rgba(246, 195, 88, 0.95);
+    box-shadow: 0 8px 20px rgba(246, 195, 88, 0.22);
+}
+
+.tab-btn:focus-visible {
+    outline: 3px solid rgba(246, 195, 88, 0.5);
+    outline-offset: 2px;
+}
+
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.active {
+    display: block;
+    animation: tabPanelIn 0.3s ease-out;
+}
+
+@keyframes tabPanelIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================================
    METRO LINES BANNER STYLES
    ======================================== */
 
@@ -789,6 +858,18 @@ select option {
     font-weight: 700;
 }
 
+.transfer-guide {
+    margin-top: 0.9rem;
+    color: #f0d79d;
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1.5;
+    background: rgba(246, 195, 88, 0.1);
+    border: 1px solid rgba(246, 195, 88, 0.35);
+    border-radius: 8px;
+    padding: 0.65rem 0.8rem;
+}
+
 .transition-badge {
     display: inline-block;
     background: linear-gradient(135deg, rgba(246, 195, 88, 0.25) 0%, rgba(246, 195, 88, 0.15) 100%);
@@ -910,6 +991,76 @@ select option {
 }
 
 /* ========================================
+   LINE STATIONS TABLE STYLES
+   ======================================== */
+
+.lines-section {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 12px;
+    margin-top: 2rem;
+    backdrop-filter: blur(10px);
+}
+
+.lines-section h2 {
+    color: #F6C358;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.lines-table-wrap {
+    overflow-x: auto;
+}
+
+.lines-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 760px;
+    background: rgba(0, 0, 0, 0.22);
+    border: 1px solid rgba(246, 195, 88, 0.25);
+}
+
+.lines-table th,
+.lines-table td {
+    border: 1px solid rgba(246, 195, 88, 0.3);
+    padding: 0.8rem 0.9rem;
+    text-align: left;
+    vertical-align: top;
+}
+
+.lines-table th {
+    color: #F6C358;
+    background: rgba(246, 195, 88, 0.1);
+    font-weight: 700;
+}
+
+.lines-table td {
+    color: #e0ecea;
+    line-height: 1.55;
+}
+
+.stations-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+}
+
+.station-pill {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(246, 195, 88, 0.14);
+    border: 1px solid rgba(246, 195, 88, 0.35);
+    color: #f3f7f6;
+    padding: 0.25rem 0.55rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    line-height: 1.3;
+    white-space: nowrap;
+}
+
+/* ========================================
    COORDINATE TOOLS STYLES
    ======================================== */
 
@@ -926,6 +1077,31 @@ select option {
     color: #F6C358;
     font-size: 1.2rem;
     margin-bottom: 0.8rem;
+}
+
+.coord-link-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+    gap: 0.9rem;
+    margin-top: 0.8rem;
+}
+
+.coord-link-grid label {
+    margin-bottom: 0;
+}
+
+.coord-link-input {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: 1px solid rgba(246, 195, 88, 0.3);
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+.coord-link-input::placeholder {
+    color: rgba(224, 236, 234, 0.7);
 }
 
 .coord-grid {
@@ -1092,6 +1268,19 @@ select option {
         font-size: 1.8rem;
     }
 
+    .tabs-shell {
+        padding: 0.9rem;
+    }
+
+    .tabs-nav {
+        grid-template-columns: 1fr;
+    }
+
+    .tab-btn {
+        width: 100%;
+        text-align: center;
+    }
+
     .metro-lines-banner {
         grid-template-columns: 1fr;
     }
@@ -1105,6 +1294,10 @@ select option {
     }
 
     .coord-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .coord-link-grid {
         grid-template-columns: 1fr;
     }
 

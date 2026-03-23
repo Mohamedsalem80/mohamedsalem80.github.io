@@ -76,8 +76,10 @@
             </div>
             <div class="nav-links">
                 <a href="index.html">Home</a>
+                <a href="#tab-planner" data-tab-link="tab-planner">Planner</a>
+                <a href="#tab-coordinates" data-tab-link="tab-coordinates">Coordinates</a>
+                <a href="#tab-info" data-tab-link="tab-info">Info</a>
                 <a href="#metroMap">Map</a>
-                <a href="#fares">Fares</a>
             </div>
         </div>
     </header>
@@ -88,342 +90,416 @@
             <p>Select your starting point and destination to find the best route</p>
         </div>
 
-        <div class="planner-container">
-            <div class="planner-section" id="planner">
-                <h2>From (Starting Point)</h2>
-                <label>
-                    <p>Select Line:</p>
-                    <div class="label-row">
-                        <select name="line" id="sline" autocomplete="off">
-                            <option value="">Choose a line...</option>
-                            <option value="one">Line 1 (Helwan - El Marg)</option>
-                            <option value="two">Line 2 (El Monib - Shubra Al Khaimah)</option>
-                            <option value="three">Line 3 (Adly Mansour - Ring Road)</option>
-                        </select>
-                    </div>
-                </label>
-                <label>
-                    <p>Select Station:</p>
-                    <select name="pickup" class="pickupl1" autocomplete="off">
-                        <option value="">-- Choose station --</option>
-                        <option value="Helwan">Helwan</option>
-                        <option value="Ain Helwan">Ain Helwan</option>
-                        <option value="Helwan University">Helwan University</option>
-                        <option value="Wadi Hof">Wadi Hof</option>
-                        <option value="Hadayeq Helwan">Hadayeq Helwan</option>
-                        <option value="Elmasraa">Elmasraa</option>
-                        <option value="Tura El-Asmant">Tura El-Asmant</option>
-                        <option value="Kozzika">Kozzika</option>
-                        <option value="Tura El-Balad">Tura El-Balad</option>
-                        <option value="Sakanat El-Maadi">Sakanat El-Maadi</option>
-                        <option value="Maadi">Maadi</option>
-                        <option value="Hadayeq El-Maadi">Hadayeq El-Maadi</option>
-                        <option value="Dar El-Salam">Dar El-Salam</option>
-                        <option value="El-Zahraa">El-Zahraa</option>
-                        <option value="Mar Girgis">Mar Girgis</option>
-                        <option value="El-Malek El-Saleh">El-Malek El-Saleh</option>
-                        <option value="Al-Sayeda Zeinab">Al-Sayeda Zeinab</option>
-                        <option value="Saad Zaghloul">Saad Zaghloul</option>
-                        <option value="Sadat">Sadat</option>
-                        <option value="Nasser">Nasser</option>
-                        <option value="Urabi">Urabi</option>
-                        <option value="Al Shohadaa">Al Shohadaa</option>
-                        <option value="Ghamra">Ghamra</option>
-                        <option value="El-Demerdash">El-Demerdash</option>
-                        <option value="Manshiet El-Sadr">Manshiet El-Sadr</option>
-                        <option value="Kobri El-Qobba">Kobri El-Qobba</option>
-                        <option value="Hammamat El-Qobba">Hammamat El-Qobba</option>
-                        <option value="Saray El-Qobba">Saray El-Qobba</option>
-                        <option value="Hadayeq El-Zaitoun">Hadayeq El-Zaitoun</option>
-                        <option value="Helmeyet El-Zaitoun">Helmeyet El-Zaitoun</option>
-                        <option value="El-Matareyya">El-Matareyya</option>
-                        <option value="Ain Shams">Ain Shams</option>
-                        <option value="Ezbet El-Nakhl">Ezbet El-Nakhl</option>
-                        <option value="El-Marg">El-Marg</option>
-                        <option value="New El-Marg">New El-Marg</option>
-                    </select>
-                    <select name="pickup" class="pickupl2" style="display:none;" autocomplete="off">
-                        <option value="">-- Choose station --</option>
-                        <option value="El Monib">El Monib</option>
-                        <option value="Sakiat Mekky">Sakiat Mekky</option>
-                        <option value="Omm El-Masryeen">Omm El-Masryeen</option>
-                        <option value="Giza">Giza</option>
-                        <option value="Faisal">Faisal</option>
-                        <option value="Cairo University">Cairo University</option>
-                        <option value="Bohooth">Bohooth</option>
-                        <option value="Dokki">Dokki</option>
-                        <option value="Opera">Opera</option>
-                        <option value="Sadat">Sadat</option>
-                        <option value="Mohamed Naguib">Mohamed Naguib</option>
-                        <option value="Ataba">Ataba</option>
-                        <option value="Al Shohadaa">Al Shohadaa</option>
-                        <option value="Masarra">Masarra</option>
-                        <option value="Rod El-Farag">Rod El-Farag</option>
-                        <option value="St. Teresa">St. Teresa</option>
-                        <option value="Khalafawy">Khalafawy</option>
-                        <option value="Mezallat">Mezallat</option>
-                        <option value="Koliet El-Zeraa">Koliet El-Zeraa</option>
-                        <option value="Shubra Al Khaimah">Shubra Al Khaimah</option>
-                    </select>
-                    <select name="pickup" class="pickupl3" style="display:none;" autocomplete="off">
-                        <option value="">-- Choose station --</option>
-                        <option value="Adly Mansour">Adly Mansour</option>
-                        <option value="Heykestep">Heykestep</option>
-                        <option value="Omar Ibn Al Khattab">Omar Ibn Al Khattab</option>
-                        <option value="Qebaa">Qebaa</option>
-                        <option value="Hesham Barakat">Hesham Barakat</option>
-                        <option value="El Nozha">El Nozha</option>
-                        <option value="Nadi El Shams">Nadi El Shams</option>
-                        <option value="Alf Maskan">Alf Maskan</option>
-                        <option value="Heliopolis">Heliopolis</option>
-                        <option value="Haroun">Haroun</option>
-                        <option value="Al Ahram">Al Ahram</option>
-                        <option value="Koleyet El Banat">Koleyet El Banat</option>
-                        <option value="Cairo Stadium">Cairo Stadium</option>
-                        <option value="Fair Zone">Fair Zone</option>
-                        <option value="Abbassiya">Abbassiya</option>
-                        <option value="Abdou Pasha">Abdou Pasha</option>
-                        <option value="El Geish">El Geish</option>
-                        <option value="Bab El Shaaria">Bab El Shaaria</option>
-                        <option value="Ataba">Ataba</option>
-                        <option value="Nasser">Nasser</option>
-                        <option value="Maspero">Maspero</option>
-                        <option value="Safaa Hegazy">Safaa Hegazy</option>
-                        <option value="Kit Kat">Kit Kat</option>
-                        <option value="Sudan St.">Sudan St.</option>
-                        <option value="Imbaba">Imbaba</option>
-                        <option value="El Bohy">El Bohy</option>
-                        <option value="El-Qawmia">El-Qawmia</option>
-                        <option value="Ring Rd.">Ring Rd.</option>
-                        <option value="Rod El Farag Corridor">Rod El Farag Corridor</option>
-                    </select>
-                </label>
+        <div class="tabs-shell">
+            <div class="tabs-nav" role="tablist" aria-label="Metro tools sections">
+                <button type="button" class="tab-btn active" data-tab-target="tab-planner" id="tab-btn-planner" role="tab" aria-controls="tab-planner" aria-selected="true">Planner</button>
+                <button type="button" class="tab-btn" data-tab-target="tab-coordinates" id="tab-btn-coordinates" role="tab" aria-controls="tab-coordinates" aria-selected="false" tabindex="-1">Coordinates</button>
+                <button type="button" class="tab-btn" data-tab-target="tab-info" id="tab-btn-info" role="tab" aria-controls="tab-info" aria-selected="false" tabindex="-1">Info</button>
             </div>
 
-            <div class="planner-section">
-                <h2>To (Destination)</h2>
-                <label>
-                    <p>Select Line:</p>
-                    <div class="label-row">
-                        <select name="line" id="eline" autocomplete="off">
-                            <option value="">Choose a line...</option>
-                            <option value="one">Line 1 (Helwan - El Marg)</option>
-                            <option value="two">Line 2 (El Monib - Shubra Al Khaimah)</option>
-                            <option value="three">Line 3 (Adly Mansour - Ring Road)</option>
-                        </select>
+            <section id="tab-planner" class="tab-panel active" role="tabpanel" aria-labelledby="tab-btn-planner">
+                <div class="planner-container">
+                    <div class="planner-section" id="planner">
+                        <h2>From (Starting Point)</h2>
+                        <label>
+                            <p>Select Line:</p>
+                            <div class="label-row">
+                                <select name="line" id="sline" autocomplete="off">
+                                    <option value="">Choose a line...</option>
+                                    <option value="one">Line 1 (Helwan - El Marg)</option>
+                                    <option value="two">Line 2 (El Monib - Shubra Al Khaimah)</option>
+                                    <option value="three">Line 3 (Adly Mansour - Ring Road)</option>
+                                </select>
+                            </div>
+                        </label>
+                        <label>
+                            <p>Select Station:</p>
+                            <select name="pickup" class="pickupl1" autocomplete="off">
+                                <option value="">-- Choose station --</option>
+                                <option value="Helwan">Helwan</option>
+                                <option value="Ain Helwan">Ain Helwan</option>
+                                <option value="Helwan University">Helwan University</option>
+                                <option value="Wadi Hof">Wadi Hof</option>
+                                <option value="Hadayeq Helwan">Hadayeq Helwan</option>
+                                <option value="Elmasraa">Elmasraa</option>
+                                <option value="Tura El-Asmant">Tura El-Asmant</option>
+                                <option value="Kozzika">Kozzika</option>
+                                <option value="Tura El-Balad">Tura El-Balad</option>
+                                <option value="Sakanat El-Maadi">Sakanat El-Maadi</option>
+                                <option value="Maadi">Maadi</option>
+                                <option value="Hadayeq El-Maadi">Hadayeq El-Maadi</option>
+                                <option value="Dar El-Salam">Dar El-Salam</option>
+                                <option value="El-Zahraa">El-Zahraa</option>
+                                <option value="Mar Girgis">Mar Girgis</option>
+                                <option value="El-Malek El-Saleh">El-Malek El-Saleh</option>
+                                <option value="Al-Sayeda Zeinab">Al-Sayeda Zeinab</option>
+                                <option value="Saad Zaghloul">Saad Zaghloul</option>
+                                <option value="Sadat">Sadat</option>
+                                <option value="Nasser">Nasser</option>
+                                <option value="Urabi">Urabi</option>
+                                <option value="Al Shohadaa">Al Shohadaa</option>
+                                <option value="Ghamra">Ghamra</option>
+                                <option value="El-Demerdash">El-Demerdash</option>
+                                <option value="Manshiet El-Sadr">Manshiet El-Sadr</option>
+                                <option value="Kobri El-Qobba">Kobri El-Qobba</option>
+                                <option value="Hammamat El-Qobba">Hammamat El-Qobba</option>
+                                <option value="Saray El-Qobba">Saray El-Qobba</option>
+                                <option value="Hadayeq El-Zaitoun">Hadayeq El-Zaitoun</option>
+                                <option value="Helmeyet El-Zaitoun">Helmeyet El-Zaitoun</option>
+                                <option value="El-Matareyya">El-Matareyya</option>
+                                <option value="Ain Shams">Ain Shams</option>
+                                <option value="Ezbet El-Nakhl">Ezbet El-Nakhl</option>
+                                <option value="El-Marg">El-Marg</option>
+                                <option value="New El-Marg">New El-Marg</option>
+                            </select>
+                            <select name="pickup" class="pickupl2" style="display:none;" autocomplete="off">
+                                <option value="">-- Choose station --</option>
+                                <option value="El Monib">El Monib</option>
+                                <option value="Sakiat Mekky">Sakiat Mekky</option>
+                                <option value="Omm El-Masryeen">Omm El-Masryeen</option>
+                                <option value="Giza">Giza</option>
+                                <option value="Faisal">Faisal</option>
+                                <option value="Cairo University">Cairo University</option>
+                                <option value="Bohooth">Bohooth</option>
+                                <option value="Dokki">Dokki</option>
+                                <option value="Opera">Opera</option>
+                                <option value="Sadat">Sadat</option>
+                                <option value="Mohamed Naguib">Mohamed Naguib</option>
+                                <option value="Ataba">Ataba</option>
+                                <option value="Al Shohadaa">Al Shohadaa</option>
+                                <option value="Masarra">Masarra</option>
+                                <option value="Rod El-Farag">Rod El-Farag</option>
+                                <option value="St. Teresa">St. Teresa</option>
+                                <option value="Khalafawy">Khalafawy</option>
+                                <option value="Mezallat">Mezallat</option>
+                                <option value="Koliet El-Zeraa">Koliet El-Zeraa</option>
+                                <option value="Shubra Al Khaimah">Shubra Al Khaimah</option>
+                            </select>
+                            <select name="pickup" class="pickupl3" style="display:none;" autocomplete="off">
+                                <option value="">-- Choose station --</option>
+                                <option value="Adly Mansour">Adly Mansour</option>
+                                <option value="Heykestep">Heykestep</option>
+                                <option value="Omar Ibn Al Khattab">Omar Ibn Al Khattab</option>
+                                <option value="Qebaa">Qebaa</option>
+                                <option value="Hesham Barakat">Hesham Barakat</option>
+                                <option value="El Nozha">El Nozha</option>
+                                <option value="Nadi El Shams">Nadi El Shams</option>
+                                <option value="Alf Maskan">Alf Maskan</option>
+                                <option value="Heliopolis">Heliopolis</option>
+                                <option value="Haroun">Haroun</option>
+                                <option value="Al Ahram">Al Ahram</option>
+                                <option value="Koleyet El Banat">Koleyet El Banat</option>
+                                <option value="Cairo Stadium">Cairo Stadium</option>
+                                <option value="Fair Zone">Fair Zone</option>
+                                <option value="Abbassiya">Abbassiya</option>
+                                <option value="Abdou Pasha">Abdou Pasha</option>
+                                <option value="El Geish">El Geish</option>
+                                <option value="Bab El Shaaria">Bab El Shaaria</option>
+                                <option value="Ataba">Ataba</option>
+                                <option value="Nasser">Nasser</option>
+                                <option value="Maspero">Maspero</option>
+                                <option value="Safaa Hegazy">Safaa Hegazy</option>
+                                <option value="Kit Kat">Kit Kat</option>
+                                <option value="Sudan St.">Sudan St.</option>
+                                <option value="Imbaba">Imbaba</option>
+                                <option value="El Bohy">El Bohy</option>
+                                <option value="El-Qawmia">El-Qawmia</option>
+                                <option value="Ring Rd.">Ring Rd.</option>
+                                <option value="Rod El Farag Corridor">Rod El Farag Corridor</option>
+                            </select>
+                        </label>
                     </div>
-                </label>
-                <label>
-                    <p>Select Station:</p>
-                    <select name="dropoff" class="dropoff1" autocomplete="off">
-                        <option value="">-- Choose station --</option>
-                        <option value="Helwan">Helwan</option>
-                        <option value="Ain Helwan">Ain Helwan</option>
-                        <option value="Helwan University">Helwan University</option>
-                        <option value="Wadi Hof">Wadi Hof</option>
-                        <option value="Hadayeq Helwan">Hadayeq Helwan</option>
-                        <option value="Elmasraa">Elmasraa</option>
-                        <option value="Tura El-Asmant">Tura El-Asmant</option>
-                        <option value="Kozzika">Kozzika</option>
-                        <option value="Tura El-Balad">Tura El-Balad</option>
-                        <option value="Sakanat El-Maadi">Sakanat El-Maadi</option>
-                        <option value="Maadi">Maadi</option>
-                        <option value="Hadayeq El-Maadi">Hadayeq El-Maadi</option>
-                        <option value="Dar El-Salam">Dar El-Salam</option>
-                        <option value="El-Zahraa">El-Zahraa</option>
-                        <option value="Mar Girgis">Mar Girgis</option>
-                        <option value="El-Malek El-Saleh">El-Malek El-Saleh</option>
-                        <option value="Al-Sayeda Zeinab">Al-Sayeda Zeinab</option>
-                        <option value="Saad Zaghloul">Saad Zaghloul</option>
-                        <option value="Sadat">Sadat</option>
-                        <option value="Nasser">Nasser</option>
-                        <option value="Urabi">Urabi</option>
-                        <option value="Al Shohadaa">Al Shohadaa</option>
-                        <option value="Ghamra">Ghamra</option>
-                        <option value="El-Demerdash">El-Demerdash</option>
-                        <option value="Manshiet El-Sadr">Manshiet El-Sadr</option>
-                        <option value="Kobri El-Qobba">Kobri El-Qobba</option>
-                        <option value="Hammamat El-Qobba">Hammamat El-Qobba</option>
-                        <option value="Saray El-Qobba">Saray El-Qobba</option>
-                        <option value="Hadayeq El-Zaitoun">Hadayeq El-Zaitoun</option>
-                        <option value="Helmeyet El-Zaitoun">Helmeyet El-Zaitoun</option>
-                        <option value="El-Matareyya">El-Matareyya</option>
-                        <option value="Ain Shams">Ain Shams</option>
-                        <option value="Ezbet El-Nakhl">Ezbet El-Nakhl</option>
-                        <option value="El-Marg">El-Marg</option>
-                        <option value="New El-Marg">New El-Marg</option>
-                    </select>
-                    <select name="dropoff" class="dropoff2" style="display:none;" autocomplete="off">
-                        <option value="">-- Choose station --</option>
-                        <option value="El Monib">El Monib</option>
-                        <option value="Sakiat Mekky">Sakiat Mekky</option>
-                        <option value="Omm El-Masryeen">Omm El-Masryeen</option>
-                        <option value="Giza">Giza</option>
-                        <option value="Faisal">Faisal</option>
-                        <option value="Cairo University">Cairo University</option>
-                        <option value="Bohooth">Bohooth</option>
-                        <option value="Dokki">Dokki</option>
-                        <option value="Opera">Opera</option>
-                        <option value="Sadat">Sadat</option>
-                        <option value="Mohamed Naguib">Mohamed Naguib</option>
-                        <option value="Ataba">Ataba</option>
-                        <option value="Al Shohadaa">Al Shohadaa</option>
-                        <option value="Masarra">Masarra</option>
-                        <option value="Rod El-Farag">Rod El-Farag</option>
-                        <option value="St. Teresa">St. Teresa</option>
-                        <option value="Khalafawy">Khalafawy</option>
-                        <option value="Mezallat">Mezallat</option>
-                        <option value="Koliet El-Zeraa">Koliet El-Zeraa</option>
-                        <option value="Shubra Al Khaimah">Shubra Al Khaimah</option>
-                    </select>
-                    <select name="dropoff" class="dropoff3" style="display:none;" autocomplete="off">
-                        <option value="">-- Choose station --</option>
-                        <option value="Adly Mansour">Adly Mansour</option>
-                        <option value="Heykestep">Heykestep</option>
-                        <option value="Omar Ibn Al Khattab">Omar Ibn Al Khattab</option>
-                        <option value="Qebaa">Qebaa</option>
-                        <option value="Hesham Barakat">Hesham Barakat</option>
-                        <option value="El Nozha">El Nozha</option>
-                        <option value="Nadi El Shams">Nadi El Shams</option>
-                        <option value="Alf Maskan">Alf Maskan</option>
-                        <option value="Heliopolis">Heliopolis</option>
-                        <option value="Haroun">Haroun</option>
-                        <option value="Al Ahram">Al Ahram</option>
-                        <option value="Koleyet El Banat">Koleyet El Banat</option>
-                        <option value="Cairo Stadium">Cairo Stadium</option>
-                        <option value="Fair Zone">Fair Zone</option>
-                        <option value="Abbassiya">Abbassiya</option>
-                        <option value="Abdou Pasha">Abdou Pasha</option>
-                        <option value="El Geish">El Geish</option>
-                        <option value="Bab El Shaaria">Bab El Shaaria</option>
-                        <option value="Ataba">Ataba</option>
-                        <option value="Nasser">Nasser</option>
-                        <option value="Maspero">Maspero</option>
-                        <option value="Safaa Hegazy">Safaa Hegazy</option>
-                        <option value="Kit Kat">Kit Kat</option>
-                        <option value="Sudan St.">Sudan St.</option>
-                        <option value="Imbaba">Imbaba</option>
-                        <option value="El Bohy">El Bohy</option>
-                        <option value="El-Qawmia">El-Qawmia</option>
-                        <option value="Ring Rd.">Ring Rd.</option>
-                        <option value="Rod El Farag Corridor">Rod El Farag Corridor</option>
-                    </select>
-                </label>
-            </div>
-        </div>
 
-        <div class="action-buttons">
-            <button onclick="calculateTicket()" class="btn btn-primary">Find Route & Price</button>
-            <button id="startTravelBtn" onclick="startTravelMode()" class="btn btn-primary">Start Traveling</button>
-            <button onclick="resetForm()" class="btn btn-secondary">Reset</button>
-        </div>
+                    <div class="planner-section">
+                        <h2>To (Destination)</h2>
+                        <label>
+                            <p>Select Line:</p>
+                            <div class="label-row">
+                                <select name="line" id="eline" autocomplete="off">
+                                    <option value="">Choose a line...</option>
+                                    <option value="one">Line 1 (Helwan - El Marg)</option>
+                                    <option value="two">Line 2 (El Monib - Shubra Al Khaimah)</option>
+                                    <option value="three">Line 3 (Adly Mansour - Ring Road)</option>
+                                </select>
+                            </div>
+                        </label>
+                        <label>
+                            <p>Select Station:</p>
+                            <select name="dropoff" class="dropoff1" autocomplete="off">
+                                <option value="">-- Choose station --</option>
+                                <option value="Helwan">Helwan</option>
+                                <option value="Ain Helwan">Ain Helwan</option>
+                                <option value="Helwan University">Helwan University</option>
+                                <option value="Wadi Hof">Wadi Hof</option>
+                                <option value="Hadayeq Helwan">Hadayeq Helwan</option>
+                                <option value="Elmasraa">Elmasraa</option>
+                                <option value="Tura El-Asmant">Tura El-Asmant</option>
+                                <option value="Kozzika">Kozzika</option>
+                                <option value="Tura El-Balad">Tura El-Balad</option>
+                                <option value="Sakanat El-Maadi">Sakanat El-Maadi</option>
+                                <option value="Maadi">Maadi</option>
+                                <option value="Hadayeq El-Maadi">Hadayeq El-Maadi</option>
+                                <option value="Dar El-Salam">Dar El-Salam</option>
+                                <option value="El-Zahraa">El-Zahraa</option>
+                                <option value="Mar Girgis">Mar Girgis</option>
+                                <option value="El-Malek El-Saleh">El-Malek El-Saleh</option>
+                                <option value="Al-Sayeda Zeinab">Al-Sayeda Zeinab</option>
+                                <option value="Saad Zaghloul">Saad Zaghloul</option>
+                                <option value="Sadat">Sadat</option>
+                                <option value="Nasser">Nasser</option>
+                                <option value="Urabi">Urabi</option>
+                                <option value="Al Shohadaa">Al Shohadaa</option>
+                                <option value="Ghamra">Ghamra</option>
+                                <option value="El-Demerdash">El-Demerdash</option>
+                                <option value="Manshiet El-Sadr">Manshiet El-Sadr</option>
+                                <option value="Kobri El-Qobba">Kobri El-Qobba</option>
+                                <option value="Hammamat El-Qobba">Hammamat El-Qobba</option>
+                                <option value="Saray El-Qobba">Saray El-Qobba</option>
+                                <option value="Hadayeq El-Zaitoun">Hadayeq El-Zaitoun</option>
+                                <option value="Helmeyet El-Zaitoun">Helmeyet El-Zaitoun</option>
+                                <option value="El-Matareyya">El-Matareyya</option>
+                                <option value="Ain Shams">Ain Shams</option>
+                                <option value="Ezbet El-Nakhl">Ezbet El-Nakhl</option>
+                                <option value="El-Marg">El-Marg</option>
+                                <option value="New El-Marg">New El-Marg</option>
+                            </select>
+                            <select name="dropoff" class="dropoff2" style="display:none;" autocomplete="off">
+                                <option value="">-- Choose station --</option>
+                                <option value="El Monib">El Monib</option>
+                                <option value="Sakiat Mekky">Sakiat Mekky</option>
+                                <option value="Omm El-Masryeen">Omm El-Masryeen</option>
+                                <option value="Giza">Giza</option>
+                                <option value="Faisal">Faisal</option>
+                                <option value="Cairo University">Cairo University</option>
+                                <option value="Bohooth">Bohooth</option>
+                                <option value="Dokki">Dokki</option>
+                                <option value="Opera">Opera</option>
+                                <option value="Sadat">Sadat</option>
+                                <option value="Mohamed Naguib">Mohamed Naguib</option>
+                                <option value="Ataba">Ataba</option>
+                                <option value="Al Shohadaa">Al Shohadaa</option>
+                                <option value="Masarra">Masarra</option>
+                                <option value="Rod El-Farag">Rod El-Farag</option>
+                                <option value="St. Teresa">St. Teresa</option>
+                                <option value="Khalafawy">Khalafawy</option>
+                                <option value="Mezallat">Mezallat</option>
+                                <option value="Koliet El-Zeraa">Koliet El-Zeraa</option>
+                                <option value="Shubra Al Khaimah">Shubra Al Khaimah</option>
+                            </select>
+                            <select name="dropoff" class="dropoff3" style="display:none;" autocomplete="off">
+                                <option value="">-- Choose station --</option>
+                                <option value="Adly Mansour">Adly Mansour</option>
+                                <option value="Heykestep">Heykestep</option>
+                                <option value="Omar Ibn Al Khattab">Omar Ibn Al Khattab</option>
+                                <option value="Qebaa">Qebaa</option>
+                                <option value="Hesham Barakat">Hesham Barakat</option>
+                                <option value="El Nozha">El Nozha</option>
+                                <option value="Nadi El Shams">Nadi El Shams</option>
+                                <option value="Alf Maskan">Alf Maskan</option>
+                                <option value="Heliopolis">Heliopolis</option>
+                                <option value="Haroun">Haroun</option>
+                                <option value="Al Ahram">Al Ahram</option>
+                                <option value="Koleyet El Banat">Koleyet El Banat</option>
+                                <option value="Cairo Stadium">Cairo Stadium</option>
+                                <option value="Fair Zone">Fair Zone</option>
+                                <option value="Abbassiya">Abbassiya</option>
+                                <option value="Abdou Pasha">Abdou Pasha</option>
+                                <option value="El Geish">El Geish</option>
+                                <option value="Bab El Shaaria">Bab El Shaaria</option>
+                                <option value="Ataba">Ataba</option>
+                                <option value="Nasser">Nasser</option>
+                                <option value="Maspero">Maspero</option>
+                                <option value="Safaa Hegazy">Safaa Hegazy</option>
+                                <option value="Kit Kat">Kit Kat</option>
+                                <option value="Sudan St.">Sudan St.</option>
+                                <option value="Imbaba">Imbaba</option>
+                                <option value="El Bohy">El Bohy</option>
+                                <option value="El-Qawmia">El-Qawmia</option>
+                                <option value="Ring Rd.">Ring Rd.</option>
+                                <option value="Rod El Farag Corridor">Rod El Farag Corridor</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
 
-        <div id="travelStatus" class="travel-status">Travel mode is off.</div>
+                <div class="action-buttons">
+                    <button onclick="calculateTicket()" class="btn btn-primary">Find Route & Price</button>
+                    <button id="startTravelBtn" onclick="startTravelMode()" class="btn btn-primary">Start Traveling</button>
+                    <button onclick="resetForm()" class="btn btn-secondary">Reset</button>
+                </div>
 
+                <div id="travelStatus" class="travel-status">Travel mode is off.</div>
+
+                <div id="resultsContainer" class="results">
+                    <div class="result-item">
+                        <div class="result-item-header">
+                            <span class="result-item-icon">Fare</span>
+                            <h3>Your Journey Summary</h3>
+                        </div>
+                        <div class="result-item-content">
+                            <div class="result-stat">
+                                <div class="result-stat-label">Total Stations</div>
+                                <div class="result-stat-value" id="cstats">0</div>
+                            </div>
+                            <div class="result-stat">
+                                <div class="result-stat-label">Ticket Price</div>
+                                <div class="result-stat-value" id="ticketCost">-</div>
+                            </div>
+                            <div class="result-stat">
+                                <div class="result-stat-label">Elderly / Army / Police</div>
+                                <div class="result-stat-value" id="elderlyCost">-</div>
+                            </div>
+                            <div class="result-stat">
+                                <div class="result-stat-label">Special Needs</div>
+                                <div class="result-stat-value" id="specialNeedsCost">-</div>
+                            </div>
+                            <div class="result-stat">
+                                <div class="result-stat-label">Estimated Trip Time</div>
+                                <div class="result-stat-value" id="estimatedTime">-</div>
+                            </div>
+                        </div>
+                        <div class="route-visualization">
+                            <div class="route-label">Complete Route</div>
+                            <div class="route-stations" id="stationsList"></div>
+                            <div class="route-path" id="stations"></div>
+                            <div class="transfer-guide" id="transferGuide"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="tab-coordinates" class="tab-panel" role="tabpanel" aria-labelledby="tab-btn-coordinates" hidden>
                 <section class="coord-tools" id="coordTools">
-            <h2>Find Closest Station by Coordinates</h2>
-            <p style="color: #b0c4c1;">Enter your current coordinates and destination coordinates, or use live location.</p>
-            <div class="coord-grid">
-                <label>
-                    <p>Current Latitude</p>
-                    <input id="currentLat" type="number" step="any" placeholder="e.g. 30.0444">
-                </label>
-                <label>
-                    <p>Current Longitude</p>
-                    <input id="currentLng" type="number" step="any" placeholder="e.g. 31.2357">
-                </label>
-                <label>
-                    <p>Destination Latitude</p>
-                    <input id="destLat" type="number" step="any" placeholder="e.g. 30.0100">
-                </label>
-                <label>
-                    <p>Destination Longitude</p>
-                    <input id="destLng" type="number" step="any" placeholder="e.g. 31.2000">
-                </label>
-            </div>
-            <div class="coord-actions">
-                <button type="button" class="btn btn-secondary" onclick="getLiveLocation()">Use Live Location</button>
-                <button type="button" class="btn btn-primary" onclick="findClosestStationNow()">Closest Station To Me</button>
-                <button type="button" class="btn btn-primary" onclick="findClosestStartEndStations()">Find Closest Start &amp; End</button>
-            </div>
-            <div id="coordResult" class="coord-result">Closest-station results will appear here.</div>
-        </section>
+                    <h2>Find Closest Station by Coordinates</h2>
+                    <p style="color: #b0c4c1;">Enter your current coordinates and destination coordinates, or use live location.</p>
+                    <div class="coord-link-grid">
+                        <label>
+                            <p>Current Location Link</p>
+                            <input id="currentLocationLink" class="coord-link-input" type="text" placeholder="Paste Google Maps / Apple Maps / Waze / OSM link or lat,lng">
+                        </label>
+                        <label>
+                            <p>Destination Location Link</p>
+                            <input id="destLocationLink" class="coord-link-input" type="text" placeholder="Paste location app link or lat,lng">
+                        </label>
+                    </div>
+                    <div class="coord-grid">
+                        <label>
+                            <p>Current Latitude</p>
+                            <input id="currentLat" type="number" step="any" placeholder="e.g. 30.0444">
+                        </label>
+                        <label>
+                            <p>Current Longitude</p>
+                            <input id="currentLng" type="number" step="any" placeholder="e.g. 31.2357">
+                        </label>
+                        <label>
+                            <p>Destination Latitude</p>
+                            <input id="destLat" type="number" step="any" placeholder="e.g. 30.0100">
+                        </label>
+                        <label>
+                            <p>Destination Longitude</p>
+                            <input id="destLng" type="number" step="any" placeholder="e.g. 31.2000">
+                        </label>
+                    </div>
+                    <div class="coord-actions">
+                        <button type="button" class="btn btn-secondary" onclick="importCoordinatesFromLinks()">Import Coordinates From Links</button>
+                        <button type="button" class="btn btn-secondary" onclick="getLiveLocation()">Use Live Location</button>
+                        <button type="button" class="btn btn-primary" onclick="findClosestStationNow()">Closest Station To Me</button>
+                        <button type="button" class="btn btn-primary" onclick="findClosestStartEndStations()">Find Closest Start &amp; End</button>
+                    </div>
+                    <div id="coordResult" class="coord-result">Closest-station results will appear here.</div>
+                </section>
+            </section>
 
-        <div id="resultsContainer" class="results">
-            <div class="result-item">
-                <div class="result-item-header">
-                    <span class="result-item-icon">Fare</span>
-                    <h3>Your Journey Summary</h3>
-                </div>
-                <div class="result-item-content">
-                    <div class="result-stat">
-                        <div class="result-stat-label">Total Stations</div>
-                        <div class="result-stat-value" id="cstats">0</div>
+            <section id="tab-info" class="tab-panel" role="tabpanel" aria-labelledby="tab-btn-info" hidden>
+                <section class="fares-section" id="fares" role="region" aria-label="Ticket Fares">
+                    <h2>Metro Fare Table</h2>
+                    <div class="fares-table-wrap">
+                        <table class="fares-table">
+                            <thead>
+                                <tr>
+                                    <th>Distance</th>
+                                    <th>Ticket Price (Lines 1,2,3)</th>
+                                    <th>Elderly (Over 60) / Army / Police</th>
+                                    <th>Special Needs</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Up to 9 stations</td>
+                                    <td>8 EGP</td>
+                                    <td>4 EGP</td>
+                                    <td>5 EGP</td>
+                                </tr>
+                                <tr>
+                                    <td>10 to 16 stations</td>
+                                    <td>10 EGP</td>
+                                    <td>5 EGP</td>
+                                    <td>5 EGP</td>
+                                </tr>
+                                <tr>
+                                    <td>17 to 23 stations</td>
+                                    <td>15 EGP</td>
+                                    <td>8 EGP</td>
+                                    <td>5 EGP</td>
+                                </tr>
+                                <tr>
+                                    <td>24 to 39 stations</td>
+                                    <td>20 EGP</td>
+                                    <td>10 EGP</td>
+                                    <td>5 EGP</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="result-stat">
-                        <div class="result-stat-label">Ticket Price</div>
-                        <div class="result-stat-value" id="ticketCost">-</div>
+                </section>
+
+                <section class="lines-section" id="lineStations" role="region" aria-label="Metro lines and stations">
+                    <h2>Metro Lines and Stations Table</h2>
+                    <div class="lines-table-wrap">
+                        <table class="lines-table">
+                            <thead>
+                                <tr>
+                                    <th>Line</th>
+                                    <th>Route</th>
+                                    <th>Stations</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Line 1</td>
+                                    <td>Helwan to New El-Marg</td>
+                                    <td>
+                                        <div class="stations-row" aria-label="Line 1 stations">
+                                            <span class="station-pill">Helwan</span><span class="station-pill">Ain Helwan</span><span class="station-pill">Helwan University</span><span class="station-pill">Wadi Hof</span><span class="station-pill">Hadayeq Helwan</span><span class="station-pill">Elmasraa</span><span class="station-pill">Tura El-Asmant</span><span class="station-pill">Kozzika</span><span class="station-pill">Tura El-Balad</span><span class="station-pill">Sakanat El-Maadi</span><span class="station-pill">Maadi</span><span class="station-pill">Hadayeq El-Maadi</span><span class="station-pill">Dar El-Salam</span><span class="station-pill">El-Zahraa</span><span class="station-pill">Mar Girgis</span><span class="station-pill">El-Malek El-Saleh</span><span class="station-pill">Al-Sayeda Zeinab</span><span class="station-pill">Saad Zaghloul</span><span class="station-pill">Sadat</span><span class="station-pill">Nasser</span><span class="station-pill">Urabi</span><span class="station-pill">Al Shohadaa</span><span class="station-pill">Ghamra</span><span class="station-pill">El-Demerdash</span><span class="station-pill">Manshiet El-Sadr</span><span class="station-pill">Kobri El-Qobba</span><span class="station-pill">Hammamat El-Qobba</span><span class="station-pill">Saray El-Qobba</span><span class="station-pill">Hadayeq El-Zaitoun</span><span class="station-pill">Helmeyet El-Zaitoun</span><span class="station-pill">El-Matareyya</span><span class="station-pill">Ain Shams</span><span class="station-pill">Ezbet El-Nakhl</span><span class="station-pill">El-Marg</span><span class="station-pill">New El-Marg</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Line 2</td>
+                                    <td>El Monib to Shubra Al Khaimah</td>
+                                    <td>
+                                        <div class="stations-row" aria-label="Line 2 stations">
+                                            <span class="station-pill">El Monib</span><span class="station-pill">Sakiat Mekky</span><span class="station-pill">Omm El-Masryeen</span><span class="station-pill">Giza</span><span class="station-pill">Faisal</span><span class="station-pill">Cairo University</span><span class="station-pill">Bohooth</span><span class="station-pill">Dokki</span><span class="station-pill">Opera</span><span class="station-pill">Sadat</span><span class="station-pill">Mohamed Naguib</span><span class="station-pill">Ataba</span><span class="station-pill">Al Shohadaa</span><span class="station-pill">Masarra</span><span class="station-pill">Rod El-Farag</span><span class="station-pill">St. Teresa</span><span class="station-pill">Khalafawy</span><span class="station-pill">Mezallat</span><span class="station-pill">Koliet El-Zeraa</span><span class="station-pill">Shubra Al Khaimah</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Line 3</td>
+                                    <td>Adly Mansour to Rod El Farag Corridor</td>
+                                    <td>
+                                        <div class="stations-row" aria-label="Line 3 stations">
+                                            <span class="station-pill">Adly Mansour</span><span class="station-pill">Heykestep</span><span class="station-pill">Omar Ibn Al Khattab</span><span class="station-pill">Qebaa</span><span class="station-pill">Hesham Barakat</span><span class="station-pill">El Nozha</span><span class="station-pill">Nadi El Shams</span><span class="station-pill">Alf Maskan</span><span class="station-pill">Heliopolis</span><span class="station-pill">Haroun</span><span class="station-pill">Al Ahram</span><span class="station-pill">Koleyet El Banat</span><span class="station-pill">Cairo Stadium</span><span class="station-pill">Fair Zone</span><span class="station-pill">Abbassiya</span><span class="station-pill">Abdou Pasha</span><span class="station-pill">El Geish</span><span class="station-pill">Bab El Shaaria</span><span class="station-pill">Ataba</span><span class="station-pill">Nasser</span><span class="station-pill">Maspero</span><span class="station-pill">Safaa Hegazy</span><span class="station-pill">Kit Kat</span><span class="station-pill">Sudan St.</span><span class="station-pill">Imbaba</span><span class="station-pill">El Bohy</span><span class="station-pill">El-Qawmia</span><span class="station-pill">Ring Rd.</span><span class="station-pill">Rod El Farag Corridor</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="result-stat">
-                        <div class="result-stat-label">Elderly / Army / Police</div>
-                        <div class="result-stat-value" id="elderlyCost">-</div>
-                    </div>
-                    <div class="result-stat">
-                        <div class="result-stat-label">Special Needs</div>
-                        <div class="result-stat-value" id="specialNeedsCost">-</div>
-                    </div>
-                </div>
-                <div class="route-visualization">
-                    <div class="route-label">Complete Route</div>
-                    <div class="route-stations" id="stationsList"></div>
-                    <div class="route-path" id="stations"></div>
-                </div>
-            </div>
+                </section>
+            </section>
         </div>
 
-        <section class="fares-section" id="fares" role="region" aria-label="Ticket Fares">
-            <h2>Metro Fare Table</h2>
-            <div class="fares-table-wrap">
-                <table class="fares-table">
-                    <thead>
-                        <tr>
-                            <th>Distance</th>
-                            <th>Ticket Price (Lines 1,2,3)</th>
-                            <th>Elderly (Over 60) / Army / Police</th>
-                            <th>Special Needs</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Up to 9 stations</td>
-                            <td>8 EGP</td>
-                            <td>4 EGP</td>
-                            <td>5 EGP</td>
-                        </tr>
-                        <tr>
-                            <td>10 to 16 stations</td>
-                            <td>10 EGP</td>
-                            <td>5 EGP</td>
-                            <td>5 EGP</td>
-                        </tr>
-                        <tr>
-                            <td>17 to 23 stations</td>
-                            <td>15 EGP</td>
-                            <td>8 EGP</td>
-                            <td>5 EGP</td>
-                        </tr>
-                        <tr>
-                            <td>24 to 39 stations</td>
-                            <td>20 EGP</td>
-                            <td>10 EGP</td>
-                            <td>5 EGP</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <section class="metro-map" id="metroMap" role="region" aria-label="Interactive Metro Map" style="margin-top: 3rem;">
+        <section class="metro-map" id="metroMap" role="region" aria-label="Interactive Metro Map" style="margin-top: 2rem;">
             <h2>Cairo Metro Network Map</h2>
             <div id="stationMap" class="station-map"></div>
         </section>
@@ -475,6 +551,8 @@
         var cost = document.getElementById("ticketCost");
         var elderlyCost = document.getElementById("elderlyCost");
         var specialNeedsCost = document.getElementById("specialNeedsCost");
+        var estimatedTime = document.getElementById("estimatedTime");
+        var transferGuide = document.getElementById("transferGuide");
         var cstats = document.getElementById("cstats");
         var startTravelBtn = document.getElementById("startTravelBtn");
         var travelStatus = document.getElementById("travelStatus");
@@ -482,6 +560,8 @@
         var currentLng = document.getElementById("currentLng");
         var destLat = document.getElementById("destLat");
         var destLng = document.getElementById("destLng");
+        var currentLocationLink = document.getElementById("currentLocationLink");
+        var destLocationLink = document.getElementById("destLocationLink");
         var coordResult = document.getElementById("coordResult");
         var pickups = document.querySelectorAll("[name=pickup]");
         var dropoffs = document.querySelectorAll("[name=dropoff]");
@@ -498,6 +578,74 @@
         var slinestr = "one";
         var elinestr = "one";
         var travelWatchId = null;
+
+        function activateTab(tabId, updateHash) {
+            var tabButtons = document.querySelectorAll(".tab-btn[data-tab-target]");
+            var tabPanels = document.querySelectorAll(".tab-panel");
+            var found = false;
+
+            if (!document.getElementById(tabId)) {
+                tabId = "tab-planner";
+            }
+
+            tabButtons.forEach(function(btn) {
+                var isActive = btn.getAttribute("data-tab-target") === tabId;
+                btn.classList.toggle("active", isActive);
+                btn.setAttribute("aria-selected", isActive ? "true" : "false");
+                btn.setAttribute("tabindex", isActive ? "0" : "-1");
+                if (isActive) {
+                    found = true;
+                }
+            });
+
+            tabPanels.forEach(function(panel) {
+                var isActive = panel.id === tabId;
+                panel.classList.toggle("active", isActive);
+                if (isActive) {
+                    panel.removeAttribute("hidden");
+                } else {
+                    panel.setAttribute("hidden", "hidden");
+                }
+            });
+
+            if (updateHash && found) {
+                history.replaceState(null, "", "#" + tabId);
+            }
+
+            if (tabId === "tab-info" && window.metroMapState && window.metroMapState.map) {
+                setTimeout(function() {
+                    window.metroMapState.map.invalidateSize();
+                }, 150);
+            }
+        }
+
+        function initTabs() {
+            var tabButtons = document.querySelectorAll(".tab-btn[data-tab-target]");
+            var navTabLinks = document.querySelectorAll("[data-tab-link]");
+            var initialTab = window.location.hash ? window.location.hash.replace("#", "") : "tab-planner";
+
+            tabButtons.forEach(function(btn) {
+                btn.addEventListener("click", function() {
+                    activateTab(btn.getAttribute("data-tab-target"), true);
+                });
+            });
+
+            navTabLinks.forEach(function(link) {
+                link.addEventListener("click", function(event) {
+                    var target = link.getAttribute("data-tab-link");
+                    if (!target) return;
+                    event.preventDefault();
+                    activateTab(target, true);
+                });
+            });
+
+            window.addEventListener("hashchange", function() {
+                var hashTab = window.location.hash ? window.location.hash.replace("#", "") : "tab-planner";
+                activateTab(hashTab, false);
+            });
+
+            activateTab(initialTab, false);
+        }
 
         function initPlannerControls() {
             sline.value = slinestr;
@@ -537,8 +685,10 @@
         // Initialize
         if (document.readyState === "loading") {
             document.addEventListener("DOMContentLoaded", initPlannerControls);
+            document.addEventListener("DOMContentLoaded", initTabs);
         } else {
             initPlannerControls();
+            initTabs();
         }
 
         function changeSLine(line){
@@ -679,6 +829,8 @@
             cost.innerText = "-";
             elderlyCost.innerText = "-";
             specialNeedsCost.innerText = "-";
+            estimatedTime.innerText = "-";
+            transferGuide.innerText = "";
             stations.textContent = "";
             stations.classList.remove('show');
             document.getElementById('stationsList').innerHTML = "";
@@ -1151,6 +1303,239 @@
             }
         }
 
+        function isValidLatLng(lat, lng) {
+            return Number.isFinite(lat) && Number.isFinite(lng) && lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180;
+        }
+
+        function extractCoordinatesFromText(rawText, callback) {
+            if (!rawText) {
+                if (callback) callback(null);
+                return;
+            }
+
+            var text = String(rawText).trim();
+            if (!text) {
+                if (callback) callback(null);
+                return;
+            }
+
+            // Try extracting directly from text first (synchronous patterns)
+            var result = tryExtractDirectCoordinates(text);
+            if (result) {
+                if (callback) callback(result);
+                return result;
+            }
+
+            // Check for Plus Code format (e.g., V82R+FV or 8FWC2234+V82R)
+            var plusCodeMatch = text.match(/([0-9A-Z]{4,8}\+[0-9A-Z]{2,3})(?:\s|$)/i);
+            if (plusCodeMatch && callback) {
+                resolvePlusCode(plusCodeMatch[1], callback);
+                return;
+            }
+
+            // If it's a shortened/redirect link (goo.gl, maps.app.goo.gl, etc), try to resolve it
+            if (text.indexOf('goo.gl') > -1 || text.indexOf('maps.app.goo') > -1) {
+                if (callback) {
+                    // Async resolution for shortened links
+                    resolveShortLink(text, callback);
+                    return;
+                }
+            }
+
+            if (callback) callback(null);
+            return null;
+        }
+
+        function tryExtractDirectCoordinates(text) {
+            if (!text) return null;
+
+            var candidates = [text];
+            try {
+                var decoded = decodeURIComponent(text);
+                if (decoded && decoded !== text) {
+                    candidates.push(decoded);
+                }
+            } catch (e) {
+                // Ignore malformed URI input and continue with raw text.
+            }
+
+            var pairPatterns = [
+                /@\s*(-?\d{1,2}(?:\.\d+)?)\s*,\s*(-?\d{1,3}(?:\.\d+)?)/i,
+                /[?&](?:q|query|ll|saddr|daddr|origin|destination|center|cp)=(-?\d{1,2}(?:\.\d+)?)\s*,\s*(-?\d{1,3}(?:\.\d+)?)/i,
+                /geo:\s*(-?\d{1,2}(?:\.\d+)?)\s*,\s*(-?\d{1,3}(?:\.\d+)?)/i,
+                /(-?\d{1,2}(?:\.\d+)?)\s*,\s*(-?\d{1,3}(?:\.\d+)?)/
+            ];
+
+            for (var c = 0; c < candidates.length; c++) {
+                var candidate = candidates[c];
+
+                for (var p = 0; p < pairPatterns.length; p++) {
+                    var m = candidate.match(pairPatterns[p]);
+                    if (m) {
+                        var lat = parseFloat(m[1]);
+                        var lng = parseFloat(m[2]);
+                        if (isValidLatLng(lat, lng)) {
+                            return { lat: lat, lng: lng };
+                        }
+                    }
+                }
+
+                // Google maps encoded coordinates in some links: !3d<lat>!4d<lng>
+                var g = candidate.match(/!3d(-?\d{1,2}(?:\.\d+)?)!4d(-?\d{1,3}(?:\.\d+)?)/i);
+                if (g) {
+                    var glat = parseFloat(g[1]);
+                    var glng = parseFloat(g[2]);
+                    if (isValidLatLng(glat, glng)) {
+                        return { lat: glat, lng: glng };
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        function resolveShortLink(shortUrl, callback) {
+            fetch(shortUrl, { method: 'HEAD', redirect: 'follow' })
+                .then(function(response) {
+                    var expanded = response.url || shortUrl;
+                    var coords = tryExtractDirectCoordinates(expanded);
+                    callback(coords);
+                })
+                .catch(function(err) {
+                    // Fall back to GET request if HEAD fails
+                    fetch(shortUrl, { method: 'GET', redirect: 'follow' })
+                        .then(function(response) {
+                            var expanded = response.url || shortUrl;
+                            var coords = tryExtractDirectCoordinates(expanded);
+                            callback(coords);
+                        })
+                        .catch(function(err2) {
+                            callback(null);
+                        });
+                });
+        }
+
+        function resolvePlusCode(plusCode, callback) {
+            // Construct a Google Maps URL with the Plus Code and follow redirects to get coordinates
+            var mapsUrl = "https://maps.google.com/?q=" + encodeURIComponent(plusCode);
+            
+            fetch(mapsUrl, { method: 'GET', redirect: 'follow', mode: 'no-cors' })
+                .then(function(response) {
+                    var expanded = response.url || mapsUrl;
+                    var coords = tryExtractDirectCoordinates(expanded);
+                    if (coords) {
+                        callback(coords);
+                        return;
+                    }
+                    
+                    // If Google Maps redirect didn't work, try OpenStreetMap Nominatim
+                    resolvePlusCodeViaGeocoding(plusCode, callback);
+                })
+                .catch(function(err) {
+                    // Fall back to geocoding service
+                    resolvePlusCodeViaGeocoding(plusCode, callback);
+                });
+        }
+
+        function resolvePlusCodeViaGeocoding(plusCode, callback) {
+            // Use OSM Nominatim to resolve Plus Code (free, no API key needed)
+            var geocodeUrl = "https://nominatim.openstreetmap.org/search?q=" + encodeURIComponent(plusCode) + "&format=json&limit=1";
+            
+            fetch(geocodeUrl, { 
+                method: 'GET',
+                headers: { 'Accept': 'application/json' }
+            })
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(data) {
+                    if (data && data.length > 0) {
+                        var result = data[0];
+                        var lat = parseFloat(result.lat);
+                        var lng = parseFloat(result.lon);
+                        if (isValidLatLng(lat, lng)) {
+                            callback({ lat: lat, lng: lng });
+                            return;
+                        }
+                    }
+                    callback(null);
+                })
+                .catch(function(err) {
+                    callback(null);
+                });
+        }
+
+        function importCoordinatesFromLinks(showStatusMessage) {
+            if (showStatusMessage === undefined) showStatusMessage = true;
+
+            var currentLinkText = currentLocationLink ? currentLocationLink.value.trim() : "";
+            var destLinkText = destLocationLink ? destLocationLink.value.trim() : "";
+
+            if (!currentLinkText && !destLinkText) {
+                if (showStatusMessage) {
+                    coordResult.innerText = 'Paste a current and/or destination map link first. Supports Google Maps (full/short links), Plus Codes (e.g., V82R+FV), Apple Maps, Waze, OSM, geo links, and lat,lng text.';
+                }
+                return { importedCurrent: false, importedDestination: false };
+            }
+
+            if (showStatusMessage) {
+                coordResult.innerText = 'Resolving coordinates...';
+            }
+
+            var pendingCount = 0;
+            var importedCurrent = false;
+            var importedDestination = false;
+
+            if (currentLinkText) pendingCount++;
+            if (destLinkText) pendingCount++;
+
+            var completed = 0;
+
+            if (currentLinkText) {
+                extractCoordinatesFromText(currentLinkText, function(cur) {
+                    if (cur) {
+                        currentLat.value = cur.lat.toFixed(6);
+                        currentLng.value = cur.lng.toFixed(6);
+                        importedCurrent = true;
+                    }
+                    completed++;
+                    if (completed === pendingCount) {
+                        updateCoordinateImportStatus(importedCurrent, importedDestination, showStatusMessage);
+                    }
+                });
+            }
+
+            if (destLinkText) {
+                extractCoordinatesFromText(destLinkText, function(dst) {
+                    if (dst) {
+                        destLat.value = dst.lat.toFixed(6);
+                        destLng.value = dst.lng.toFixed(6);
+                        importedDestination = true;
+                    }
+                    completed++;
+                    if (completed === pendingCount) {
+                        updateCoordinateImportStatus(importedCurrent, importedDestination, showStatusMessage);
+                    }
+                });
+            }
+
+            return { importedCurrent: false, importedDestination: false };
+        }
+
+        function updateCoordinateImportStatus(importedCurrent, importedDestination, showStatusMessage) {
+            if (!showStatusMessage) return;
+
+            if (importedCurrent && importedDestination) {
+                coordResult.innerText = 'Imported both current and destination coordinates from links.';
+            } else if (importedCurrent) {
+                coordResult.innerText = 'Imported current coordinates from link. Add destination link (or manual destination coordinates) to continue.';
+            } else if (importedDestination) {
+                coordResult.innerText = 'Imported destination coordinates from link. Add current link (or manual current coordinates) to continue.';
+            } else {
+                coordResult.innerText = 'Could not read coordinates from the provided link(s). If using a Google Maps short link, try right-clicking the location and choosing "Share" for a full link.';
+            }
+        }
+
         function getLiveLocation() {
             if (!navigator.geolocation) {
                 coordResult.innerText = 'Live location is not supported in this browser.';
@@ -1221,6 +1606,10 @@
         }
 
         function findClosestStationNow() {
+            if (!Number.isFinite(parseFloat(currentLat.value)) || !Number.isFinite(parseFloat(currentLng.value))) {
+                importCoordinatesFromLinks(false);
+            }
+
             var lat = parseFloat(currentLat.value);
             var lng = parseFloat(currentLng.value);
             if (!Number.isFinite(lat) || !Number.isFinite(lng)) {
@@ -1239,6 +1628,10 @@
         }
 
         function findClosestStartEndStations() {
+            if (!Number.isFinite(parseFloat(currentLat.value)) || !Number.isFinite(parseFloat(currentLng.value)) || !Number.isFinite(parseFloat(destLat.value)) || !Number.isFinite(parseFloat(destLng.value))) {
+                importCoordinatesFromLinks(false);
+            }
+
             var curLat = parseFloat(currentLat.value);
             var curLng = parseFloat(currentLng.value);
             var dstLat = parseFloat(destLat.value);
@@ -1280,6 +1673,79 @@
             }
         }
 
+        function lineTimingProfile(lineId) {
+            // Publicly reported values: Line 1 max speed ~80 km/h, Line 3 up to ~100 km/h.
+            // Effective factor models acceleration/deceleration + operational constraints.
+            var profiles = {
+                "Line 1": { maxSpeedKmh: 80, effectiveFactor: 0.46, headwayMin: 3.8, dwellMin: 0.35 },
+                "Line 2": { maxSpeedKmh: 80, effectiveFactor: 0.47, headwayMin: 3.0, dwellMin: 0.35 },
+                "Line 3": { maxSpeedKmh: 100, effectiveFactor: 0.50, headwayMin: 3.0, dwellMin: 0.32 }
+            };
+            return profiles[lineId] || { maxSpeedKmh: 80, effectiveFactor: 0.47, headwayMin: 3.4, dwellMin: 0.35 };
+        }
+
+        function estimateTripTime(stationCount, hasTransfer, routePoints) {
+            var distanceKm = 0;
+            var movingMin = 0;
+            var dwellMin = 0;
+            var transferCount = 0;
+            var transferWaitMin = 0;
+            var initialWaitMin = 2.5;
+            var transferWalkMin = 2.5;
+
+            if (Array.isArray(routePoints) && routePoints.length > 1) {
+                var startProfile = lineTimingProfile(routePoints[0].lineId);
+                initialWaitMin = startProfile.headwayMin / 2;
+
+                for (var i = 1; i < routePoints.length; i++) {
+                    var prev = routePoints[i - 1];
+                    var curr = routePoints[i];
+                    var segLineId = curr.lineId || prev.lineId;
+                    var segProfile = lineTimingProfile(segLineId);
+                    var segSpeedKmh = segProfile.maxSpeedKmh * segProfile.effectiveFactor;
+
+                    var segDistKm = haversineKm(prev.lat, prev.lng, curr.lat, curr.lng);
+                    distanceKm += segDistKm;
+                    movingMin += (segDistKm / segSpeedKmh) * 60;
+
+                    if (prev.lineId && curr.lineId && prev.lineId !== curr.lineId) {
+                        transferCount += 1;
+                        transferWaitMin += (lineTimingProfile(curr.lineId).headwayMin / 2) + transferWalkMin;
+                    }
+                }
+
+                for (var j = 1; j < routePoints.length - 1; j++) {
+                    dwellMin += lineTimingProfile(routePoints[j].lineId).dwellMin;
+                }
+            }
+
+            // Fallback if map coordinates are temporarily unavailable.
+            if (distanceKm <= 0) {
+                var avgInterStationKm = 1.1;
+                var avgEffSpeedKmh = 38;
+                var fallbackStops = Math.max(1, stationCount - 1);
+                distanceKm = Math.max(0.8, fallbackStops * avgInterStationKm);
+                movingMin = (distanceKm / avgEffSpeedKmh) * 60;
+                dwellMin = Math.max(0, stationCount - 2) * 0.35;
+                transferWaitMin = hasTransfer ? 4.5 : 0;
+            }
+
+            if (transferCount === 0 && hasTransfer) {
+                transferWaitMin += 4.5;
+            }
+
+            var center = movingMin + dwellMin + initialWaitMin + transferWaitMin;
+
+            // Uncertainty band for signal constraints and passenger exchange variance.
+            var min = Math.max(3, Math.round(center * 0.92));
+            var max = Math.max(min + 1, Math.round(center * 1.12));
+
+            return {
+                distanceKm: distanceKm,
+                text: min + "-" + max + " min"
+            };
+        }
+
         function destination(line, start, end){
             if((start == end)) return [start];
             var route = [];
@@ -1301,6 +1767,36 @@
             }
         }
 
+        function lineLabelFromValue(lineValue) {
+            if (lineValue === "one") return "Line 1";
+            if (lineValue === "two") return "Line 2";
+            return "Line 3";
+        }
+
+        function terminalNameForDirection(lineValue, towardEnd) {
+            var terminals = {
+                one: { start: "Helwan", end: "El Marg" },
+                two: { start: "El Monib", end: "Shubra Al Khaimah" },
+                three: { start: "Adly Mansour", end: "Rod El Farag Corridor" }
+            };
+            var lineTerminals = terminals[lineValue] || terminals.one;
+            return towardEnd ? lineTerminals.end : lineTerminals.start;
+        }
+
+        function getTransferDirectionGuidance(transferStation, targetLine, targetStation) {
+            var stats = network[targetLine] || [];
+            var transferIdx = stats.indexOf(transferStation);
+            var targetIdx = stats.indexOf(targetStation);
+
+            if (transferIdx === -1 || targetIdx === -1) {
+                return "Transfer at " + transferStation + " to " + lineLabelFromValue(targetLine) + ".";
+            }
+
+            var towardEnd = targetIdx > transferIdx;
+            var terminal = terminalNameForDirection(targetLine, towardEnd);
+            return "Transfer at " + transferStation + ". Take " + lineLabelFromValue(targetLine) + " toward " + terminal + ".";
+        }
+
         function calculateTicket(){
             var transs = "";
 
@@ -1315,6 +1811,21 @@
             if(!pickup || !dropoff) {
                 document.getElementById('stationsList').innerHTML = '<div style="color: #b0c4c1; padding: 1rem; text-align: center;">Please select the stations</div>';
                 stations.textContent = '';
+                transferGuide.innerText = "";
+                z112.classList.remove('show');
+                return;
+            }
+
+            if (normalizeStationName(pickup) === normalizeStationName(dropoff)) {
+                document.getElementById('stationsList').innerHTML = '<div style="color: #ffcf86; padding: 1rem; text-align: center;">Start and destination cannot be the same station. Please choose a different destination.</div>';
+                stations.textContent = '';
+                transferGuide.innerText = "";
+                cstats.innerText = '0';
+                cost.innerText = '-';
+                elderlyCost.innerText = '-';
+                specialNeedsCost.innerText = '-';
+                estimatedTime.innerText = '-';
+                z112.classList.remove('show');
                 return;
             }
             
@@ -1330,7 +1841,10 @@
                 generateStationBadges(totals, null);
                 stations.textContent = totals.join(" → ");
                 stations.classList.add('show');
+                transferGuide.innerText = "No transfer required on this trip.";
                 showRouteOnMap(totals, slinestr, elinestr, null);
+                var sameLineTime = estimateTripTime(sameLineCount, false, window.currentRouteGeoPoints);
+                estimatedTime.innerText = sameLineTime.text + " (" + sameLineTime.distanceKm.toFixed(1) + " km)";
             } else {
                 // Different lines - need transfer
                 routes = [];
@@ -1354,7 +1868,10 @@
                 generateStationBadges(routes, transs);
                 stations.textContent = routes.join(" → ");
                 stations.classList.add('show');
+                transferGuide.innerText = getTransferDirectionGuidance(transs, elinestr, dropoff);
                 showRouteOnMap(routes, slinestr, elinestr, transs);
+                var transferTime = estimateTripTime(transferCount, true, window.currentRouteGeoPoints);
+                estimatedTime.innerText = transferTime.text + " (" + transferTime.distanceKm.toFixed(1) + " km)";
             }
             
             // Show results with animation
@@ -1661,6 +2178,7 @@
         window.calculateTicket = calculateTicket;
         window.resetForm = resetForm;
         window.getLiveLocation = getLiveLocation;
+        window.importCoordinatesFromLinks = importCoordinatesFromLinks;
         window.findClosestStationNow = findClosestStationNow;
         window.findClosestStartEndStations = findClosestStartEndStations;
         window.startTravelMode = startTravelMode;
