@@ -203,6 +203,11 @@
                                 <option value="El-Qawmia">El-Qawmia</option>
                                 <option value="Ring Rd.">Ring Rd.</option>
                                 <option value="Rod El Farag Corridor">Rod El Farag Corridor</option>
+                                <option value="Tawfikia">Tawfikia</option>
+                                <option value="Wadi El Nile">Wadi El Nile</option>
+                                <option value="Gamat El Dowal">Gamat El Dowal</option>
+                                <option value="Boulak El Dakrour">Boulak El Dakrour</option>
+                                <option value="Cairo University">Cairo University</option>
                             </select>
                         </label>
                     </div>
@@ -314,6 +319,11 @@
                                 <option value="El-Qawmia">El-Qawmia</option>
                                 <option value="Ring Rd.">Ring Rd.</option>
                                 <option value="Rod El Farag Corridor">Rod El Farag Corridor</option>
+                                <option value="Tawfikia">Tawfikia</option>
+                                <option value="Wadi El Nile">Wadi El Nile</option>
+                                <option value="Gamat El Dowal">Gamat El Dowal</option>
+                                <option value="Boulak El Dakrour">Boulak El Dakrour</option>
+                                <option value="Cairo University">Cairo University</option>
                             </select>
                         </label>
                     </div>
@@ -520,6 +530,13 @@
             two: ["El Monib", "Sakiat Mekky", "Omm El-Masryeen", "Giza", "Faisal", "Cairo University", "Bohooth", "Dokki", "Opera", "Sadat", "Mohamed Naguib", "Ataba", "Al Shohadaa", "Masarra", "Rod El-Farag", "St. Teresa", "Khalafawy", "Mezallat", "Koliet El-Zeraa", "Shubra Al Khaimah"],
             three: ["Adly Mansour", "Heykestep","Omar Ibn Al Khattab", "Qebaa", "Hesham Barakat", "El Nozha", "Nadi El Shams", "Alf Maskan", "Heliopolis", "Haroun", "Al Ahram", "Koleyet El Banat", "Cairo Stadium", "Fair Zone", "Abbassiya", "Abdou Pasha", "El Geish", "Bab El Shaaria", "Ataba", "Nasser", "Maspero", "Safaa Hegazy", "Kit Kat", "Sudan St.", "Imbaba", "El Bohy", "El-Qawmia", "Ring Rd.", "Rod El Farag Corridor"]
         };
+
+        // Planner representation of Line 3 (branched after Kit Kat).
+        var lineThreeRouteSegments = [
+            ["Adly Mansour", "Heykestep", "Omar Ibn Al Khattab", "Qebaa", "Hesham Barakat", "El Nozha", "Nadi El Shams", "Alf Maskan", "Heliopolis", "Haroun", "Al Ahram", "Koleyet El Banat", "Cairo Stadium", "Fair Zone", "Abbassiya", "Abdou Pasha", "El Geish", "Bab El Shaaria", "Ataba", "Nasser", "Maspero", "Safaa Hegazy", "Kit Kat"],
+            ["Kit Kat", "Sudan St.", "Imbaba", "El Bohy", "El-Qawmia", "Ring Rd.", "Rod El Farag Corridor"],
+            ["Kit Kat", "Tawfikia", "Wadi El Nile", "Gamat El Dowal", "Boulak El Dakrour", "Cairo University"]
+        ];
 
         // Interchange stations between lines
         var interchangeMatrix = {
@@ -1743,8 +1760,66 @@
             };
         }
 
+        function destinationLineThree(start, end) {
+            if (start === end) return [start];
+
+            var graph = {};
+
+            function addEdge(a, b) {
+                if (!graph[a]) graph[a] = [];
+                if (!graph[b]) graph[b] = [];
+                if (graph[a].indexOf(b) === -1) graph[a].push(b);
+                if (graph[b].indexOf(a) === -1) graph[b].push(a);
+            }
+
+            lineThreeRouteSegments.forEach(function(segment) {
+                for (var i = 1; i < segment.length; i++) {
+                    addEdge(segment[i - 1], segment[i]);
+                }
+            });
+
+            if (!graph[start] || !graph[end]) {
+                return [start];
+            }
+
+            var queue = [start];
+            var visited = {};
+            var previous = {};
+            visited[start] = true;
+
+            while (queue.length > 0) {
+                var current = queue.shift();
+                if (current === end) break;
+
+                graph[current].forEach(function(next) {
+                    if (visited[next]) return;
+                    visited[next] = true;
+                    previous[next] = current;
+                    queue.push(next);
+                });
+            }
+
+            if (!visited[end]) {
+                return [start];
+            }
+
+            var path = [];
+            var cursor = end;
+            while (cursor !== undefined) {
+                path.push(cursor);
+                cursor = previous[cursor];
+            }
+
+            return path.reverse();
+        }
+
         function destination(line, start, end){
             if((start == end)) return [start];
+
+            if (line === "three") {
+                return destinationLineThree(start, end);
+            }
+
             var route = [];
             var stats = network[line];
             var found = 0;
