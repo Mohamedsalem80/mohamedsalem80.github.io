@@ -45,6 +45,7 @@ var transferGuide = document.getElementById("transferGuide");
 var cstats = document.getElementById("cstats");
 var startTravelBtn = document.getElementById("startTravelBtn");
 var travelStatus = document.getElementById("travelStatus");
+var travelSpeed = document.getElementById("travelSpeed");
 var currentLat = document.getElementById("currentLat");
 var currentLng = document.getElementById("currentLng");
 var destLat = document.getElementById("destLat");
@@ -69,15 +70,24 @@ var elinestr = "one";
 var travelWatchId = null;
 var travelTickId = null;
 var travelState = null;
+var stationAreaByKey = {};
+var stationBoundsByKey = {};
+var showStationAreasOverlay = true;
 
 var TRAVEL_CONFIG = {
     arrivalRadiusKm: 0.08,
     staleGpsMs: 7000,
     fallbackTickMs: 1200,
     maxBacktrackKm: 0.08,
-    defaultSpeedKmh: 34,
-    minFallbackSpeedKmh: 22,
-    maxFallbackSpeedKmh: 55
+    defaultSpeedKmh: 28,
+    minFallbackSpeedKmh: 18,
+    maxFallbackSpeedKmh: 40,
+    maxSyntheticAdvanceWithoutGpsKm: 1.4,
+    gpsRecoveryAccuracyMeters: 75,
+    gpsRecoveryBacktrackKm: 2.5,
+    recoverySamplesRequired: 2,
+    stationAreaRadiusKm: 0.22,
+    curveSamplesPerSegment: 8
 };
 
 function activateTab(tabId, updateHash) {
@@ -344,6 +354,9 @@ function resetForm(){
     if (travelStatus) {
         travelStatus.innerText = 'Travel mode is off.';
     }
+    if (travelSpeed) {
+        travelSpeed.innerText = 'Speed: -- km/h';
+    }
 }
 
 function normalizeStationName(name) {
@@ -408,6 +421,342 @@ function haversineKm(lat1, lng1, lat2, lng2) {
         Math.sin(dLng / 2) * Math.sin(dLng / 2);
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
+}
+
+function stationKey(lineId, plannerName) {
+    return normalizeStationName(lineId) + '|' + normalizeStationName(plannerName);
+}
+
+function stationAreaRadiusFor(stationObj) {
+    if (!stationObj) return TRAVEL_CONFIG.stationAreaRadiusKm;
+
+    if (Number.isFinite(stationObj.areaRadiusKm) && stationObj.areaRadiusKm > 0) {
+        return stationObj.areaRadiusKm;
+    }
+
+    var directKey = stationKey(stationObj.lineId || '', stationObj.plannerName || stationObj.name || '');
+    if (Number.isFinite(stationAreaByKey[directKey])) {
+        return stationAreaByKey[directKey];
+    }
+
+    return TRAVEL_CONFIG.stationAreaRadiusKm;
+}
+
+function parseLineIdFromStopAreaName(nameText) {
+    var txt = String(nameText || '');
+    var m = txt.match(/line\s*(\d+)/i);
+    if (!m) return null;
+    if (m[1] === '1') return 'Line 1';
+    if (m[1] === '2') return 'Line 2';
+    if (m[1] === '3') return 'Line 3';
+    return null;
+}
+
+function stationAreaColor(lineId) {
+    if (lineId === 'Line 1') return '#2E86DE';
+    if (lineId === 'Line 2') return '#E74C3C';
+    return '#27AE60';
+}
+
+function renderStationAreasOverlay() {
+    if (!window.metroMapState || !window.metroMapState.stationAreaLayer) return;
+
+    var layer = window.metroMapState.stationAreaLayer;
+    layer.clearLayers();
+
+    if (!showStationAreasOverlay) return;
+
+    var stations = window.metroGeoStations || [];
+    stations.forEach(function(st) {
+        var key = stationKey(st.lineId, st.plannerName);
+        var radiusKm = stationAreaRadiusFor(st);
+        var color = stationAreaColor(st.lineId);
+
+        L.circle([st.lat, st.lng], {
+            radius: radiusKm * 1000,
+            color: color,
+            weight: 1,
+            opacity: 0.55,
+            fillColor: color,
+            fillOpacity: 0.08,
+            interactive: false
+        }).addTo(layer);
+
+        var bounds = stationBoundsByKey[key];
+        if (bounds) {
+            L.rectangle([[bounds.minLat, bounds.minLng], [bounds.maxLat, bounds.maxLng]], {
+                color: color,
+                weight: 1,
+                opacity: 0.65,
+                dashArray: '4,4',
+                fillOpacity: 0.03,
+                interactive: false
+            }).addTo(layer);
+        }
+    });
+}
+
+function addStationAreaToggleControl(map) {
+    if (!map || typeof L === 'undefined') return;
+
+    var ToggleControl = L.Control.extend({
+        options: { position: 'topright' },
+        onAdd: function() {
+            var container = L.DomUtil.create('div', 'leaflet-bar');
+            var button = L.DomUtil.create('a', '', container);
+            button.href = '#';
+            button.title = 'Toggle station area bounds';
+            button.setAttribute('role', 'button');
+            button.setAttribute('aria-label', 'Toggle station area bounds');
+            button.style.width = '32px';
+            button.style.height = '32px';
+            button.style.lineHeight = '32px';
+            button.style.textAlign = 'center';
+            button.style.fontWeight = '700';
+            button.style.fontFamily = 'system-ui, sans-serif';
+            button.textContent = 'A';
+
+            function refresh() {
+                button.style.background = showStationAreasOverlay ? '#1e483f' : '#ffffff';
+                button.style.color = showStationAreasOverlay ? '#ffffff' : '#1e483f';
+            }
+
+            refresh();
+
+            L.DomEvent.on(button, 'click', function(e) {
+                L.DomEvent.stop(e);
+                showStationAreasOverlay = !showStationAreasOverlay;
+                refresh();
+                renderStationAreasOverlay();
+            });
+
+            return container;
+        }
+    });
+
+    map.addControl(new ToggleControl());
+}
+
+function loadStationAreasFromInternet() {
+    if (!window.metroGeoStations || window.metroGeoStations.length === 0) return;
+
+    var query = '[out:json][timeout:25];(relation["public_transport"="stop_area"](30.0,31.1,30.2,31.4););out tags bb;';
+    var endpoint = 'https://overpass.kumi.systems/api/interpreter';
+    var body = 'data=' + encodeURIComponent(query);
+
+    fetch(endpoint, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+        },
+        body: body
+    })
+        .then(function(res) {
+            if (!res.ok) throw new Error('Overpass HTTP ' + res.status);
+            return res.json();
+        })
+        .then(function(data) {
+            var elements = (data && data.elements) ? data.elements : [];
+            if (!elements.length) return;
+
+            var updated = 0;
+
+            elements.forEach(function(rel) {
+                if (!rel || !rel.bounds) return;
+
+                var b = rel.bounds;
+                var minLat = Number(b.minlat);
+                var minLng = Number(b.minlon);
+                var maxLat = Number(b.maxlat);
+                var maxLng = Number(b.maxlon);
+                if (!Number.isFinite(minLat) || !Number.isFinite(minLng) || !Number.isFinite(maxLat) || !Number.isFinite(maxLng)) return;
+
+                var centerLat = (minLat + maxLat) / 2;
+                var centerLng = (minLng + maxLng) / 2;
+                var cornerRadiusKm = Math.max(
+                    haversineKm(centerLat, centerLng, minLat, minLng),
+                    haversineKm(centerLat, centerLng, minLat, maxLng),
+                    haversineKm(centerLat, centerLng, maxLat, minLng),
+                    haversineKm(centerLat, centerLng, maxLat, maxLng)
+                );
+                var inferredRadiusKm = clampValue(cornerRadiusKm * 0.9, 0.12, 0.55);
+
+                var tags = rel.tags || {};
+                var nameEn = tags['name:en'] || tags.int_name || tags.name || '';
+                var inferredLineId = parseLineIdFromStopAreaName(nameEn);
+
+                var nearest = null;
+                var nearestDist = Number.MAX_VALUE;
+                (window.metroGeoStations || []).forEach(function(st) {
+                    if (inferredLineId && st.lineId !== inferredLineId) {
+                        return;
+                    }
+                    var dist = haversineKm(centerLat, centerLng, st.lat, st.lng);
+                    if (dist < nearestDist) {
+                        nearest = st;
+                        nearestDist = dist;
+                    }
+                });
+
+                if (!nearest || nearestDist > 0.7) return;
+
+                var key = stationKey(nearest.lineId, nearest.plannerName);
+                stationAreaByKey[key] = inferredRadiusKm;
+                nearest.areaRadiusKm = inferredRadiusKm;
+                stationBoundsByKey[key] = {
+                    minLat: minLat,
+                    minLng: minLng,
+                    maxLat: maxLat,
+                    maxLng: maxLng
+                };
+                updated += 1;
+            });
+
+            if (updated > 0) {
+                window.stationAreaCoverage = {
+                    source: 'OSM Overpass stop_area bounds',
+                    updatedStations: updated,
+                    loadedAt: Date.now()
+                };
+                renderStationAreasOverlay();
+            }
+        })
+        .catch(function() {
+            // Keep fallback static radius when network or CORS is unavailable.
+        });
+}
+
+function estimateBoundsFromRadius(lat, lng, radiusKm) {
+    var latDelta = radiusKm / 111.32;
+    var cosLat = Math.cos((lat * Math.PI) / 180);
+    var safeCosLat = Math.max(0.15, Math.abs(cosLat));
+    var lngDelta = radiusKm / (111.32 * safeCosLat);
+
+    return {
+        minLat: lat - latDelta,
+        minLng: lng - lngDelta,
+        maxLat: lat + latDelta,
+        maxLng: lng + lngDelta
+    };
+}
+
+function resolveStationBounds(station) {
+    var key = stationKey(station.lineId, station.plannerName);
+    if (stationBoundsByKey[key]) {
+        return {
+            bounds: stationBoundsByKey[key],
+            source: 'osm_stop_area'
+        };
+    }
+
+    return {
+        bounds: estimateBoundsFromRadius(station.lat, station.lng, stationAreaRadiusFor(station)),
+        source: 'estimated_from_radius'
+    };
+}
+
+function downloadTextFile(filename, content, mimeType) {
+    var blob = new Blob([content], { type: mimeType || 'application/json;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
+function downloadStationBoundsData() {
+    var stations = window.metroGeoStations || [];
+    if (!stations.length) {
+        if (travelStatus) {
+            travelStatus.innerText = 'Cannot download bounds: station map data is not loaded yet.';
+        }
+        return;
+    }
+
+    var features = stations.map(function(st) {
+        var resolved = resolveStationBounds(st);
+        var b = resolved.bounds;
+
+        return {
+            type: 'Feature',
+            properties: {
+                stationName: st.plannerName,
+                originalName: st.name,
+                lineId: st.lineId,
+                lineValue: st.lineValue,
+                areaRadiusKm: stationAreaRadiusFor(st),
+                boundsSource: resolved.source
+            },
+            geometry: {
+                type: 'Polygon',
+                coordinates: [[
+                    [b.minLng, b.minLat],
+                    [b.maxLng, b.minLat],
+                    [b.maxLng, b.maxLat],
+                    [b.minLng, b.maxLat],
+                    [b.minLng, b.minLat]
+                ]]
+            }
+        };
+    });
+
+    var geojson = {
+        type: 'FeatureCollection',
+        name: 'cairo_metro_station_bounds',
+        generatedAt: new Date().toISOString(),
+        features: features
+    };
+
+    downloadTextFile('cairo_metro_station_bounds.geojson', JSON.stringify(geojson, null, 2), 'application/geo+json;charset=utf-8');
+
+    if (travelStatus) {
+        travelStatus.innerText = 'Downloaded station bounds GeoJSON (' + features.length + ' stations).';
+    }
+}
+
+function downloadStationsData() {
+    var stations = window.metroGeoStations || [];
+    if (!stations.length) {
+        if (travelStatus) {
+            travelStatus.innerText = 'Cannot download stations: station map data is not loaded yet.';
+        }
+        return;
+    }
+
+    var features = stations.map(function(st) {
+        var key = stationKey(st.lineId, st.plannerName);
+        return {
+            type: 'Feature',
+            properties: {
+                stationName: st.plannerName,
+                originalName: st.name,
+                lineId: st.lineId,
+                lineValue: st.lineValue,
+                areaRadiusKm: stationAreaRadiusFor(st),
+                hasOsmBounds: !!stationBoundsByKey[key]
+            },
+            geometry: {
+                type: 'Point',
+                coordinates: [st.lng, st.lat]
+            }
+        };
+    });
+
+    var geojson = {
+        type: 'FeatureCollection',
+        name: 'cairo_metro_station_points',
+        generatedAt: new Date().toISOString(),
+        features: features
+    };
+
+    downloadTextFile('cairo_metro_station_points.geojson', JSON.stringify(geojson, null, 2), 'application/geo+json;charset=utf-8');
+
+    if (travelStatus) {
+        travelStatus.innerText = 'Downloaded station points GeoJSON (' + features.length + ' stations).';
+    }
 }
 
 function findNearestStation(lat, lng) {
@@ -478,25 +827,86 @@ function lerpValue(a, b, t) {
 function buildRouteMeta(routePoints) {
     if (!routePoints || routePoints.length < 2) return null;
 
+    function catmullRom(p0, p1, p2, p3, t) {
+        var t2 = t * t;
+        var t3 = t2 * t;
+        return 0.5 * (
+            (2 * p1) +
+            (-p0 + p2) * t +
+            (2 * p0 - 5 * p1 + 4 * p2 - p3) * t2 +
+            (-p0 + 3 * p1 - 3 * p2 + p3) * t3
+        );
+    }
+
+    function buildSmoothedGeometry(stations) {
+        if (stations.length < 3) {
+            return {
+                geometryPoints: stations.slice(),
+                stationToGeometryIndex: stations.map(function(_, idx) { return idx; })
+            };
+        }
+
+        var geometry = [];
+        var stationToGeometryIndex = new Array(stations.length);
+        var samplesPerSegment = Math.max(4, TRAVEL_CONFIG.curveSamplesPerSegment || 8);
+
+        geometry.push({ lat: stations[0].lat, lng: stations[0].lng });
+        stationToGeometryIndex[0] = 0;
+
+        for (var i = 0; i < stations.length - 1; i++) {
+            var p0 = stations[Math.max(0, i - 1)];
+            var p1 = stations[i];
+            var p2 = stations[i + 1];
+            var p3 = stations[Math.min(stations.length - 1, i + 2)];
+
+            for (var s = 1; s <= samplesPerSegment; s++) {
+                var t = s / samplesPerSegment;
+                var lat = catmullRom(p0.lat, p1.lat, p2.lat, p3.lat, t);
+                var lng = catmullRom(p0.lng, p1.lng, p2.lng, p3.lng, t);
+                geometry.push({ lat: lat, lng: lng });
+
+                if (s === samplesPerSegment) {
+                    stationToGeometryIndex[i + 1] = geometry.length - 1;
+                }
+            }
+        }
+
+        return {
+            geometryPoints: geometry,
+            stationToGeometryIndex: stationToGeometryIndex
+        };
+    }
+
+    var smoothed = buildSmoothedGeometry(routePoints);
+    var geometryPoints = smoothed.geometryPoints;
+    var stationToGeometryIndex = smoothed.stationToGeometryIndex;
+
     var cumulativeKm = [0];
     var totalKm = 0;
 
-    for (var i = 1; i < routePoints.length; i++) {
-        totalKm += haversineKm(routePoints[i - 1].lat, routePoints[i - 1].lng, routePoints[i].lat, routePoints[i].lng);
+    for (var i = 1; i < geometryPoints.length; i++) {
+        totalKm += haversineKm(geometryPoints[i - 1].lat, geometryPoints[i - 1].lng, geometryPoints[i].lat, geometryPoints[i].lng);
         cumulativeKm.push(totalKm);
     }
 
+    var stationCumulativeKm = stationToGeometryIndex.map(function(geomIndex) {
+        return cumulativeKm[geomIndex] || 0;
+    });
+
     return {
         points: routePoints,
+        geometryPoints: geometryPoints,
         cumulativeKm: cumulativeKm,
+        stationCumulativeKm: stationCumulativeKm,
+        stationToGeometryIndex: stationToGeometryIndex,
         totalKm: totalKm
     };
 }
 
 function getPointAtProgress(routeMeta, progressKm) {
-    if (!routeMeta || !routeMeta.points || routeMeta.points.length === 0) return null;
+    if (!routeMeta || !routeMeta.geometryPoints || routeMeta.geometryPoints.length === 0) return null;
 
-    var points = routeMeta.points;
+    var points = routeMeta.geometryPoints;
     var cumulative = routeMeta.cumulativeKm;
     var clampedProgress = clampValue(progressKm, 0, routeMeta.totalKm);
 
@@ -532,9 +942,9 @@ function getPointAtProgress(routeMeta, progressKm) {
 }
 
 function projectPointToRoute(routeMeta, lat, lng) {
-    if (!routeMeta || !routeMeta.points || routeMeta.points.length < 2) return null;
+    if (!routeMeta || !routeMeta.geometryPoints || routeMeta.geometryPoints.length < 2) return null;
 
-    var points = routeMeta.points;
+    var points = routeMeta.geometryPoints;
     var cumulative = routeMeta.cumulativeKm;
     var best = null;
 
@@ -576,14 +986,47 @@ function projectPointToRoute(routeMeta, lat, lng) {
     return best;
 }
 
+function getStationAreaMatch(routeMeta, lat, lng) {
+    if (!routeMeta || !routeMeta.points || !routeMeta.stationCumulativeKm) return null;
+
+    var bestIndex = -1;
+    var bestDist = Number.MAX_VALUE;
+
+    for (var i = 0; i < routeMeta.points.length; i++) {
+        var st = routeMeta.points[i];
+        var dist = haversineKm(lat, lng, st.lat, st.lng);
+        var radiusKm = stationAreaRadiusFor(st);
+        if (dist <= radiusKm && dist < bestDist) {
+            bestDist = dist;
+            bestIndex = i;
+            continue;
+        }
+        if (dist < bestDist) {
+            bestDist = dist;
+            bestIndex = i;
+        }
+    }
+
+    if (bestIndex === -1 || bestDist > stationAreaRadiusFor(routeMeta.points[bestIndex])) {
+        return null;
+    }
+
+    return {
+        index: bestIndex,
+        station: routeMeta.points[bestIndex],
+        progressKm: routeMeta.stationCumulativeKm[bestIndex],
+        distanceKm: bestDist
+    };
+}
+
 function findNearestStationByProgress(routeMeta, progressKm) {
-    if (!routeMeta || !routeMeta.points || routeMeta.points.length === 0) return null;
+    if (!routeMeta || !routeMeta.points || routeMeta.points.length === 0 || !routeMeta.stationCumulativeKm) return null;
 
     var nearestIndex = 0;
     var nearestDiff = Number.MAX_VALUE;
 
-    for (var i = 0; i < routeMeta.cumulativeKm.length; i++) {
-        var diff = Math.abs(routeMeta.cumulativeKm[i] - progressKm);
+    for (var i = 0; i < routeMeta.stationCumulativeKm.length; i++) {
+        var diff = Math.abs(routeMeta.stationCumulativeKm[i] - progressKm);
         if (diff < nearestDiff) {
             nearestDiff = diff;
             nearestIndex = i;
@@ -605,6 +1048,7 @@ function initializeTravelState() {
         maxProgressKm: 0,
         lastProgressKm: null,
         lastProgressAtMs: 0,
+        lastGpsProgressKm: null,
         lastGpsAtMs: 0,
         lastTickAtMs: Date.now(),
         smoothedSpeedKmh: TRAVEL_CONFIG.defaultSpeedKmh,
@@ -612,7 +1056,10 @@ function initializeTravelState() {
         filteredPosition: null,
         visuals: null,
         arrivedSamples: 0,
-        isFallbackMode: false
+        isFallbackMode: false,
+        recoveryVotes: 0,
+        recoveryTargetKm: null,
+        currentSpeedKmh: 0
     };
 
     window.travelMapFollowingInitialized = false;
@@ -633,13 +1080,14 @@ function getRemainingRoutePoints(routeMeta, progressKm) {
     if (!onRoutePoint) return [];
 
     var remaining = [[onRoutePoint.lat, onRoutePoint.lng]];
-    for (var i = onRoutePoint.segmentIndex + 1; i < routeMeta.points.length; i++) {
-        remaining.push([routeMeta.points[i].lat, routeMeta.points[i].lng]);
+    var geometry = routeMeta.geometryPoints || [];
+    for (var i = onRoutePoint.segmentIndex + 1; i < geometry.length; i++) {
+        remaining.push([geometry[i].lat, geometry[i].lng]);
     }
     return remaining;
 }
 
-function renderTravelVisuals(displayPoint, nearestStation, remaining, accuracyMeters, distanceToDestinationKm, isFallback) {
+function renderTravelVisuals(displayPoint, nearestStation, remaining, accuracyMeters, distanceToDestinationKm, isFallback, currentSpeedKmh) {
     if (!window.metroMapState || !window.metroMapState.map || !window.metroMapState.travelLayer) return;
 
     var map = window.metroMapState.map;
@@ -701,12 +1149,21 @@ function renderTravelVisuals(displayPoint, nearestStation, remaining, accuracyMe
             ' on ' + nearestStation.lineId +
             '. Remaining to destination ~' + (distanceToDestinationKm * 1000).toFixed(0) + ' m' + accText + '.';
     }
+
+    if (travelSpeed) {
+        var safeSpeed = Number(currentSpeedKmh || 0);
+        var speedText = safeSpeed > 1 ? safeSpeed.toFixed(1) : '0.0';
+        travelSpeed.innerText = (isFallback ? 'Speed (est.): ' : 'Speed: ') + speedText + ' km/h';
+    }
 }
 
 function stopTravelAsArrived() {
     stopTravelMode(true);
     if (travelStatus) {
         travelStatus.innerText = 'You reached near your destination station. Travel mode stopped automatically.';
+    }
+    if (travelSpeed) {
+        travelSpeed.innerText = 'Speed: 0.0 km/h';
     }
 }
 
@@ -720,12 +1177,58 @@ function processTravelLocation(rawLat, rawLng, accuracyMeters, source) {
     var projected = projectPointToRoute(routeMeta, rawLat, rawLng);
     if (!projected) return;
 
-    var progressKm = projected.progressKm;
-    var nearMaxAllowed = Math.max(0, travelState.maxProgressKm - TRAVEL_CONFIG.maxBacktrackKm);
-    progressKm = Math.max(progressKm, nearMaxAllowed);
+    var stationAreaMatch = source === 'gps' ? getStationAreaMatch(routeMeta, rawLat, rawLng) : null;
 
-    if (source === 'synthetic') {
-        progressKm = Math.max(progressKm, travelState.maxProgressKm);
+    var projectedProgressKm = projected.progressKm;
+    if (stationAreaMatch) {
+        projectedProgressKm = stationAreaMatch.progressKm;
+    }
+    var progressKm = projectedProgressKm;
+    var recoveredFromOvershoot = false;
+
+    if (source === 'gps') {
+        var gpsAcc = Number(accuracyMeters || 9999);
+        var backtrackGapKm = travelState.maxProgressKm - projectedProgressKm;
+
+        if (backtrackGapKm > TRAVEL_CONFIG.maxBacktrackKm) {
+            var canRecover = gpsAcc <= TRAVEL_CONFIG.gpsRecoveryAccuracyMeters &&
+                backtrackGapKm <= TRAVEL_CONFIG.gpsRecoveryBacktrackKm;
+
+            if (canRecover) {
+                if (travelState.recoveryTargetKm !== null && Math.abs(travelState.recoveryTargetKm - projectedProgressKm) <= 0.25) {
+                    travelState.recoveryVotes += 1;
+                } else {
+                    travelState.recoveryVotes = 1;
+                    travelState.recoveryTargetKm = projectedProgressKm;
+                }
+
+                if (travelState.recoveryVotes >= TRAVEL_CONFIG.recoverySamplesRequired) {
+                    progressKm = projectedProgressKm;
+                    recoveredFromOvershoot = true;
+                    travelState.recoveryVotes = 0;
+                    travelState.recoveryTargetKm = null;
+                } else {
+                    progressKm = Math.max(projectedProgressKm, travelState.maxProgressKm - 0.22);
+                }
+            } else {
+                progressKm = Math.max(projectedProgressKm, travelState.maxProgressKm - TRAVEL_CONFIG.maxBacktrackKm);
+                travelState.recoveryVotes = 0;
+                travelState.recoveryTargetKm = null;
+            }
+        } else {
+            travelState.recoveryVotes = 0;
+            travelState.recoveryTargetKm = null;
+        }
+
+        travelState.lastGpsProgressKm = projectedProgressKm;
+    } else {
+        progressKm = Math.max(projectedProgressKm, travelState.maxProgressKm);
+        if (travelState.lastGpsProgressKm !== null) {
+            progressKm = Math.min(
+                progressKm,
+                travelState.lastGpsProgressKm + TRAVEL_CONFIG.maxSyntheticAdvanceWithoutGpsKm
+            );
+        }
     }
 
     if (travelState.lastProgressKm !== null) {
@@ -735,11 +1238,20 @@ function processTravelLocation(rawLat, rawLng, accuracyMeters, source) {
             var speedKmh = deltaKm / dtHours;
             if (speedKmh >= 6 && speedKmh <= 120) {
                 travelState.smoothedSpeedKmh = (travelState.smoothedSpeedKmh * 0.7) + (speedKmh * 0.3);
+                travelState.currentSpeedKmh = travelState.smoothedSpeedKmh;
             }
         }
     }
 
-    travelState.maxProgressKm = Math.max(travelState.maxProgressKm, progressKm);
+    if (source === 'gps' && !Number.isFinite(travelState.currentSpeedKmh)) {
+        travelState.currentSpeedKmh = 0;
+    }
+
+    if (recoveredFromOvershoot) {
+        travelState.maxProgressKm = progressKm;
+    } else {
+        travelState.maxProgressKm = Math.max(travelState.maxProgressKm, progressKm);
+    }
     travelState.lastProgressKm = progressKm;
     travelState.lastProgressAtMs = now;
     travelState.lastAccuracyMeters = accuracyMeters;
@@ -773,10 +1285,12 @@ function processTravelLocation(rawLat, rawLng, accuracyMeters, source) {
         };
     }
 
-    var nearestStationRef = findNearestStationByProgress(routeMeta, progressKm);
+    var nearestStationRef = stationAreaMatch ? { station: stationAreaMatch.station, index: stationAreaMatch.index } : findNearestStationByProgress(routeMeta, progressKm);
     var nearestStation = nearestStationRef ? nearestStationRef.station : routeMeta.points[0];
     var remaining = getRemainingRoutePoints(routeMeta, progressKm);
     var distanceToDestinationKm = Math.max(0, routeMeta.totalKm - progressKm);
+    var destinationStation = routeMeta.points[routeMeta.points.length - 1];
+    var destinationCenterDistanceKm = haversineKm(rawLat, rawLng, destinationStation.lat, destinationStation.lng);
 
     renderTravelVisuals(
         travelState.filteredPosition,
@@ -784,10 +1298,14 @@ function processTravelLocation(rawLat, rawLng, accuracyMeters, source) {
         remaining,
         accuracyMeters,
         distanceToDestinationKm,
-        source === 'synthetic'
+        source === 'synthetic',
+        travelState.currentSpeedKmh
     );
 
-    if (distanceToDestinationKm <= TRAVEL_CONFIG.arrivalRadiusKm) {
+    var isReliableArrivalSample = source === 'gps' && Number(accuracyMeters || 9999) <= 140;
+    var arrivedByRouteProgress = distanceToDestinationKm <= TRAVEL_CONFIG.arrivalRadiusKm;
+    var arrivedByStationArea = destinationCenterDistanceKm <= stationAreaRadiusFor(destinationStation);
+    if ((arrivedByRouteProgress || arrivedByStationArea) && isReliableArrivalSample) {
         travelState.arrivedSamples += 1;
     } else {
         travelState.arrivedSamples = 0;
@@ -815,6 +1333,7 @@ function travelFallbackTick() {
         TRAVEL_CONFIG.minFallbackSpeedKmh,
         TRAVEL_CONFIG.maxFallbackSpeedKmh
     );
+    travelState.currentSpeedKmh = speed;
 
     var nextProgress = Math.min(
         travelState.routeMeta.totalKm,
@@ -867,6 +1386,9 @@ function startTravelMode() {
     if (travelStatus) {
         travelStatus.innerText = 'Travel mode active. Waiting for live location updates...';
     }
+    if (travelSpeed) {
+        travelSpeed.innerText = 'Speed: -- km/h';
+    }
 
     travelWatchId = navigator.geolocation.watchPosition(function(pos) {
         if (!travelState) {
@@ -907,6 +1429,9 @@ function stopTravelMode(silent) {
 
     if (!silent && travelStatus) {
         travelStatus.innerText = 'Travel mode stopped.';
+    }
+    if (travelSpeed) {
+        travelSpeed.innerText = 'Speed: 0.0 km/h';
     }
 
     if (window.metroMapState && window.metroMapState.travelLayer) {
@@ -1926,12 +2451,39 @@ function buildStationMap() {
         attributionControl: false
     }).setView([30.045, 31.24], 11);
 
-    // Non-satellite basemap (street/light style).
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    function createOfflineGridLayer() {
+        var grid = L.gridLayer({ attribution: 'Offline fallback map layer' });
+        grid.createTile = function(coords) {
+            var tile = document.createElement('div');
+            tile.style.background = ((coords.x + coords.y) % 2 === 0) ? '#eef3f2' : '#e7efed';
+            tile.style.border = '1px solid rgba(30,72,63,0.06)';
+            return tile;
+        };
+        return grid;
+    }
+
+    // Primary online basemap + local offline grid fallback for connectivity drops.
+    var onlineBaseLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
         subdomains: 'abcd',
         maxZoom: 19,
         attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
-    }).addTo(map);
+    });
+    var offlineBaseLayer = createOfflineGridLayer();
+
+    function syncBaseLayerWithConnectivity() {
+        var isOnline = navigator.onLine !== false;
+        if (isOnline) {
+            if (map.hasLayer(offlineBaseLayer)) map.removeLayer(offlineBaseLayer);
+            if (!map.hasLayer(onlineBaseLayer)) map.addLayer(onlineBaseLayer);
+        } else {
+            if (map.hasLayer(onlineBaseLayer)) map.removeLayer(onlineBaseLayer);
+            if (!map.hasLayer(offlineBaseLayer)) map.addLayer(offlineBaseLayer);
+        }
+    }
+
+    syncBaseLayerWithConnectivity();
+    window.addEventListener('online', syncBaseLayerWithConnectivity);
+    window.addEventListener('offline', syncBaseLayerWithConnectivity);
 
     L.control.attribution({ prefix: false }).addTo(map);
 
@@ -2047,8 +2599,14 @@ function buildStationMap() {
         map: map,
         routeLayer: L.layerGroup().addTo(map),
         contextLayer: L.layerGroup().addTo(map),
-        travelLayer: L.layerGroup().addTo(map)
+        travelLayer: L.layerGroup().addTo(map),
+        stationAreaLayer: L.layerGroup().addTo(map)
     };
+
+    addStationAreaToggleControl(map);
+    renderStationAreasOverlay();
+
+    loadStationAreasFromInternet();
 }
 
 if (document.readyState === 'loading') {
@@ -2065,3 +2623,5 @@ window.importCoordinatesFromLinks = importCoordinatesFromLinks;
 window.findClosestStationNow = findClosestStationNow;
 window.findClosestStartEndStations = findClosestStartEndStations;
 window.startTravelMode = startTravelMode;
+window.downloadStationBoundsData = downloadStationBoundsData;
+window.downloadStationsData = downloadStationsData;

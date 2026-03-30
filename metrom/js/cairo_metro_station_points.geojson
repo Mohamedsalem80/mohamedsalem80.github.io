@@ -1,0 +1,1609 @@
+{
+  "type": "FeatureCollection",
+  "name": "cairo_metro_station_points",
+  "generatedAt": "2026-03-30T19:26:58.524Z",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Helwan",
+        "originalName": "Helwan",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "hasOsmBounds": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.334166666666665,
+          29.848888888888887
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Ain Helwan",
+        "originalName": "Ain Helwan",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "hasOsmBounds": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.325,
+          29.86277777777778
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Helwan University",
+        "originalName": "Helwan University",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "hasOsmBounds": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.32027777777778,
+          29.86888888888889
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Wadi Hof",
+        "originalName": "Wadi Hof",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "hasOsmBounds": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.313333333333333,
+          29.879444444444445
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Hadayeq Helwan",
+        "originalName": "Hadayek Helwan",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "hasOsmBounds": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.304166666666667,
+          29.897222222222222
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Elmasraa",
+        "originalName": "El-Maasara",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "hasOsmBounds": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.299722222222226,
+          29.90611111111111
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Tura El-Asmant",
+        "originalName": "Tora El-Asmant",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "hasOsmBounds": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.28777777777778,
+          29.925833333333333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Kozzika",
+        "originalName": "Kozzika",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "hasOsmBounds": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.281666666666666,
+          29.93611111111111
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Tura El-Balad",
+        "originalName": "Tora El-Balad",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "hasOsmBounds": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.27361111111111,
+          29.94638888888889
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Sakanat El-Maadi",
+        "originalName": "Sakanat El-Maadi",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "hasOsmBounds": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.263333333333332,
+          29.952777777777776
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Maadi",
+        "originalName": "Maadi",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "hasOsmBounds": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.258055555555554,
+          29.959722222222222
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Hadayeq El-Maadi",
+        "originalName": "Hadayek El-Maadi",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "hasOsmBounds": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.250555555555554,
+          29.97
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Dar El-Salam",
+        "originalName": "Dar El-Salam",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "hasOsmBounds": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.242222222222225,
+          29.981944444444444
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "El-Zahraa",
+        "originalName": "El-Zahraa",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "hasOsmBounds": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.231666666666666,
+          29.99527777777778
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Mar Girgis",
+        "originalName": "Mar Girgis",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.229444444444443,
+          30.00583333333333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "El-Malek El-Saleh",
+        "originalName": "El-Malek El-Saleh",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.230833333333333,
+          30.016944444444444
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Al-Sayeda Zeinab",
+        "originalName": "Al-Sayeda Zeinab",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.235277777777778,
+          30.029166666666665
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Saad Zaghloul",
+        "originalName": "Saad Zaghloul",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.238055555555558,
+          30.03666666666667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Sadat",
+        "originalName": "Sadat",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.13475821510147137,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.235555555555557,
+          30.044444444444448
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Nasser",
+        "originalName": "Nasser",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.23888888888889,
+          30.053611111111113
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Orabi",
+        "originalName": "Orabi",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.2425,
+          30.0575
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Al Shohadaa",
+        "originalName": "Al-Shohadaa",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.246111111111112,
+          30.061944444444446
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Ghamra",
+        "originalName": "Ghamra",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.264722222222222,
+          30.06888888888889
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "El-Demerdash",
+        "originalName": "El-Demerdash",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.27777777777778,
+          30.077222222222222
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Manshiet El-Sadr",
+        "originalName": "Manshiet El-Sadr",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.28777777777778,
+          30.08222222222222
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Kobri El-Qobba",
+        "originalName": "Kobri El-Qobba",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.29388888888889,
+          30.086944444444445
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Hammamat El-Qobba",
+        "originalName": "Hammamat El-Qobba",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.298055555555557,
+          30.090277777777775
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Saray El-Qobba",
+        "originalName": "Saray El-Qobba",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.304722222222225,
+          30.098055555555554
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Hadayeq El-Zaitoun",
+        "originalName": "Hadayeq El-Zaitoun",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.310000000000002,
+          30.10527777777778
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Helmeyet El-Zaitoun",
+        "originalName": "Helmeyet El-Zaitoun",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.31388888888889,
+          30.114444444444445
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "El-Matareyya",
+        "originalName": "El-Matareyya",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.31388888888889,
+          30.12138888888889
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Ain Shams",
+        "originalName": "Ain Shams",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.319166666666668,
+          30.13111111111111
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Ezbet El-Nakhl",
+        "originalName": "Ezbet El-Nakhl",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.324444444444445,
+          30.139166666666664
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "El-Marg",
+        "originalName": "El-Marg",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.335555555555555,
+          30.15222222222222
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "New El-Marg",
+        "originalName": "New El-Marg",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.33833333333333,
+          30.16333333333333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "El Monib",
+        "originalName": "El-Mounib",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.22,
+        "hasOsmBounds": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.211944444444445,
+          29.981388888888887
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Sakiat Mekky",
+        "originalName": "Sakiat Mekky",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.22,
+        "hasOsmBounds": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.20861111111111,
+          29.995555555555555
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Omm El-Masryeen",
+        "originalName": "Omm El-Masryeen",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.208055555555553,
+          30.005277777777778
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Giza",
+        "originalName": "El Giza",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.206944444444442,
+          30.010555555555555
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Faisal",
+        "originalName": "Faisal",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.203888888888887,
+          30.01722222222222
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Cairo University",
+        "originalName": "Cairo University",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.20111111111111,
+          30.02611111111111
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Bohooth",
+        "originalName": "El Bohoth",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.200277777777778,
+          30.035833333333336
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Dokki",
+        "originalName": "Dokki",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.211944444444445,
+          30.038333333333334
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Opera",
+        "originalName": "Opera",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.225277777777777,
+          30.041944444444447
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Sadat",
+        "originalName": "Sadat",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.13475821510147137,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.235555555555557,
+          30.044444444444448
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Mohamed Naguib",
+        "originalName": "Mohamed Naguib",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.24416666666667,
+          30.04527777777778
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Ataba",
+        "originalName": "Attaba",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.246944444444445,
+          30.052500000000002
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Al Shohadaa",
+        "originalName": "Al-Shohadaa",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.246111111111112,
+          30.061944444444446
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Masarra",
+        "originalName": "Masarra",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.245,
+          30.07111111111111
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Rod El-Farag",
+        "originalName": "Road El-Farag",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.245555555555555,
+          30.080555555555556
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "St. Teresa",
+        "originalName": "St. Teresa",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.245555555555555,
+          30.08833333333333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Khalafawy",
+        "originalName": "Khalafawy",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.24527777777778,
+          30.098055555555554
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Mezallat",
+        "originalName": "Mezallat",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.246666666666666,
+          30.105
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Koliet El-Zeraa",
+        "originalName": "Kolleyyet El-Zeraa",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.248611111111114,
+          30.11388888888889
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Shubra Al Khaimah",
+        "originalName": "Shubra El-Kheima",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.244722222222222,
+          30.1225
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Adly Mansour",
+        "originalName": "Adly Mansour",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "hasOsmBounds": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.42138888888889,
+          30.146944444444443
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Heykestep",
+        "originalName": "El Haykestep",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "hasOsmBounds": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.404722222222222,
+          30.14388888888889
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Omar Ibn Al Khattab",
+        "originalName": "Omar Ibn El-Khattab",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.394166666666667,
+          30.140555555555554
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Qebaa",
+        "originalName": "Qobaa",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.383888888888887,
+          30.134722222222223
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Hesham Barakat",
+        "originalName": "Hesham Barakat",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.372777777777777,
+          30.13111111111111
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "El Nozha",
+        "originalName": "El-Nozha",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.360000000000003,
+          30.128333333333334
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Nadi El Shams",
+        "originalName": "Nadi El-Shams",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.343888888888888,
+          30.122222222222224
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Alf Maskan",
+        "originalName": "Alf Maskan",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.33972222222222,
+          30.118055555555557
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Heliopolis",
+        "originalName": "Heliopolis Square",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.338055555555556,
+          30.108055555555556
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Haroun",
+        "originalName": "Haroun",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.33277777777778,
+          30.101111111111113
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Al Ahram",
+        "originalName": "Al-Ahram",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.32638888888889,
+          30.091388888888886
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Koleyet El-Banat",
+        "originalName": "Koleyet El-Banat",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.328888888888887,
+          30.08361111111111
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Cairo Stadium",
+        "originalName": "Stadium",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.3175,
+          30.073055555555555
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Fair Zone",
+        "originalName": "Fair Zone",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.301111111111112,
+          30.073333333333334
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Abbassiya",
+        "originalName": "Abbassia",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.280833333333334,
+          30.06972222222222
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Abdou Pasha",
+        "originalName": "Abdou Pasha",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.27472222222222,
+          30.064722222222223
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "El Geish",
+        "originalName": "El Geish",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.266944444444444,
+          30.061944444444446
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Bab El Shaaria",
+        "originalName": "Bab El Shaaria",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.25611111111111,
+          30.05388888888889
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Ataba",
+        "originalName": "Attaba",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.15883177258500275,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.246944444444445,
+          30.052500000000002
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Nasser",
+        "originalName": "Nasser",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "hasOsmBounds": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.23888888888889,
+          30.053611111111113
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Maspero",
+        "originalName": "Maspero",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.23222222222222,
+          30.055555555555557
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Safaa Hegazy",
+        "originalName": "Safaa Hegazy",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.222499999999997,
+          30.0625
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Kit Kat",
+        "originalName": "Kit Kat",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.213055555555556,
+          30.066666666666666
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Sudan St.",
+        "originalName": "Sudan",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.205277777777777,
+          30.06972222222222
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Imbaba",
+        "originalName": "Imbaba",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.2075,
+          30.075833333333332
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "El-Bohy",
+        "originalName": "El-Bohy",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.210555555555555,
+          30.08222222222222
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "El-Qawmia",
+        "originalName": "El-Qawmia",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.20888888888889,
+          30.093333333333334
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Ring Rd.",
+        "originalName": "Ring Road",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.199722222222224,
+          30.09638888888889
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Rod El Farag Corridor",
+        "originalName": "Rod al-Farag Corridor",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.184166666666666,
+          30.101944444444445
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Tawfikia",
+        "originalName": "Tawfikia",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.2025,
+          30.06527777777778
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Wadi El Nile",
+        "originalName": "Wadi El Nile",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.20111111111111,
+          30.058333333333334
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Gamat El Dowal",
+        "originalName": "Gamat El Dowal",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.199722222222224,
+          30.050833333333333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Boulak El Dakrour",
+        "originalName": "Boulak El Dakrour",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.12,
+        "hasOsmBounds": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.19638888888889,
+          30.03611111111111
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Cairo University",
+        "originalName": "Cairo University",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "hasOsmBounds": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.20111111111111,
+          30.02611111111111
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,3389 @@
+{
+  "type": "FeatureCollection",
+  "name": "cairo_metro_station_bounds",
+  "generatedAt": "2026-03-30T19:25:54.651Z",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Helwan",
+        "originalName": "Helwan",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.33188811141022,
+              29.846912604303906
+            ],
+            [
+              31.33644522192311,
+              29.846912604303906
+            ],
+            [
+              31.33644522192311,
+              29.850865173473867
+            ],
+            [
+              31.33188811141022,
+              29.850865173473867
+            ],
+            [
+              31.33188811141022,
+              29.846912604303906
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Ain Helwan",
+        "originalName": "Ain Helwan",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.322721127679717,
+              29.8608014931928
+            ],
+            [
+              31.32727887232028,
+              29.8608014931928
+            ],
+            [
+              31.32727887232028,
+              29.86475406236276
+            ],
+            [
+              31.322721127679717,
+              29.86475406236276
+            ],
+            [
+              31.322721127679717,
+              29.8608014931928
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Helwan University",
+        "originalName": "Helwan University",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.31799876587902,
+              29.86691260430391
+            ],
+            [
+              31.322556789676536,
+              29.86691260430391
+            ],
+            [
+              31.322556789676536,
+              29.87086517347387
+            ],
+            [
+              31.31799876587902,
+              29.87086517347387
+            ],
+            [
+              31.31799876587902,
+              29.86691260430391
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Wadi Hof",
+        "originalName": "Wadi Hof",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.31105408024313,
+              29.877468159859465
+            ],
+            [
+              31.315612586423534,
+              29.877468159859465
+            ],
+            [
+              31.315612586423534,
+              29.881420729029426
+            ],
+            [
+              31.31105408024313,
+              29.881420729029426
+            ],
+            [
+              31.31105408024313,
+              29.877468159859465
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Hadayeq Helwan",
+        "originalName": "Hadayek Helwan",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.30188700706896,
+              29.89524593763724
+            ],
+            [
+              31.306446326264375,
+              29.89524593763724
+            ],
+            [
+              31.306446326264375,
+              29.899198506807203
+            ],
+            [
+              31.30188700706896,
+              29.899198506807203
+            ],
+            [
+              31.30188700706896,
+              29.89524593763724
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Elmasraa",
+        "originalName": "El-Maasara",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.29744235923407,
+              29.90413482652613
+            ],
+            [
+              31.302002085210383,
+              29.90413482652613
+            ],
+            [
+              31.302002085210383,
+              29.90808739569609
+            ],
+            [
+              31.29744235923407,
+              29.90808739569609
+            ],
+            [
+              31.29744235923407,
+              29.90413482652613
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Tura El-Asmant",
+        "originalName": "Tora El-Asmant",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.285497463191422,
+              29.923857048748353
+            ],
+            [
+              31.290058092364138,
+              29.923857048748353
+            ],
+            [
+              31.290058092364138,
+              29.927809617918314
+            ],
+            [
+              31.285497463191422,
+              29.927809617918314
+            ],
+            [
+              31.285497463191422,
+              29.923857048748353
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Kozzika",
+        "originalName": "Kozzika",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.279386116562375,
+              29.93413482652613
+            ],
+            [
+              31.283947216770958,
+              29.93413482652613
+            ],
+            [
+              31.283947216770958,
+              29.93808739569609
+            ],
+            [
+              31.279386116562375,
+              29.93808739569609
+            ],
+            [
+              31.279386116562375,
+              29.93413482652613
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Tura El-Balad",
+        "originalName": "Tora El-Balad",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.27133032536683,
+              29.94441260430391
+            ],
+            [
+              31.275891896855388,
+              29.94441260430391
+            ],
+            [
+              31.275891896855388,
+              29.94836517347387
+            ],
+            [
+              31.27133032536683,
+              29.94836517347387
+            ],
+            [
+              31.27133032536683,
+              29.94441260430391
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Sakanat El-Maadi",
+        "originalName": "Sakanat El-Maadi",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.261052401048598,
+              29.950801493192795
+            ],
+            [
+              31.265614265618066,
+              29.950801493192795
+            ],
+            [
+              31.265614265618066,
+              29.954754062362756
+            ],
+            [
+              31.261052401048598,
+              29.954754062362756
+            ],
+            [
+              31.261052401048598,
+              29.950801493192795
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Maadi",
+        "originalName": "Maadi",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.25577446393419,
+              29.95774593763724
+            ],
+            [
+              31.260336647176917,
+              29.95774593763724
+            ],
+            [
+              31.260336647176917,
+              29.961698506807203
+            ],
+            [
+              31.25577446393419,
+              29.961698506807203
+            ],
+            [
+              31.25577446393419,
+              29.95774593763724
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Hadayeq El-Maadi",
+        "originalName": "Hadayek El-Maadi",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.24827422801361,
+              29.96802371541502
+            ],
+            [
+              31.252836883097498,
+              29.96802371541502
+            ],
+            [
+              31.252836883097498,
+              29.97197628458498
+            ],
+            [
+              31.24827422801361,
+              29.97197628458498
+            ],
+            [
+              31.24827422801361,
+              29.96802371541502
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Dar El-Salam",
+        "originalName": "Dar El-Salam",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.23994062034874,
+              29.979968159859464
+            ],
+            [
+              31.24450382409571,
+              29.979968159859464
+            ],
+            [
+              31.24450382409571,
+              29.983920729029425
+            ],
+            [
+              31.23994062034874,
+              29.983920729029425
+            ],
+            [
+              31.23994062034874,
+              29.979968159859464
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "El-Zahraa",
+        "originalName": "El-Zahraa",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.229384758367527,
+              29.9933014931928
+            ],
+            [
+              31.233948574965805,
+              29.9933014931928
+            ],
+            [
+              31.233948574965805,
+              29.99725406236276
+            ],
+            [
+              31.229384758367527,
+              29.99725406236276
+            ],
+            [
+              31.229384758367527,
+              29.9933014931928
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Mar Girgis",
+        "originalName": "Mar Girgis",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.227162293412288,
+              30.00385704874835
+            ],
+            [
+              31.231726595476598,
+              30.00385704874835
+            ],
+            [
+              31.231726595476598,
+              30.007809617918312
+            ],
+            [
+              31.227162293412288,
+              30.007809617918312
+            ],
+            [
+              31.227162293412288,
+              30.00385704874835
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "El-Malek El-Saleh",
+        "originalName": "El-Malek El-Saleh",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.228550926653252,
+              30.014968159859464
+            ],
+            [
+              31.233115740013414,
+              30.014968159859464
+            ],
+            [
+              31.233115740013414,
+              30.018920729029425
+            ],
+            [
+              31.228550926653252,
+              30.018920729029425
+            ],
+            [
+              31.228550926653252,
+              30.014968159859464
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Al-Sayeda Zeinab",
+        "originalName": "Al-Sayeda Zeinab",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.23299508971965,
+              30.027190382081685
+            ],
+            [
+              31.237560465835905,
+              30.027190382081685
+            ],
+            [
+              31.237560465835905,
+              30.031142951251645
+            ],
+            [
+              31.23299508971965,
+              30.031142951251645
+            ],
+            [
+              31.23299508971965,
+              30.027190382081685
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Saad Zaghloul",
+        "originalName": "Saad Zaghloul",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.235772694747844,
+              30.03469038208169
+            ],
+            [
+              31.240338416363272,
+              30.03469038208169
+            ],
+            [
+              31.240338416363272,
+              30.03864295125165
+            ],
+            [
+              31.235772694747844,
+              30.03864295125165
+            ],
+            [
+              31.235772694747844,
+              30.03469038208169
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Sadat",
+        "originalName": "Sadat",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.23327251553118,
+              30.042468159859467
+            ],
+            [
+              31.237838595579934,
+              30.042468159859467
+            ],
+            [
+              31.237838595579934,
+              30.04642072902943
+            ],
+            [
+              31.23327251553118,
+              30.04642072902943
+            ],
+            [
+              31.23327251553118,
+              30.042468159859467
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Nasser",
+        "originalName": "Nasser",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.236605637554728,
+              30.051634826526133
+            ],
+            [
+              31.241172140223053,
+              30.051634826526133
+            ],
+            [
+              31.241172140223053,
+              30.055587395696094
+            ],
+            [
+              31.236605637554728,
+              30.055587395696094
+            ],
+            [
+              31.236605637554728,
+              30.051634826526133
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Orabi",
+        "originalName": "Orabi",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.240216658989784,
+              30.05552371541502
+            ],
+            [
+              31.244783341010216,
+              30.05552371541502
+            ],
+            [
+              31.244783341010216,
+              30.05947628458498
+            ],
+            [
+              31.240216658989784,
+              30.05947628458498
+            ],
+            [
+              31.240216658989784,
+              30.05552371541502
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Al Shohadaa",
+        "originalName": "Al-Shohadaa",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.243827667592473,
+              30.059968159859466
+            ],
+            [
+              31.24839455462975,
+              30.059968159859466
+            ],
+            [
+              31.24839455462975,
+              30.063920729029427
+            ],
+            [
+              31.243827667592473,
+              30.063920729029427
+            ],
+            [
+              31.243827667592473,
+              30.059968159859466
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Ghamra",
+        "originalName": "Ghamra",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.262438618488236,
+              30.06691260430391
+            ],
+            [
+              31.267005825956208,
+              30.06691260430391
+            ],
+            [
+              31.267005825956208,
+              30.07086517347387
+            ],
+            [
+              31.262438618488236,
+              30.07086517347387
+            ],
+            [
+              31.262438618488236,
+              30.06691260430391
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "El-Demerdash",
+        "originalName": "El-Demerdash",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.275493981711403,
+              30.07524593763724
+            ],
+            [
+              31.280061573844154,
+              30.07524593763724
+            ],
+            [
+              31.280061573844154,
+              30.079198506807202
+            ],
+            [
+              31.275493981711403,
+              30.079198506807202
+            ],
+            [
+              31.275493981711403,
+              30.07524593763724
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Manshiet El-Sadr",
+        "originalName": "Manshiet El-Sadr",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.285493866273228,
+              30.08024593763724
+            ],
+            [
+              31.290061689282332,
+              30.08024593763724
+            ],
+            [
+              31.290061689282332,
+              30.0841985068072
+            ],
+            [
+              31.285493866273228,
+              30.0841985068072
+            ],
+            [
+              31.285493866273228,
+              30.08024593763724
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Kobri El-Qobba",
+        "originalName": "Kobri El-Qobba",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.29160486833271,
+              30.084968159859464
+            ],
+            [
+              31.296172909445072,
+              30.084968159859464
+            ],
+            [
+              31.296172909445072,
+              30.088920729029425
+            ],
+            [
+              31.29160486833271,
+              30.088920729029425
+            ],
+            [
+              31.29160486833271,
+              30.084968159859464
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Hammamat El-Qobba",
+        "originalName": "Hammamat El-Qobba",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.29577145800614,
+              30.088301493192795
+            ],
+            [
+              31.300339653104974,
+              30.088301493192795
+            ],
+            [
+              31.300339653104974,
+              30.092254062362755
+            ],
+            [
+              31.29577145800614,
+              30.092254062362755
+            ],
+            [
+              31.29577145800614,
+              30.088301493192795
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Saray El-Qobba",
+        "originalName": "Saray El-Qobba",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.30243794497167,
+              30.096079270970574
+            ],
+            [
+              31.30700649947278,
+              30.096079270970574
+            ],
+            [
+              31.30700649947278,
+              30.100031840140534
+            ],
+            [
+              31.30243794497167,
+              30.100031840140534
+            ],
+            [
+              31.30243794497167,
+              30.096079270970574
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Hadayeq El-Zaitoun",
+        "originalName": "Hadayeq El-Zaitoun",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.307715555821087,
+              30.1033014931928
+            ],
+            [
+              31.312284444178918,
+              30.1033014931928
+            ],
+            [
+              31.312284444178918,
+              30.10725406236276
+            ],
+            [
+              31.307715555821087,
+              30.10725406236276
+            ],
+            [
+              31.307715555821087,
+              30.1033014931928
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Helmeyet El-Zaitoun",
+        "originalName": "Helmeyet El-Zaitoun",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.311604232751947,
+              30.112468159859464
+            ],
+            [
+              31.316173545025833,
+              30.112468159859464
+            ],
+            [
+              31.316173545025833,
+              30.116420729029425
+            ],
+            [
+              31.311604232751947,
+              30.116420729029425
+            ],
+            [
+              31.311604232751947,
+              30.112468159859464
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "El-Matareyya",
+        "originalName": "El-Matareyya",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.31160407211256,
+              30.11941260430391
+            ],
+            [
+              31.31617370566522,
+              30.11941260430391
+            ],
+            [
+              31.31617370566522,
+              30.12336517347387
+            ],
+            [
+              31.31160407211256,
+              30.12336517347387
+            ],
+            [
+              31.31160407211256,
+              30.11941260430391
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Ain Shams",
+        "originalName": "Ain Shams",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.316881624900837,
+              30.12913482652613
+            ],
+            [
+              31.321451708432498,
+              30.12913482652613
+            ],
+            [
+              31.321451708432498,
+              30.13308739569609
+            ],
+            [
+              31.316881624900837,
+              30.13308739569609
+            ],
+            [
+              31.316881624900837,
+              30.12913482652613
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Ezbet El-Nakhl",
+        "originalName": "Ezbet El-Nakhl",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.322159216175326,
+              30.137190382081684
+            ],
+            [
+              31.326729672713565,
+              30.137190382081684
+            ],
+            [
+              31.326729672713565,
+              30.141142951251645
+            ],
+            [
+              31.322159216175326,
+              30.141142951251645
+            ],
+            [
+              31.322159216175326,
+              30.137190382081684
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "El-Marg",
+        "originalName": "El-Marg",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.333270024861864,
+              30.15024593763724
+            ],
+            [
+              31.337841086249245,
+              30.15024593763724
+            ],
+            [
+              31.337841086249245,
+              30.1541985068072
+            ],
+            [
+              31.333270024861864,
+              30.1541985068072
+            ],
+            [
+              31.333270024861864,
+              30.15024593763724
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "New El-Marg",
+        "originalName": "New El-Marg",
+        "lineId": "Line 1",
+        "lineValue": "one",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.336047545100474,
+              30.16135704874835
+            ],
+            [
+              31.34061912156619,
+              30.16135704874835
+            ],
+            [
+              31.34061912156619,
+              30.16530961791831
+            ],
+            [
+              31.336047545100474,
+              30.16530961791831
+            ],
+            [
+              31.336047545100474,
+              30.16135704874835
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "El Monib",
+        "originalName": "El-Mounib",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.209662855334226,
+              29.979412604303906
+            ],
+            [
+              31.214226033554663,
+              29.979412604303906
+            ],
+            [
+              31.214226033554663,
+              29.983365173473867
+            ],
+            [
+              31.209662855334226,
+              29.983365173473867
+            ],
+            [
+              31.209662855334226,
+              29.979412604303906
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Sakiat Mekky",
+        "originalName": "Sakiat Mekky",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.206329196425916,
+              29.993579270970574
+            ],
+            [
+              31.210893025796306,
+              29.993579270970574
+            ],
+            [
+              31.210893025796306,
+              29.997531840140535
+            ],
+            [
+              31.206329196425916,
+              29.997531840140535
+            ],
+            [
+              31.206329196425916,
+              29.993579270970574
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Omm El-Masryeen",
+        "originalName": "Omm El-Masryeen",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.20577341730204,
+              30.003301493192797
+            ],
+            [
+              31.210337693809066,
+              30.003301493192797
+            ],
+            [
+              31.210337693809066,
+              30.007254062362758
+            ],
+            [
+              31.20577341730204,
+              30.007254062362758
+            ],
+            [
+              31.20577341730204,
+              30.003301493192797
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Giza",
+        "originalName": "El Giza",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.204662184779405,
+              30.008579270970575
+            ],
+            [
+              31.20922670410948,
+              30.008579270970575
+            ],
+            [
+              31.20922670410948,
+              30.012531840140536
+            ],
+            [
+              31.204662184779405,
+              30.012531840140536
+            ],
+            [
+              31.204662184779405,
+              30.008579270970575
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Faisal",
+        "originalName": "Faisal",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.201606475815773,
+              30.01524593763724
+            ],
+            [
+              31.206171301962,
+              30.01524593763724
+            ],
+            [
+              31.206171301962,
+              30.0191985068072
+            ],
+            [
+              31.201606475815773,
+              30.0191985068072
+            ],
+            [
+              31.201606475815773,
+              30.01524593763724
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Cairo University",
+        "originalName": "Cairo University",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.198828493413735,
+              30.02413482652613
+            ],
+            [
+              31.203393728808486,
+              30.02413482652613
+            ],
+            [
+              31.203393728808486,
+              30.02808739569609
+            ],
+            [
+              31.198828493413735,
+              30.02808739569609
+            ],
+            [
+              31.198828493413735,
+              30.02413482652613
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Bohooth",
+        "originalName": "El Bohoth",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.197994936167685,
+              30.033857048748356
+            ],
+            [
+              31.20256061938787,
+              30.033857048748356
+            ],
+            [
+              31.20256061938787,
+              30.037809617918317
+            ],
+            [
+              31.197994936167685,
+              30.037809617918317
+            ],
+            [
+              31.197994936167685,
+              30.033857048748356
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Dokki",
+        "originalName": "Dokki",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.20966154523907,
+              30.036357048748354
+            ],
+            [
+              31.21422734364982,
+              30.036357048748354
+            ],
+            [
+              31.21422734364982,
+              30.040309617918314
+            ],
+            [
+              31.20966154523907,
+              30.040309617918314
+            ],
+            [
+              31.20966154523907,
+              30.036357048748354
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Opera",
+        "originalName": "Opera",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.22299479536641,
+              30.039968159859466
+            ],
+            [
+              31.227560760189142,
+              30.039968159859466
+            ],
+            [
+              31.227560760189142,
+              30.043920729029427
+            ],
+            [
+              31.22299479536641,
+              30.043920729029427
+            ],
+            [
+              31.22299479536641,
+              30.039968159859466
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Sadat",
+        "originalName": "Sadat",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.23327251553118,
+              30.042468159859467
+            ],
+            [
+              31.237838595579934,
+              30.042468159859467
+            ],
+            [
+              31.237838595579934,
+              30.04642072902943
+            ],
+            [
+              31.23327251553118,
+              30.04642072902943
+            ],
+            [
+              31.23327251553118,
+              30.042468159859467
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Mohamed Naguib",
+        "originalName": "Mohamed Naguib",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.241883607436343,
+              30.0433014931928
+            ],
+            [
+              31.246449725896994,
+              30.0433014931928
+            ],
+            [
+              31.246449725896994,
+              30.04725406236276
+            ],
+            [
+              31.241883607436343,
+              30.04725406236276
+            ],
+            [
+              31.241883607436343,
+              30.0433014931928
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Ataba",
+        "originalName": "Attaba",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.244661218728787,
+              30.05052371541502
+            ],
+            [
+              31.249227670160103,
+              30.05052371541502
+            ],
+            [
+              31.249227670160103,
+              30.054476284584982
+            ],
+            [
+              31.244661218728787,
+              30.054476284584982
+            ],
+            [
+              31.244661218728787,
+              30.05052371541502
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Al Shohadaa",
+        "originalName": "Al-Shohadaa",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.243827667592473,
+              30.059968159859466
+            ],
+            [
+              31.24839455462975,
+              30.059968159859466
+            ],
+            [
+              31.24839455462975,
+              30.063920729029427
+            ],
+            [
+              31.243827667592473,
+              30.063920729029427
+            ],
+            [
+              31.243827667592473,
+              30.059968159859466
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Masarra",
+        "originalName": "Masarra",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.24271634498527,
+              30.06913482652613
+            ],
+            [
+              31.247283655014733,
+              30.06913482652613
+            ],
+            [
+              31.247283655014733,
+              30.073087395696092
+            ],
+            [
+              31.24271634498527,
+              30.073087395696092
+            ],
+            [
+              31.24271634498527,
+              30.06913482652613
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Rod El-Farag",
+        "originalName": "Road El-Farag",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.243271682533624,
+              30.078579270970575
+            ],
+            [
+              31.247839428577485,
+              30.078579270970575
+            ],
+            [
+              31.247839428577485,
+              30.082531840140536
+            ],
+            [
+              31.243271682533624,
+              30.082531840140536
+            ],
+            [
+              31.243271682533624,
+              30.078579270970575
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "St. Teresa",
+        "originalName": "St. Teresa",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.24327150292043,
+              30.08635704874835
+            ],
+            [
+              31.24783960819068,
+              30.08635704874835
+            ],
+            [
+              31.24783960819068,
+              30.09030961791831
+            ],
+            [
+              31.24327150292043,
+              30.09030961791831
+            ],
+            [
+              31.24327150292043,
+              30.08635704874835
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Khalafawy",
+        "originalName": "Khalafawy",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.242993500527223,
+              30.096079270970574
+            ],
+            [
+              31.247562055028336,
+              30.096079270970574
+            ],
+            [
+              31.247562055028336,
+              30.100031840140534
+            ],
+            [
+              31.242993500527223,
+              30.100031840140534
+            ],
+            [
+              31.242993500527223,
+              30.096079270970574
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Mezallat",
+        "originalName": "Mezallat",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.244382228909195,
+              30.10302371541502
+            ],
+            [
+              31.248951104424137,
+              30.10302371541502
+            ],
+            [
+              31.248951104424137,
+              30.10697628458498
+            ],
+            [
+              31.244382228909195,
+              30.10697628458498
+            ],
+            [
+              31.244382228909195,
+              30.10302371541502
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Koliet El-Zeraa",
+        "originalName": "Kolleyyet El-Zeraa",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.246326467822897,
+              30.11191260430391
+            ],
+            [
+              31.25089575439933,
+              30.11191260430391
+            ],
+            [
+              31.25089575439933,
+              30.11586517347387
+            ],
+            [
+              31.246326467822897,
+              30.11586517347387
+            ],
+            [
+              31.246326467822897,
+              30.11191260430391
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Shubra Al Khaimah",
+        "originalName": "Shubra El-Kheima",
+        "lineId": "Line 2",
+        "lineValue": "two",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.242437379738377,
+              30.12052371541502
+            ],
+            [
+              31.247007064706068,
+              30.12052371541502
+            ],
+            [
+              31.247007064706068,
+              30.12447628458498
+            ],
+            [
+              31.242437379738377,
+              30.12447628458498
+            ],
+            [
+              31.242437379738377,
+              30.12052371541502
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Adly Mansour",
+        "originalName": "Adly Mansour",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.41910348047587,
+              30.144968159859463
+            ],
+            [
+              31.423674297301915,
+              30.144968159859463
+            ],
+            [
+              31.423674297301915,
+              30.148920729029424
+            ],
+            [
+              31.41910348047587,
+              30.148920729029424
+            ],
+            [
+              31.41910348047587,
+              30.144968159859463
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Heykestep",
+        "originalName": "El Haykestep",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.40243688458843,
+              30.141912604303908
+            ],
+            [
+              31.407007559856016,
+              30.141912604303908
+            ],
+            [
+              31.407007559856016,
+              30.14586517347387
+            ],
+            [
+              31.40243688458843,
+              30.14586517347387
+            ],
+            [
+              31.40243688458843,
+              30.141912604303908
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Omar Ibn Al Khattab",
+        "originalName": "Omar Ibn El-Khattab",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.391881406234162,
+              30.138579270970574
+            ],
+            [
+              31.39645192709917,
+              30.138579270970574
+            ],
+            [
+              31.39645192709917,
+              30.142531840140535
+            ],
+            [
+              31.391881406234162,
+              30.142531840140535
+            ],
+            [
+              31.391881406234162,
+              30.138579270970574
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Qebaa",
+        "originalName": "Qobaa",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.381603763527483,
+              30.132745937637242
+            ],
+            [
+              31.38617401425029,
+              30.132745937637242
+            ],
+            [
+              31.38617401425029,
+              30.136698506807203
+            ],
+            [
+              31.381603763527483,
+              30.136698506807203
+            ],
+            [
+              31.381603763527483,
+              30.132745937637242
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Hesham Barakat",
+        "originalName": "Hesham Barakat",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.370492736011947,
+              30.12913482652613
+            ],
+            [
+              31.375062819543608,
+              30.12913482652613
+            ],
+            [
+              31.375062819543608,
+              30.13308739569609
+            ],
+            [
+              31.370492736011947,
+              30.13308739569609
+            ],
+            [
+              31.370492736011947,
+              30.12913482652613
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "El Nozha",
+        "originalName": "El-Nozha",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.357715022528122,
+              30.126357048748353
+            ],
+            [
+              31.362284977471884,
+              30.126357048748353
+            ],
+            [
+              31.362284977471884,
+              30.130309617918314
+            ],
+            [
+              31.357715022528122,
+              30.130309617918314
+            ],
+            [
+              31.357715022528122,
+              30.126357048748353
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Nadi El Shams",
+        "originalName": "Nadi El-Shams",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.341604052832054,
+              30.120245937637243
+            ],
+            [
+              31.34617372494572,
+              30.120245937637243
+            ],
+            [
+              31.34617372494572,
+              30.124198506807204
+            ],
+            [
+              31.341604052832054,
+              30.124198506807204
+            ],
+            [
+              31.341604052832054,
+              30.120245937637243
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Alf Maskan",
+        "originalName": "Alf Maskan",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.337437482559803,
+              30.116079270970577
+            ],
+            [
+              31.34200696188464,
+              30.116079270970577
+            ],
+            [
+              31.34200696188464,
+              30.120031840140538
+            ],
+            [
+              31.337437482559803,
+              30.120031840140538
+            ],
+            [
+              31.337437482559803,
+              30.116079270970577
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Heliopolis",
+        "originalName": "Heliopolis Square",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.335771047157262,
+              30.106079270970575
+            ],
+            [
+              31.34034006395385,
+              30.106079270970575
+            ],
+            [
+              31.34034006395385,
+              30.110031840140536
+            ],
+            [
+              31.335771047157262,
+              30.110031840140536
+            ],
+            [
+              31.335771047157262,
+              30.106079270970575
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Haroun",
+        "originalName": "Haroun",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.330493429911094,
+              30.099134826526132
+            ],
+            [
+              31.335062125644463,
+              30.099134826526132
+            ],
+            [
+              31.335062125644463,
+              30.103087395696093
+            ],
+            [
+              31.330493429911094,
+              30.103087395696093
+            ],
+            [
+              31.330493429911094,
+              30.099134826526132
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Al Ahram",
+        "originalName": "Al-Ahram",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.32410476567219,
+              30.089412604303906
+            ],
+            [
+              31.32867301210559,
+              30.089412604303906
+            ],
+            [
+              31.32867301210559,
+              30.093365173473867
+            ],
+            [
+              31.32410476567219,
+              30.093365173473867
+            ],
+            [
+              31.32410476567219,
+              30.089412604303906
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Koleyet El-Banat",
+        "originalName": "Koleyet El-Banat",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.32660494531302,
+              30.08163482652613
+            ],
+            [
+              31.331172832464755,
+              30.08163482652613
+            ],
+            [
+              31.331172832464755,
+              30.08558739569609
+            ],
+            [
+              31.32660494531302,
+              30.08558739569609
+            ],
+            [
+              31.32660494531302,
+              30.08163482652613
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Cairo Stadium",
+        "originalName": "Stadium",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.315216300109906,
+              30.071079270970575
+            ],
+            [
+              31.319783699890092,
+              30.071079270970575
+            ],
+            [
+              31.319783699890092,
+              30.075031840140536
+            ],
+            [
+              31.315216300109906,
+              30.075031840140536
+            ],
+            [
+              31.315216300109906,
+              30.071079270970575
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Fair Zone",
+        "originalName": "Fair Zone",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.298827404809895,
+              30.071357048748354
+            ],
+            [
+              31.30339481741233,
+              30.071357048748354
+            ],
+            [
+              31.30339481741233,
+              30.075309617918315
+            ],
+            [
+              31.298827404809895,
+              30.075309617918315
+            ],
+            [
+              31.298827404809895,
+              30.071357048748354
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Abbassiya",
+        "originalName": "Abbassia",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.278549710369738,
+              30.06774593763724
+            ],
+            [
+              31.28311695629693,
+              30.06774593763724
+            ],
+            [
+              31.28311695629693,
+              30.071698506807202
+            ],
+            [
+              31.278549710369738,
+              30.071698506807202
+            ],
+            [
+              31.278549710369738,
+              30.06774593763724
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Abdou Pasha",
+        "originalName": "Abdou Pasha",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.272438714624165,
+              30.062745937637242
+            ],
+            [
+              31.277005729820274,
+              30.062745937637242
+            ],
+            [
+              31.277005729820274,
+              30.066698506807203
+            ],
+            [
+              31.272438714624165,
+              30.066698506807203
+            ],
+            [
+              31.272438714624165,
+              30.062745937637242
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "El Geish",
+        "originalName": "El Geish",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.264661000925805,
+              30.059968159859466
+            ],
+            [
+              31.269227887963083,
+              30.059968159859466
+            ],
+            [
+              31.269227887963083,
+              30.063920729029427
+            ],
+            [
+              31.264661000925805,
+              30.063920729029427
+            ],
+            [
+              31.264661000925805,
+              30.059968159859466
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Bab El Shaaria",
+        "originalName": "Bab El Shaaria",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.253827853372098,
+              30.051912604303908
+            ],
+            [
+              31.258394368850123,
+              30.051912604303908
+            ],
+            [
+              31.258394368850123,
+              30.05586517347387
+            ],
+            [
+              31.253827853372098,
+              30.05586517347387
+            ],
+            [
+              31.253827853372098,
+              30.051912604303908
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Ataba",
+        "originalName": "Attaba",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.244661218728787,
+              30.05052371541502
+            ],
+            [
+              31.249227670160103,
+              30.05052371541502
+            ],
+            [
+              31.249227670160103,
+              30.054476284584982
+            ],
+            [
+              31.244661218728787,
+              30.054476284584982
+            ],
+            [
+              31.244661218728787,
+              30.05052371541502
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Nasser",
+        "originalName": "Nasser",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.236605637554728,
+              30.051634826526133
+            ],
+            [
+              31.241172140223053,
+              30.051634826526133
+            ],
+            [
+              31.241172140223053,
+              30.055587395696094
+            ],
+            [
+              31.236605637554728,
+              30.055587395696094
+            ],
+            [
+              31.236605637554728,
+              30.051634826526133
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Maspero",
+        "originalName": "Maspero",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.229938926052228,
+              30.053579270970577
+            ],
+            [
+              31.23450551839221,
+              30.053579270970577
+            ],
+            [
+              31.23450551839221,
+              30.057531840140538
+            ],
+            [
+              31.229938926052228,
+              30.057531840140538
+            ],
+            [
+              31.229938926052228,
+              30.053579270970577
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Safaa Hegazy",
+        "originalName": "Safaa Hegazy",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.220216543666194,
+              30.06052371541502
+            ],
+            [
+              31.2247834563338,
+              30.06052371541502
+            ],
+            [
+              31.2247834563338,
+              30.06447628458498
+            ],
+            [
+              31.220216543666194,
+              30.06447628458498
+            ],
+            [
+              31.220216543666194,
+              30.06052371541502
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Kit Kat",
+        "originalName": "Kit Kat",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.210772003096576,
+              30.064690382081686
+            ],
+            [
+              31.215339108014536,
+              30.064690382081686
+            ],
+            [
+              31.215339108014536,
+              30.068642951251647
+            ],
+            [
+              31.210772003096576,
+              30.068642951251647
+            ],
+            [
+              31.210772003096576,
+              30.064690382081686
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Sudan St.",
+        "originalName": "Sudan",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.20299415481418,
+              30.06774593763724
+            ],
+            [
+              31.207561400741373,
+              30.06774593763724
+            ],
+            [
+              31.207561400741373,
+              30.071698506807202
+            ],
+            [
+              31.20299415481418,
+              30.071698506807202
+            ],
+            [
+              31.20299415481418,
+              30.06774593763724
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Imbaba",
+        "originalName": "Imbaba",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.205216235994627,
+              30.07385704874835
+            ],
+            [
+              31.209783764005373,
+              30.07385704874835
+            ],
+            [
+              31.209783764005373,
+              30.077809617918312
+            ],
+            [
+              31.205216235994627,
+              30.077809617918312
+            ],
+            [
+              31.205216235994627,
+              30.07385704874835
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "El-Bohy",
+        "originalName": "El-Bohy",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.208271644051003,
+              30.08024593763724
+            ],
+            [
+              31.212839467060107,
+              30.08024593763724
+            ],
+            [
+              31.212839467060107,
+              30.0841985068072
+            ],
+            [
+              31.208271644051003,
+              30.0841985068072
+            ],
+            [
+              31.208271644051003,
+              30.08024593763724
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "El-Qawmia",
+        "originalName": "El-Qawmia",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.20660472075099,
+              30.091357048748353
+            ],
+            [
+              31.21117305702679,
+              30.091357048748353
+            ],
+            [
+              31.21117305702679,
+              30.095309617918314
+            ],
+            [
+              31.20660472075099,
+              30.095309617918314
+            ],
+            [
+              31.20660472075099,
+              30.091357048748353
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Ring Rd.",
+        "originalName": "Ring Road",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.197437983484978,
+              30.09441260430391
+            ],
+            [
+              31.20200646095947,
+              30.09441260430391
+            ],
+            [
+              31.20200646095947,
+              30.09836517347387
+            ],
+            [
+              31.197437983484978,
+              30.09836517347387
+            ],
+            [
+              31.197437983484978,
+              30.09441260430391
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Rod El Farag Corridor",
+        "originalName": "Rod al-Farag Corridor",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.18188229953915,
+              30.099968159859465
+            ],
+            [
+              31.18645103379418,
+              30.099968159859465
+            ],
+            [
+              31.18645103379418,
+              30.103920729029426
+            ],
+            [
+              31.18188229953915,
+              30.103920729029426
+            ],
+            [
+              31.18188229953915,
+              30.099968159859465
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Tawfikia",
+        "originalName": "Tawfikia",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.200216479584988,
+              30.0633014931928
+            ],
+            [
+              31.204783520415013,
+              30.0633014931928
+            ],
+            [
+              31.204783520415013,
+              30.06725406236276
+            ],
+            [
+              31.200216479584988,
+              30.06725406236276
+            ],
+            [
+              31.200216479584988,
+              30.0633014931928
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Wadi El Nile",
+        "originalName": "Wadi El Nile",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.198827750882316,
+              30.056357048748353
+            ],
+            [
+              31.203394471339905,
+              30.056357048748353
+            ],
+            [
+              31.203394471339905,
+              30.060309617918314
+            ],
+            [
+              31.198827750882316,
+              30.060309617918314
+            ],
+            [
+              31.198827750882316,
+              30.056357048748353
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Gamat El Dowal",
+        "originalName": "Gamat El Dowal",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.197439034931634,
+              30.048857048748353
+            ],
+            [
+              31.202005409512815,
+              30.048857048748353
+            ],
+            [
+              31.202005409512815,
+              30.052809617918314
+            ],
+            [
+              31.197439034931634,
+              30.052809617918314
+            ],
+            [
+              31.197439034931634,
+              30.048857048748353
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Boulak El Dakrour",
+        "originalName": "Boulak El Dakrour",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.194106040879678,
+              30.03413482652613
+            ],
+            [
+              31.198671736898103,
+              30.03413482652613
+            ],
+            [
+              31.198671736898103,
+              30.038087395696092
+            ],
+            [
+              31.194106040879678,
+              30.038087395696092
+            ],
+            [
+              31.194106040879678,
+              30.03413482652613
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stationName": "Cairo University",
+        "originalName": "Cairo University",
+        "lineId": "Line 3",
+        "lineValue": "three",
+        "areaRadiusKm": 0.22,
+        "boundsSource": "estimated_from_radius"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              31.198828493413735,
+              30.02413482652613
+            ],
+            [
+              31.203393728808486,
+              30.02413482652613
+            ],
+            [
+              31.203393728808486,
+              30.02808739569609
+            ],
+            [
+              31.198828493413735,
+              30.02808739569609
+            ],
+            [
+              31.198828493413735,
+              30.02413482652613
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

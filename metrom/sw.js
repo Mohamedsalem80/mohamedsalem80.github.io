@@ -1,11 +1,15 @@
-const CACHE_VERSION = 'metrom-static-v1';
+const CACHE_VERSION = 'metrom-static-v2';
+const TILE_CACHE_VERSION = 'metrom-tiles-v1';
 const CORE_ASSETS = [
   './',
   './index.html',
   './main.html',
+  './recorder.html',
+  './css/leaflet.css',
   './css/metro.min.css',
+  './js/leaflet.js',
   './js/parallax.min.js',
-  './js/metro-script.min.js',
+  './js/metro-script.js',
   './favicon/apple-icon-180x180.png',
   './img/metrom-layer-1.png',
   './img/metrom-layer-2.png',
@@ -19,6 +23,7 @@ const CORE_ASSETS = [
 ];
 
 const STATIC_EXTENSIONS = /\.(?:css|js|png|jpg|jpeg|gif|webp|svg|ico|woff2?)$/i;
+const TILE_HOST_REGEX = /^(?:[abcd]\.)?basemaps\.cartocdn\.com$/i;
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -32,7 +37,7 @@ self.addEventListener('activate', (event) => {
     caches.keys().then((keys) =>
       Promise.all(
         keys
-          .filter((key) => key !== CACHE_VERSION)
+          .filter((key) => key !== CACHE_VERSION && key !== TILE_CACHE_VERSION)
           .map((key) => caches.delete(key))
       )
     )
@@ -45,6 +50,28 @@ self.addEventListener('fetch', (event) => {
   if (request.method !== 'GET') return;
 
   const url = new URL(request.url);
+
+  // Runtime tile cache: allows previously visited map areas to remain visible offline.
+  if (TILE_HOST_REGEX.test(url.hostname)) {
+    event.respondWith(
+      caches.open(TILE_CACHE_VERSION).then((tileCache) =>
+        tileCache.match(request).then((cachedTile) => {
+          const networkFetch = fetch(request)
+            .then((response) => {
+              if (response && response.status === 200) {
+                tileCache.put(request, response.clone());
+              }
+              return response;
+            })
+            .catch(() => cachedTile);
+
+          return cachedTile || networkFetch;
+        })
+      )
+    );
+    return;
+  }
+
   if (url.origin !== self.location.origin) return;
 
   const isStaticAsset = STATIC_EXTENSIONS.test(url.pathname);
