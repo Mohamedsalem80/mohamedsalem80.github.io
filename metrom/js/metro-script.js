@@ -67,6 +67,18 @@ var dropoff = "none";
 var slinestr = "one";
 var elinestr = "one";
 var travelWatchId = null;
+var travelTickId = null;
+var travelState = null;
+
+var TRAVEL_CONFIG = {
+    arrivalRadiusKm: 0.08,
+    staleGpsMs: 7000,
+    fallbackTickMs: 1200,
+    maxBacktrackKm: 0.08,
+    defaultSpeedKmh: 34,
+    minFallbackSpeedKmh: 22,
+    maxFallbackSpeedKmh: 55
+};
 
 function activateTab(tabId, updateHash) {
     var tabButtons = document.querySelectorAll(".tab-btn[data-tab-target]");
@@ -455,6 +467,371 @@ function clearMapHighlights() {
     }
 }
 
+function clampValue(value, min, max) {
+    return Math.min(Math.max(value, min), max);
+}
+
+function lerpValue(a, b, t) {
+    return a + (b - a) * t;
+}
+
+function buildRouteMeta(routePoints) {
+    if (!routePoints || routePoints.length < 2) return null;
+
+    var cumulativeKm = [0];
+    var totalKm = 0;
+
+    for (var i = 1; i < routePoints.length; i++) {
+        totalKm += haversineKm(routePoints[i - 1].lat, routePoints[i - 1].lng, routePoints[i].lat, routePoints[i].lng);
+        cumulativeKm.push(totalKm);
+    }
+
+    return {
+        points: routePoints,
+        cumulativeKm: cumulativeKm,
+        totalKm: totalKm
+    };
+}
+
+function getPointAtProgress(routeMeta, progressKm) {
+    if (!routeMeta || !routeMeta.points || routeMeta.points.length === 0) return null;
+
+    var points = routeMeta.points;
+    var cumulative = routeMeta.cumulativeKm;
+    var clampedProgress = clampValue(progressKm, 0, routeMeta.totalKm);
+
+    if (clampedProgress <= 0) {
+        return {
+            lat: points[0].lat,
+            lng: points[0].lng,
+            segmentIndex: 0,
+            progressKm: 0
+        };
+    }
+
+    for (var i = 0; i < cumulative.length - 1; i++) {
+        if (clampedProgress <= cumulative[i + 1]) {
+            var segmentLength = cumulative[i + 1] - cumulative[i];
+            var ratio = segmentLength > 0 ? (clampedProgress - cumulative[i]) / segmentLength : 0;
+            ratio = clampValue(ratio, 0, 1);
+            return {
+                lat: lerpValue(points[i].lat, points[i + 1].lat, ratio),
+                lng: lerpValue(points[i].lng, points[i + 1].lng, ratio),
+                segmentIndex: i,
+                progressKm: clampedProgress
+            };
+        }
+    }
+
+    return {
+        lat: points[points.length - 1].lat,
+        lng: points[points.length - 1].lng,
+        segmentIndex: points.length - 2,
+        progressKm: routeMeta.totalKm
+    };
+}
+
+function projectPointToRoute(routeMeta, lat, lng) {
+    if (!routeMeta || !routeMeta.points || routeMeta.points.length < 2) return null;
+
+    var points = routeMeta.points;
+    var cumulative = routeMeta.cumulativeKm;
+    var best = null;
+
+    for (var i = 0; i < points.length - 1; i++) {
+        var a = points[i];
+        var b = points[i + 1];
+        var ax = a.lng;
+        var ay = a.lat;
+        var bx = b.lng;
+        var by = b.lat;
+        var px = lng;
+        var py = lat;
+
+        var dx = bx - ax;
+        var dy = by - ay;
+        var len2 = (dx * dx) + (dy * dy);
+        var t = 0;
+        if (len2 > 0) {
+            t = ((px - ax) * dx + (py - ay) * dy) / len2;
+        }
+        t = clampValue(t, 0, 1);
+
+        var projLat = ay + (dy * t);
+        var projLng = ax + (dx * t);
+        var distanceKm = haversineKm(lat, lng, projLat, projLng);
+        var progressKm = cumulative[i] + haversineKm(a.lat, a.lng, projLat, projLng);
+
+        if (!best || distanceKm < best.distanceKm) {
+            best = {
+                lat: projLat,
+                lng: projLng,
+                segmentIndex: i,
+                progressKm: progressKm,
+                distanceKm: distanceKm
+            };
+        }
+    }
+
+    return best;
+}
+
+function findNearestStationByProgress(routeMeta, progressKm) {
+    if (!routeMeta || !routeMeta.points || routeMeta.points.length === 0) return null;
+
+    var nearestIndex = 0;
+    var nearestDiff = Number.MAX_VALUE;
+
+    for (var i = 0; i < routeMeta.cumulativeKm.length; i++) {
+        var diff = Math.abs(routeMeta.cumulativeKm[i] - progressKm);
+        if (diff < nearestDiff) {
+            nearestDiff = diff;
+            nearestIndex = i;
+        }
+    }
+
+    return {
+        station: routeMeta.points[nearestIndex],
+        index: nearestIndex
+    };
+}
+
+function initializeTravelState() {
+    var routeMeta = buildRouteMeta(window.currentRouteGeoPoints || []);
+    if (!routeMeta) return null;
+
+    travelState = {
+        routeMeta: routeMeta,
+        maxProgressKm: 0,
+        lastProgressKm: null,
+        lastProgressAtMs: 0,
+        lastGpsAtMs: 0,
+        lastTickAtMs: Date.now(),
+        smoothedSpeedKmh: TRAVEL_CONFIG.defaultSpeedKmh,
+        lastAccuracyMeters: 0,
+        filteredPosition: null,
+        visuals: null,
+        arrivedSamples: 0,
+        isFallbackMode: false
+    };
+
+    window.travelMapFollowingInitialized = false;
+    return travelState;
+}
+
+function resetTravelTrackingState() {
+    travelState = null;
+
+    if (travelTickId !== null) {
+        clearInterval(travelTickId);
+        travelTickId = null;
+    }
+}
+
+function getRemainingRoutePoints(routeMeta, progressKm) {
+    var onRoutePoint = getPointAtProgress(routeMeta, progressKm);
+    if (!onRoutePoint) return [];
+
+    var remaining = [[onRoutePoint.lat, onRoutePoint.lng]];
+    for (var i = onRoutePoint.segmentIndex + 1; i < routeMeta.points.length; i++) {
+        remaining.push([routeMeta.points[i].lat, routeMeta.points[i].lng]);
+    }
+    return remaining;
+}
+
+function renderTravelVisuals(displayPoint, nearestStation, remaining, accuracyMeters, distanceToDestinationKm, isFallback) {
+    if (!window.metroMapState || !window.metroMapState.map || !window.metroMapState.travelLayer) return;
+
+    var map = window.metroMapState.map;
+    var travelLayer = window.metroMapState.travelLayer;
+
+    if (!travelState.visuals) {
+        travelLayer.clearLayers();
+        travelState.visuals = {
+            userMarker: L.circleMarker([displayPoint.lat, displayPoint.lng], {
+                radius: 8,
+                color: '#0d47a1',
+                weight: 2,
+                fillColor: '#42A5F5',
+                fillOpacity: 1
+            }).addTo(travelLayer),
+            nearestMarker: L.circleMarker([nearestStation.lat, nearestStation.lng], {
+                radius: 9,
+                color: '#1b5e20',
+                weight: 2,
+                fillColor: '#66BB6A',
+                fillOpacity: 1
+            }).addTo(travelLayer),
+            connector: L.polyline([[displayPoint.lat, displayPoint.lng], [nearestStation.lat, nearestStation.lng]], {
+                color: '#90CAF9',
+                weight: 4,
+                dashArray: '8,8',
+                opacity: 0.95
+            }).addTo(travelLayer),
+            remainingPath: L.polyline(remaining, {
+                color: '#FFC107',
+                weight: 5,
+                opacity: 0.95
+            }).addTo(travelLayer)
+        };
+    } else {
+        travelState.visuals.userMarker.setLatLng([displayPoint.lat, displayPoint.lng]);
+        travelState.visuals.nearestMarker.setLatLng([nearestStation.lat, nearestStation.lng]);
+        travelState.visuals.connector.setLatLngs([[displayPoint.lat, displayPoint.lng], [nearestStation.lat, nearestStation.lng]]);
+        travelState.visuals.remainingPath.setLatLngs(remaining);
+    }
+
+    if (!window.travelMapFollowingInitialized) {
+        map.fitBounds(L.latLngBounds([[displayPoint.lat, displayPoint.lng], [nearestStation.lat, nearestStation.lng]]), { padding: [36, 36] });
+        window.travelMapFollowingInitialized = true;
+    } else {
+        map.panTo([displayPoint.lat, displayPoint.lng], {
+            animate: true,
+            duration: 1.15,
+            easeLinearity: 0.2
+        });
+    }
+
+    var accText = Number.isFinite(accuracyMeters) ? (' (±' + accuracyMeters.toFixed(0) + ' m)') : '';
+    var modeText = isFallback ? 'GPS weak/underground detected, approximating along route. ' : '';
+    if (travelStatus) {
+        travelStatus.innerText =
+            modeText +
+            'Traveling: nearest station is ' + nearestStation.plannerName +
+            ' on ' + nearestStation.lineId +
+            '. Remaining to destination ~' + (distanceToDestinationKm * 1000).toFixed(0) + ' m' + accText + '.';
+    }
+}
+
+function stopTravelAsArrived() {
+    stopTravelMode(true);
+    if (travelStatus) {
+        travelStatus.innerText = 'You reached near your destination station. Travel mode stopped automatically.';
+    }
+}
+
+function processTravelLocation(rawLat, rawLng, accuracyMeters, source) {
+    if (!travelState || !travelState.routeMeta) {
+        if (!initializeTravelState()) return;
+    }
+
+    var now = Date.now();
+    var routeMeta = travelState.routeMeta;
+    var projected = projectPointToRoute(routeMeta, rawLat, rawLng);
+    if (!projected) return;
+
+    var progressKm = projected.progressKm;
+    var nearMaxAllowed = Math.max(0, travelState.maxProgressKm - TRAVEL_CONFIG.maxBacktrackKm);
+    progressKm = Math.max(progressKm, nearMaxAllowed);
+
+    if (source === 'synthetic') {
+        progressKm = Math.max(progressKm, travelState.maxProgressKm);
+    }
+
+    if (travelState.lastProgressKm !== null) {
+        var dtHours = (now - travelState.lastProgressAtMs) / 3600000;
+        var deltaKm = progressKm - travelState.lastProgressKm;
+        if (source === 'gps' && dtHours > 0 && deltaKm > 0) {
+            var speedKmh = deltaKm / dtHours;
+            if (speedKmh >= 6 && speedKmh <= 120) {
+                travelState.smoothedSpeedKmh = (travelState.smoothedSpeedKmh * 0.7) + (speedKmh * 0.3);
+            }
+        }
+    }
+
+    travelState.maxProgressKm = Math.max(travelState.maxProgressKm, progressKm);
+    travelState.lastProgressKm = progressKm;
+    travelState.lastProgressAtMs = now;
+    travelState.lastAccuracyMeters = accuracyMeters;
+
+    var snappedPoint = getPointAtProgress(routeMeta, progressKm);
+    if (!snappedPoint) return;
+
+    var blend = 0.82;
+    if (source === 'gps') {
+        var acc = Number(accuracyMeters || 0);
+        if (acc <= 20) blend = 0.52;
+        else if (acc <= 45) blend = 0.68;
+        else if (acc <= 90) blend = 0.82;
+        else blend = 0.92;
+    } else {
+        blend = 1;
+    }
+
+    var blended = {
+        lat: lerpValue(rawLat, snappedPoint.lat, blend),
+        lng: lerpValue(rawLng, snappedPoint.lng, blend)
+    };
+
+    if (!travelState.filteredPosition) {
+        travelState.filteredPosition = blended;
+    } else {
+        var alpha = source === 'synthetic' ? 0.26 : 0.38;
+        travelState.filteredPosition = {
+            lat: lerpValue(travelState.filteredPosition.lat, blended.lat, alpha),
+            lng: lerpValue(travelState.filteredPosition.lng, blended.lng, alpha)
+        };
+    }
+
+    var nearestStationRef = findNearestStationByProgress(routeMeta, progressKm);
+    var nearestStation = nearestStationRef ? nearestStationRef.station : routeMeta.points[0];
+    var remaining = getRemainingRoutePoints(routeMeta, progressKm);
+    var distanceToDestinationKm = Math.max(0, routeMeta.totalKm - progressKm);
+
+    renderTravelVisuals(
+        travelState.filteredPosition,
+        nearestStation,
+        remaining,
+        accuracyMeters,
+        distanceToDestinationKm,
+        source === 'synthetic'
+    );
+
+    if (distanceToDestinationKm <= TRAVEL_CONFIG.arrivalRadiusKm) {
+        travelState.arrivedSamples += 1;
+    } else {
+        travelState.arrivedSamples = 0;
+    }
+
+    if (travelState.arrivedSamples >= 2) {
+        stopTravelAsArrived();
+    }
+}
+
+function travelFallbackTick() {
+    if (travelWatchId === null || !travelState || !travelState.routeMeta) return;
+
+    var now = Date.now();
+    var sinceLastGps = now - (travelState.lastGpsAtMs || 0);
+    var dtSec = (now - (travelState.lastTickAtMs || now)) / 1000;
+    travelState.lastTickAtMs = now;
+
+    if (sinceLastGps < TRAVEL_CONFIG.staleGpsMs || dtSec <= 0) {
+        return;
+    }
+
+    var speed = clampValue(
+        travelState.smoothedSpeedKmh || TRAVEL_CONFIG.defaultSpeedKmh,
+        TRAVEL_CONFIG.minFallbackSpeedKmh,
+        TRAVEL_CONFIG.maxFallbackSpeedKmh
+    );
+
+    var nextProgress = Math.min(
+        travelState.routeMeta.totalKm,
+        travelState.maxProgressKm + (speed * dtSec / 3600)
+    );
+
+    if (nextProgress <= travelState.maxProgressKm + 0.0005) {
+        return;
+    }
+
+    var simulatedPoint = getPointAtProgress(travelState.routeMeta, nextProgress);
+    if (!simulatedPoint) return;
+
+    travelState.isFallbackMode = true;
+    processTravelLocation(simulatedPoint.lat, simulatedPoint.lng, Math.max(120, Number(travelState.lastAccuracyMeters || 120)), 'synthetic');
+}
+
 function startTravelMode() {
     if (travelWatchId !== null) {
         stopTravelMode(false);
@@ -476,6 +853,8 @@ function startTravelMode() {
         return;
     }
 
+    initializeTravelState();
+
     if (window.metroMapState && window.metroMapState.travelLayer) {
         window.metroMapState.travelLayer.clearLayers();
     }
@@ -490,7 +869,14 @@ function startTravelMode() {
     }
 
     travelWatchId = navigator.geolocation.watchPosition(function(pos) {
-        updateTravelMap(pos.coords.latitude, pos.coords.longitude, Number(pos.coords.accuracy || 0));
+        if (!travelState) {
+            initializeTravelState();
+        }
+        if (travelState) {
+            travelState.lastGpsAtMs = Date.now();
+            travelState.isFallbackMode = false;
+        }
+        processTravelLocation(pos.coords.latitude, pos.coords.longitude, Number(pos.coords.accuracy || 0), 'gps');
     }, function(err) {
         if (travelStatus) {
             travelStatus.innerText = 'Travel mode error: ' + err.message;
@@ -500,6 +886,11 @@ function startTravelMode() {
         maximumAge: 1000,
         timeout: 20000
     });
+
+    if (travelTickId !== null) {
+        clearInterval(travelTickId);
+    }
+    travelTickId = setInterval(travelFallbackTick, TRAVEL_CONFIG.fallbackTickMs);
 }
 
 function stopTravelMode(silent) {
@@ -521,77 +912,12 @@ function stopTravelMode(silent) {
     if (window.metroMapState && window.metroMapState.travelLayer) {
         window.metroMapState.travelLayer.clearLayers();
     }
+
+    resetTravelTrackingState();
 }
 
 function updateTravelMap(lat, lng, accuracyMeters) {
-    if (!window.metroMapState || !window.metroMapState.map || !window.metroMapState.travelLayer) return;
-    if (!window.currentRouteGeoPoints || window.currentRouteGeoPoints.length < 2) return;
-
-    var map = window.metroMapState.map;
-    var travelLayer = window.metroMapState.travelLayer;
-    var userPoint = [lat, lng];
-    var routePoints = window.currentRouteGeoPoints;
-
-    var nearestIdx = 0;
-    var nearestDist = Number.MAX_VALUE;
-    for (var i = 0; i < routePoints.length; i++) {
-        var d = haversineKm(lat, lng, routePoints[i].lat, routePoints[i].lng);
-        if (d < nearestDist) {
-            nearestDist = d;
-            nearestIdx = i;
-        }
-    }
-
-    var nearestStation = routePoints[nearestIdx];
-    var remaining = routePoints.slice(nearestIdx).map(function(p) { return [p.lat, p.lng]; });
-
-    travelLayer.clearLayers();
-
-    L.circleMarker(userPoint, {
-        radius: 8,
-        color: '#0d47a1',
-        weight: 2,
-        fillColor: '#42A5F5',
-        fillOpacity: 1
-    }).bindPopup('You are here').addTo(travelLayer);
-
-    L.circleMarker([nearestStation.lat, nearestStation.lng], {
-        radius: 9,
-        color: '#1b5e20',
-        weight: 2,
-        fillColor: '#66BB6A',
-        fillOpacity: 1
-    }).bindPopup('Nearest route station: ' + nearestStation.plannerName).addTo(travelLayer);
-
-    L.polyline([userPoint, [nearestStation.lat, nearestStation.lng]], {
-        color: '#90CAF9',
-        weight: 4,
-        dashArray: '8,8',
-        opacity: 0.95
-    }).addTo(travelLayer);
-
-    if (remaining.length > 1) {
-        L.polyline(remaining, {
-            color: '#FFC107',
-            weight: 5,
-            opacity: 0.95
-        }).addTo(travelLayer);
-    }
-
-    if (!window.travelMapFollowingInitialized) {
-        map.fitBounds(L.latLngBounds([userPoint, [nearestStation.lat, nearestStation.lng]]), { padding: [36, 36] });
-        window.travelMapFollowingInitialized = true;
-    } else {
-        map.panTo(userPoint, { animate: true, duration: 0.6 });
-    }
-
-    var accText = Number.isFinite(accuracyMeters) ? (' (±' + accuracyMeters.toFixed(0) + ' m)') : '';
-    if (travelStatus) {
-        travelStatus.innerText =
-            'Traveling live: nearest station is ' + nearestStation.plannerName +
-            ' on ' + nearestStation.lineId +
-            ' at ~' + nearestDist.toFixed(2) + ' km from your current location' + accText + '.';
-    }
+    processTravelLocation(lat, lng, accuracyMeters, 'gps');
 }
 
 function showRouteOnMap(routeStations, startLine, endLine, transferStation) {
@@ -628,6 +954,8 @@ function showRouteOnMap(routeStations, startLine, endLine, transferStation) {
 
     var latLngs = points.map(function(p) { return [p.lat, p.lng]; });
     window.currentRouteGeoPoints = points;
+    window.currentRouteMeta = buildRouteMeta(points);
+    resetTravelTrackingState();
     L.polyline(latLngs, {
         color: '#9C27B0',
         weight: 6,
