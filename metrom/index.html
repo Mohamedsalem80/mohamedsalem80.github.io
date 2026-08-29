@@ -76,126 +76,122 @@
     }
     </script>
     <link rel="stylesheet" href="css/metro.min.css">
+    <link rel="preload" as="image" href="img/metrom-layer-1.png">
+    <link rel="stylesheet" href="css/metrom-ui.css?v=3.0.0">
 </head>
-<body>
-    <header>
-        <div class="container">
+<body class="landing-page">
+    <a href="#home" class="skip-link">Skip to main content</a>
+    <header class="site-header">
+        <div class="container header-shell">
             <div class="logo">
-                <a href="index.html" title="Cairo Metro Navigator Home">
-                    <img src="favicon/metrom-23.png" alt="Cairo Metro Navigator Logo" width="120" height="60" loading="lazy" decoding="async">
+                <a href="index.html" title="Metrom home" aria-label="Metrom home">
+                    <img src="favicon/metrom-23.png" alt="Metrom" width="120" height="60" fetchpriority="high">
                 </a>
             </div>
-    
-            <div class="back">
-                <a href="/">Home</a>
-                <a href="#features">Features</a>
-                <a href="main.html">🗺️ Route Planner</a>
-            </div>
+
+            <nav class="back" aria-label="Primary navigation">
+                <a href="../" class="mivex-link">Mivex</a>
+                <a href="#features">Capabilities</a>
+                <a href="main.html" class="header-cta">Plan a route <span aria-hidden="true">→</span></a>
+            </nav>
         </div>
     </header>
 
     <main id="home">
         <div class="container">
-            <div class="hero">
+            <section class="hero" aria-labelledby="home-title">
                 <div class="hero-text">
-                    <div class="slogan">
-                        Navigate Cairo Metro with Ease
-                    </div>
-    
-                    <div class="more">
-                        Find your way through Cairo's metro system. Get real-time station information, route planning, and fare details for your journey.
+                    <p class="eyebrow"><span></span> Cairo Metro Navigator</p>
+                    <h1 class="slogan" id="home-title">Metrom</h1>
+                    <p class="hero-title">Cairo, station by station.</p>
+                    <p class="more">Build a route across Cairo’s metro network, compare fares and travel time, then follow your journey from the map.</p>
+                    <div class="hero-actions">
+                        <a href="main.html" class="btn btn-primary">Plan a journey <span aria-hidden="true">→</span></a>
+                        <a href="#features" class="btn btn-secondary">Explore the system</a>
                     </div>
                 </div>
-                <div class="parallax mx-auto me-lg-0" style="max-width: 600px; pointer-events: none;">
+                <div class="parallax" aria-hidden="true">
                     <div class="parallax-layer" data-depth="-0.1" style="position: relative; display: block; left: 0px; top: 0px; transform: translate(6.5px, -3.1px);">
-                        <img src="img/metrom-layer-1.png" alt="Layer" width="1024">
+                        <img src="img/metrom-layer-1.png" alt="" width="1024" fetchpriority="high">
                     </div>
                     <div class="parallax-layer" data-depth="0.1" style="position: absolute; display: block; left: 0px; top: 0px; transform: translate(8.4px, -4px);">
-                        <img src="img/metrom-layer-2.png" alt="Layer"  width="1024">
+                        <img src="img/metrom-layer-2.png" alt="" width="1024" decoding="async">
                     </div>
                     <div class="parallax-layer" data-depth="-0.15" style="position: absolute; display: block; left: 0px; top: 0px; transform: translate(-7.7px, 3.7px);">
-                        <img src="img/metrom-layer-3.png" alt="Layer"  width="1024">
+                        <img src="img/metrom-layer-3.png" alt="" width="1024" decoding="async">
                     </div>
                     <div class="parallax-layer" data-depth="0.15" style="position: absolute; display: block; left: 0px; top: 0px; transform: translate(17.4px, -8.4px);">
-                        <img src="img/metrom-layer-4-1.png" alt="Layer"  width="1024" height="512">
+                        <img src="img/metrom-layer-4-1.png" alt="" width="1024" height="512" decoding="async">
                     </div>
                     <div class="parallax-layer" data-depth="-0.2" style="position: absolute; display: block; left: 0px; top: 0px; transform: translate(17.4px, -8.4px);">
-                        <img src="img/metrom-layer-4-2.png" alt="Layer"  width="1024" height="512">
+                        <img src="img/metrom-layer-4-2.png" alt="" width="1024" height="512" decoding="async">
                     </div>
                     <div class="parallax-layer zindex-1" data-depth="0.2" style="position: absolute; display: block; left: 0px; top: 0px; transform: translate(6.5px, -3.1px);">
-                        <img src="img/metrom-layer-5.png" alt="Layer"  width="1024">
+                        <img src="img/metrom-layer-5.png" alt="" width="1024" decoding="async">
                     </div>
                     <div class="parallax-layer zindex-1" data-depth="-0.25" style="position: absolute; display: block; left: 0px; top: 0px; transform: translate(-18.1px, 8.7px);">
-                        <img src="img/metrom-layer-6.png" alt="Layer"  width="1024">
+                        <img src="img/metrom-layer-6.png" alt="" width="1024" decoding="async">
                     </div>
                     <div class="parallax-layer zindex-1" data-depth="0.25" style="position: absolute; display: block; left: 0px; top: 0px; transform: translate(6.5px, -3.1px);">
-                        <img src="img/metrom-layer-7.png" alt="Layer"  width="1024">
+                        <img src="img/metrom-layer-7.png" alt="" width="1024" decoding="async">
                     </div>
                     <div class="parallax-layer zindex-1" data-depth="0.1" style="position: absolute; display: block; left: 0px; top: 0px; transform: translate(-18.1px, 8.7px);">
-                        <img src="img/metrom-layer-8.png" alt="Layer"  width="1024">
+                        <img src="img/metrom-layer-8.png" alt="" width="1024" decoding="async">
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="application">
-            <div class="container">
-                <div style="text-align: center;">
-                    <h2>Start Your Journey</h2>
-                    <p>Use our service to explore Cairo Metro easily</p>
-                    <div class="download-buttons">
-                    <a href="main.html" class="btn btn-primary" role="button">🗺️ Open Route Planner</a>
-                    <a href="#features" class="btn btn-secondary" role="button">📖 Learn More</a>
-                    </div>
+                <div class="network-summary" aria-label="Network summary">
+                    <span><strong>3</strong> active lines</span>
+                    <span><strong>89</strong> mapped stations</span>
+                    <span><strong>Live</strong> journey tracking</span>
                 </div>
-            </div>
+            </section>
         </div>
 
-        <div class="features" id="features" role="region" aria-label="Platform Features">
+        <section class="network-strip" aria-label="Cairo Metro lines">
             <div class="container">
-                <div style="text-align: center; margin-bottom: 1rem;">
-                    <h2 style="color: #F6C358; font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">Features</h2>
-                    <p style="color: #b0c4c1;">Everything you need to navigate Cairo Metro</p>
+                <span class="line-key line-one"><i></i> Line 1 <b>Helwan ↔ New El-Marg</b></span>
+                <span class="line-key line-two"><i></i> Line 2 <b>El Monib ↔ Shubra</b></span>
+                <span class="line-key line-three"><i></i> Line 3 <b>Adly Mansour ↔ West branches</b></span>
+            </div>
+        </section>
+
+        <section class="features" id="features" aria-labelledby="features-title">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="eyebrow">Built for movement</p>
+                    <h2 id="features-title">One workspace for the whole trip.</h2>
+                    <p>From choosing stations to understanding the route on the ground, each tool stays connected to the same network data.</p>
                 </div>
                 <div class="features-grid">
-                    <div class="feature-card">
-                        <h3>🗺️ Complete Metro Map</h3>
+                    <article class="feature-card">
+                        <span class="feature-index">01</span>
+                        <h3>Network map</h3>
                         <p>Interactive map of all three Cairo Metro lines with accurate station information and connections.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>🎟️ Fare Information</h3>
+                    </article>
+                    <article class="feature-card">
+                        <span class="feature-index">02</span>
+                        <h3>Fare and timing</h3>
                         <p>Get accurate fare prices for any journey between stations on Cairo Metro lines.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>📍 Coordinate Search</h3>
+                    </article>
+                    <article class="feature-card">
+                        <span class="feature-index">03</span>
+                        <h3>Nearest stations</h3>
                         <p>Find the closest metro station by entering your GPS coordinates or current location.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>📱 Mobile Friendly</h3>
+                    </article>
+                    <article class="feature-card">
+                        <span class="feature-index">04</span>
+                        <h3>Travel mode</h3>
                         <p>Access metro information anytime, anywhere on your phone while traveling in Cairo.</p>
-                    </div>
+                    </article>
                 </div>
             </div>
-        </div>
+        </section>
     </main>
     <footer>
-        <!-- Contact section removed, use footer for copyright only -->
-        <p>Mivex &copy; 2026 | Navigate Cairo's Metro Network with Ease</p>
+        <p>Mivex &copy; <span id="currentYear">2026</span> / Metrom</p>
+        <a href="main.html">Open route planner <span aria-hidden="true">→</span></a>
     </footer>
 <script src="js/parallax.min.js"></script>
-<script>
-    const parallaxElement = document.querySelector('.parallax');
-    if (parallaxElement) {
-        new Parallax(parallaxElement);
-    }
-</script>
-<script>
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-            navigator.serviceWorker.register('sw.js').catch(function() {
-                // Service worker registration can fail on some private/incognito sessions.
-            });
-        });
-    }
-</script>
+<script src="js/metrom-home.js?v=3.0.0"></script>
 </body>
 </html>

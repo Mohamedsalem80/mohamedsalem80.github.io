@@ -139,6 +139,27 @@ function initTabs() {
         btn.addEventListener("click", function() {
             activateTab(btn.getAttribute("data-tab-target"), true);
         });
+        btn.addEventListener("keydown", function(event) {
+            var currentIndex = Array.prototype.indexOf.call(tabButtons, btn);
+            var nextIndex = currentIndex;
+
+            if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+                nextIndex = (currentIndex + 1) % tabButtons.length;
+            } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+                nextIndex = (currentIndex - 1 + tabButtons.length) % tabButtons.length;
+            } else if (event.key === "Home") {
+                nextIndex = 0;
+            } else if (event.key === "End") {
+                nextIndex = tabButtons.length - 1;
+            } else {
+                return;
+            }
+
+            event.preventDefault();
+            var nextButton = tabButtons[nextIndex];
+            activateTab(nextButton.getAttribute("data-tab-target"), true);
+            nextButton.focus();
+        });
     });
 
     navTabLinks.forEach(function(link) {
@@ -159,6 +180,11 @@ function initTabs() {
 }
 
 function initPlannerControls() {
+    sline.setAttribute("aria-label", "Starting metro line");
+    eline.setAttribute("aria-label", "Destination metro line");
+    pickups.forEach(function(ele) { ele.setAttribute("aria-label", "Starting station"); });
+    dropoffs.forEach(function(ele) { ele.setAttribute("aria-label", "Destination station"); });
+
     sline.value = slinestr;
     eline.value = elinestr;
     changeSLine(slinestr);
@@ -167,11 +193,13 @@ function initPlannerControls() {
     function onStartLineChange() {
         slinestr = sline.value || "one";
         changeSLine(slinestr);
+        invalidateCurrentRoute(true);
     }
 
     function onEndLineChange() {
         elinestr = eline.value || "one";
         changeELine(elinestr);
+        invalidateCurrentRoute(true);
     }
 
     // Support both events to avoid browser inconsistencies on select elements.
@@ -183,14 +211,25 @@ function initPlannerControls() {
     pickups.forEach(function(ele){
         ele.addEventListener("change", function(e){
             pickup = e.target.value;
+            invalidateCurrentRoute(true);
         });
     });
 
     dropoffs.forEach(function(ele){
         ele.addEventListener("change", function(e){
             dropoff = e.target.value;
+            invalidateCurrentRoute(true);
         });
     });
+
+    document.getElementById("calculateRouteBtn").addEventListener("click", calculateTicket);
+    document.getElementById("swapRouteBtn").addEventListener("click", swapJourney);
+    document.getElementById("startTravelBtn").addEventListener("click", startTravelMode);
+    document.getElementById("resetPlannerBtn").addEventListener("click", resetForm);
+    document.getElementById("importCoordinatesBtn").addEventListener("click", function() { importCoordinatesFromLinks(); });
+    document.getElementById("liveLocationBtn").addEventListener("click", getLiveLocation);
+    document.getElementById("closestStationBtn").addEventListener("click", findClosestStationNow);
+    document.getElementById("closestJourneyBtn").addEventListener("click", findClosestStartEndStations);
 }
 
 // Initialize
@@ -246,11 +285,7 @@ function changeSLine(line){
         });
     }
 
-    // Always read pickup from the visible line select.
     var activePickup = getActivePickupSelect(line);
-    if (activePickup && activePickup.selectedIndex === 0 && activePickup.options.length > 1) {
-        activePickup.selectedIndex = 1;
-    }
     pickup = activePickup ? activePickup.value : "";
 }
 
@@ -298,11 +333,7 @@ function changeELine(line){
         });
     }
 
-    // Always read dropoff from the visible line select.
     var activeDropoff = getActiveDropoffSelect(line);
-    if (activeDropoff && activeDropoff.selectedIndex === 0 && activeDropoff.options.length > 1) {
-        activeDropoff.selectedIndex = 1;
-    }
     dropoff = activeDropoff ? activeDropoff.value : "";
 }
 
@@ -316,6 +347,57 @@ function getActiveDropoffSelect(line){
     if(line === "one") return dl1[0] || null;
     if(line === "two") return dl2[0] || null;
     return dl3[0] || null;
+}
+
+function setPlannerFeedback(message, type) {
+    var feedback = document.getElementById("plannerFeedback");
+    if (!feedback) return;
+    feedback.textContent = message;
+    feedback.dataset.state = type || "default";
+}
+
+function invalidateCurrentRoute(showMessage) {
+    var hadRoute = window.currentRouteGeoPoints && window.currentRouteGeoPoints.length > 1;
+    window.currentRouteGeoPoints = [];
+    window.currentRouteMeta = null;
+    z112.classList.remove("show");
+    stations.textContent = "";
+    stations.classList.remove("show");
+    document.getElementById("stationsList").replaceChildren();
+    transferGuide.textContent = "";
+    if (startTravelBtn) startTravelBtn.disabled = true;
+    stopTravelMode(true);
+    clearMapHighlights();
+
+    if (showMessage && hadRoute) {
+        setPlannerFeedback("Journey changed. Find the route again to refresh the summary.", "notice");
+    }
+}
+
+function swapJourney() {
+    var startLine = sline.value || "one";
+    var endLine = eline.value || "one";
+    var startStation = getActivePickupSelect(startLine).value;
+    var endStation = getActiveDropoffSelect(endLine).value;
+
+    sline.value = endLine;
+    eline.value = startLine;
+    slinestr = endLine;
+    elinestr = startLine;
+    changeSLine(slinestr);
+    changeELine(elinestr);
+
+    getActivePickupSelect(slinestr).value = endStation;
+    getActiveDropoffSelect(elinestr).value = startStation;
+    pickup = endStation;
+    dropoff = startStation;
+    invalidateCurrentRoute(false);
+
+    if (pickup && dropoff) {
+        calculateTicket();
+    } else {
+        setPlannerFeedback("Start and destination swapped.", "notice");
+    }
 }
 
 function resetForm(){
@@ -345,9 +427,7 @@ function resetForm(){
     stations.textContent = "";
     stations.classList.remove('show');
     document.getElementById('stationsList').innerHTML = "";
-    z112.classList.remove('show');
-    stopTravelMode(true);
-    clearMapHighlights();
+    invalidateCurrentRoute(false);
     if (window.metroMapState && window.metroMapState.travelLayer) {
         window.metroMapState.travelLayer.clearLayers();
     }
@@ -357,6 +437,7 @@ function resetForm(){
     if (travelSpeed) {
         travelSpeed.innerText = 'Speed: -- km/h';
     }
+    setPlannerFeedback("Choose a start and destination station.", "default");
 }
 
 function normalizeStationName(name) {
@@ -440,16 +521,6 @@ function stationAreaRadiusFor(stationObj) {
     }
 
     return TRAVEL_CONFIG.stationAreaRadiusKm;
-}
-
-function parseLineIdFromStopAreaName(nameText) {
-    var txt = String(nameText || '');
-    var m = txt.match(/line\s*(\d+)/i);
-    if (!m) return null;
-    if (m[1] === '1') return 'Line 1';
-    if (m[1] === '2') return 'Line 2';
-    if (m[1] === '3') return 'Line 3';
-    return null;
 }
 
 function stationAreaColor(lineId) {
@@ -537,92 +608,65 @@ function addStationAreaToggleControl(map) {
     map.addControl(new ToggleControl());
 }
 
-function loadStationAreasFromInternet() {
-    if (!window.metroGeoStations || window.metroGeoStations.length === 0) return;
+function loadLocalStationAreas() {
+    if (window.location.protocol === 'file:') {
+        window.stationAreaCoverage = {
+            source: 'default-radius',
+            updatedStations: 0,
+            totalStations: (window.metroGeoStations || []).length
+        };
+        return Promise.resolve();
+    }
 
-    var query = '[out:json][timeout:25];(relation["public_transport"="stop_area"](30.0,31.1,30.2,31.4););out tags bb;';
-    var endpoint = 'https://overpass.kumi.systems/api/interpreter';
-    var body = 'data=' + encodeURIComponent(query);
-
-    fetch(endpoint, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-        },
-        body: body
-    })
-        .then(function(res) {
-            if (!res.ok) throw new Error('Overpass HTTP ' + res.status);
-            return res.json();
+    return fetch('js/cairo_metro_station_bounds.geojson')
+        .then(function(response) {
+            if (!response.ok) throw new Error('Station bounds HTTP ' + response.status);
+            return response.json();
         })
         .then(function(data) {
-            var elements = (data && data.elements) ? data.elements : [];
-            if (!elements.length) return;
-
+            var features = data && Array.isArray(data.features) ? data.features : [];
             var updated = 0;
 
-            elements.forEach(function(rel) {
-                if (!rel || !rel.bounds) return;
+            features.forEach(function(feature) {
+                var properties = feature && feature.properties ? feature.properties : {};
+                var rings = feature && feature.geometry && feature.geometry.type === 'Polygon'
+                    ? feature.geometry.coordinates
+                    : null;
+                var ring = rings && Array.isArray(rings[0]) ? rings[0] : [];
+                if (!properties.lineId || !properties.stationName || ring.length === 0) return;
 
-                var b = rel.bounds;
-                var minLat = Number(b.minlat);
-                var minLng = Number(b.minlon);
-                var maxLat = Number(b.maxlat);
-                var maxLng = Number(b.maxlon);
-                if (!Number.isFinite(minLat) || !Number.isFinite(minLng) || !Number.isFinite(maxLat) || !Number.isFinite(maxLng)) return;
+                var lngValues = ring.map(function(point) { return Number(point[0]); }).filter(Number.isFinite);
+                var latValues = ring.map(function(point) { return Number(point[1]); }).filter(Number.isFinite);
+                if (!lngValues.length || !latValues.length) return;
 
-                var centerLat = (minLat + maxLat) / 2;
-                var centerLng = (minLng + maxLng) / 2;
-                var cornerRadiusKm = Math.max(
-                    haversineKm(centerLat, centerLng, minLat, minLng),
-                    haversineKm(centerLat, centerLng, minLat, maxLng),
-                    haversineKm(centerLat, centerLng, maxLat, minLng),
-                    haversineKm(centerLat, centerLng, maxLat, maxLng)
-                );
-                var inferredRadiusKm = clampValue(cornerRadiusKm * 0.9, 0.12, 0.55);
-
-                var tags = rel.tags || {};
-                var nameEn = tags['name:en'] || tags.int_name || tags.name || '';
-                var inferredLineId = parseLineIdFromStopAreaName(nameEn);
-
-                var nearest = null;
-                var nearestDist = Number.MAX_VALUE;
-                (window.metroGeoStations || []).forEach(function(st) {
-                    if (inferredLineId && st.lineId !== inferredLineId) {
-                        return;
-                    }
-                    var dist = haversineKm(centerLat, centerLng, st.lat, st.lng);
-                    if (dist < nearestDist) {
-                        nearest = st;
-                        nearestDist = dist;
-                    }
-                });
-
-                if (!nearest || nearestDist > 0.7) return;
-
-                var key = stationKey(nearest.lineId, nearest.plannerName);
-                stationAreaByKey[key] = inferredRadiusKm;
-                nearest.areaRadiusKm = inferredRadiusKm;
+                var key = stationKey(properties.lineId, properties.stationName);
+                var radiusKm = Number(properties.areaRadiusKm);
+                if (Number.isFinite(radiusKm) && radiusKm > 0) {
+                    stationAreaByKey[key] = radiusKm;
+                }
                 stationBoundsByKey[key] = {
-                    minLat: minLat,
-                    minLng: minLng,
-                    maxLat: maxLat,
-                    maxLng: maxLng
+                    minLat: Math.min.apply(null, latValues),
+                    minLng: Math.min.apply(null, lngValues),
+                    maxLat: Math.max.apply(null, latValues),
+                    maxLng: Math.max.apply(null, lngValues),
+                    source: properties.boundsSource || 'bundled-geojson'
                 };
                 updated += 1;
             });
 
-            if (updated > 0) {
-                window.stationAreaCoverage = {
-                    source: 'OSM Overpass stop_area bounds',
-                    updatedStations: updated,
-                    loadedAt: Date.now()
-                };
-                renderStationAreasOverlay();
-            }
+            window.stationAreaCoverage = {
+                source: 'bundled-geojson',
+                updatedStations: updated,
+                totalStations: (window.metroGeoStations || []).length
+            };
+            renderStationAreasOverlay();
         })
         .catch(function() {
-            // Keep fallback static radius when network or CORS is unavailable.
+            window.stationAreaCoverage = {
+                source: 'default-radius',
+                updatedStations: 0,
+                totalStations: (window.metroGeoStations || []).length
+            };
         });
 }
 
@@ -1400,9 +1444,12 @@ function startTravelMode() {
         }
         processTravelLocation(pos.coords.latitude, pos.coords.longitude, Number(pos.coords.accuracy || 0), 'gps');
     }, function(err) {
-        if (travelStatus) {
-            travelStatus.innerText = 'Travel mode error: ' + err.message;
+        var errorMessage = 'Travel mode error: ' + err.message;
+        if (err && Number(err.code) === 1) {
+            stopTravelMode(true);
+            errorMessage = 'Location permission was denied. Enable location access to use travel mode.';
         }
+        if (travelStatus) travelStatus.innerText = errorMessage;
     }, {
         enableHighAccuracy: true,
         maximumAge: 1000,
@@ -1419,6 +1466,10 @@ function stopTravelMode(silent) {
     if (travelWatchId !== null) {
         navigator.geolocation.clearWatch(travelWatchId);
         travelWatchId = null;
+    }
+    if (travelTickId !== null) {
+        clearInterval(travelTickId);
+        travelTickId = null;
     }
 
     if (startTravelBtn) {
@@ -1942,6 +1993,7 @@ function getLiveLocation() {
         if (!done) {
             coordResult.innerText = 'Could not get live location: ' + err.message;
         }
+        done = true;
         if (watchId !== null) {
             navigator.geolocation.clearWatch(watchId);
         }
@@ -2011,11 +2063,11 @@ function findClosestStartEndStations() {
 }
 
 function fareBreakdown(stations){
-    // Fare tiers from the provided table image.
+    // Cairo Metro fare tiers by total stations in the planned trip.
     if(stations <= 9){
-        return { regular: "8 EGP", elderly: "4 EGP", special: "5 EGP" };
-    } else if(stations <= 16){
         return { regular: "10 EGP", elderly: "5 EGP", special: "5 EGP" };
+    } else if(stations <= 16){
+        return { regular: "12 EGP", elderly: "6 EGP", special: "5 EGP" };
     } else if(stations <= 23){
         return { regular: "15 EGP", elderly: "8 EGP", special: "5 EGP" };
     } else {
@@ -2191,7 +2243,33 @@ function terminalNameForDirection(lineValue, towardEnd) {
     return towardEnd ? lineTerminals.end : lineTerminals.start;
 }
 
+function lineThreeDirectionTarget(transferStation, targetStation) {
+    var trunk = lineThreeRouteSegments[0];
+    var rodElFaragBranch = lineThreeRouteSegments[1];
+    var cairoUniversityBranch = lineThreeRouteSegments[2];
+
+    if (rodElFaragBranch.indexOf(targetStation) > 0) {
+        return "Rod El Farag Corridor";
+    }
+    if (cairoUniversityBranch.indexOf(targetStation) > 0) {
+        return "Cairo University";
+    }
+
+    var transferIndex = trunk.indexOf(transferStation);
+    var targetIndex = trunk.indexOf(targetStation);
+    if (transferIndex !== -1 && targetIndex !== -1) {
+        return targetIndex < transferIndex ? "Adly Mansour" : "Kit Kat";
+    }
+
+    return "Line 3 service";
+}
+
 function getTransferDirectionGuidance(transferStation, targetLine, targetStation) {
+    if (targetLine === "three") {
+        return "Transfer at " + transferStation + ". Take Line 3 toward " +
+            lineThreeDirectionTarget(transferStation, targetStation) + ".";
+    }
+
     var stats = network[targetLine] || [];
     var transferIdx = stats.indexOf(transferStation);
     var targetIdx = stats.indexOf(targetStation);
@@ -2217,17 +2295,14 @@ function calculateTicket(){
     dropoff = activeDropoffSelect ? activeDropoffSelect.value : "";
     
     if(!pickup || !dropoff) {
-        document.getElementById('stationsList').innerHTML = '<div style="color: #b0c4c1; padding: 1rem; text-align: center;">Please select the stations</div>';
-        stations.textContent = '';
-        transferGuide.innerText = "";
-        z112.classList.remove('show');
+        invalidateCurrentRoute(false);
+        setPlannerFeedback("Select both a starting station and a destination.", "error");
         return;
     }
 
     if (normalizeStationName(pickup) === normalizeStationName(dropoff)) {
-        document.getElementById('stationsList').innerHTML = '<div style="color: #ffcf86; padding: 1rem; text-align: center;">Start and destination cannot be the same station. Please choose a different destination.</div>';
-        stations.textContent = '';
-        transferGuide.innerText = "";
+        invalidateCurrentRoute(false);
+        setPlannerFeedback("Start and destination must be different stations.", "error");
         cstats.innerText = '0';
         cost.innerText = '-';
         elderlyCost.innerText = '-';
@@ -2284,8 +2359,13 @@ function calculateTicket(){
     
     // Show results with animation
     z112.classList.add('show');
+    if (startTravelBtn) {
+        startTravelBtn.disabled = !(window.currentRouteGeoPoints && window.currentRouteGeoPoints.length > 1);
+    }
+    setPlannerFeedback("Route ready. Review the journey summary below.", "success");
     setTimeout(() => {
-        z112.scrollIntoView({ behavior: 'smooth' });
+        var behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+        z112.scrollIntoView({ behavior: behavior, block: 'start' });
     }, 100);
 }
 
@@ -2469,6 +2549,18 @@ function buildStationMap() {
         attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
     });
     var offlineBaseLayer = createOfflineGridLayer();
+    var consecutiveTileErrors = 0;
+
+    onlineBaseLayer.on('tileload', function() {
+        consecutiveTileErrors = 0;
+    });
+    onlineBaseLayer.on('tileerror', function() {
+        consecutiveTileErrors += 1;
+        if (consecutiveTileErrors >= 3 && !map.hasLayer(offlineBaseLayer)) {
+            offlineBaseLayer.addTo(map);
+            offlineBaseLayer.bringToBack();
+        }
+    });
 
     function syncBaseLayerWithConnectivity() {
         var isOnline = navigator.onLine !== false;
@@ -2606,7 +2698,7 @@ function buildStationMap() {
     addStationAreaToggleControl(map);
     renderStationAreasOverlay();
 
-    loadStationAreasFromInternet();
+    loadLocalStationAreas();
 }
 
 if (document.readyState === 'loading') {
@@ -2625,3 +2717,6 @@ window.findClosestStartEndStations = findClosestStartEndStations;
 window.startTravelMode = startTravelMode;
 window.downloadStationBoundsData = downloadStationBoundsData;
 window.downloadStationsData = downloadStationsData;
+
+var currentYear = document.getElementById('currentYear');
+if (currentYear) currentYear.textContent = new Date().getFullYear();

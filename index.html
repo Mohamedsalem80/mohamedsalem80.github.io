@@ -226,30 +226,50 @@
 	</style>
 	<link rel="stylesheet" href="css/style.min.css?v=2.0.0">
 	<link rel="stylesheet" href="./css/jarallax.min.css">
+	<link rel="stylesheet" href="./css/future.css?v=1.0.0">
 </head>
 
 <body>
+	<div class="scroll-progress" aria-hidden="true"><span></span></div>
 	<section id="second-quote">
 		<div class="contaier">
-			<div class="jarallax" style="min-height: calc(100vh - 70px);">
+			<div class="jarallax">
 				<picture class="jarallax-img">
-					<source media="..." srcset="<alternative_background_image_url_here>">
-					<img src="./img/bgprog.jpg" alt="background">
+					<img src="./img/bgprog.jpg" alt="Code displayed across a software engineering workspace" fetchpriority="high">
 				</picture>
-				<header>
+				<header class="site-header">
 					<div class="header container">
-						<div class="logo">
-							<img src="./favicon/mivex-96x96.png" alt="Mivex" style="width: 48px;">
-							Mivex
-						</div>
+						<a class="logo" href="#second-quote" aria-label="Mivex home">
+							<img src="./favicon/mivex-96x96.png" alt="" width="48" height="48">
+							<span>Mivex</span>
+						</a>
 						<div class="menu-opt">
-							<a href="#contact" class="ms-anchor ms-btn-skewe"> Get in Touch </a>
+							<nav class="primary-nav" aria-label="Primary navigation">
+								<a href="#projects">Work</a>
+								<a href="#services">Services</a>
+								<a href="#web-dev">Capabilities</a>
+							</nav>
+							<a href="#contact" class="header-cta">Start a project <span aria-hidden="true">↗</span></a>
 						</div>
 					</div>
 				</header>
 				<div class="content">
-					<div class="text">
-						Unleash your innovation with cutting-edge solutions
+					<div class="intro-copy">
+						<p class="intro-eyebrow"><span></span> Software engineering studio</p>
+						<h1>
+							<span class="intro-brand">Mivex</span>
+							<span class="intro-statement">Digital products, engineered forward.</span>
+						</h1>
+						<p class="intro-lead">Web platforms, secure systems, and practical AI built to turn ambitious ideas into dependable products.</p>
+						<div class="intro-actions">
+							<a class="intro-primary" href="#projects">Explore our work <span aria-hidden="true">↓</span></a>
+							<a class="intro-secondary" href="#contact">Discuss a project</a>
+						</div>
+					</div>
+					<div class="intro-rail" aria-label="Core capabilities">
+						<span><b>01</b> Product engineering</span>
+						<span><b>02</b> Intelligent workflows</span>
+						<span><b>03</b> Secure delivery</span>
 					</div>
 				</div>
 			</div>
@@ -260,26 +280,30 @@
 			<div class="container">
 				<div class="hero">
 					<div class="hero-left">
-						<div class="quote">
-							Where Creativity Meets Reality
-						</div>
+						<p class="section-kicker">Creative systems / 01</p>
+						<h2 class="quote">
+							Where creativity meets <span>engineered reality.</span>
+						</h2>
 						<div class="sub-quote">
-							While you innovate we craft seamless design, functionality, and presentation to bring your
-							vision to life. Let’s transform your ideas into a digital masterpiece.
+							We connect design, functionality, and delivery to turn an early idea into a polished product people can rely on.
 						</div>
 						<div class="hero-btn">
-							<a class="button-86" href="#services" role="button">Services</a>
+							<a class="button-86" href="#services">Explore services <span aria-hidden="true">↘</span></a>
 						</div>
 					</div>
 					<div class="hero-right">
 						<div class="image-comparison">
 							<div class="image-wrapper">
-								<img src="img/creativity-meet-reality-after-1.png" alt="black and white"
+								<img src="img/creativity-meet-reality-after-1.png" alt="Monochrome creative concept"
 									class="image-new">
-								<img src="img/creativity-meet-reality-before-2.png" alt="color photo" class="image-old">
+								<img src="img/creativity-meet-reality-before-2.png" alt="" class="image-old">
+							</div>
+							<div class="comparison-labels" aria-hidden="true">
+								<span>Concept</span>
+								<span>Delivered</span>
 							</div>
 							<input type="range" class="slider" min="0" max="100" value="0" name="ranger"
-								aria-label="Adjust image comparison">
+								aria-label="Compare the concept and delivered visuals">
 						</div>
 					</div>
 				</div>
@@ -288,31 +312,37 @@
 
 		<section id="projects">
 			<div class="container">
-				<h2>Projects</h2>
+				<div class="section-heading">
+					<p class="section-kicker">Selected systems / 02</p>
+					<h2>Built to be used.</h2>
+					<p>Focused products spanning open-source tooling, decision support, playful interfaces, and urban navigation.</p>
+				</div>
 				<div class="projects">
-					<div class="project">
+					<article class="project">
 						<div class="project-image">
-							<img src="./img/mavenjs-proj-img.png" alt="mavenjs" loading="lazy">
+							<img src="./img/mavenjs-proj-img.png" alt="MavenJS project interface" loading="lazy" decoding="async">
 						</div>
 						<div class="project-content">
+							<div class="project-type">Open source</div>
 							<div class="project-title">
 								MavenJS
 							</div>
 							<div class="project-description">
-								open-source JavaScript library.
+								A lightweight JavaScript library designed for practical frontend development.
 							</div>
 							<div class="project-link">
-								<a href="/mavenjs/" target="_blank">
+								<a href="./mavenjs/" target="_blank" rel="noopener">
 									Visit MavenJS →
 								</a>
 							</div>
 						</div>
-					</div>
-					<div class="project">
+					</article>
+					<article class="project">
 						<div class="project-image">
-							<img src="./img/erws-proj-img.png" alt="erws" loading="lazy">
+							<img src="./img/erws-proj-img.png" alt="ERWS project interface" loading="lazy" decoding="async">
 						</div>
 						<div class="project-content">
+							<div class="project-type">Decision support</div>
 							<div class="project-title">
 								ERWS
 							</div>
@@ -320,17 +350,18 @@
 								Estimating Relative Weights of Subjects.
 							</div>
 							<div class="project-link">
-								<a href="https://sys.gaserc.org/" target="_blank">
+								<a href="https://sys.gaserc.org/" target="_blank" rel="noopener">
 									Visit ERWS →
 								</a>
 							</div>
 						</div>
-					</div>
-					<div class="project">
+					</article>
+					<article class="project">
 						<div class="project-image">
-							<img src="./img/wordl-proj-img.png" alt="wordl" loading="lazy">
+							<img src="./img/wordl-proj-img.png" alt="WORDL game interface" loading="lazy" decoding="async">
 						</div>
 						<div class="project-content">
+							<div class="project-type">Game interface</div>
 							<div class="project-title">
 								WORDL
 							</div>
@@ -338,17 +369,18 @@
 								Black & Gold UI for WORDLE game.
 							</div>
 							<div class="project-link">
-								<a href="/wordl/" target="_blank">
+								<a href="./wordl/" target="_blank" rel="noopener">
 									Visit WORDL →
 								</a>
 							</div>
 						</div>
-					</div>
-					<div class="project">
+					</article>
+					<article class="project">
 						<div class="project-image">
-							<img src="./img/metrom-proj-img.jpg" alt="metrom" loading="lazy">
+							<img src="./img/metrom-proj-img.jpg" alt="Metrom transit application" loading="lazy" decoding="async">
 						</div>
 						<div class="project-content">
+							<div class="project-type">Transit tool</div>
 							<div class="project-title">
 								Metrom
 							</div>
@@ -356,26 +388,33 @@
 								Navigate Cairo's Metro Network with Ease.
 							</div>
 							<div class="project-link">
-								<a href="/metrom/" target="_blank">
+								<a href="./metrom/" target="_blank" rel="noopener">
 									Visit Metrom →
 								</a>
 							</div>
 						</div>
-					</div>
+					</article>
 				</div>
 			</div>
 		</section>
 
-		<div class="wave-container"></div>
+		<div class="capability-band" aria-label="Mivex capabilities">
+			<div class="capability-track">
+				<span>Web platforms</span><i></i><span>AI workflows</span><i></i><span>Secure systems</span><i></i><span>Responsive design</span><i></i>
+				<span aria-hidden="true">Web platforms</span><i aria-hidden="true"></i><span aria-hidden="true">AI workflows</span><i aria-hidden="true"></i><span aria-hidden="true">Secure systems</span><i aria-hidden="true"></i><span aria-hidden="true">Responsive design</span><i aria-hidden="true"></i>
+			</div>
+		</div>
 		<section id="services">
 			<div class="container">
-				<div class="section-title">
-					<h2>Services</h2>
+				<div class="section-heading section-heading-light">
+					<p class="section-kicker">What we deliver / 03</p>
+					<h2>From first signal to stable release.</h2>
+					<p>Strategy, design, engineering, and optimization shaped around the outcome your product needs.</p>
 				</div>
 				<div class="services">
-					<div class="service">
+					<article class="service">
 						<div class="service-icon">
-							<img src="./img/web-desgin.jpg" alt="Web Design" loading="lazy">
+							<img src="./img/web-desgin.jpg" alt="Web interface design" loading="lazy" decoding="async">
 						</div>
 						<div class="service-title">
 							Web Design
@@ -383,10 +422,10 @@
 						<div class="service-description">
 							Design and develop pages that are visually appealing, user-friendly, and responsive.
 						</div>
-					</div>
-					<div class="service">
+					</article>
+					<article class="service">
 						<div class="service-icon">
-							<img src="./img/web-dev.jpg" alt="Web Development" loading="lazy">
+							<img src="./img/web-dev.jpg" alt="Web development workspace" loading="lazy" decoding="async">
 						</div>
 						<div class="service-title">
 							Web Development
@@ -394,11 +433,11 @@
 						<div class="service-description">
 							Develop custom websites and web applications that are tailored to your business needs.
 						</div>
-					</div>
+					</article>
 
-					<div class="service">
+					<article class="service">
 						<div class="service-icon">
-							<img src="./img/web-sec.jpg" alt="Web Security" loading="lazy">
+							<img src="./img/web-sec.jpg" alt="Web security technology" loading="lazy" decoding="async">
 						</div>
 						<div class="service-title">
 							Web Security
@@ -406,11 +445,11 @@
 						<div class="service-description">
 							Ensure that your website is secure and protected from cyber threats, and following measures for web security.
 						</div>
-					</div>
+					</article>
 
-					<div class="service">
+					<article class="service">
 						<div class="service-icon">
-							<img src="./img/seo.jpg" alt="SEO" loading="lazy">
+							<img src="./img/seo.jpg" alt="Search engine optimization analytics" loading="lazy" decoding="async">
 						</div>
 						<div class="service-title">
 							SEO
@@ -418,11 +457,11 @@
 						<div class="service-description">
 							Optimize your website to rank higher on search engines and drive organic traffic to your website.
 						</div>
-					</div>
+					</article>
 
-					<div class="service">
+					<article class="service">
 						<div class="service-icon">
-							<img src="./img/ai.jpg" alt="AI Solutions" loading="lazy">
+							<img src="./img/ai.jpg" alt="Artificial intelligence system" loading="lazy" decoding="async">
 						</div>
 						<div class="service-title">
 							AI Solutions
@@ -430,7 +469,7 @@
 						<div class="service-description">
 							Integrate AI into web products with intelligent workflows, recommendation logic, and predictive insights.
 						</div>
-					</div>
+					</article>
 				</div>
 			</div>
 		</section>
@@ -439,6 +478,11 @@
 		<section id="web-dev">
 			<div class="container">
 				<div class="section-text">
+					<div class="section-heading">
+						<p class="section-kicker">Engineering depth / 04</p>
+						<h2>Five disciplines. One delivery system.</h2>
+						<p class="section-lead">Every engagement connects product thinking with the technical detail needed to ship quickly and stay reliable.</p>
+					</div>
 					<div class="stack-matrix">
 						<div class="stack-track">
 							<h3>Web Design</h3>
@@ -483,6 +527,10 @@
 					</div>
 				</div>
 				<div class="section-content">
+					<div class="orbit-label" aria-hidden="true">
+						<span>Technology matrix</span>
+						<b>Full-stack</b>
+					</div>
 					<div class="parallax"
 						style="max-width: 636px; transform: translate3d(0px, 0px, 0px) rotate(0.0001deg); transform-style: preserve-3d; backface-visibility: hidden; pointer-events: none;">
 						<div class="parallax-layer" data-depth="0.05"
@@ -672,17 +720,21 @@
 			<div class="container">
 				<div class="contact-container">
 					<div class="contact-quote">
-						<p>Start Your Project</p>
+						<div>
+							<p class="section-kicker">Start a project / 05</p>
+							<h2>Let’s build what comes next.</h2>
+							<p class="contact-intro">Share the problem, the ambition, and the timeline. We’ll shape the path from there.</p>
+						</div>
 						<div class="contact-logo">
-							<img src="./favicon/mivex.png" alt="Mivex" style="width: 150px;" loading="lazy">
-							Mivex
+							<img src="./favicon/mivex.png" alt="" width="88" height="88" loading="lazy" decoding="async">
+							<span>Mivex</span>
 						</div>
 					</div>
 					<div class="contacts">
 						<div class="contacts-row">
 							<div class="contact-item">
 								<div class="contact-icon">
-									<img src="./svg/email.svg" alt="Email" width="32px" height="32px" loading="lazy">
+									<img src="./svg/email.svg" alt="" width="32" height="32" loading="lazy" decoding="async">
 								</div>
 								<div class="contact-title">
 									Project Email
@@ -691,14 +743,13 @@
 									Share your scope and timeline.
 								</div>
 								<div class="contact-description">
-									<a class="contact-link" target="_blank"
-										href="mailto:mohamed3salem1@gmail.com">Write</a>
+									<a class="contact-link" href="mailto:mohamed3salem1@gmail.com">Email Mivex</a>
 								</div>
 							</div>
 
 							<div class="contact-item">
 								<div class="contact-icon">
-									<img src="./svg/github.svg" alt="GitHub" width="32px" height="32px" loading="lazy">
+									<img src="./svg/github.svg" alt="" width="32" height="32" loading="lazy" decoding="async">
 								</div>
 								<div class="contact-title">
 									Work Samples
@@ -707,15 +758,14 @@
 									Explore delivery quality.
 								</div>
 								<div class="contact-description">
-									<a class="contact-link" target="_blank"
-										href="https://github.com/Mohamedsalem80">Follow</a>
+									<a class="contact-link" target="_blank" rel="noopener"
+										href="https://github.com/Mohamedsalem80">View GitHub</a>
 								</div>
 							</div>
 
 							<div class="contact-item">
 								<div class="contact-icon">
-									<img src="./svg/linkedin.svg" alt="LinkedIn" width="32px" height="32px"
-										loading="lazy">
+									<img src="./svg/linkedin.svg" alt="" width="32" height="32" loading="lazy" decoding="async">
 								</div>
 								<div class="contact-title">
 									Business Network
@@ -724,7 +774,7 @@
 									Professional updates and partnerships.
 								</div>
 								<div class="contact-description">
-									<a class="contact-link" target="_blank"
+									<a class="contact-link" target="_blank" rel="noopener"
 										href="https://www.linkedin.com/in/mo-salem80/">Connect</a>
 								</div>
 							</div>
@@ -733,7 +783,7 @@
 						<div class="contacts-row">
 							<div class="contact-item">
 								<div class="contact-icon">
-									<img src="./svg/kaggle.svg" alt="Kaggle" width="32px" height="32px" loading="lazy">
+									<img src="./svg/kaggle.svg" alt="" width="32" height="32" loading="lazy" decoding="async">
 								</div>
 								<div class="contact-title">
 									Kaggle
@@ -742,15 +792,14 @@
 									Check out my AI work.
 								</div>
 								<div class="contact-description">
-									<a class="contact-link" target="_blank"
-										href="https://www.kaggle.com/mohamedsalemmohamed">Follow</a>
+									<a class="contact-link" target="_blank" rel="noopener"
+										href="https://www.kaggle.com/mohamedsalemmohamed">View Kaggle</a>
 								</div>
 							</div>
 
 							<div class="contact-item">
 								<div class="contact-icon">
-									<img src="./svg/discord.svg" alt="Discord" width="32px" height="32px"
-										loading="lazy">
+									<img src="./svg/discord.svg" alt="" width="32" height="32" loading="lazy" decoding="async">
 								</div>
 								<div class="contact-title">
 									Discord
@@ -759,15 +808,14 @@
 									Hop on to discuss tech.
 								</div>
 								<div class="contact-description">
-									<a class="contact-link" target="_blank"
-										href="https://discord.com/users/gomine79">Chat</a>
+									<a class="contact-link" target="_blank" rel="noopener"
+										href="https://discord.com/users/gomine79">Open Discord</a>
 								</div>
 							</div>
 
 							<div class="contact-item">
 								<div class="contact-icon">
-									<img src="./svg/facebook.svg" alt="Facebook" width="32px" height="32px"
-										loading="lazy">
+									<img src="./svg/facebook.svg" alt="" width="32" height="32" loading="lazy" decoding="async">
 								</div>
 								<div class="contact-title">
 									Facebook
@@ -776,8 +824,8 @@
 									Stay tuned & updated.
 								</div>
 								<div class="contact-description">
-									<a class="contact-link" target="_blank"
-										href="https://www.facebook.com/mohamed.solaiman.7796">Add</a>
+									<a class="contact-link" target="_blank" rel="noopener"
+										href="https://www.facebook.com/mohamed.solaiman.7796">View Facebook</a>
 								</div>
 							</div>
 						</div>
@@ -787,80 +835,14 @@
 		</section>
 	</main>
 	<footer>
-		Copyright © 2022-2025 Mivex. All rights reserved.
+		<div class="footer-inner">
+			<span>Copyright © 2022-<span id="current-year">2026</span> Mivex.</span>
+			<a href="#second-quote">Back to top <span aria-hidden="true">↑</span></a>
+		</div>
 	</footer>
 	<script src="js/parallax.min.js?v=1.0.0"></script>
 	<script src="./js/jarallax.min.js"></script>
-	<script>
-		const hero = document.querySelector('.hero');
-		const slider = document.querySelector('.slider');
-		const oldImage = document.querySelector('.image-old');
-		const comparisonContainer = document.querySelector('.image-comparison');
-
-		function updateSlider(value) {
-			slider.value = value;
-			oldImage.style.clipPath = `inset(0 ${100 - value}% 0 0)`;
-			comparisonContainer.style.setProperty('--slider-position', `${value}%`);
-		}
-
-		const observer = new IntersectionObserver(
-			(entries, observer) => {
-				entries.forEach(entry => {
-					if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
-						startEffect();
-						observer.unobserve(hero); // Stop observing after triggering
-					}
-				});
-			},
-			{ threshold: 0.5 } // Trigger when 50% of `.hero` is visible
-		);
-
-		observer.observe(hero);
-
-		function startEffect() {
-			let value = 100;
-			let decreasing = true;
-
-			setTimeout(() => {
-				const interval = setInterval(() => {
-					if (decreasing) {
-						if (value > 0) {
-							value--;
-							updateSlider(value);
-						} else {
-							decreasing = false;
-							clearInterval(interval);
-							setTimeout(() => {
-								const increaseInterval = setInterval(() => {
-									if (value < 50) {
-										value++;
-										updateSlider(value);
-									} else {
-										clearInterval(increaseInterval);
-									}
-								}, 25);
-							}, 25);
-						}
-					}
-				}, 20);
-			}, 375);
-		}
-
-		slider.addEventListener('input', (e) => {
-			updateSlider(e.target.value);
-		});
-	</script>
-	<script>
-		jarallax(document.querySelectorAll('.jarallax'), {
-			speed: 0.2,
-		});
-	</script>
-	<script>
-		const parallaxElement = document.querySelector('.parallax');
-		if (parallaxElement) {
-			new Parallax(parallaxElement);
-		}
-	</script>
+	<script src="./js/site.js?v=1.0.0"></script>
 </body>
 
 </html>

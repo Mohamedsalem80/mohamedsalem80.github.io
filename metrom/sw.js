@@ -1,5 +1,6 @@
-const CACHE_VERSION = 'metrom-static-v2';
+const CACHE_VERSION = 'metrom-static-v6';
 const TILE_CACHE_VERSION = 'metrom-tiles-v1';
+const TILE_CACHE_LIMIT = 240;
 const CORE_ASSETS = [
   './',
   './index.html',
@@ -7,10 +8,17 @@ const CORE_ASSETS = [
   './recorder.html',
   './css/leaflet.css',
   './css/metro.min.css',
+  './css/metrom-ui.css',
   './js/leaflet.js',
   './js/parallax.min.js',
+  './js/metrom-home.js',
   './js/metro-script.js',
+  './js/cairo_metro_station_points.geojson',
+  './js/cairo_metro_station_bounds.geojson',
+  './favicon/site.webmanifest',
   './favicon/apple-icon-180x180.png',
+  './favicon/web-app-manifest-192x192.png',
+  './favicon/web-app-manifest-512x512.png',
   './img/metrom-layer-1.png',
   './img/metrom-layer-2.png',
   './img/metrom-layer-3.png',
@@ -22,12 +30,19 @@ const CORE_ASSETS = [
   './img/metrom-layer-8.png'
 ];
 
-const STATIC_EXTENSIONS = /\.(?:css|js|png|jpg|jpeg|gif|webp|svg|ico|woff2?)$/i;
+const STATIC_EXTENSIONS = /\.(?:css|js|json|geojson|webmanifest|png|jpg|jpeg|gif|webp|svg|ico|woff2?)$/i;
 const TILE_HOST_REGEX = /^(?:[abcd]\.)?basemaps\.cartocdn\.com$/i;
+
+function trimCache(cache, maximumEntries) {
+  return cache.keys().then((keys) => {
+    const excess = Math.max(0, keys.length - maximumEntries);
+    return Promise.all(keys.slice(0, excess).map((request) => cache.delete(request)));
+  });
+}
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_VERSION).then((cache) => cache.addAll(CORE_ASSETS)).catch(() => {})
+    caches.open(CACHE_VERSION).then((cache) => cache.addAll(CORE_ASSETS))
   );
   self.skipWaiting();
 });
@@ -56,16 +71,18 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(
       caches.open(TILE_CACHE_VERSION).then((tileCache) =>
         tileCache.match(request).then((cachedTile) => {
-          const networkFetch = fetch(request)
+          if (cachedTile) return cachedTile;
+
+          return fetch(request)
             .then((response) => {
               if (response && response.status === 200) {
-                tileCache.put(request, response.clone());
+                event.waitUntil(
+                  tileCache.put(request, response.clone())
+                    .then(() => trimCache(tileCache, TILE_CACHE_LIMIT))
+                );
               }
               return response;
-            })
-            .catch(() => cachedTile);
-
-          return cachedTile || networkFetch;
+            });
         })
       )
     );
@@ -80,7 +97,7 @@ self.addEventListener('fetch', (event) => {
   if (!isStaticAsset && !isPage) return;
 
   event.respondWith(
-    caches.match(request).then((cached) => {
+    caches.match(request, { ignoreSearch: true }).then((cached) => {
       const networkFetch = fetch(request)
         .then((response) => {
           if (!response || response.status !== 200) return response;

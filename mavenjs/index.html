@@ -73,62 +73,116 @@
   </script>
 	<link rel="stylesheet" href="css/style.css?v=1.1.0">
 	<link rel="stylesheet" href="css/prism-tn.css">
+  <link rel="stylesheet" href="css/ui.css?v=2.0.0">
 </head>
 <body>
-	<header>
-    <a href="https://mohamedsalem80.github.io/" class="logo-link" title="Mivex - Mohamed Salem" aria-label="Mivex - Mohamed Salem">
-      <div class="logo">
-        <img src="../favicon/mivex-72x72.png" alt="Mivex" style="width: 32px;">
-        Mivex
+  <div class="scroll-progress" aria-hidden="true"><span></span></div>
+  <header class="site-header">
+    <div class="header-shell">
+      <div class="brand-group">
+        <a href="../" class="logo-link" title="Return to Mivex" aria-label="Return to Mivex home">
+          <span class="logo">
+            <img src="../favicon/mivex-72x72.png" alt="" width="32" height="32">
+            <span>Mivex</span>
+          </span>
+        </a>
+        <span class="product-mark">MavenJS</span>
       </div>
-    </a>
-		<div class="version">
-			<select id="versionSelector" aria-label="Select version" title="Select version">
-				<option value="1.1.0" selected>1.1.0</option>
-				<option value="1.0.0">1.0.0</option>
-			</select>
-		</div>
+      <nav class="primary-nav" aria-label="MavenJS navigation">
+        <a href="#overview">Overview</a>
+        <a href="#api-reference">API</a>
+        <a href="#about">About</a>
+      </nav>
+      <div class="header-actions">
+        <a class="github-link" href="https://github.com/Mohamedsalem80/mavenjs" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+        <label class="version" for="versionSelector">
+          <span>Version</span>
+          <select id="versionSelector" aria-label="Select documentation version">
+            <option value="v1.1.0" selected>v1.1.0</option>
+            <option value="v1.0.0">v1.0.0</option>
+          </select>
+        </label>
+      </div>
+    </div>
 	</header>
 	<main>
-		<div class="hero">
-			<img src="../img/mavenjs.png" alt="mars">
-			<p>Fast and light open-sourced JavaScript library that eases creation and manipulation of web applications.</p>
-			<p>
-				<a class="btn-30" href="https://github.com/Mohamedsalem80/mavenjs/releases">
-					<span class="text-container">
-						<span class="text">Download</span>
-					</span>
-				</a>
-			  </p>
-		</div>
-		<div class="documentation">
-			<h2>Documentation</h2>
-			<br>
-			<hr>
-			<input type="text" class="search-box" id="searchInput" placeholder="Search function..." pattern="^[a-zA-Z]+$" title="Only letters are allowed.">
-			<br>
-			<div id="functionList"></div>
-		</div>
+    <section class="hero" id="overview">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow"><span></span> Open-source JavaScript utility library</p>
+          <h1>Maven<span>JS</span></h1>
+          <p class="hero-lead">A fast, lightweight toolkit for selecting, traversing, and manipulating web interfaces without unnecessary overhead.</p>
+          <div class="hero-actions">
+            <a class="primary-button" href="https://github.com/Mohamedsalem80/mavenjs/releases" target="_blank" rel="noopener">Download release <span aria-hidden="true">↓</span></a>
+            <a class="secondary-button" href="#api-reference">Browse API <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="hero-command" aria-label="MavenJS example">
+            <span aria-hidden="true">$</span>
+            <code>mvn('.app').addClass('ready');</code>
+          </div>
+          <ul class="hero-facts" aria-label="MavenJS facts">
+            <li><strong>53</strong><span>Documented methods</span></li>
+            <li><strong>1.1.0</strong><span>Current release</span></li>
+            <li><strong>Open</strong><span>Source code</span></li>
+          </ul>
+        </div>
+        <div class="hero-visual" aria-label="MavenJS rocket logo">
+          <div class="orbit orbit-one" aria-hidden="true"></div>
+          <div class="orbit orbit-two" aria-hidden="true"></div>
+          <img src="../img/mavenjs.png" alt="MavenJS rocket orbiting Mars" width="520" height="520">
+          <span class="visual-tag tag-dom">DOM</span>
+          <span class="visual-tag tag-events">EVENTS</span>
+          <span class="visual-tag tag-ajax">AJAX</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="documentation" id="api-reference">
+      <div class="docs-shell">
+        <div class="docs-heading">
+          <div>
+            <p class="eyebrow">API reference</p>
+            <h2>Find the method you need.</h2>
+          </div>
+          <p>Search the MavenJS API, inspect concise examples, and copy working snippets directly into your project.</p>
+        </div>
+        <div class="docs-toolbar">
+          <div class="search-control">
+            <label for="searchInput">Search methods</label>
+            <span class="search-field">
+              <input type="search" class="search-box" id="searchInput" placeholder="Try addClass or ajax" autocomplete="off" spellcheck="false">
+              <button class="clear-search" id="clearSearch" type="button" aria-label="Clear search" hidden>×</button>
+            </span>
+          </div>
+          <div class="docs-status" aria-live="polite">
+            <span id="resultCount">53 methods</span>
+            <span id="versionStatus">v1.1.0</span>
+          </div>
+        </div>
+        <div class="empty-state" id="emptyState" hidden>
+          <strong>No matching methods.</strong>
+          <span>Try a shorter name or clear the search.</span>
+        </div>
+        <div id="functionList" class="api-list"></div>
+      </div>
+    </section>
 	</main>
-	<footer>
+  <footer id="about">
 		<div class="inspiration">
 			<div class="inspiration-top">
-        <p>
-          The name "maven" is inspired by NASA's MAVEN mission to Mars, which stands for Mars Atmosphere and Volatile Evolution. This mission aims to study the Martian atmosphere and its evolution over time.
-        </p>
-        <p>
-          Similarly, mavenjs is designed to explore and manipulate the web environment efficiently and effectively. It also draws inspiration from jQuery, a popular JavaScript library that simplifies HTML document traversing, event handling, and animation.
-        </p>
-        <p>
-          The name "maven" reflects the library's goal of being a reliable and efficient tool for web developers.
-        </p>
+        <p class="eyebrow">Origin story</p>
+        <h2>Named for exploration.</h2>
+        <p>The name MavenJS is inspired by NASA’s MAVEN mission to Mars: Mars Atmosphere and Volatile Evolution. Where the mission explores a planetary environment, MavenJS helps developers explore and manipulate the web environment efficiently.</p>
+        <p>Its focused API also draws inspiration from jQuery’s approachable model for traversal, events, and interface behavior.</p>
+        <a href="https://github.com/Mohamedsalem80/mavenjs" target="_blank" rel="noopener">Explore the source <span aria-hidden="true">↗</span></a>
 			</div>
 			<div class="inspiration-bottom">
-				<img src="../img/maven-cover-2.jpg" alt="NASA MAVEN Mission" loading="lazy">
+        <img src="../img/maven-cover-2.jpg" alt="NASA MAVEN spacecraft above Mars" loading="lazy" decoding="async">
 			</div>
 		</div>
 		<div class="copyright">
-			Copyright © 2022-2025 Mivex. All rights reserved. 
+      <span>Copyright © 2022-<span id="currentYear">2026</span> Mivex.</span>
+      <a href="#overview">Back to top <span aria-hidden="true">↑</span></a>
 		</div>
 	</footer>
 <script src="../js/prism.js"></script>
@@ -456,7 +510,8 @@
   ]
 }
 
-let current = 'v1.1.0';
+let currentVersion = 'v1.1.0';
+let searchQuery = '';
 
 function compareVersions(version1, version2) {
 	const v1Parts = version1.replace('v', '').split('.').map(num => parseInt(num, 10));
@@ -473,44 +528,168 @@ function compareVersions(version1, version2) {
 	return 0;
 }
 
-function renderDocumentation(functions, currentVersion) {
-			const container = document.getElementById('functionList');
-			container.innerHTML = '';
-			const filteredFunctions = functions.filter(func => {
-				return compareVersions(func.version, currentVersion) <= 0;
-			});
+const functionList = document.getElementById('functionList');
+const searchInput = document.getElementById('searchInput');
+const clearSearch = document.getElementById('clearSearch');
+const versionSelector = document.getElementById('versionSelector');
+const resultCount = document.getElementById('resultCount');
+const versionStatus = document.getElementById('versionStatus');
+const emptyState = document.getElementById('emptyState');
 
-			filteredFunctions.forEach(func => {
-				const functionElement = document.createElement('div');
-				functionElement.innerHTML = `
-					<br>
-					<p><strong>${func.name}</strong> | Version: ${func.version}</p>
-					<p>${func.description}</p>
-					<br>
-					<pre><code class="language-javascript">${func.code}</code></pre>
-					<hr>
-					<br>
-				`;
-				container.appendChild(functionElement);
-			});
-		}
+function createElement(tagName, className, text) {
+  const element = document.createElement(tagName);
+  if (className) element.className = className;
+  if (text !== undefined) element.textContent = text;
+  return element;
+}
 
-		document.getElementById('searchInput').addEventListener('input', function(e) {
-      const searchQuery = e.target.value.toLowerCase().replace(/[^a-z]/g, '');
-			const filteredFunctions = functionsData.functions.filter(func => 
-				func.name.toLowerCase().includes(searchQuery)
-			);
-			renderDocumentation(filteredFunctions, current);
-			Prism.highlightAll();
-		});
+function decodeCode(code) {
+  const textarea = document.createElement('textarea');
+  textarea.innerHTML = code;
+  return textarea.value;
+}
 
-		document.getElementById('versionSelector').addEventListener('change', function(e) {
-			current = e.target.value;
-			renderDocumentation(functionsData.functions, current);
-			Prism.highlightAll();
-		});
+function createMethodCard(method, shouldOpen) {
+  const card = createElement('details', 'api-card');
+  card.open = shouldOpen;
 
-		renderDocumentation(functionsData.functions, current);
+  const summary = document.createElement('summary');
+  const name = createElement('code', 'method-name', method.name);
+  const description = createElement('p', 'method-description', method.description);
+  const version = createElement('span', 'method-version', method.version);
+  const indicator = createElement('span', 'expand-indicator');
+  indicator.setAttribute('aria-hidden', 'true');
+  summary.append(name, description, version, indicator);
+
+  const example = createElement('div', 'api-example');
+  const toolbar = createElement('div', 'code-toolbar');
+  toolbar.append(
+    createElement('span', '', 'JavaScript example'),
+    createElement('button', 'copy-code', 'Copy')
+  );
+  const copyButton = toolbar.querySelector('button');
+  copyButton.type = 'button';
+  copyButton.setAttribute('aria-label', `Copy ${method.name} example`);
+  copyButton.setAttribute('aria-live', 'polite');
+
+  const pre = document.createElement('pre');
+  pre.className = 'language-javascript';
+  const code = createElement('code', 'language-javascript', decodeCode(method.code));
+  pre.appendChild(code);
+  example.append(toolbar, pre);
+  card.append(summary, example);
+
+  return card;
+}
+
+function renderDocumentation() {
+  const filteredMethods = functionsData.functions.filter(method => {
+    const matchesVersion = compareVersions(method.version, currentVersion) <= 0;
+    const searchableText = `${method.name} ${method.description}`.toLowerCase();
+    return matchesVersion && searchableText.includes(searchQuery);
+  });
+
+  const fragment = document.createDocumentFragment();
+  const shouldOpenMatches = searchQuery.length > 0 && filteredMethods.length <= 6;
+  filteredMethods.forEach(method => fragment.appendChild(createMethodCard(method, shouldOpenMatches)));
+  functionList.replaceChildren(fragment);
+
+  resultCount.textContent = `${filteredMethods.length} ${filteredMethods.length === 1 ? 'method' : 'methods'}`;
+  versionStatus.textContent = currentVersion;
+  emptyState.hidden = filteredMethods.length !== 0;
+
+  if (window.Prism && typeof window.Prism.highlightAllUnder === 'function') {
+    window.Prism.highlightAllUnder(functionList);
+  }
+}
+
+function fallbackCopy(text) {
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  textarea.style.position = 'fixed';
+  textarea.style.opacity = '0';
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand('copy');
+  textarea.remove();
+}
+
+async function copyCode(button, code) {
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(code);
+    } else {
+      fallbackCopy(code);
+    }
+
+    button.textContent = 'Copied';
+    button.classList.add('is-copied');
+    window.setTimeout(() => {
+      button.textContent = 'Copy';
+      button.classList.remove('is-copied');
+    }, 1400);
+  } catch (error) {
+    button.textContent = 'Select code';
+    button.closest('.api-example').querySelector('code').focus();
+  }
+}
+
+searchInput.addEventListener('input', function(event) {
+  searchQuery = event.target.value.trim().toLowerCase();
+  clearSearch.hidden = searchQuery.length === 0;
+  renderDocumentation();
+});
+
+searchInput.addEventListener('keydown', function(event) {
+  if (event.key === 'Escape' && searchInput.value) {
+    searchInput.value = '';
+    searchQuery = '';
+    clearSearch.hidden = true;
+    renderDocumentation();
+  }
+});
+
+clearSearch.addEventListener('click', function() {
+  searchInput.value = '';
+  searchQuery = '';
+  clearSearch.hidden = true;
+  renderDocumentation();
+  searchInput.focus();
+});
+
+versionSelector.addEventListener('change', function(event) {
+  currentVersion = event.target.value;
+  renderDocumentation();
+});
+
+functionList.addEventListener('click', function(event) {
+  const button = event.target.closest('.copy-code');
+  if (!button) return;
+
+  const code = button.closest('.api-example').querySelector('code').textContent;
+  copyCode(button, code);
+});
+
+const progressBar = document.querySelector('.scroll-progress span');
+let progressFrame = 0;
+
+function updateProgress() {
+  const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = scrollableHeight > 0 ? window.scrollY / scrollableHeight : 0;
+  progressBar.style.transform = `scaleX(${Math.min(1, Math.max(0, progress))})`;
+  progressFrame = 0;
+}
+
+function queueProgressUpdate() {
+  if (!progressFrame) progressFrame = window.requestAnimationFrame(updateProgress);
+}
+
+window.addEventListener('scroll', queueProgressUpdate, { passive: true });
+window.addEventListener('resize', queueProgressUpdate);
+document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+renderDocumentation();
+updateProgress();
 </script>
 </body>
 </html>

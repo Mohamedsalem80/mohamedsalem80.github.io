@@ -77,89 +77,54 @@
     </script>
     <link rel="stylesheet" href="css/leaflet.css">
     <link rel="stylesheet" href="css/metro.min.css">
-    <style>
-        .travel-hud {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 0.75rem;
-            margin: 0.5rem 0 1rem;
-            padding: 0.75rem 1rem;
-            border: 1px solid rgba(255, 207, 134, 0.28);
-            border-radius: 10px;
-            background: linear-gradient(90deg, rgba(12, 40, 37, 0.92), rgba(18, 64, 55, 0.92));
-        }
-
-        .travel-hud .travel-status {
-            flex: 1 1 300px;
-            margin: 0;
-            padding: 0;
-            border: 0;
-            background: transparent;
-            color: #d6ece7;
-            text-align: left;
-            font-weight: 600;
-        }
-
-        .travel-speed-chip {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 134px;
-            padding: 0.45rem 0.8rem;
-            border-radius: 999px;
-            border: 1px solid rgba(255, 207, 134, 0.4);
-            background: rgba(255, 207, 134, 0.16);
-            color: #ffcf86;
-            font-size: 0.92rem;
-            font-weight: 700;
-            letter-spacing: 0.02em;
-            white-space: nowrap;
-        }
-
-        @media (max-width: 640px) {
-            .travel-hud {
-                padding: 0.7rem 0.8rem;
-            }
-            .travel-hud .travel-status {
-                flex-basis: 100%;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="css/metrom-ui.css?v=3.0.0">
 </head>
-<body>
+<body class="planner-page">
     <a href="#main-content" class="skip-link">Skip to main content</a>
-    <header>
-        <div class="container">
-            <div class="logo">
-                <a href="index.html" title="Cairo Metro Navigator Home">
-                    <img src="favicon/metrom-23.png" alt="Cairo Metro Navigator Logo" width="120" height="60" loading="lazy" decoding="async">
-                </a>
+    <header class="site-header">
+        <div class="container header-shell">
+            <div class="planner-brand">
+                <div class="logo">
+                    <a href="index.html" title="Metrom home" aria-label="Metrom home">
+                        <img src="favicon/metrom-23.png" alt="Metrom" width="120" height="60">
+                    </a>
+                </div>
+                <span>Route planner</span>
             </div>
-            <div class="nav-links">
-                <a href="index.html">Home</a>
+            <nav class="nav-links" aria-label="Planner navigation">
+                <a href="index.html">Overview</a>
+                <a href="#tab-coordinates" data-tab-link="tab-coordinates">Nearby stations</a>
                 <a href="#metroMap">Map</a>
-            </div>
+            </nav>
         </div>
     </header>
 
     <main id="main-content">
         <div class="page-title">
-            <h1>Plan Your Cairo Metro Journey</h1>
-            <p>Select your starting point and destination to find the best route</p>
+            <div>
+                <p class="eyebrow">Journey workspace</p>
+                <h1>Plan a Cairo metro trip.</h1>
+                <p>Select two stations to build the route, fare, transfer guidance, and estimated travel time.</p>
+            </div>
+            <div class="planner-line-key" aria-label="Metro line colors">
+                <span><i class="line-one-color"></i> Line 1</span>
+                <span><i class="line-two-color"></i> Line 2</span>
+                <span><i class="line-three-color"></i> Line 3</span>
+            </div>
         </div>
 
         <div class="tabs-shell">
             <div class="tabs-nav" role="tablist" aria-label="Metro tools sections">
-                <button type="button" class="tab-btn active" data-tab-target="tab-planner" id="tab-btn-planner" role="tab" aria-controls="tab-planner" aria-selected="true">Planner</button>
-                <button type="button" class="tab-btn" data-tab-target="tab-coordinates" id="tab-btn-coordinates" role="tab" aria-controls="tab-coordinates" aria-selected="false" tabindex="-1">Coordinates</button>
-                <button type="button" class="tab-btn" data-tab-target="tab-info" id="tab-btn-info" role="tab" aria-controls="tab-info" aria-selected="false" tabindex="-1">Info</button>
+                <button type="button" class="tab-btn active" data-tab-target="tab-planner" id="tab-btn-planner" role="tab" aria-controls="tab-planner" aria-selected="true">Route planner</button>
+                <button type="button" class="tab-btn" data-tab-target="tab-coordinates" id="tab-btn-coordinates" role="tab" aria-controls="tab-coordinates" aria-selected="false" tabindex="-1">Nearby stations</button>
+                <button type="button" class="tab-btn" data-tab-target="tab-info" id="tab-btn-info" role="tab" aria-controls="tab-info" aria-selected="false" tabindex="-1">Network info</button>
             </div>
 
             <section id="tab-planner" class="tab-panel active" role="tabpanel" aria-labelledby="tab-btn-planner">
                 <div class="planner-container">
                     <div class="planner-section" id="planner">
-                        <h2>From (Starting Point)</h2>
+                        <p class="planner-step">01 / Departure</p>
+                        <h2>Starting point</h2>
                         <label>
                             <p>Select Line:</p>
                             <div class="label-row">
@@ -275,7 +240,8 @@
                     </div>
 
                     <div class="planner-section">
-                        <h2>To (Destination)</h2>
+                        <p class="planner-step">02 / Arrival</p>
+                        <h2>Destination</h2>
                         <label>
                             <p>Select Line:</p>
                             <div class="label-row">
@@ -391,17 +357,20 @@
                     </div>
                 </div>
 
+                <div id="plannerFeedback" class="planner-feedback" role="status" aria-live="polite">Choose a start and destination station.</div>
+
                 <div class="action-buttons">
-                    <button onclick="calculateTicket()" class="btn btn-primary">Find Route & Price</button>
-                    <button id="startTravelBtn" onclick="startTravelMode()" class="btn btn-primary">Start Traveling</button>
-                    <button onclick="resetForm()" class="btn btn-secondary">Reset</button>
+                    <button id="calculateRouteBtn" type="button" class="btn btn-primary">Find Route &amp; Price</button>
+                    <button id="swapRouteBtn" type="button" class="btn btn-secondary" aria-label="Swap starting point and destination">Swap</button>
+                    <button id="startTravelBtn" type="button" class="btn btn-secondary" disabled>Start Traveling</button>
+                    <button id="resetPlannerBtn" type="button" class="btn btn-secondary">Reset</button>
                 </div>
 
-                <div id="resultsContainer" class="results">
+                <div id="resultsContainer" class="results" role="region" aria-label="Journey results" aria-live="polite">
                     <div class="result-item">
                         <div class="result-item-header">
-                            <span class="result-item-icon">Fare</span>
-                            <h3>Your Journey Summary</h3>
+                            <span class="result-item-icon">Route ready</span>
+                            <h3>Journey summary</h3>
                         </div>
                         <div class="result-item-content">
                             <div class="result-stat">
@@ -427,7 +396,7 @@
                         </div>
                         <div class="route-visualization">
                             <div class="route-label">Complete Route</div>
-                            <div class="route-stations" id="stationsList"></div>
+                            <div class="route-stations" id="stationsList" tabindex="0" aria-label="Route stations in travel order"></div>
                             <div class="route-path" id="stations"></div>
                             <div class="transfer-guide" id="transferGuide"></div>
                         </div>
@@ -438,7 +407,7 @@
             <section id="tab-coordinates" class="tab-panel" role="tabpanel" aria-labelledby="tab-btn-coordinates" hidden>
                 <section class="coord-tools" id="coordTools">
                     <h2>Find Closest Station by Coordinates</h2>
-                    <p style="color: #b0c4c1;">Enter your current coordinates and destination coordinates, or use live location.</p>
+                    <p class="section-copy">Enter current and destination coordinates, paste a location link, or use live location.</p>
                     <div class="coord-link-grid">
                         <label>
                             <p>Current Location Link</p>
@@ -468,12 +437,12 @@
                         </label>
                     </div>
                     <div class="coord-actions">
-                        <button type="button" class="btn btn-secondary" onclick="importCoordinatesFromLinks()">Import Coordinates From Links</button>
-                        <button type="button" class="btn btn-secondary" onclick="getLiveLocation()">Use Live Location</button>
-                        <button type="button" class="btn btn-primary" onclick="findClosestStationNow()">Closest Station To Me</button>
-                        <button type="button" class="btn btn-primary" onclick="findClosestStartEndStations()">Find Closest Start &amp; End</button>
+                        <button id="importCoordinatesBtn" type="button" class="btn btn-secondary">Import coordinates</button>
+                        <button id="liveLocationBtn" type="button" class="btn btn-secondary">Use live location</button>
+                        <button id="closestStationBtn" type="button" class="btn btn-primary">Closest station to me</button>
+                        <button id="closestJourneyBtn" type="button" class="btn btn-primary">Find closest start &amp; end</button>
                     </div>
-                    <div id="coordResult" class="coord-result">Closest-station results will appear here.</div>
+                    <div id="coordResult" class="coord-result" role="status" aria-live="polite">Closest-station results will appear here.</div>
                 </section>
             </section>
 
@@ -484,33 +453,33 @@
                         <table class="fares-table">
                             <thead>
                                 <tr>
-                                    <th>Distance</th>
-                                    <th>Ticket Price (Lines 1,2,3)</th>
-                                    <th>Elderly (Over 60) / Army / Police</th>
-                                    <th>Special Needs</th>
+                                    <th>Trip length</th>
+                                    <th>Standard</th>
+                                    <th>Age 60+, army &amp; police</th>
+                                    <th>Special needs &amp; veterans</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>Up to 9 stations</td>
-                                    <td>8 EGP</td>
-                                    <td>4 EGP</td>
-                                    <td>5 EGP</td>
-                                </tr>
-                                <tr>
-                                    <td>10 to 16 stations</td>
                                     <td>10 EGP</td>
                                     <td>5 EGP</td>
                                     <td>5 EGP</td>
                                 </tr>
                                 <tr>
-                                    <td>17 to 23 stations</td>
+                                    <td>Up to 16 stations</td>
+                                    <td>12 EGP</td>
+                                    <td>6 EGP</td>
+                                    <td>5 EGP</td>
+                                </tr>
+                                <tr>
+                                    <td>Up to 23 stations</td>
                                     <td>15 EGP</td>
                                     <td>8 EGP</td>
                                     <td>5 EGP</td>
                                 </tr>
                                 <tr>
-                                    <td>24 to 39 stations</td>
+                                    <td>Up to 39 stations</td>
                                     <td>20 EGP</td>
                                     <td>10 EGP</td>
                                     <td>5 EGP</td>
@@ -559,6 +528,15 @@
                                         </div>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>Line 3 branch</td>
+                                    <td>Kit Kat to Cairo University</td>
+                                    <td>
+                                        <div class="stations-row" aria-label="Line 3 Cairo University branch stations">
+                                            <span class="station-pill">Kit Kat</span><span class="station-pill">Tawfikia</span><span class="station-pill">Wadi El Nile</span><span class="station-pill">Gamat El Dowal</span><span class="station-pill">Boulak El Dakrour</span><span class="station-pill">Cairo University</span>
+                                        </div>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -566,8 +544,18 @@
             </section>
         </div>
 
-        <section class="metro-map" id="metroMap" role="region" aria-label="Interactive Metro Map" style="margin-top: 2rem;">
-            <h2>Cairo Metro Network Map</h2>
+        <section class="metro-map" id="metroMap" role="region" aria-labelledby="map-title">
+            <div class="map-heading">
+                <div>
+                    <p class="eyebrow">Network view</p>
+                    <h2 id="map-title">Cairo Metro map</h2>
+                </div>
+                <div class="map-legend" aria-label="Map line legend">
+                    <span><i class="line-one-color"></i> 1</span>
+                    <span><i class="line-two-color"></i> 2</span>
+                    <span><i class="line-three-color"></i> 3</span>
+                </div>
+            </div>
             <div class="travel-hud" role="status" aria-live="polite">
                 <div id="travelStatus" class="travel-status">Travel mode is off.</div>
                 <div id="travelSpeed" class="travel-speed-chip">Speed: -- km/h</div>
@@ -577,14 +565,15 @@
     </main>
 
     <footer>
-        <p>Mivex &copy; 2026 | Navigate Cairo's Metro Network with Ease</p>
+        <p>Mivex &copy; <span id="currentYear">2026</span> / Metrom route planner</p>
+        <a href="index.html">Back to overview</a>
     </footer>
 
     <script src="js/leaflet.js"></script>
 
-    <script src="js/metro-script.js"></script>
+    <script src="js/metro-script.js?v=3.1.0"></script>
     <script>
-        if ('serviceWorker' in navigator) {
+        if ('serviceWorker' in navigator && /^https?:$/.test(window.location.protocol)) {
             window.addEventListener('load', function() {
                 navigator.serviceWorker.register('sw.js').catch(function() {
                     // Service worker registration can fail on some private/incognito sessions.
