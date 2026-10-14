@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GASERC · المركز العربي للبحوث التربوية لدول الخليج</title>
+<link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@400;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070b18;--s:rgba(255,255,255,.05);--s2:rgba(255,255,255,.09);--ink:#f1f5ff;--mute:#9aa7c7;--a:#5b8cff;--b:#2ee6c5;--g:#f2c66d;--line:rgba(255,255,255,.1);--orb:.55;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f4f7fd;--s:rgba(255,255,255,.75);--s2:#fff;--ink:#0b1430;--mute:#52618a;--a:#2f5bea;--b:#0a9d86;--g:#a67810;--line:rgba(11,20,48,.12);--orb:.3}}
+:root[data-theme="light"]{--bg:#f4f7fd;--s:rgba(255,255,255,.75);--s2:#fff;--ink:#0b1430;--mute:#52618a;--a:#2f5bea;--b:#0a9d86;--g:#a67810;--line:rgba(11,20,48,.12);--orb:.3}
+:root[data-theme="dark"]{--bg:#070b18;--s:rgba(255,255,255,.05);--s2:rgba(255,255,255,.09);--ink:#f1f5ff;--mute:#9aa7c7;--a:#5b8cff;--b:#2ee6c5;--g:#f2c66d;--line:rgba(255,255,255,.1);--orb:.55}
+*{box-sizing:border-box;margin:0}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans Arabic",Tahoma,sans-serif;line-height:1.8;overflow-x:hidden}
+h1,h2,h3,.f{font-family:"Readex Pro","IBM Plex Sans Arabic",Tahoma,sans-serif}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--b);outline-offset:3px}
+.aur{position:fixed;inset:0;z-index:-1;overflow:hidden}
+.aur i{position:absolute;width:620px;height:620px;border-radius:50%;filter:blur(110px);opacity:var(--orb);animation:fl 22s ease-in-out infinite alternate}
+.aur i:nth-child(1){background:var(--a);top:-200px;inset-inline-start:-120px}
+.aur i:nth-child(2){background:var(--b);top:300px;inset-inline-end:-200px;animation-delay:-8s}
+.aur i:nth-child(3){background:var(--g);bottom:-300px;inset-inline-start:30%;opacity:calc(var(--orb) * .5);animation-delay:-14s}
+@keyframes fl{to{transform:translate(60px,80px) scale(1.15)}}
+.w{max-width:1200px;margin:auto;padding:0 22px}
+header{position:sticky;top:0;z-index:30;padding-top:calc(env(safe-area-inset-top,0px) + 12px)}
+.bar{display:flex;align-items:center;gap:14px;background:var(--s);backdrop-filter:blur(18px);border:1px solid var(--line);border-radius:99px;padding:8px 10px 8px 18px;max-width:1200px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px;line-height:1.3;max-width:230px}
+.seal{width:38px;height:38px;border-radius:50%;flex:none;background:conic-gradient(var(--g),var(--b),var(--a),var(--g));position:relative}
+.seal:after{content:"";position:absolute;inset:5px;border-radius:50%;background:var(--bg)}
+nav{display:flex;gap:2px;margin-inline:auto;font-size:14px}
+nav a{padding:6px 13px;border-radius:99px;color:var(--mute);transition:.2s}
+nav a:hover,nav a.on{color:var(--ink);background:var(--s2)}
+.tl{display:flex;gap:6px}
+.tl button{height:36px;min-width:36px;padding:0 12px;border-radius:99px;border:1px solid var(--line);background:var(--s);color:var(--ink);cursor:pointer;font:inherit;font-size:13px}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center;min-height:660px;padding:50px 0}
+.kick{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--line);background:var(--s);border-radius:99px;padding:3px 14px;font-size:13px;color:var(--b)}
+.kick:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--b);box-shadow:0 0 12px var(--b);animation:pu 2s infinite}
+@keyframes pu{50%{opacity:.3}}
+h1{font-size:clamp(36px,5.6vw,68px);line-height:1.2;font-weight:700;margin:18px 0}
+h1 em{font-style:normal;background:linear-gradient(100deg,var(--a),var(--b) 55%,var(--g));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--mute);font-size:18px;max-width:540px}
+.srch{display:flex;align-items:center;gap:10px;margin:28px 0 14px;max-width:560px;background:var(--s2);border:1px solid var(--line);border-radius:18px;padding:8px 8px 8px 18px;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.srch input{flex:1;background:none;border:0;color:var(--ink);font:inherit;font-size:16px;min-width:0;padding:8px 0}
+.srch input:focus{outline:0}
+.srch:focus-within{border-color:var(--b)}
+.go{border:0;cursor:pointer;border-radius:12px;padding:10px 22px;font:inherit;font-weight:600;background:linear-gradient(100deg,var(--a),var(--b));color:#04101f}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chips a{font-size:13px;color:var(--mute);border:1px solid var(--line);border-radius:99px;padding:2px 13px;transition:.2s}
+.chips a:hover{color:var(--ink);border-color:var(--b)}
+.orbit{position:relative;aspect-ratio:1;max-width:480px;margin:auto;width:100%}
+.ring{position:absolute;inset:0;border-radius:50%;border:1px solid var(--line);animation:sp 40s linear infinite}
+.ring:nth-child(2){inset:12%;animation-duration:28s;animation-direction:reverse;border-style:dashed}
+.ring:nth-child(3){inset:26%;animation-duration:18s}
+.ring b{position:absolute;top:-6px;left:50%;width:12px;height:12px;border-radius:50%;background:var(--b);box-shadow:0 0 18px var(--b)}
+.ring:nth-child(2) b{background:var(--g);box-shadow:0 0 18px var(--g)}
+.ring:nth-child(3) b{background:var(--a);box-shadow:0 0 18px var(--a)}
+@keyframes sp{to{transform:rotate(360deg)}}
+.core{position:absolute;inset:36%;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,var(--b) 25%,var(--a) 60%,#0b1a4a);box-shadow:0 0 90px rgba(91,140,255,.6);display:grid;place-items:center;font-family:"Readex Pro";font-weight:700;color:#04101f;font-size:22px}
+.fc{position:absolute;background:var(--s);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:14px;padding:8px 14px;font-size:13px;line-height:1.5;animation:fl2 6s ease-in-out infinite alternate}
+.fc small{display:block;color:var(--b);font-size:11px}
+.fc.a{top:6%;inset-inline-start:-4%}.fc.b{bottom:8%;inset-inline-end:-2%;animation-delay:-3s}
+@keyframes fl2{to{transform:translateY(-12px)}}
+.tick{border-block:1px solid var(--line);background:var(--s);overflow:hidden;white-space:nowrap;font-size:14px;color:var(--mute);padding:10px 0}
+.tick div{display:inline-flex;gap:48px;padding-inline-end:48px;animation:mq 40s linear infinite}
+.tick span:before{content:"◆";color:var(--g);margin-inline-end:12px;font-size:10px}
+@keyframes mq{to{transform:translateX(50%)}}
+section{padding:90px 0 10px}
+.sh{display:flex;justify-content:space-between;align-items:end;margin-bottom:28px;gap:14px}
+.sh h2{font-size:clamp(26px,3.4vw,38px)}
+.sh a{color:var(--b);font-size:14px;white-space:nowrap}
+.bento{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(3,minmax(120px,auto));gap:16px}
+.bx{position:relative;overflow:hidden;background:var(--s);border:1px solid var(--line);border-radius:24px;padding:20px;transition:.3s;--mx:50%;--my:50%}
+.bx:before{content:"";position:absolute;inset:0;background:radial-gradient(260px circle at var(--mx) var(--my),rgba(91,140,255,.22),transparent 70%);opacity:0;transition:.3s}
+.bx:hover{border-color:var(--a);transform:translateY(-3px)}
+.bx:hover:before{opacity:1}
+.bx>*{position:relative}
+.big{grid-column:span 2;grid-row:span 3;display:flex;flex-direction:column;justify-content:flex-end;min-height:420px;background:linear-gradient(180deg,transparent 30%,rgba(5,10,30,.9)),linear-gradient(135deg,#27478f,#18b8a4 70%,#e8c068);color:#fff}
+.big h3{font-size:clamp(22px,2.6vw,30px);line-height:1.5}
+.mid{grid-column:span 2;display:flex;flex-direction:column;justify-content:center}
+.mid h3{font-size:16px;line-height:1.7;font-weight:600}
+.dt{font-size:12px;color:var(--b);margin-bottom:4px}
+.big .dt{color:#fff;opacity:.85}
+.shelf{display:flex;gap:26px;overflow-x:auto;padding:14px 4px 30px;scroll-snap-type:x mandatory}
+.bk{flex:none;width:200px;scroll-snap-align:start}
+.cv{aspect-ratio:3/4;border-radius:5px 14px 14px 5px;padding:18px 14px;display:flex;flex-direction:column;justify-content:flex-end;font-family:"Readex Pro";font-weight:600;font-size:15px;line-height:1.5;color:#fff;position:relative;box-shadow:-10px 18px 34px rgba(0,0,0,.45),inset 7px 0 10px rgba(0,0,0,.3);transition:.35s}
+.cv:before{content:"2026";position:absolute;top:12px;left:14px;font-size:12px;opacity:.7}
+.bk:hover .cv{transform:perspective(800px) rotateY(12deg) translateY(-8px)}
+.bk p{margin-top:12px;font-size:14px;color:var(--mute)}
+.acts{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.ac{padding:26px 20px;text-align:center;font-family:"Readex Pro";font-weight:600}
+.ac svg{width:46px;height:46px;stroke:var(--b);fill:none;stroke-width:1.5;margin-bottom:10px}
+.lib{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:16px}
+.lib .bx{padding:28px}
+.lib h3{font-size:20px;margin-bottom:6px}
+.lib p{color:var(--mute);font-size:14px}
+.lib .hl{background:linear-gradient(135deg,rgba(91,140,255,.35),rgba(46,230,197,.2))}
+footer{margin-top:90px;border-top:1px solid var(--line);background:var(--s);padding:56px 0 24px}
+.fg{display:grid;grid-template-columns:1.2fr 1fr 1.2fr;gap:40px}
+footer h3{font-size:17px;margin-bottom:12px}
+footer li{list-style:none;color:var(--mute);font-size:14px;margin-bottom:6px}
+footer ul{padding:0}
+.nl{display:flex;flex-direction:column;gap:10px}
+.nl input{background:var(--s2);border:1px solid var(--line);color:var(--ink);border-radius:12px;padding:11px 14px;font:inherit}
+.copy{text-align:center;color:var(--mute);font-size:13px;margin-top:36px;padding-top:18px;border-top:1px solid var(--line)}
+.vh{position:relative;overflow:hidden}
+.vh .hero{position:relative;z-index:1}
+.bgv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s}
+.shade{position:absolute;inset:0;opacity:0;transition:opacity 1.2s;background:linear-gradient(180deg,rgba(5,10,28,.6),rgba(5,10,28,.72) 70%,var(--bg))}
+.vh.hv{--ink:#fff;--mute:#d5def5;--s:rgba(8,14,36,.5);--s2:rgba(8,14,36,.6);--line:rgba(255,255,255,.28)}
+.vh.hv .bgv,.vh.hv .shade{opacity:1}
+.pp{position:absolute;z-index:2;bottom:18px;inset-inline-end:22px;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--s);backdrop-filter:blur(10px);color:var(--ink);cursor:pointer;font-size:12px}
+.pp[hidden]{display:none}
+.rv{opacity:0;transform:translateY(24px);transition:.7s}
+.rv.in{opacity:1;transform:none}
+@media(max-width:920px){nav{display:none}.tl{margin-inline-start:auto}.hero,.fg,.lib{grid-template-columns:1fr}.bento{grid-template-columns:1fr 1fr}.big{grid-column:span 2;grid-row:auto}.mid{grid-column:span 2}.acts{grid-template-columns:1fr 1fr}.orbit{max-width:340px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+.paths{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pa{padding:26px}.pa .ic{font-size:30px}.pa h3{font-size:21px;margin:8px 0 4px}.pa p{color:var(--mute);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;text-align:center;border-block:1px solid var(--line);padding:30px 0}
+.stats b{display:block;font-family:"Readex Pro";font-size:clamp(34px,5vw,56px);line-height:1.1;background:linear-gradient(100deg,var(--a),var(--b));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stats span{color:var(--mute);font-size:14px}
+.cty{justify-content:center;margin-top:20px}
+.tabs{margin-bottom:6px}
+.tab{font:inherit;font-size:13px;color:var(--mute);border:1px solid var(--line);background:none;border-radius:99px;padding:2px 14px;cursor:pointer}
+.tab.on,.tab:hover{color:var(--ink);background:var(--s2);border-color:var(--b)}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.dp{padding:34px;min-height:200px}.dp h3{font-size:26px;margin:10px 0 6px}.dp p{color:var(--mute)}
+.dp.gd{background:linear-gradient(135deg,rgba(242,198,109,.25),rgba(91,140,255,.12))}
+.ptn{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.ptn .bx{padding:18px 20px}.ptn i{display:block;font-style:normal;color:var(--g);font-size:12px}.ptn span{font-size:15px;line-height:1.7;font-weight:500}
+.lib4{grid-template-columns:repeat(4,1fr)}
+.cta{display:grid;grid-template-columns:1.2fr 1fr;gap:30px;align-items:center;padding:40px;background:linear-gradient(135deg,rgba(91,140,255,.28),rgba(46,230,197,.16))}
+.cta h2{font-size:clamp(26px,3.4vw,38px)}
+.btn2{text-align:center;border:1px solid var(--line);border-radius:12px;padding:10px;font-size:14px;color:var(--mute)}
+@media(max-width:920px){.paths,.duo,.ptn,.cta{grid-template-columns:1fr}.stats,.lib4{grid-template-columns:1fr 1fr}}
+.bar{position:relative}
+.mi{position:relative}
+.mb{font:inherit;font-size:14px;color:var(--mute);background:none;border:0;padding:6px 13px;border-radius:99px;cursor:pointer;transition:.2s}
+.mb:hover,.mi:hover>.mb,.mi.open>.mb{color:var(--ink);background:var(--s2)}
+button.mb:after{content:"▾";margin-inline-start:5px;font-size:10px}
+.dd{position:absolute;top:calc(100% - 2px);inset-inline-start:0;min-width:260px;padding:8px;background:var(--bg);border:1px solid var(--line);border-radius:16px;box-shadow:0 24px 60px rgba(0,0,0,.35);opacity:0;visibility:hidden;transform:translateY(6px);transition:.2s;z-index:40}
+.mi:hover .dd,.mi:focus-within .dd,.mi.open .dd{opacity:1;visibility:visible;transform:none}
+.dd a{display:block;padding:8px 12px;border-radius:10px;white-space:nowrap;color:var(--ink);font-size:14px}
+.dd a:hover{background:var(--s2)}
+.ex:after{content:" ↗";color:var(--b);font-size:11px}
+#bg{display:none}
+@media(max-width:920px){#bg{display:inline-block}.bar.open nav{display:flex;flex-direction:column;gap:0;position:absolute;top:calc(100% + 8px);inset-inline:0;background:var(--bg);border:1px solid var(--line);border-radius:22px;padding:10px;max-height:70vh;overflow:auto;z-index:50}nav .mb,nav a.mb{width:100%;text-align:start;display:block}.dd{position:static;display:none;opacity:1;visibility:visible;transform:none;border:0;box-shadow:none;padding:0 12px 6px;min-width:0}.mi.open .dd{display:block}.mi:hover .dd{display:none}.mi.open:hover .dd{display:block}}
+.dd h4{font-family:"Readex Pro";font-size:12px;color:var(--b);padding:4px 12px;font-weight:600}
+.sp{border:0;border-top:1px solid var(--line);margin:6px 8px}
+.mo{display:none}
+.tl{align-items:center}
+.pz{display:inline-flex;align-items:center;height:36px;padding:0 16px;border-radius:99px;font-family:"Readex Pro";font-weight:600;font-size:13px;color:#2a1c00;background:linear-gradient(100deg,#f2c66d,#ffe29a);white-space:nowrap}
+.ct{font-size:13px;color:var(--mute);padding:0 8px;white-space:nowrap}
+.ct:hover{color:var(--ink)}
+.topics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.tp{padding:18px 20px;display:flex;flex-direction:column;gap:2px}
+.tp span{font-family:"Readex Pro";font-weight:600;font-size:16px;line-height:1.6}
+.tp small{color:var(--b);font-size:12px}
+@media(min-width:921px){.dd.wide{display:flex;gap:20px;min-width:560px}.dd.wide>div{flex:1}.dd.cols{min-width:540px;columns:2;column-gap:10px}.dd.cols a{break-inside:avoid}}
+@media(max-width:920px){.topics{grid-template-columns:1fr 1fr}.bar.open nav .mo{display:block}.pz{padding:0 12px}.ct{display:none}}
+section.w{padding-block:64px 0}
+#join{padding-bottom:10px}
+header{position:fixed;top:0;inset-inline:0}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 90px)}
+.vh .hero{padding-top:130px}
+header .bar{background:transparent;border-color:transparent;backdrop-filter:none;transition:background .3s,border-color .3s}
+header.sc .bar{background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:blur(18px);border-color:var(--line)}
+.hasv header:not(.sc){--ink:#fff;--mute:#d5def5;--s:rgba(255,255,255,.1);--s2:rgba(255,255,255,.16);--line:rgba(255,255,255,.3)}
+.dd{background:rgba(8,14,36,.95);backdrop-filter:blur(14px)}
+.dd a{color:#f1f5ff}
+.dd a:hover{background:rgba(255,255,255,.1)}
+.dd .sp{border-top-color:rgba(255,255,255,.15)}
+@media(max-width:920px){.bar.open nav{background:rgba(8,14,36,.96);--ink:#fff;--mute:#d5def5;--s2:rgba(255,255,255,.1);--line:rgba(255,255,255,.2)}}
+</style>
+</head>
+<body>
+<div class="aur" aria-hidden="true"><i></i><i></i><i></i></div>
+<header><div class="w"><div class="bar">
+ <a class="brand" href="#"><span class="seal"></span><span data-en="Arab Educational Research Center for the Gulf States">المركز العربي للبحوث التربوية لدول الخليج</span></a>
+ <nav aria-label="Main">
+<div class="mi"><button class="mb" aria-expanded="false" data-en="About">عن المركز</button><div class="dd"><a target="_blank" rel="noopener" href="https://gaserc.org/about/establishment-of-gaserc" data-en="About the Center">تعريف بالمركز</a><a target="_blank" rel="noopener" href="https://qrco.de/bfcbvV" data-en="The Center's journey">مسيرة المركز: حكاية تروى</a><a target="_blank" rel="noopener" href="https://gaserc.org/council-of-trustees" data-en="Board of Trustees">مجلس أمناء المركز</a><a target="_blank" rel="noopener" href="https://gaserc.org/about/partners" data-en="Partners &amp; friendly sites">الشركاء والمواقع الصديقة</a></div></div>
+<div class="mi"><button class="mb" aria-expanded="false" data-en="Programs &amp; events">البرامج والفعاليات</button><div class="dd"><a target="_blank" rel="noopener" href="https://gaserc.org/programs/current-projects" data-en="Current-cycle programs">برامج الدورة الحالية</a><a target="_blank" rel="noopener" href="https://gaserc.org/programs/previous-projects" data-en="Previous cycles (incl. 2023-2024)">الدورات السابقة (ومنها 2023-2024)</a><hr class="sp"><a target="_blank" rel="noopener" href="https://gaserc.org/news-events/1" data-en="Workshops &amp; seminars">الندوات وورش العمل</a><a target="_blank" rel="noopener" href="https://gaserc.org/news-events/2" data-en="Conferences &amp; forums">المؤتمرات والملتقيات</a><a target="_blank" rel="noopener" href="https://gaserc.org/news-events/3" data-en="Cultural seasons">المواسم الثقافية</a><a target="_blank" rel="noopener" href="https://gaserc.org/news-events/4" data-en="Discussion circles">الحلقات النقاشية</a></div></div>
+<div class="mi"><button class="mb" aria-expanded="false" data-en="Research &amp; library">الأبحاث والمكتبة</button><div class="dd wide"><div><h4 data-en="Center publications">إصدارات المركز</h4><a target="_blank" rel="noopener" href="https://gaserc.org/versions/study-and-research" data-en="Studies &amp; research">الدراسات والأبحاث</a><a target="_blank" rel="noopener" href="https://gaserc.org/versions/educational-future-magazine" data-en="Futures in Education magazine">مجلة مستقبليات تربوية</a><a target="_blank" rel="noopener" href="https://gaserc.org/versions/Specialized-scientific-reports" data-en="Reports &amp; scientific papers">تقارير وأوراق علمية</a><a target="_blank" rel="noopener" href="https://gaserc.org/Dictionaries" data-en="Educational dictionaries">المعاجم اللغوية التربوية</a></div><div><h4 data-en="Library">المكتبة</h4><a class="ex" target="_blank" rel="noopener" href="https://gaserc.portal.medad.com/ar" data-en="Library catalog">فهرس المكتبة</a><a class="ex" target="_blank" rel="noopener" href="https://gaserc.portal.medad.com/ar/widget-listing/605" data-en="New arrivals">وصل حديثًا</a><a target="_blank" rel="noopener" href="https://gaserc.org/Digitallib" data-en="Gulf Digital Education Library">المكتبة التربوية الخليجية الرقمية</a><a target="_blank" rel="noopener" href="https://gaserc.org/library/ask-the-librarian" data-en="Ask the librarian">اسأل المكتبي</a><a target="_blank" rel="noopener" href="https://gaserc.org/library/work-hours" data-en="Opening hours">ساعات العمل</a></div></div></div>
+<div class="mi"><button class="mb" aria-expanded="false" data-en="Topics">المواضيع</button><div class="dd cols"><a href="#topics" data-en="Education in emergencies">التعليم أثناء الأزمات والطوارئ</a><a href="#topics" data-en="Assessment &amp; e-evaluation">القياس والتقويم الإلكتروني</a><a href="#topics" data-en="Teaching English">تعليم اللغة الإنجليزية</a><a href="#topics" data-en="Inclusion &amp; disability">دمج ذوي الإعاقة</a><a href="#topics" data-en="Teacher licensing">رخص المعلمين</a><a href="#topics" data-en="School governance">حوكمة أداء المدرسة</a><a href="#topics" data-en="Green schools">المدارس الخضراء</a><a href="#topics" data-en="Education privatization">خصخصة التعليم</a><a href="#topics" data-en="Digital curriculum content">المحتوى الرقمي للمناهج</a></div></div>
+<a class="mb" target="_blank" rel="noopener" href="https://gaserc.org/news-events/5" data-en="News">الأخبار</a>
+<a class="mb mo ex" target="_blank" rel="noopener" href="https://prize.gaserc.org/" data-en="Prize">الجائزة</a>
+<a class="mb mo" target="_blank" rel="noopener" href="https://gaserc.org/contact-us" data-en="Contact">تواصل معنا</a>
+</nav>
+ <div class="tl"><a class="ct" target="_blank" rel="noopener" href="https://gaserc.org/contact-us" data-en="Contact">تواصل معنا</a><a class="pz" target="_blank" rel="noopener" href="https://prize.gaserc.org/" data-en="Prize ↗">الجائزة ↗</a><button id="lg">EN</button><button id="th" aria-label="Theme">◐</button><button id="bg" aria-label="Menu">☰</button></div>
+</div></div></header>
+
+<main>
+<div class="vh"><video id="hv" class="bgv" autoplay muted loop playsinline aria-hidden="true"><source src="hero.mp4" type="video/mp4"></video><div class="shade"></div>
+<div class="w hero">
+ <div>
+  <span class="kick" data-en="Since 1979 · Arab Bureau of Education for the Gulf States">منذ 1979 · جهاز بحثي تابع لمكتب التربية العربي لدول الخليج</span>
+  <h1 data-en="Research that shapes education across the <em>Gulf</em>">بحوث تربوية تصنع مستقبل التعليم في <em>الخليج</em></h1>
+  <p class="sub" data-en="We bring researchers, policy makers and teachers together around studies, data and regional dialogue.">نجمع الباحثين وصنّاع القرار والمعلمين حول دراسات وبيانات وحوار إقليمي.</p>
+  <div class="srch"><input data-ph="Search studies, publications and events…" placeholder="ابحث في الدراسات والإصدارات والفعاليات…" aria-label="Search"><button class="go" data-en="Search">بحث</button></div>
+  <div class="chips"><a href="#pub" data-en="Latest studies">أحدث الدراسات</a><a href="#news" data-en="Upcoming &amp; recent events">الفعاليات</a><a href="#lib" data-en="Digital library">المكتبة الرقمية</a><a href="#join" data-en="Center guide (PDF)">الدليل التعريفي</a></div>
+ </div>
+ <div class="orbit" aria-hidden="true">
+  <div class="ring"><b></b></div><div class="ring"><b></b></div><div class="ring"><b></b></div>
+  <div class="core">GASERC</div>
+  <div class="fc a"><small data-en="Latest report">أحدث تقرير</small><span data-en="Final report: inclusion forum">التقرير الختامي لملتقى الدمج</span></div>
+  <div class="fc b"><small data-en="Latest news">آخر خبر</small><span data-en="Muscat workshop">مشغل تربوي في مسقط</span></div>
+ </div>
+</div>
+<button class="pp" id="pp" aria-label="Pause or play video" hidden>❚❚</button></div>
+
+<div class="tick" aria-hidden="true"><div id="mq">
+ <span data-en="Muscat workshop on the strategic framework for general education">مشغل مسقط حول الإطار الاستراتيجي للتعليم العام</span>
+ <span data-en="Inclusion forum for people with disabilities">ملتقى دمج ذوي الإعاقة في التعليم</span>
+ <span data-en="42nd Board of Trustees meeting, Kuwait">اجتماع مجلس الأمناء الثاني والأربعين، الكويت</span>
+ <span data-en="MoU signed with the Saudi Education Research Center">مذكرة تفاهم مع مركز بحوث التعليم السعودي</span>
+</div></div>
+
+<section class="w" id="paths">
+ <div class="sh rv"><h2 data-en="Start here: what brings you to GASERC?">ابدأ من هنا: ما الذي تبحث عنه؟</h2></div>
+ <div class="paths rv">
+  <a class="bx pa" href="#pub"><span class="ic">🔬</span><h3 data-en="Researchers">الباحثون</h3><p data-en="Studies, the digital library and the Gulf Educational Researchers Forum.">الدراسات والأبحاث والمكتبة الرقمية والملتقى الخليجي للباحثين التربويين.</p></a>
+  <a class="bx pa" href="#prog"><span class="ic">🏛</span><h3 data-en="Policy makers">صنّاع القرار</h3><p data-en="Scientific reports, regional meetings and current-cycle programs.">التقارير والأوراق العلمية والاجتماعات الإقليمية وبرامج الدورة الحالية.</p></a>
+  <a class="bx pa" href="#news"><span class="ic">🎓</span><h3 data-en="Educators">المعلمون والتربويون</h3><p data-en="Futures in Education magazine, workshops and discussion circles.">مجلة مستقبليات تربوية والمشاغل التربوية والحلقات النقاشية.</p></a>
+ </div>
+</section>
+
+<section class="w" id="impact">
+ <div class="stats rv">
+  <div><b>1979</b><span data-en="Year founded">عام التأسيس</span></div>
+  <div><b class="n" data-n="42">0</b><span data-en="Board of Trustees meetings">اجتماعًا لمجلس الأمناء</span></div>
+  <div><b class="n" data-n="4">0</b><span data-en="International education conferences">مؤتمرات تربوية دولية</span></div>
+  <div><b class="n" data-n="9">0</b><span data-en="Gulf cities hosting recent events">مدن خليجية استضافت فعاليات حديثة</span></div>
+ </div>
+ <div class="chips rv cty"><a href="#" data-en="Muscat">مسقط</a><a href="#" data-en="Manama">المنامة</a><a href="#" data-en="Doha">الدوحة</a><a href="#" data-en="Dubai">دبي</a><a href="#" data-en="Sharjah">الشارقة</a><a href="#" data-en="Dammam">الدمام</a><a href="#" data-en="Jeddah">جدة</a><a href="#" data-en="Riyadh">الرياض</a><a href="#" data-en="Kuwait">الكويت</a></div>
+</section>
+
+<section class="w" id="pub">
+ <div class="sh rv"><h2 data-en="Latest research &amp; publications">أحدث الأبحاث والإصدارات</h2><a href="#" data-en="All publications ←">كل الإصدارات ←</a></div>
+ <div class="chips rv tabs"><button class="tab on" data-c="all" data-en="All">الكل</button><button class="tab" data-c="s" data-en="Studies &amp; research">الدراسات والأبحاث</button><button class="tab" data-c="m" data-en="Futures in Education">مجلة مستقبليات تربوية</button><button class="tab" data-c="r" data-en="Reports &amp; papers">تقارير وأوراق علمية</button><button class="tab" data-c="d" data-en="Educational dictionaries">المعاجم اللغوية التربوية</button></div>
+ <div class="shelf rv">
+  <div class="bk" data-c="r"><div class="cv" style="background:linear-gradient(160deg,#1b8aa8,#0a2f4a)">التقرير الختامي للملتقى التعليمي لدمج ذوي الإعاقة في التعليم</div><p data-en="Reports">تقرير علمي</p></div>
+  <div class="bk" data-c="s"><div class="cv" style="background:linear-gradient(160deg,#5558d6,#1c1f6e)">واقع استخدام التقنية في تقويم تعلم الطلبة</div><p data-en="Study">دراسة</p></div>
+  <div class="bk" data-c="s"><div class="cv" style="background:linear-gradient(160deg,#8f9440,#4a4f1c)">أساليب استخدام أدوات القياس والتقويم الإلكتروني</div><p data-en="Study">دراسة</p></div>
+  <div class="bk" data-c="s"><div class="cv" style="background:linear-gradient(160deg,#d65f35,#6e2410)">Strategies for teaching and learning English in the elementary stage</div><p data-en="Evaluative study">دراسة تقويمية</p></div>
+  <div class="bk" data-c="m"><div class="cv" style="background:linear-gradient(160deg,#6b9a5e,#2b3d2a)">من البيانات إلى القرار: كيف تعيد تحليلات التعلم تشكيل صناعة القرار التربوي؟</div><p data-en="Magazine issue">عدد المجلة</p></div>
+  <div class="bk" data-c="r"><div class="cv" style="background:linear-gradient(160deg,#2a8f6b,#0c3a2c)">تعزيز الوعي البيئي لدى الطلبة</div><p data-en="Report">تقرير علمي</p></div>
+  <div class="bk" data-c="r"><div class="cv" style="background:linear-gradient(160deg,#a8548f,#4a1a3c)">خدمات وبرامج الإرشاد النفسي المدرسي</div><p data-en="Report">تقرير علمي</p></div>
+  <div class="bk" data-c="r"><div class="cv" style="background:linear-gradient(160deg,#c08a2d,#5a3a0a)">التنمر المدرسي</div><p data-en="Report">تقرير علمي</p></div>
+  <div class="bk" data-c="d"><div class="cv" style="background:linear-gradient(160deg,#3a4a7a,#141b36)">المعاجم اللغوية التربوية</div><p data-en="Browse the dictionaries">تصفح المعاجم</p></div>
+ </div>
+</section>
+
+<section class="w" id="topics">
+ <div class="sh rv"><h2 data-en="Explore by topic">استكشف حسب الموضوع</h2><a href="#" data-en="All topics ←">كل المواضيع ←</a></div>
+ <div class="topics rv">
+  <a class="bx tp" href="#"><span data-en="Education in emergencies &amp; crises">التعليم أثناء الأزمات والطوارئ</span><small data-en="Studies · Events · News">دراسات · فعاليات · أخبار</small></a>
+  <a class="bx tp" href="#"><span data-en="Assessment &amp; e-evaluation">القياس والتقويم الإلكتروني</span><small data-en="Studies · Events · News">دراسات · فعاليات · أخبار</small></a>
+  <a class="bx tp" href="#"><span data-en="Teaching English">تعليم وتعلم اللغة الإنجليزية</span><small data-en="Studies · Events · News">دراسات · فعاليات · أخبار</small></a>
+  <a class="bx tp" href="#"><span data-en="Inclusion of people with disabilities">دمج ذوي الإعاقة</span><small data-en="Studies · Events · News">دراسات · فعاليات · أخبار</small></a>
+  <a class="bx tp" href="#"><span data-en="Teacher licensing">رخص المعلمين</span><small data-en="Studies · Events · News">دراسات · فعاليات · أخبار</small></a>
+  <a class="bx tp" href="#"><span data-en="School performance governance">حوكمة أداء المدرسة</span><small data-en="Studies · Events · News">دراسات · فعاليات · أخبار</small></a>
+  <a class="bx tp" href="#"><span data-en="Green schools">المدارس الخضراء</span><small data-en="Studies · Events · News">دراسات · فعاليات · أخبار</small></a>
+  <a class="bx tp" href="#"><span data-en="Privatization of education">خصخصة التعليم</span><small data-en="Studies · Events · News">دراسات · فعاليات · أخبار</small></a>
+  <a class="bx tp" href="#"><span data-en="Digital curriculum content">المحتوى الرقمي للمناهج</span><small data-en="Studies · Events · News">دراسات · فعاليات · أخبار</small></a>
+ </div>
+</section>
+
+<section class="w" id="prog">
+ <div class="duo rv">
+  <a class="bx dp" href="#"><span class="kick" data-en="Programs">البرامج</span><h3 data-en="Current-cycle programs">برامج الدورة الحالية</h3><p data-en="See what the Center is running this cycle, plus the 2023-2024 and earlier cycles.">اطّلع على ما ينفذه المركز في هذه الدورة، إضافة إلى دورة 2023-2024 والدورات السابقة.</p></a>
+  <a class="bx dp gd" href="#"><span class="kick" data-en="Prize">الجائزة</span><h3 data-en="Discover the Center's prize">اكتشف جائزة المركز</h3><p data-en="Details and participation on the prize's dedicated platform.">التفاصيل والمشاركة عبر المنصة المخصصة للجائزة.</p></a>
+ </div>
+</section>
+
+<section class="w" id="news">
+ <div class="sh rv"><h2 data-en="News &amp; events">الأخبار والفعاليات</h2><a href="#" data-en="All news ←">كل الأخبار ←</a></div>
+ <div class="chips rv" style="margin-bottom:18px"><a href="#" data-en="Workshops &amp; seminars">الندوات وورش العمل</a><a href="#" data-en="Conferences &amp; forums">المؤتمرات والملتقيات</a><a href="#" data-en="Cultural seasons">المواسم الثقافية</a><a href="#" data-en="Discussion circles">الحلقات النقاشية</a></div>
+ <div class="bento rv">
+  <a class="bx big" href="#"><div class="dt">27/09/2026</div><h3 data-en="Muscat workshop discusses the strategic framework for general education in GCC countries">مشغل تربوي في مسقط لمناقشة الإطار الاستراتيجي للتعليم العام في دول مجلس التعاون</h3></a>
+  <a class="bx mid" href="#"><div class="dt">20/09/2026</div><h3 data-en="Educational forum on including people with disabilities in education">الملتقى التعليمي لدمج ذوي الإعاقة في التعليم</h3></a>
+  <a class="bx mid" href="#"><div class="dt">18/08/2026</div><h3 data-en="Stronger partnership with the Regional Organization for the Protection of the Marine Environment">تعزيز التعاون والشراكة مع المنظمة الإقليمية لحماية البيئة البحرية</h3></a>
+  <a class="bx mid" href="#"><div class="dt">09/07/2026</div><h3 data-en="Board of Trustees holds its 42nd meeting in Kuwait">مجلس الأمناء يعقد اجتماعه الثاني والأربعين في الكويت</h3></a>
+ </div>
+</section>
+
+<section class="w" id="ptn">
+ <div class="sh rv"><h2 data-en="Knowledge partners">شركاء المعرفة</h2></div>
+ <div class="ptn rv">
+  <div class="bx"><i>01/2026</i><span data-en="MoU with the Saudi Education Research Center">مذكرة تفاهم مع مركز بحوث التعليم السعودي</span></div>
+  <div class="bx"><i>12/2025</i><span data-en="Cooperation protocol with PAAET, College of Basic Education">بروتوكول تعاون مع الهيئة العامة للتعليم التطبيقي والتدريب</span></div>
+  <div class="bx"><i>01/2026</i><span data-en="Cooperation talks with the Arab Fund for Economic and Social Development">لقاء تعاون مع الصندوق العربي للإنماء الاقتصادي والاجتماعي</span></div>
+  <div class="bx"><i>12/2025</i><span data-en="Gulf Educational Researchers Forum under the Kuwait Minister of Education's patronage">الملتقى الخليجي للباحثين التربويين برعاية وزير التربية</span></div>
+  <div class="bx"><i>08/2026</i><span data-en="Regional Organization for the Protection of the Marine Environment">المنظمة الإقليمية لحماية البيئة البحرية</span></div>
+  <div class="bx"><i>01/2025</i><span data-en="Peking University delegation visit">زيارة وفد جامعة بكين</span></div>
+ </div>
+</section>
+
+<section class="w" id="lib">
+ <div class="sh rv"><h2 data-en="Library">المكتبة</h2></div>
+ <div class="lib lib4 rv">
+  <a class="bx hl" href="#"><h3 data-en="Library catalog">فهرس المكتبة</h3><p data-en="Search the full collection.">ابحث في المقتنيات كاملة.</p></a>
+  <a class="bx" href="#"><h3 data-en="New arrivals">وصل حديثًا</h3><p data-en="Newly added titles.">أحدث العناوين المضافة.</p></a>
+  <a class="bx" href="#"><h3 data-en="Gulf Digital Education Library">المكتبة التربوية الخليجية الرقمية</h3><p data-en="Read online.">اقرأ عبر الإنترنت.</p></a>
+  <a class="bx" href="#"><h3 data-en="Ask the librarian">اسأل المكتبي</h3><p data-en="Help finding a source, plus opening hours.">مساعدة في الوصول إلى مصدر، وساعات العمل.</p></a>
+ </div>
+</section>
+
+<section class="w" id="join">
+ <div class="bx cta rv">
+  <div><h2 data-en="Join the conversation">انضم إلى الحوار</h2><p data-en="Get new studies and event invitations by email, or follow the Center's channels." class="sub">احصل على الدراسات الجديدة ودعوات الفعاليات على بريدك، أو تابع قنوات المركز.</p>
+   <div class="chips" style="margin-top:16px"><a href="https://www.youtube.com/@gaserckuwait">YouTube</a><a href="https://twitter.com/gaserckuwait">X</a><a href="https://www.instagram.com/GASERCKUWAIT/">Instagram</a><a href="https://www.facebook.com/GASERCKUWAIT/">Facebook</a></div></div>
+  <form class="nl" onsubmit="return false"><input data-ph="Email address" placeholder="البريد الإلكتروني" type="email" aria-label="Email"><button class="go" data-en="Subscribe to the newsletter">اشترك في النشرة البريدية</button><a class="btn2" href="#" data-en="Download the Center guide (PDF)">تحميل الدليل التعريفي (PDF)</a></form>
+ </div>
+</section>
+</main>
+
+
+<footer id="ct"><div class="w">
+ <div class="fg">
+  <div><h3 data-en="Contact Us">اتصل بنا</h3><ul><li data-en="Yousef Ibrahim Al-Ghanim St., Block 3, Shamiya, Kuwait 12580">شارع يوسف ابراهيم الغانم، قطعة 3، الشامية، الكويت 12580</li><li>gaserc@gaserc.org</li><li dir="ltr" style="text-align:start">+965 24830428 · +965 24830499 · +965 24832677</li></ul></div>
+  <div><h3 data-en="Quick Links">روابط قصيرة</h3><ul><li data-en="About the Center">تعريف بالمركز</li><li data-en="Board of Trustees">مجلس أمناء المركز</li><li data-en="Tenders">كراسات للطرح</li><li data-en="Staff Portal">بوابة الموظف</li><li data-en="Contact us">تواصل معنا</li></ul></div>
+  <div><h3 data-en="Stay connected">ابقَ على تواصل</h3><ul><li>@gaserckuwait</li><li>YouTube · X · Instagram · Facebook</li></ul></div>
+ </div>
+ <p class="copy" data-en="All rights reserved © Arab Educational Research Center for the Gulf States, Kuwait 2026">جميع الحقوق محفوظة © للمركز العربي للبحوث التربوية لدول الخليج - الكويت 2026</p>
+</div></footer>
+
+<script>
+(function(){
+var d=document,r=d.documentElement,mq=d.getElementById('mq');
+mq.innerHTML+=mq.innerHTML;
+var en=false,els=d.querySelectorAll('[data-en]'),ph=d.querySelectorAll('[data-ph]');
+els.forEach(function(e){e.setAttribute('data-ar',e.innerHTML)});
+ph.forEach(function(e){e.setAttribute('data-arph',e.placeholder)});
+d.getElementById('lg').onclick=function(){en=!en;
+r.lang=en?'en':'ar';r.dir=en?'ltr':'rtl';this.textContent=en?'عربي':'EN';
+els.forEach(function(e){e.innerHTML=e.getAttribute(en?'data-en':'data-ar')});
+ph.forEach(function(e){e.placeholder=en?e.getAttribute('data-ph'):e.getAttribute('data-arph')})};
+var v=d.getElementById('hv'),pp=d.getElementById('pp');
+v.addEventListener('canplay',function(){v.parentNode.classList.add('hv');r.classList.add('hasv');pp.hidden=false;if(matchMedia('(prefers-reduced-motion:reduce)').matches){v.pause();pp.textContent='▶'}});
+pp.onclick=function(){if(v.paused){v.play();pp.textContent='❚❚'}else{v.pause();pp.textContent='▶'}};
+d.getElementById('th').onclick=function(){var l=r.getAttribute('data-theme')?r.getAttribute('data-theme')==='light':matchMedia('(prefers-color-scheme:light)').matches;r.setAttribute('data-theme',l?'dark':'light')};
+d.querySelectorAll('.bx').forEach(function(b){b.addEventListener('pointermove',function(e){var k=b.getBoundingClientRect();b.style.setProperty('--mx',e.clientX-k.left+'px');b.style.setProperty('--my',e.clientY-k.top+'px')})});
+var io=new IntersectionObserver(function(a){a.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.12});
+d.querySelectorAll('.rv').forEach(function(e){io.observe(e)});
+var bar=d.querySelector('.bar'),hd=d.querySelector('header');
+function sc(){hd.classList.toggle('sc',scrollY>30)}addEventListener('scroll',sc,{passive:true});sc();
+d.querySelectorAll('nav a').forEach(function(a){a.addEventListener('click',function(){bar.classList.remove('open')})});
+d.getElementById('bg').onclick=function(){bar.classList.toggle('open')};
+d.querySelectorAll('button.mb').forEach(function(b){b.onclick=function(){var m=b.parentNode,o=m.classList.contains('open');d.querySelectorAll('.mi.open').forEach(function(x){x.classList.remove('open')});if(!o)m.classList.add('open');b.setAttribute('aria-expanded',String(!o))}});
+d.addEventListener('click',function(e){if(!e.target.closest('nav')&&!e.target.closest('#bg'))d.querySelectorAll('.mi.open').forEach(function(x){x.classList.remove('open')})});
+var tabs=d.querySelectorAll('.tab'),bks=d.querySelectorAll('.bk');
+tabs.forEach(function(t){t.onclick=function(){tabs.forEach(function(x){x.classList.remove('on')});t.classList.add('on');var c=t.getAttribute('data-c');bks.forEach(function(b){b.style.display=(c==='all'||b.getAttribute('data-c')===c)?'':'none'})}});
+var cio=new IntersectionObserver(function(a){a.forEach(function(x){if(!x.isIntersecting)return;var e=x.target,n=+e.getAttribute('data-n'),t=0;cio.unobserve(e);if(matchMedia('(prefers-reduced-motion:reduce)').matches){e.textContent=n;return}var s=setInterval(function(){t+=Math.max(1,Math.round(n/30));if(t>=n){t=n;clearInterval(s)}e.textContent=t},30)})},{threshold:.5});
+d.querySelectorAll('[data-n]').forEach(function(e){cio.observe(e)});
+})();
+</script>
+</body>
+</html>

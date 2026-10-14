@@ -434,9 +434,9 @@ h1 {
 }
 
 .keyboard__key[data-state="absent"] {
-    border-color: #383c41;
-    background: #303439;
-    color: #7e858e;
+    border-color: #262626;
+    background: #121212;
+    color: #333333;
 }
 
 .keyboard__key[data-state="present"] {
