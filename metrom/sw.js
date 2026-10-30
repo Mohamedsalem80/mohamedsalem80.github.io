@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'metrom-static-v6';
+const CACHE_VERSION = 'metrom-static-v7';
 const TILE_CACHE_VERSION = 'metrom-tiles-v1';
 const TILE_CACHE_LIMIT = 240;
 const CORE_ASSETS = [

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="../favicon/wordl.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#08090a">
+    <link rel="stylesheet" href="../css/game.css?v=2.1.0">
+    <link rel="stylesheet" href="solver.css?v=1.0.0">
+    <title>WORDL Solver</title>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-shell">
+            <div class="brand-group">
+                <a href="../../" class="logo-link" title="Return to Mivex" aria-label="Return to Mivex home">
+                    <img src="../../favicon/mivex-72x72.png" alt="" width="32" height="32">
+                    <span>Mivex</span>
+                </a>
+                <span class="product-mark">WORDL / SOLVER</span>
+            </div>
+            <nav class="game-actions" aria-label="WORDL navigation">
+                <a class="control-button" href="../">Play WORDL</a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="game-shell" aria-labelledby="solver-title">
+            <div class="game-heading">
+                <div>
+                    <p class="game-kicker">Black and gold word game</p>
+                    <h1 id="solver-title">WORDL Solver</h1>
+                </div>
+                <div class="round-status">
+                    <strong>Find your next guess</strong>
+                    <span>Use the feedback from your completed guesses</span>
+                </div>
+            </div>
+
+            <div class="game-layout solver-layout">
+                <aside class="score-panel solver-guide" aria-label="Solver instructions">
+                    <div>
+                        <p class="panel-label">Enter feedback</p>
+                        <p>Fill in known letters by position. Separate letters entered in the same position can come from different guesses. If a letter is both green or yellow and gray, only the known matching copies are allowed.</p>
+                    </div>
+                    <div class="solver-legend" aria-label="Feedback colors">
+                        <span><i class="scheme-2"></i> Correct position</span>
+                        <span><i class="scheme-1"></i> In the word, different position</span>
+                        <span><i class="scheme-0"></i> Not in the word</span>
+                    </div>
+                </aside>
+
+                <div class="play-area solver-area">
+                    <div class="board-frame solver-frame">
+                        <div class="solver-constraints">
+                            <fieldset class="solver-row">
+                                <legend>Correct position <span>(green)</span></legend>
+                                <div class="solver-grid">
+                                    <label class="solver-position"><span>1</span><input id="c0" class="solver-input scheme-2" type="text" maxlength="1" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Correct letter in position 1"></label>
+                                    <label class="solver-position"><span>2</span><input id="c1" class="solver-input scheme-2" type="text" maxlength="1" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Correct letter in position 2"></label>
+                                    <label class="solver-position"><span>3</span><input id="c2" class="solver-input scheme-2" type="text" maxlength="1" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Correct letter in position 3"></label>
+                                    <label class="solver-position"><span>4</span><input id="c3" class="solver-input scheme-2" type="text" maxlength="1" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Correct letter in position 4"></label>
+                                    <label class="solver-position"><span>5</span><input id="c4" class="solver-input scheme-2" type="text" maxlength="1" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Correct letter in position 5"></label>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="solver-row">
+                                <legend>Wrong position <span>(yellow; enter all known matches)</span></legend>
+                                <div class="solver-grid">
+                                    <label class="solver-position"><span>1</span><input id="m0" class="solver-input scheme-1" type="text" maxlength="6" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Misplaced letters in position 1"></label>
+                                    <label class="solver-position"><span>2</span><input id="m1" class="solver-input scheme-1" type="text" maxlength="6" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Misplaced letters in position 2"></label>
+                                    <label class="solver-position"><span>3</span><input id="m2" class="solver-input scheme-1" type="text" maxlength="6" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Misplaced letters in position 3"></label>
+                                    <label class="solver-position"><span>4</span><input id="m3" class="solver-input scheme-1" type="text" maxlength="6" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Misplaced letters in position 4"></label>
+                                    <label class="solver-position"><span>5</span><input id="m4" class="solver-input scheme-1" type="text" maxlength="6" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Misplaced letters in position 5"></label>
+                                </div>
+                            </fieldset>
+
+                            <label class="excluded-letters" for="i0">
+                                <span>Not in the word <span>(gray)</span></span>
+                                <input id="i0" class="solver-input scheme-0" type="text" maxlength="26" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Letters not in the word">
+                            </label>
+                        </div>
+
+                        <div class="solver-results" aria-labelledby="poss-title">
+                            <h2 id="poss-title">Possible words <span id="poss-count" aria-live="polite"></span></h2>
+                            <p id="poss" aria-live="polite">Enter feedback, then search.</p>
+                        </div>
+                    </div>
+                    <div class="solver-actions">
+                        <button type="button" onclick="search(this);" class="control-button result-primary">Search</button>
+                        <button type="button" onclick="reset(this);" class="control-button result-secondary">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <span>Copyright &copy; 2022-2026 Mivex.</span>
+        <span>WORDL / Solver</span>
+    </footer>
+<script>
+
+</script>
+<script src="../js/answer-words.js?v=1.0.0"></script>
+<script src="../js/wordl-solver.js"></script>
+</body>
+</html>

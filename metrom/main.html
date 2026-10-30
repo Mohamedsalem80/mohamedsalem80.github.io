@@ -557,7 +557,7 @@
                 </div>
             </div>
             <div class="travel-hud" role="status" aria-live="polite">
-                <div id="travelStatus" class="travel-status">Travel mode is off.</div>
+                <div id="travelStatus" class="travel-status">Travel mode is off. GPS needs location permission and HTTPS. Estimated speeds are labeled; underground tracking is limited and pauses without a reliable fix.</div>
                 <div id="travelSpeed" class="travel-speed-chip">Speed: -- km/h</div>
             </div>
             <div id="stationMap" class="station-map"></div>
@@ -571,7 +571,7 @@
 
     <script src="js/leaflet.js"></script>
 
-    <script src="js/metro-script.js?v=3.1.0"></script>
+    <script src="js/metro-script.js?v=3.2.0"></script>
     <script>
         if ('serviceWorker' in navigator && /^https?:$/.test(window.location.protocol)) {
             window.addEventListener('load', function() {

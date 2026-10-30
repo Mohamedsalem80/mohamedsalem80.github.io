@@ -70,6 +70,7 @@ var elinestr = "one";
 var travelWatchId = null;
 var travelTickId = null;
 var travelState = null;
+var liveLocationRequest = null;
 var stationAreaByKey = {};
 var stationBoundsByKey = {};
 var showStationAreasOverlay = true;
@@ -79,9 +80,10 @@ var TRAVEL_CONFIG = {
     staleGpsMs: 7000,
     fallbackTickMs: 1200,
     maxBacktrackKm: 0.08,
-    defaultSpeedKmh: 28,
-    minFallbackSpeedKmh: 18,
     maxFallbackSpeedKmh: 40,
+    maxFallbackMs: 30000,
+    maxGpsAccuracyMeters: 100,
+    maxSpeedKmh: 120,
     maxSyntheticAdvanceWithoutGpsKm: 1.4,
     gpsRecoveryAccuracyMeters: 75,
     gpsRecoveryBacktrackKm: 2.5,
@@ -1090,12 +1092,12 @@ function initializeTravelState() {
     travelState = {
         routeMeta: routeMeta,
         maxProgressKm: 0,
-        lastProgressKm: null,
-        lastProgressAtMs: 0,
         lastGpsProgressKm: null,
         lastGpsAtMs: 0,
+        lastGpsSample: null,
+        speedAnchor: null,
         lastTickAtMs: Date.now(),
-        smoothedSpeedKmh: TRAVEL_CONFIG.defaultSpeedKmh,
+        smoothedSpeedKmh: null,
         lastAccuracyMeters: 0,
         filteredPosition: null,
         visuals: null,
@@ -1103,7 +1105,8 @@ function initializeTravelState() {
         isFallbackMode: false,
         recoveryVotes: 0,
         recoveryTargetKm: null,
-        currentSpeedKmh: 0
+        currentSpeedKmh: null,
+        speedIsEstimated: false
     };
 
     window.travelMapFollowingInitialized = false;
@@ -1195,9 +1198,8 @@ function renderTravelVisuals(displayPoint, nearestStation, remaining, accuracyMe
     }
 
     if (travelSpeed) {
-        var safeSpeed = Number(currentSpeedKmh || 0);
-        var speedText = safeSpeed > 1 ? safeSpeed.toFixed(1) : '0.0';
-        travelSpeed.innerText = (isFallback ? 'Speed (est.): ' : 'Speed: ') + speedText + ' km/h';
+        var speedText = Number.isFinite(currentSpeedKmh) ? currentSpeedKmh.toFixed(1) : '--';
+        travelSpeed.innerText = (isFallback || travelState.speedIsEstimated ? 'Speed (est.): ' : 'Speed: ') + speedText + ' km/h';
     }
 }
 
@@ -1211,15 +1213,110 @@ function stopTravelAsArrived() {
     }
 }
 
-function processTravelLocation(rawLat, rawLng, accuracyMeters, source) {
+function getGpsPositionError(position, now) {
+    var coords = position && position.coords;
+    if (!coords || !Number.isFinite(coords.latitude) || !Number.isFinite(coords.longitude) ||
+        !isValidLatLng(coords.latitude, coords.longitude)) {
+        return 'GPS returned invalid coordinates. Waiting for a valid fix.';
+    }
+    if (!Number.isFinite(coords.accuracy) || coords.accuracy < 0) {
+        return 'GPS accuracy is unavailable. Waiting for a valid fix.';
+    }
+    if (!Number.isFinite(position.timestamp) || position.timestamp <= 0 ||
+        now - position.timestamp > TRAVEL_CONFIG.staleGpsMs || position.timestamp > now + 1000) {
+        return 'GPS returned an outdated fix. Waiting for a fresh location.';
+    }
+    return '';
+}
+
+function updateTravelGpsSpeed(sample, nativeSpeedMs) {
+    var previous = travelState.lastGpsSample;
+    var gapMs = previous ? sample.timestamp - previous.timestamp : 0;
+    if (!previous || gapMs > TRAVEL_CONFIG.staleGpsMs) {
+        travelState.speedAnchor = sample;
+        travelState.smoothedSpeedKmh = null;
+        travelState.currentSpeedKmh = null;
+    }
+
+    travelState.speedIsEstimated = false;
+    if (Number.isFinite(nativeSpeedMs) && nativeSpeedMs >= 0 &&
+        nativeSpeedMs * 3.6 <= TRAVEL_CONFIG.maxSpeedKmh) {
+        travelState.currentSpeedKmh = nativeSpeedMs * 3.6;
+        travelState.smoothedSpeedKmh = travelState.currentSpeedKmh;
+        travelState.speedAnchor = sample;
+    } else {
+        travelState.speedIsEstimated = true;
+        var anchor = travelState.speedAnchor;
+        var elapsedMs = sample.timestamp - anchor.timestamp;
+        var distanceMeters = haversineKm(anchor.lat, anchor.lng, sample.lat, sample.lng) * 1000;
+        var uncertaintyMeters = Math.max(3, Math.hypot(anchor.accuracy, sample.accuracy));
+        if (elapsedMs >= 3000 && distanceMeters > uncertaintyMeters) {
+            var measuredSpeed = distanceMeters * 3600 / elapsedMs;
+            if (measuredSpeed <= TRAVEL_CONFIG.maxSpeedKmh) {
+                var alpha = 1 - Math.exp(-elapsedMs / 3000);
+                var oldSpeed = travelState.smoothedSpeedKmh;
+                travelState.currentSpeedKmh = Number.isFinite(oldSpeed) ?
+                    lerpValue(oldSpeed, measuredSpeed, alpha) : measuredSpeed;
+                travelState.smoothedSpeedKmh = travelState.currentSpeedKmh;
+                travelState.speedAnchor = sample;
+            } else {
+                travelState.currentSpeedKmh = null;
+                travelState.smoothedSpeedKmh = null;
+                travelState.speedAnchor = sample;
+            }
+        } else if (elapsedMs >= 5000 && distanceMeters <= uncertaintyMeters) {
+            travelState.currentSpeedKmh = 0;
+            travelState.smoothedSpeedKmh = 0;
+            if (elapsedMs >= 10000) travelState.speedAnchor = sample;
+        }
+    }
+    travelState.lastGpsSample = sample;
+    travelState.lastGpsAtMs = sample.timestamp;
+    travelState.lastTickAtMs = Date.now();
+    travelState.isFallbackMode = false;
+}
+
+function processTravelLocation(rawLat, rawLng, accuracyMeters, source, timestamp, nativeSpeedMs) {
     if (!travelState || !travelState.routeMeta) {
         if (!initializeTravelState()) return;
     }
 
     var now = Date.now();
     var routeMeta = travelState.routeMeta;
+    if (source === 'gps') {
+        var error = getGpsPositionError({
+            coords: { latitude: rawLat, longitude: rawLng, accuracy: accuracyMeters },
+            timestamp: timestamp
+        }, now);
+        if (!error && accuracyMeters > TRAVEL_CONFIG.maxGpsAccuracyMeters) {
+            error = 'GPS accuracy is too low (±' + accuracyMeters.toFixed(0) + ' m). Waiting for a better fix.';
+        }
+        if (error) {
+            if (travelStatus) travelStatus.innerText = error;
+            return;
+        }
+        var previousGps = travelState.lastGpsSample;
+        if (previousGps && timestamp <= previousGps.timestamp) return;
+        if (previousGps) {
+            var elapsedSec = (timestamp - previousGps.timestamp) / 1000;
+            var jumpMeters = haversineKm(previousGps.lat, previousGps.lng, rawLat, rawLng) * 1000;
+            var allowedMeters = TRAVEL_CONFIG.maxSpeedKmh / 3.6 * elapsedSec +
+                Math.hypot(previousGps.accuracy, accuracyMeters);
+            if (jumpMeters > allowedMeters) {
+                if (travelStatus) travelStatus.innerText = 'GPS location jumped unexpectedly. Waiting for a consistent fix.';
+                return;
+            }
+        }
+    }
     var projected = projectPointToRoute(routeMeta, rawLat, rawLng);
     if (!projected) return;
+    if (source === 'gps' && projected.distanceKm > Math.max(0.35, accuracyMeters / 500)) {
+        if (travelStatus) travelStatus.innerText = 'GPS location is away from the planned route. Check your route or wait for a better fix.';
+        return;
+    }
+    if (source === 'gps') {
+        updateTravelGpsSpeed({ lat: rawLat, lng: rawLng, accuracy: accuracyMeters, timestamp: timestamp }, nativeSpeedMs);
+    }
 
     var stationAreaMatch = source === 'gps' ? getStationAreaMatch(routeMeta, rawLat, rawLng) : null;
 
@@ -1231,7 +1328,7 @@ function processTravelLocation(rawLat, rawLng, accuracyMeters, source) {
     var recoveredFromOvershoot = false;
 
     if (source === 'gps') {
-        var gpsAcc = Number(accuracyMeters || 9999);
+        var gpsAcc = accuracyMeters;
         var backtrackGapKm = travelState.maxProgressKm - projectedProgressKm;
 
         if (backtrackGapKm > TRAVEL_CONFIG.maxBacktrackKm) {
@@ -1275,29 +1372,11 @@ function processTravelLocation(rawLat, rawLng, accuracyMeters, source) {
         }
     }
 
-    if (travelState.lastProgressKm !== null) {
-        var dtHours = (now - travelState.lastProgressAtMs) / 3600000;
-        var deltaKm = progressKm - travelState.lastProgressKm;
-        if (source === 'gps' && dtHours > 0 && deltaKm > 0) {
-            var speedKmh = deltaKm / dtHours;
-            if (speedKmh >= 6 && speedKmh <= 120) {
-                travelState.smoothedSpeedKmh = (travelState.smoothedSpeedKmh * 0.7) + (speedKmh * 0.3);
-                travelState.currentSpeedKmh = travelState.smoothedSpeedKmh;
-            }
-        }
-    }
-
-    if (source === 'gps' && !Number.isFinite(travelState.currentSpeedKmh)) {
-        travelState.currentSpeedKmh = 0;
-    }
-
     if (recoveredFromOvershoot) {
         travelState.maxProgressKm = progressKm;
     } else {
         travelState.maxProgressKm = Math.max(travelState.maxProgressKm, progressKm);
     }
-    travelState.lastProgressKm = progressKm;
-    travelState.lastProgressAtMs = now;
     travelState.lastAccuracyMeters = accuracyMeters;
 
     var snappedPoint = getPointAtProgress(routeMeta, progressKm);
@@ -1346,10 +1425,10 @@ function processTravelLocation(rawLat, rawLng, accuracyMeters, source) {
         travelState.currentSpeedKmh
     );
 
-    var isReliableArrivalSample = source === 'gps' && Number(accuracyMeters || 9999) <= 140;
-    var arrivedByRouteProgress = distanceToDestinationKm <= TRAVEL_CONFIG.arrivalRadiusKm;
-    var arrivedByStationArea = destinationCenterDistanceKm <= stationAreaRadiusFor(destinationStation);
-    if ((arrivedByRouteProgress || arrivedByStationArea) && isReliableArrivalSample) {
+    var isReliableArrivalSample = source === 'gps' && accuracyMeters <= 50;
+    var arrivalRadiusKm = Math.max(TRAVEL_CONFIG.arrivalRadiusKm, stationAreaRadiusFor(destinationStation));
+    var arrivedByStationArea = destinationCenterDistanceKm + accuracyMeters / 1000 <= arrivalRadiusKm;
+    if (arrivedByStationArea && isReliableArrivalSample) {
         travelState.arrivedSamples += 1;
     } else {
         travelState.arrivedSamples = 0;
@@ -1365,26 +1444,34 @@ function travelFallbackTick() {
 
     var now = Date.now();
     var sinceLastGps = now - (travelState.lastGpsAtMs || 0);
-    var dtSec = (now - (travelState.lastTickAtMs || now)) / 1000;
+    var dtSec = Math.min(3, (now - travelState.lastTickAtMs) / 1000);
     travelState.lastTickAtMs = now;
 
     if (sinceLastGps < TRAVEL_CONFIG.staleGpsMs || dtSec <= 0) {
         return;
     }
 
-    var speed = clampValue(
-        travelState.smoothedSpeedKmh || TRAVEL_CONFIG.defaultSpeedKmh,
-        TRAVEL_CONFIG.minFallbackSpeedKmh,
-        TRAVEL_CONFIG.maxFallbackSpeedKmh
-    );
+    if (!travelState.lastGpsSample || sinceLastGps > TRAVEL_CONFIG.maxFallbackMs ||
+        !Number.isFinite(travelState.smoothedSpeedKmh) || travelState.smoothedSpeedKmh <= 0) {
+        travelState.currentSpeedKmh = null;
+        if (travelSpeed) travelSpeed.innerText = 'Speed: -- km/h';
+        if (travelStatus) travelStatus.innerText = 'GPS signal unavailable. Position held while waiting for a reliable fix.';
+        return;
+    }
+
+    var speed = Math.min(travelState.smoothedSpeedKmh, TRAVEL_CONFIG.maxFallbackSpeedKmh);
     travelState.currentSpeedKmh = speed;
 
     var nextProgress = Math.min(
         travelState.routeMeta.totalKm,
+        travelState.lastGpsProgressKm + TRAVEL_CONFIG.maxSyntheticAdvanceWithoutGpsKm,
         travelState.maxProgressKm + (speed * dtSec / 3600)
     );
 
     if (nextProgress <= travelState.maxProgressKm + 0.0005) {
+        travelState.currentSpeedKmh = null;
+        if (travelSpeed) travelSpeed.innerText = 'Speed: -- km/h';
+        if (travelStatus) travelStatus.innerText = 'GPS estimate limit reached. Position held while waiting for a reliable fix.';
         return;
     }
 
@@ -1403,6 +1490,10 @@ function startTravelMode() {
 
     if (!navigator.geolocation) {
         travelStatus.innerText = 'Travel mode unavailable: geolocation is not supported by this browser.';
+        return;
+    }
+    if (window.isSecureContext === false) {
+        travelStatus.innerText = 'Travel mode requires HTTPS or localhost for location access.';
         return;
     }
 
@@ -1434,16 +1525,12 @@ function startTravelMode() {
         travelSpeed.innerText = 'Speed: -- km/h';
     }
 
+    var session = travelState;
     travelWatchId = navigator.geolocation.watchPosition(function(pos) {
-        if (!travelState) {
-            initializeTravelState();
-        }
-        if (travelState) {
-            travelState.lastGpsAtMs = Date.now();
-            travelState.isFallbackMode = false;
-        }
-        processTravelLocation(pos.coords.latitude, pos.coords.longitude, Number(pos.coords.accuracy || 0), 'gps');
+        if (travelState !== session) return;
+        processTravelLocation(pos.coords.latitude, pos.coords.longitude, pos.coords.accuracy, 'gps', pos.timestamp, pos.coords.speed);
     }, function(err) {
+        if (travelState !== session) return;
         var errorMessage = 'Travel mode error: ' + err.message;
         if (err && Number(err.code) === 1) {
             stopTravelMode(true);
@@ -1452,7 +1539,7 @@ function startTravelMode() {
         if (travelStatus) travelStatus.innerText = errorMessage;
     }, {
         enableHighAccuracy: true,
-        maximumAge: 1000,
+        maximumAge: 0,
         timeout: 20000
     });
 
@@ -1492,8 +1579,8 @@ function stopTravelMode(silent) {
     resetTravelTrackingState();
 }
 
-function updateTravelMap(lat, lng, accuracyMeters) {
-    processTravelLocation(lat, lng, accuracyMeters, 'gps');
+function updateTravelMap(lat, lng, accuracyMeters, timestamp, speedMs) {
+    processTravelLocation(lat, lng, accuracyMeters, 'gps', timestamp === undefined ? Date.now() : timestamp, speedMs);
 }
 
 function showRouteOnMap(routeStations, startLine, endLine, transferStation) {
@@ -1531,7 +1618,11 @@ function showRouteOnMap(routeStations, startLine, endLine, transferStation) {
     var latLngs = points.map(function(p) { return [p.lat, p.lng]; });
     window.currentRouteGeoPoints = points;
     window.currentRouteMeta = buildRouteMeta(points);
-    resetTravelTrackingState();
+    if (travelWatchId !== null) {
+        stopTravelMode(false);
+    } else {
+        resetTravelTrackingState();
+    }
     L.polyline(latLngs, {
         color: '#9C27B0',
         weight: 6,
@@ -1942,30 +2033,48 @@ function getLiveLocation() {
         coordResult.innerText = 'Live location is not supported in this browser.';
         return;
     }
+    if (window.isSecureContext === false) {
+        coordResult.innerText = 'Live location requires HTTPS or localhost for location access.';
+        return;
+    }
+
+    if (liveLocationRequest) liveLocationRequest.cancel();
 
     coordResult.innerText = 'Fetching live location... waiting for best GPS fix.';
 
     var best = null;
     var done = false;
     var watchId = null;
+    var timerId = null;
+    var lastError = '';
+
+    function cleanup() {
+        if (watchId !== null) navigator.geolocation.clearWatch(watchId);
+        if (timerId !== null) clearTimeout(timerId);
+        liveLocationRequest = null;
+    }
+
+    liveLocationRequest = {
+        cancel: function() {
+            done = true;
+            cleanup();
+        }
+    };
 
     function finishWithBest() {
         if (done) return;
         done = true;
-
-        if (watchId !== null) {
-            navigator.geolocation.clearWatch(watchId);
-        }
+        cleanup();
 
         if (!best) {
-            coordResult.innerText = 'Could not get live location. Please enter coordinates manually.';
+            coordResult.innerText = lastError || 'Could not get live location. Please enter coordinates manually.';
             return;
         }
 
         currentLat.value = best.coords.latitude.toFixed(6);
         currentLng.value = best.coords.longitude.toFixed(6);
 
-        var acc = Number(best.coords.accuracy || 0);
+        var acc = best.coords.accuracy;
         var qualityNote = '';
         if (acc > 500) {
             qualityNote = ' Warning: low accuracy fix. Consider entering coordinates manually.';
@@ -1981,6 +2090,13 @@ function getLiveLocation() {
     }
 
     watchId = navigator.geolocation.watchPosition(function(pos) {
+        if (done) return;
+        var error = getGpsPositionError(pos, Date.now());
+        if (error) {
+            lastError = error;
+            coordResult.innerText = error;
+            return;
+        }
         if (!best || pos.coords.accuracy < best.coords.accuracy) {
             best = pos;
         }
@@ -1990,12 +2106,12 @@ function getLiveLocation() {
             finishWithBest();
         }
     }, function(err) {
-        if (!done) {
-            coordResult.innerText = 'Could not get live location: ' + err.message;
-        }
-        done = true;
-        if (watchId !== null) {
-            navigator.geolocation.clearWatch(watchId);
+        if (done) return;
+        lastError = 'Could not get live location: ' + err.message;
+        coordResult.innerText = lastError;
+        if (err.code === 1) {
+            best = null;
+            finishWithBest();
         }
     }, {
         enableHighAccuracy: true,
@@ -2004,7 +2120,7 @@ function getLiveLocation() {
     });
 
     // Collect readings for a short window, then use the best one.
-    setTimeout(finishWithBest, 12000);
+    timerId = setTimeout(finishWithBest, 12000);
 }
 
 function findClosestStationNow() {

@@ -28,6 +28,13 @@
     const resultMessage = document.getElementById('resultMessage');
     const resultWord = document.getElementById('resultWord');
     const currentYear = document.getElementById('currentYear');
+    const gameMenu = document.getElementById('gameMenu');
+    const restartDialog = document.getElementById('restartDialog');
+    const saveStatus = document.getElementById('saveStatus');
+    const sharePreview = document.getElementById('sharePreview');
+    const shareFeedback = document.getElementById('shareFeedback');
+    const viewResult = document.getElementById('viewResult');
+    const dialogs = Array.from(document.querySelectorAll('dialog'));
 
     const answerPool = Array.from(new Set(allowedWords
         .map(word => word.toLowerCase())
@@ -37,11 +44,15 @@
         .map(word => word.toLowerCase())
         .filter(word => /^[a-z]{5}$/.test(word)));
 
-    let state = createState(selectAnswer());
-    let stats = loadStats();
+    let storageProblem = '';
+    const savedData = loadSavedData();
+    let stats = loadStats(savedData);
+    let state = loadRound(savedData && savedData.round) || createState(selectAnswer());
     let muted = readStorage(MUTE_KEY) === 'true';
     let soundBank = null;
     let toastTimer = 0;
+    let revealTimer = 0;
+    let resultTimer = 0;
 
     function createState(answer) {
         return {
@@ -71,6 +82,7 @@
         try {
             return window.localStorage.getItem(key);
         } catch (error) {
+            storageProblem = 'Browser storage is unavailable. Progress and scores cannot be saved.';
             return null;
         }
     }
@@ -78,12 +90,30 @@
     function writeStorage(key, value) {
         try {
             window.localStorage.setItem(key, value);
+            return true;
         } catch (error) {
-            // Storage is optional; gameplay remains fully functional without it.
+            storageProblem = 'Could not save on this browser. Keep this page open to retain your progress.';
+            updateSaveStatus();
+            return false;
         }
     }
 
-    function loadStats() {
+    function loadSavedData() {
+        const raw = readStorage(STORAGE_KEY);
+        if (!raw) return null;
+        try {
+            const stored = JSON.parse(raw);
+            if (!stored || typeof stored !== 'object' || Array.isArray(stored)) {
+                throw new Error('Invalid saved data.');
+            }
+            return stored;
+        } catch (error) {
+            storageProblem = 'Saved data could not be read. New progress will replace it.';
+            return null;
+        }
+    }
+
+    function loadStats(stored) {
         const defaults = {
             played: 0,
             wins: 0,
@@ -92,27 +122,58 @@
             distribution: Array(MAX_GUESSES).fill(0)
         };
 
-        try {
-            const stored = JSON.parse(readStorage(STORAGE_KEY));
-            if (!stored || typeof stored !== 'object') return defaults;
+        if (!stored) return defaults;
 
-            return {
-                played: Number.isFinite(stored.played) ? Math.max(0, stored.played) : 0,
-                wins: Number.isFinite(stored.wins) ? Math.max(0, stored.wins) : 0,
-                streak: Number.isFinite(stored.streak) ? Math.max(0, stored.streak) : 0,
-                maxStreak: Number.isFinite(stored.maxStreak) ? Math.max(0, stored.maxStreak) : 0,
-                distribution: Array.from({ length: MAX_GUESSES }, (_, index) => {
-                    const value = stored.distribution && stored.distribution[index];
-                    return Number.isFinite(value) ? Math.max(0, value) : 0;
-                })
-            };
-        } catch (error) {
-            return defaults;
-        }
+        const count = value => Number.isSafeInteger(value) && value >= 0 ? value : 0;
+        const played = count(stored.played);
+        const wins = Math.min(played, count(stored.wins));
+        const streak = Math.min(wins, count(stored.streak));
+        return {
+            played,
+            wins,
+            streak,
+            maxStreak: Math.max(streak, Math.min(wins, count(stored.maxStreak))),
+            distribution: Array.from({ length: MAX_GUESSES }, (_, index) => {
+                const value = stored.distribution && stored.distribution[index];
+                return Math.min(wins, count(value));
+            })
+        };
     }
 
-    function saveStats() {
-        writeStorage(STORAGE_KEY, JSON.stringify(stats));
+    function loadRound(round) {
+        if (!round) return null;
+        const valid = answerPool.includes(round.answer)
+            && Array.isArray(round.guesses) && round.guesses.length <= MAX_GUESSES
+            && round.guesses.every(guess => typeof guess === 'string' && acceptedWords.has(guess))
+            && new Set(round.guesses).size === round.guesses.length
+            && !round.guesses.slice(0, -1).includes(round.answer)
+            && typeof round.currentGuess === 'string' && /^[a-z]{0,5}$/.test(round.currentGuess);
+        if (!valid) {
+            storageProblem = 'The saved round could not be restored. Your completed scores are still available.';
+            return null;
+        }
+        const restored = createState(round.answer);
+        restored.guesses = round.guesses.slice();
+        restored.evaluations = restored.guesses.map(guess => scoreGuess(restored.answer, guess));
+        restored.phase = restored.guesses.includes(restored.answer) ? 'won'
+            : restored.guesses.length === MAX_GUESSES ? 'lost' : 'playing';
+        restored.currentGuess = restored.phase === 'playing' ? round.currentGuess : '';
+        return restored;
+    }
+
+    function updateSaveStatus() {
+        const message = storageProblem || 'Progress and scores saved on this browser only.';
+        saveStatus.textContent = message;
+        document.getElementById('resultSaveStatus').textContent = message;
+        saveStatus.classList.toggle('save-warning', Boolean(storageProblem));
+    }
+
+    function saveProgress() {
+        // Keep the result and counters in one write so a reload cannot count a round twice.
+        if (writeStorage(STORAGE_KEY, JSON.stringify({ ...stats, round: state }))) {
+            storageProblem = '';
+        }
+        updateSaveStatus();
     }
 
     function winRate() {
@@ -126,6 +187,27 @@
         document.getElementById('resultPlayed').textContent = stats.played;
         document.getElementById('resultWinRate').textContent = `${winRate()}%`;
         document.getElementById('resultStreak').textContent = stats.streak;
+        document.getElementById('totalPlayed').textContent = stats.played;
+        document.getElementById('totalWins').textContent = stats.wins;
+        document.getElementById('totalWinRate').textContent = `${winRate()}%`;
+        document.getElementById('totalStreak').textContent = stats.streak;
+        document.getElementById('bestStreak').textContent = stats.maxStreak;
+        const distribution = document.getElementById('guessDistribution');
+        distribution.replaceChildren();
+        const maximum = Math.max(1, ...stats.distribution);
+        stats.distribution.forEach((count, index) => {
+            const row = document.createElement('div');
+            row.className = 'distribution-row';
+            const label = document.createElement('span');
+            label.textContent = String(index + 1);
+            const bar = document.createElement('span');
+            bar.className = 'distribution-bar';
+            bar.style.width = `${Math.max(8, (count / maximum) * 100)}%`;
+            bar.textContent = String(count);
+            row.setAttribute('aria-label', `${index + 1} ${index ? 'guesses' : 'guess'}: ${count} wins`);
+            row.append(label, bar);
+            distribution.appendChild(row);
+        });
     }
 
     function scoreGuess(answer, guess) {
@@ -259,9 +341,15 @@
         setInputDisabled(true);
         updateStatus('Checking word');
         revealGuess(rowIndex, guess, evaluation);
+        state.currentGuess = '';
+        if (evaluation.every(score => score === 'correct') || state.guesses.length === MAX_GUESSES) {
+            recordResult(evaluation.every(score => score === 'correct'));
+        } else {
+            saveProgress();
+        }
 
         const revealDuration = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 20 : 960;
-        window.setTimeout(() => {
+        revealTimer = window.setTimeout(() => {
             updateKeyboard(guess, evaluation);
 
             if (evaluation.every(score => score === 'correct')) {
@@ -291,33 +379,36 @@
         } else {
             stats.streak = 0;
         }
-        saveStats();
+        saveProgress();
         updateStatsDisplay();
     }
 
     function finishGame(won) {
         state.phase = won ? 'won' : 'lost';
         setInputDisabled(true);
-        recordResult(won);
         updateStatus(won ? `Solved in ${state.guesses.length}` : 'No guesses left');
+        prepareResult();
+        notify(won ? 'You solved it.' : `The word was ${state.answer.toUpperCase()}.`, won ? 'good' : 'bad', 2200);
+
+        resultTimer = window.setTimeout(() => {
+            if (!dialogs.some(dialog => dialog.open)) openDialog(resultDialog);
+        }, 240);
+    }
+
+    function prepareResult() {
+        const won = state.phase === 'won';
         resultTitle.textContent = won ? 'Well played.' : 'Round complete.';
         resultMessage.firstChild.textContent = won
             ? `Solved in ${state.guesses.length}. The word was `
             : 'The word was ';
         resultWord.textContent = state.answer.toUpperCase();
-        notify(won ? 'You solved it.' : `The word was ${state.answer.toUpperCase()}.`, won ? 'good' : 'bad', 2200);
-
-        window.setTimeout(() => {
-            if (typeof resultDialog.showModal === 'function') {
-                resultDialog.showModal();
-            } else {
-                resultDialog.setAttribute('open', '');
-            }
-        }, 240);
+        sharePreview.value = resultText();
+        shareFeedback.textContent = '';
+        viewResult.hidden = false;
     }
 
     function handleInput(input) {
-        if (state.phase !== 'playing') return false;
+        if (state.phase !== 'playing' || dialogs.some(dialog => dialog.open) || gameMenu.open) return false;
 
         const key = input.toUpperCase();
         if (/^[A-Z]$/.test(key)) {
@@ -327,6 +418,7 @@
             }
             state.currentGuess += key.toLowerCase();
             updateBoard();
+            saveProgress();
             playSound('type');
             return true;
         }
@@ -338,6 +430,7 @@
             }
             state.currentGuess = state.currentGuess.slice(0, -1);
             updateBoard();
+            saveProgress();
             playSound('remove');
             return true;
         }
@@ -375,13 +468,39 @@
     }
 
     function newGame(answerOverride) {
+        window.clearTimeout(revealTimer);
+        window.clearTimeout(resultTimer);
         const normalizedOverride = typeof answerOverride === 'string' ? answerOverride.toLowerCase() : '';
         const answer = answerPool.includes(normalizedOverride) ? normalizedOverride : selectAnswer();
         state = createState(answer);
-        if (resultDialog.open) resultDialog.close();
+        dialogs.forEach(dialog => {
+            if (dialog.open) dialog.close();
+        });
+        viewResult.hidden = true;
         clearBoard();
+        setInputDisabled(false);
         updateStatus();
+        saveProgress();
+        board.focus({ preventScroll: true });
         notify('New game started.', 'default', 1200);
+    }
+
+    function openDialog(dialog) {
+        gameMenu.open = false;
+        if (!dialog.open) dialog.showModal();
+    }
+
+    function requestRestart() {
+        if (state.phase === 'revealing') {
+            notify('Wait for your word to finish revealing.', 'warn');
+        } else if (state.phase === 'playing' && (state.currentGuess || state.guesses.length)) {
+            document.getElementById('restartDescription').textContent = storageProblem
+                ? 'Your current guesses will be cleared. Completed scores and your streak stay in this page, but browser saving is unavailable.'
+                : 'Your current guesses will be cleared. Completed scores and your streak will stay saved.';
+            openDialog(restartDialog);
+        } else {
+            newGame();
+        }
     }
 
     function initializeSounds() {
@@ -406,13 +525,13 @@
 
     function toggleMute() {
         muted = !muted;
-        writeStorage(MUTE_KEY, String(muted));
+        const saved = writeStorage(MUTE_KEY, String(muted));
         muteButton.setAttribute('aria-pressed', String(muted));
         muteButton.setAttribute('aria-label', muted ? 'Enable game sounds' : 'Mute game sounds');
         muteButton.title = muted ? 'Enable game sounds' : 'Mute game sounds';
         muteButton.querySelector('.sound-icon').textContent = muted ? '×' : '♪';
         muteButton.querySelector('.control-label').textContent = muted ? 'Muted' : 'Sound';
-        notify(muted ? 'Sound muted.' : 'Sound enabled.', 'default', 1100);
+        notify(`${muted ? 'Sound muted.' : 'Sound enabled.'}${saved ? '' : ' This preference could not be saved.'}`, saved ? 'default' : 'warn', 2200);
     }
 
     function notify(message, style = 'default', duration = 1800) {
@@ -498,6 +617,13 @@
             }
         });
 
+        context.fillStyle = '#e9b949';
+        context.font = 'bold 16px sans-serif';
+        context.textAlign = 'center';
+        context.textBaseline = 'middle';
+        const score = state.phase === 'won' ? `${state.guesses.length}/${MAX_GUESSES}`
+            : state.phase === 'lost' ? `X/${MAX_GUESSES}` : 'In progress';
+        context.fillText(`WORDL · ${score}`, logicalWidth / 2, logicalHeight - 28);
         return canvas;
     }
 
@@ -511,6 +637,10 @@
     }
 
     async function downloadBoard(button) {
+        if (state.phase === 'revealing') {
+            notify('Wait for your word to finish revealing.', 'warn');
+            return;
+        }
         button.disabled = true;
         try {
             const canvas = renderBoardCanvas();
@@ -519,11 +649,15 @@
             const link = document.createElement('a');
             link.download = `wordl-${Date.now()}.png`;
             link.href = objectUrl;
+            (resultDialog.open ? resultDialog : document.body).appendChild(link);
             link.click();
+            link.remove();
             window.setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
             notify('Board downloaded.', 'good');
+            if (resultDialog.open) shareFeedback.textContent = 'Board image downloaded (includes letters).';
         } catch (error) {
             notify('The board could not be downloaded.', 'bad');
+            if (resultDialog.open) shareFeedback.textContent = 'Image download failed. You can still copy the result.';
         } finally {
             button.disabled = false;
         }
@@ -545,35 +679,72 @@
         textarea.value = text;
         textarea.style.position = 'fixed';
         textarea.style.opacity = '0';
-        document.body.appendChild(textarea);
+        resultDialog.appendChild(textarea);
         textarea.select();
-        document.execCommand('copy');
-        textarea.remove();
+        try {
+            if (!document.execCommand('copy')) throw new Error('Clipboard copy was refused.');
+        } finally {
+            textarea.remove();
+        }
     }
 
-    async function shareResult() {
-        if (state.phase !== 'won' && state.phase !== 'lost') return;
+    function resultText() {
         const score = state.phase === 'won' ? state.guesses.length : 'X';
-        const text = `WORDL ${score}/${MAX_GUESSES}\n\n${resultGrid()}`;
+        return `WORDL ${score}/${MAX_GUESSES}\n\n${resultGrid()}\n\nhttps://mohamedsalem80.github.io/wordl/`;
+    }
 
+    async function copyResult(button) {
+        if (state.phase !== 'won' && state.phase !== 'lost') return;
+        button.disabled = true;
         try {
-            if (navigator.share) {
-                await navigator.share({ title: 'WORDL result', text });
-            } else {
-                await copyText(text);
-                notify('Result copied.', 'good');
-            }
+            await copyText(resultText());
+            shareFeedback.textContent = 'Result copied. Paste it into a message or post.';
+            notify('Result copied.', 'good');
         } catch (error) {
-            if (error.name !== 'AbortError') notify('The result could not be shared.', 'bad');
+            sharePreview.focus();
+            sharePreview.select();
+            shareFeedback.textContent = 'Clipboard unavailable. Select and copy the result above manually.';
+        } finally {
+            button.disabled = false;
+        }
+    }
+
+    async function shareResult(button) {
+        if (state.phase !== 'won' && state.phase !== 'lost') return;
+        if (!navigator.share) {
+            await copyResult(button);
+            return;
+        }
+        button.disabled = true;
+        try {
+            await navigator.share({ title: 'WORDL result', text: resultText() });
+            shareFeedback.textContent = 'Result shared.';
+        } catch (error) {
+            shareFeedback.textContent = error.name === 'AbortError'
+                ? 'Sharing canceled. Your result is still here.'
+                : 'Sharing unavailable. Use Copy result or copy the preview manually.';
+        } finally {
+            button.disabled = false;
         }
     }
 
     function handleAction(button) {
         const action = button.dataset.action;
-        if (action === 'restart') newGame();
+        if (gameMenu.contains(button)) {
+            gameMenu.open = false;
+            gameMenu.querySelector('summary').focus();
+        }
+        if (action === 'restart') requestRestart();
+        if (action === 'confirm-restart') newGame();
+        if (action === 'cancel-restart') restartDialog.close();
+        if (action === 'statistics') openDialog(document.getElementById('statsDialog'));
+        if (action === 'help') openDialog(document.getElementById('helpDialog'));
+        if (action === 'view-result') openDialog(resultDialog);
+        if (action === 'close-dialog') button.closest('dialog').close();
         if (action === 'mute') toggleMute();
         if (action === 'download') downloadBoard(button);
-        if (action === 'share') shareResult();
+        if (action === 'share') shareResult(button);
+        if (action === 'copy') copyResult(button);
         if (action === 'close-result' && resultDialog.open) resultDialog.close();
     }
 
@@ -587,11 +758,17 @@
 
     document.addEventListener('keydown', event => {
         if (event.defaultPrevented || event.ctrlKey || event.metaKey || event.altKey || event.repeat) return;
-        if (resultDialog.open) return;
+        if (event.key === 'Escape' && gameMenu.open) {
+            gameMenu.open = false;
+            gameMenu.querySelector('summary').focus();
+            event.preventDefault();
+            return;
+        }
+        if (dialogs.some(dialog => dialog.open) || gameMenu.open) return;
 
         const target = event.target instanceof Element ? event.target : null;
         const isTextEntry = target && (target.matches('input, select, textarea') || target.isContentEditable);
-        const isNativeActivation = target && target.closest('button, a') && (event.key === 'Enter' || event.key === ' ');
+        const isNativeActivation = target && target.closest('button, a, summary') && (event.key === 'Enter' || event.key === ' ');
         if (isTextEntry || isNativeActivation) return;
 
         const key = event.key.length === 1 ? event.key.toUpperCase() : event.key.toUpperCase();
@@ -599,12 +776,34 @@
 
         event.preventDefault();
         flashKey(key);
-        handleInput(key);
+        if (handleInput(key)) board.focus({ preventScroll: true });
+    });
+
+    document.addEventListener('click', event => {
+        if (!gameMenu.contains(event.target)) gameMenu.open = false;
+    }, true);
+
+    gameMenu.addEventListener('focusout', event => {
+        if (!gameMenu.contains(event.relatedTarget)) gameMenu.open = false;
     });
 
     initializeAccessibility();
+    state.guesses.forEach((guess, index) => {
+        tiles[index].forEach((tile, column) => { tile.textContent = guess[column].toUpperCase(); });
+        revealGuess(index, guess, state.evaluations[index]);
+        tiles[index].forEach(tile => tile.classList.remove('is-revealing'));
+        updateKeyboard(guess, state.evaluations[index]);
+    });
+    updateBoard();
+    setInputDisabled(state.phase !== 'playing');
     updateStatsDisplay();
-    updateStatus();
+    updateStatus(state.phase === 'won' ? `Solved in ${state.guesses.length}`
+        : state.phase === 'lost' ? 'No guesses left'
+        : state.guesses.length || state.currentGuess ? 'Saved round resumed' : '');
+    if (state.phase === 'won' || state.phase === 'lost') prepareResult();
+    if (!storageProblem && (!savedData || !savedData.round)) saveProgress();
+    updateSaveStatus();
+    if (!navigator.share) document.querySelector('[data-action="share"]').hidden = true;
     muteButton.setAttribute('aria-pressed', String(muted));
     muteButton.setAttribute('aria-label', muted ? 'Enable game sounds' : 'Mute game sounds');
     muteButton.querySelector('.sound-icon').textContent = muted ? '×' : '♪';
