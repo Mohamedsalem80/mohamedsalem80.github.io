@@ -1,3 +1,7 @@
+const solverWords = Array.from(new Set(allowedWords.concat(allWords)));
+
+document.getElementById("dictionary-count").textContent = solverWords.length.toLocaleString("en-US");
+
 function filterWords(words, feedback) {
     if (
         feedback.correctLetters.length !== feedback.correctIndices.length ||
@@ -79,7 +83,7 @@ function search(btn) {
     const incorrectLetters = document.getElementById("i0").value.trim().toLowerCase();
     feedback.incorrectLetters = Array.from(incorrectLetters).filter(letter => /^[a-z]$/.test(letter));
 
-    const filteredWords = filterWords(allowedWords, feedback);
+    const filteredWords = filterWords(solverWords, feedback);
     const possibilities = document.getElementById("poss");
     const possibilityCount = document.getElementById("poss-count");
 
