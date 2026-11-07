@@ -39,6 +39,16 @@ function feedback(overrides = {}) {
     };
 }
 
+test('game and solver pages use the same new dictionary cache versions', () => {
+    const gameHtml = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+    const solverHtml = fs.readFileSync(path.join(root, 'solver', 'index.html'), 'utf8');
+    for (const asset of ['all-words.js', 'answer-words.js']) {
+        assert.ok(gameHtml.includes(`src="js/${asset}?v=1.1.1"`));
+        assert.ok(solverHtml.includes(`src="../js/${asset}?v=1.1.1"`));
+    }
+    assert.ok(solverHtml.includes('src="../js/wordl-solver.js?v=1.1.1"'));
+});
+
 test('the solver page loads the full dictionary once with common answers first', () => {
     const h = harness();
     const expected = Array.from(new Set(h.answers.concat(h.allWords)));
@@ -104,6 +114,28 @@ test('green, yellow, and gray clues still filter the expanded dictionary', () =>
         assert.ok(word.includes('e') && word[2] !== 'e');
         assert.ok(!/[xyz]/.test(word));
     }
+});
+
+test('REBAR remains searchable with the accumulated clues from the reported screenshot', () => {
+    const h = harness();
+    assert.ok(h.answers.includes('rebar'));
+    h.element('c4').value = 'R';
+    h.element('m1').value = 'RA';
+    h.element('m2').value = 'AE';
+    h.element('m3').value = 'E';
+    h.element('m4').value = 'E';
+    h.context.search();
+    assert.ok(h.element('poss').textContent.split(' · ').includes('rebar'));
+
+    h.element('c3').value = 'A';
+    h.element('i0').value = 'CNLIGHTFOUDPSWM';
+    h.context.search();
+    assert.ok(h.element('poss').textContent.split(' · ').includes('rebar'));
+
+    for (let index = 0; index < 5; index++) h.element('c' + index).value = 'REBAR'[index];
+    h.context.search();
+    assert.equal(h.element('poss').textContent, 'rebar');
+    assert.equal(h.element('poss-count').textContent, '(1)');
 });
 
 test('existing duplicate-letter gray constraints are preserved', () => {
