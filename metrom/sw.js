@@ -1,6 +1,4 @@
-const CACHE_VERSION = 'metrom-static-v7';
-const TILE_CACHE_VERSION = 'metrom-tiles-v1';
-const TILE_CACHE_LIMIT = 240;
+const CACHE_VERSION = 'metrom-static-v9';
 const CORE_ASSETS = [
   './',
   './index.html',
@@ -12,6 +10,7 @@ const CORE_ASSETS = [
   './js/leaflet.js',
   './js/parallax.min.js',
   './js/metrom-home.js',
+  './js/metrom-i18n.js',
   './js/metro-script.js',
   './js/cairo_metro_station_points.geojson',
   './js/cairo_metro_station_bounds.geojson',
@@ -31,14 +30,6 @@ const CORE_ASSETS = [
 ];
 
 const STATIC_EXTENSIONS = /\.(?:css|js|json|geojson|webmanifest|png|jpg|jpeg|gif|webp|svg|ico|woff2?)$/i;
-const TILE_HOST_REGEX = /^(?:[abcd]\.)?basemaps\.cartocdn\.com$/i;
-
-function trimCache(cache, maximumEntries) {
-  return cache.keys().then((keys) => {
-    const excess = Math.max(0, keys.length - maximumEntries);
-    return Promise.all(keys.slice(0, excess).map((request) => cache.delete(request)));
-  });
-}
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -52,7 +43,7 @@ self.addEventListener('activate', (event) => {
     caches.keys().then((keys) =>
       Promise.all(
         keys
-          .filter((key) => key !== CACHE_VERSION && key !== TILE_CACHE_VERSION)
+          .filter((key) => key.startsWith('metrom-') && key !== CACHE_VERSION)
           .map((key) => caches.delete(key))
       )
     )
@@ -66,29 +57,7 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(request.url);
 
-  // Runtime tile cache: allows previously visited map areas to remain visible offline.
-  if (TILE_HOST_REGEX.test(url.hostname)) {
-    event.respondWith(
-      caches.open(TILE_CACHE_VERSION).then((tileCache) =>
-        tileCache.match(request).then((cachedTile) => {
-          if (cachedTile) return cachedTile;
-
-          return fetch(request)
-            .then((response) => {
-              if (response && response.status === 200) {
-                event.waitUntil(
-                  tileCache.put(request, response.clone())
-                    .then(() => trimCache(tileCache, TILE_CACHE_LIMIT))
-                );
-              }
-              return response;
-            });
-        })
-      )
-    );
-    return;
-  }
-
+  // Let the browser honor the tile provider's HTTP cache headers; never prefetch tiles.
   if (url.origin !== self.location.origin) return;
 
   const isStaticAsset = STATIC_EXTENSIONS.test(url.pathname);

@@ -17,6 +17,70 @@
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.language-toggle {
+    padding: 0.35rem 0.65rem;
+    border: 1px solid var(--line-dark);
+    border-radius: 4px;
+    background: transparent;
+    color: var(--gold-bright);
+    font: inherit;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+html[dir="rtl"] body {
+    font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+html[dir="rtl"] .planner-page .page-title,
+html[dir="rtl"] .planner-page .metro-map,
+html[dir="rtl"] .landing-page .hero-text,
+html[dir="rtl"] .planner-page th,
+html[dir="rtl"] .planner-page td {
+    text-align: start;
+}
+
+html[dir="rtl"] .planner-brand > span {
+    padding-left: 0;
+    border-left: 0;
+    padding-inline-start: 0.9rem;
+    border-inline-start: 1px solid var(--line-dark);
+}
+
+.coord-grid input,
+.coord-link-input,
+.station-map {
+    direction: ltr;
+}
+
+.map-basemap-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.8rem;
+}
+
+.map-basemap-controls p {
+    flex: 1 1 240px;
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+html[dir="rtl"] .leaflet-tooltip,
+html[dir="rtl"] .leaflet-popup-content {
+    direction: rtl;
+    text-align: start;
+}
+
+@media (max-width: 700px) {
+    .site-header .language-toggle {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.45rem;
+    }
+}
+
 *,
 *::before,
 *::after {
@@ -762,24 +826,24 @@ select:focus-visible {
     padding: 0.7rem 0.85rem;
     display: flex;
     align-items: center;
-    border-left: 3px solid #9eaaa5;
+    border-inline-start: 3px solid #9eaaa5;
     background: rgba(255, 255, 255, 0.7);
     color: #5a6862;
     font-size: 0.82rem;
 }
 
 .planner-feedback[data-state="error"] {
-    border-left-color: var(--line-two);
+    border-inline-start-color: var(--line-two);
     color: #9b332e;
 }
 
 .planner-feedback[data-state="success"] {
-    border-left-color: var(--line-three);
+    border-inline-start-color: var(--line-three);
     color: #267148;
 }
 
 .planner-feedback[data-state="notice"] {
-    border-left-color: var(--gold);
+    border-inline-start-color: var(--gold);
     color: #795718;
 }
 
@@ -837,7 +901,7 @@ select:focus-visible {
     margin: 0;
     padding: 1.8rem;
     border: 1px solid var(--line);
-    border-left: 4px solid var(--gold);
+    border-inline-start: 4px solid var(--gold);
     border-radius: 6px;
     background: rgba(255, 255, 255, 0.94);
     box-shadow: 0 16px 40px rgba(25, 44, 38, 0.08);
@@ -998,7 +1062,7 @@ select:focus-visible {
     margin-top: 0.75rem;
     padding: 0.8rem;
     border: 0;
-    border-left: 2px solid #cbd3d0;
+    border-inline-start: 2px solid #cbd3d0;
     border-radius: 0;
     background: #f5f7f6;
     color: #52605a;

@@ -23,11 +23,11 @@ var interchangeMatrix = {
     two: {
         one: ["Al Shohadaa", "Sadat"],
         two: network["two"],
-        three: ["Ataba"]
+        three: ["Ataba", "Cairo University"]
     },
     three: {
         one: ["Nasser"],
-        two: ["Ataba"],
+        two: ["Ataba", "Cairo University"],
         three: network["three"]
     }
 };
@@ -1608,7 +1608,7 @@ function showRouteOnMap(routeStations, startLine, endLine, transferStation) {
         }
         if (st) points.push(st);
 
-        if (!switched && transferNorm && normalizeStationName(name) === transferNorm && idx !== 0) {
+        if (!switched && transferNorm && normalizeStationName(name) === transferNorm) {
             switched = true;
         }
     });
@@ -2364,6 +2364,14 @@ function lineThreeDirectionTarget(transferStation, targetStation) {
     var rodElFaragBranch = lineThreeRouteSegments[1];
     var cairoUniversityBranch = lineThreeRouteSegments[2];
 
+    var branch = cairoUniversityBranch.indexOf(transferStation) > 0
+        ? cairoUniversityBranch
+        : rodElFaragBranch.indexOf(transferStation) > 0 ? rodElFaragBranch : null;
+    if (branch && branch.indexOf(targetStation) >= 0 &&
+        branch.indexOf(targetStation) < branch.indexOf(transferStation)) {
+        return "Adly Mansour";
+    }
+
     if (rodElFaragBranch.indexOf(targetStation) > 0) {
         return "Rod El Farag Corridor";
     }
@@ -2375,6 +2383,10 @@ function lineThreeDirectionTarget(transferStation, targetStation) {
     var targetIndex = trunk.indexOf(targetStation);
     if (transferIndex !== -1 && targetIndex !== -1) {
         return targetIndex < transferIndex ? "Adly Mansour" : "Kit Kat";
+    }
+
+    if (branch && targetIndex !== -1) {
+        return "Adly Mansour";
     }
 
     return "Line 3 service";
@@ -2540,6 +2552,90 @@ function parseLatLng(dmsCoord) {
     return [lat, lng];
 }
 
+function addMapBackground(map) {
+    var localLayer = L.gridLayer({
+        attribution: 'Metrom local network map',
+        maxZoom: 19,
+        zIndex: 0
+    });
+    localLayer.createTile = function(coords) {
+        var tile = document.createElement('div');
+        tile.style.background = ((coords.x + coords.y) % 2 === 0) ? '#eef3f2' : '#e7efed';
+        tile.style.border = '1px solid rgba(30,72,63,0.06)';
+        return tile;
+    };
+    localLayer.addTo(map);
+
+    var streetLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 19,
+        zIndex: 1
+    });
+    var toggle = document.getElementById('toggleStreetMapBtn');
+    var status = document.getElementById('mapTileStatus');
+    var wantsStreetTiles = true;
+    var tileErrors = 0;
+
+    function refreshControls(message) {
+        var visible = map.hasLayer(streetLayer);
+        toggle.textContent = visible ? 'Use local map' : 'Show street map';
+        toggle.setAttribute('aria-pressed', visible ? 'true' : 'false');
+        status.textContent = message;
+    }
+
+    function showStreetTiles() {
+        tileErrors = 0;
+        if (!/^https?:$/.test(window.location.protocol)) {
+            map.removeLayer(streetLayer);
+            refreshControls('Street tiles require HTTP(S). Showing the local metro map.');
+            return;
+        }
+        if (navigator.onLine === false) {
+            map.removeLayer(streetLayer);
+            refreshControls('You are offline. Showing the local metro map.');
+            return;
+        }
+        streetLayer.addTo(map);
+        refreshControls('Loading street map tiles...');
+    }
+
+    streetLayer.on('tileload', function() {
+        if (!map.hasLayer(streetLayer)) return;
+        tileErrors = 0;
+        refreshControls('Street map tiles provided by OpenStreetMap.');
+    });
+    streetLayer.on('tileerror', function() {
+        if (!map.hasLayer(streetLayer)) return;
+        tileErrors += 1;
+        if (tileErrors >= 3) {
+            map.removeLayer(streetLayer);
+            refreshControls('Street tiles are unavailable. Showing the local metro map. Use Show street map to retry.');
+        } else {
+            refreshControls('Some street tiles could not load. The local map remains available.');
+        }
+    });
+
+    toggle.addEventListener('click', function() {
+        wantsStreetTiles = !map.hasLayer(streetLayer);
+        if (wantsStreetTiles) {
+            showStreetTiles();
+        } else {
+            map.removeLayer(streetLayer);
+            refreshControls('Showing the local metro map. Street tiles are turned off.');
+        }
+    });
+    window.addEventListener('offline', function() {
+        map.removeLayer(streetLayer);
+        refreshControls('You are offline. Showing the local metro map.');
+    });
+    window.addEventListener('online', function() {
+        if (wantsStreetTiles) showStreetTiles();
+        else refreshControls('Showing the local metro map. Street tiles are turned off.');
+    });
+
+    showStreetTiles();
+}
+
 function buildStationMap() {
     var mapEl = document.getElementById('stationMap');
     if (!mapEl || typeof L === 'undefined') return;
@@ -2647,52 +2743,6 @@ function buildStationMap() {
         attributionControl: false
     }).setView([30.045, 31.24], 11);
 
-    function createOfflineGridLayer() {
-        var grid = L.gridLayer({ attribution: 'Offline fallback map layer' });
-        grid.createTile = function(coords) {
-            var tile = document.createElement('div');
-            tile.style.background = ((coords.x + coords.y) % 2 === 0) ? '#eef3f2' : '#e7efed';
-            tile.style.border = '1px solid rgba(30,72,63,0.06)';
-            return tile;
-        };
-        return grid;
-    }
-
-    // Primary online basemap + local offline grid fallback for connectivity drops.
-    var onlineBaseLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-        subdomains: 'abcd',
-        maxZoom: 19,
-        attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
-    });
-    var offlineBaseLayer = createOfflineGridLayer();
-    var consecutiveTileErrors = 0;
-
-    onlineBaseLayer.on('tileload', function() {
-        consecutiveTileErrors = 0;
-    });
-    onlineBaseLayer.on('tileerror', function() {
-        consecutiveTileErrors += 1;
-        if (consecutiveTileErrors >= 3 && !map.hasLayer(offlineBaseLayer)) {
-            offlineBaseLayer.addTo(map);
-            offlineBaseLayer.bringToBack();
-        }
-    });
-
-    function syncBaseLayerWithConnectivity() {
-        var isOnline = navigator.onLine !== false;
-        if (isOnline) {
-            if (map.hasLayer(offlineBaseLayer)) map.removeLayer(offlineBaseLayer);
-            if (!map.hasLayer(onlineBaseLayer)) map.addLayer(onlineBaseLayer);
-        } else {
-            if (map.hasLayer(onlineBaseLayer)) map.removeLayer(onlineBaseLayer);
-            if (!map.hasLayer(offlineBaseLayer)) map.addLayer(offlineBaseLayer);
-        }
-    }
-
-    syncBaseLayerWithConnectivity();
-    window.addEventListener('online', syncBaseLayerWithConnectivity);
-    window.addEventListener('offline', syncBaseLayerWithConnectivity);
-
     L.control.attribution({ prefix: false }).addTo(map);
 
     var linesMeta = [
@@ -2787,6 +2837,8 @@ function buildStationMap() {
             map.setZoom(11);
         }
     }
+
+    addMapBackground(map);
 
     function updateStationLabels() {
         var showLabels = map.getZoom() >= 13;
