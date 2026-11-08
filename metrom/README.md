@@ -18,6 +18,16 @@ Opening the app as a `file:` URL uses only the local map; serve it over HTTP(S)
 to load street tiles with the required browser referrer.
 Zoom in for station labels or select a station for details.
 
+Selected departure and destination stations appear immediately as green and red
+pins. Planned transfers use amber pins; clicking a station or finding the nearest
+station highlights it with a blue pin. Pin tips point to the station coordinates.
+Resetting or changing the journey clears stale highlights.
+
+Station-area circles are displayed at half their detection radius, and the
+rectangular bounds at half their original width and height around the same center.
+These are visual changes only: GPS station detection, arrival thresholds and
+downloaded station bounds retain their original sizes.
+
 The service worker stores local app assets for use after an initial visit, but
 does not cache or prefetch external tiles. Standard browser HTTP caching honors
 the provider's caching headers. Street tiles require connectivity and are not

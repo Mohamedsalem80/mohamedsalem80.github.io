@@ -86,7 +86,7 @@ function planner() {
     const shape = () => ({
         addTo() { return this; }, bindPopup() { return this; }, setLatLng() {}, setLatLngs() {}
     });
-    c.L = { circleMarker: shape, polyline: shape, latLngBounds: points => points };
+    c.L = { circleMarker: shape, marker: shape, divIcon: options => options, polyline: shape, latLngBounds: points => points };
     c.window.metroMapState = {
         map: { fitBounds() {}, panTo() {} },
         travelLayer: { clearLayers() {} },

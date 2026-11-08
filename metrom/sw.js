@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'metrom-static-v9';
+const CACHE_VERSION = 'metrom-static-v11';
 const CORE_ASSETS = [
   './',
   './index.html',

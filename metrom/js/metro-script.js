@@ -370,6 +370,7 @@ function invalidateCurrentRoute(showMessage) {
     if (startTravelBtn) startTravelBtn.disabled = true;
     stopTravelMode(true);
     clearMapHighlights();
+    renderPlannerSelection();
 
     if (showMessage && hadRoute) {
         setPlannerFeedback("Journey changed. Find the route again to refresh the summary.", "notice");
@@ -546,7 +547,7 @@ function renderStationAreasOverlay() {
         var color = stationAreaColor(st.lineId);
 
         L.circle([st.lat, st.lng], {
-            radius: radiusKm * 1000,
+            radius: radiusKm * 500,
             color: color,
             weight: 1,
             opacity: 0.55,
@@ -557,7 +558,12 @@ function renderStationAreasOverlay() {
 
         var bounds = stationBoundsByKey[key];
         if (bounds) {
-            L.rectangle([[bounds.minLat, bounds.minLng], [bounds.maxLat, bounds.maxLng]], {
+            var latInset = (bounds.maxLat - bounds.minLat) / 4;
+            var lngInset = (bounds.maxLng - bounds.minLng) / 4;
+            L.rectangle([
+                [bounds.minLat + latInset, bounds.minLng + lngInset],
+                [bounds.maxLat - latInset, bounds.maxLng - lngInset]
+            ], {
                 color: color,
                 weight: 1,
                 opacity: 0.65,
@@ -852,6 +858,69 @@ function getGeoStationByPlanner(lineValue, stationName) {
     return null;
 }
 
+function createStationPin(latLng, kind, label) {
+    var icon = L.divIcon({
+        className: 'station-pin station-pin-' + kind,
+        html: '<svg width="32" height="42" viewBox="0 0 32 42" aria-hidden="true">' +
+            '<path d="M16 2C8.3 2 2 8.3 2 16c0 10.5 14 24 14 24s14-13.5 14-24C30 8.3 23.7 2 16 2Z" fill="currentColor" stroke="#fff" stroke-width="2"/>' +
+            '<circle cx="16" cy="16" r="5" fill="#fff"/></svg>',
+        iconSize: [32, 42],
+        iconAnchor: [16, 40],
+        popupAnchor: [0, -36]
+    });
+    return L.marker(latLng, {
+        icon: icon,
+        title: label,
+        riseOnHover: true,
+        zIndexOffset: kind === 'selected' ? 1200 : 1000
+    }).bindPopup(label);
+}
+
+function updateStationPinLabels() {
+    var state = window.metroMapState;
+    if (!state || !state.stationMarkers) return;
+    var pinnedPoints = {};
+    [state.routeLayer, state.contextLayer, state.selectionLayer].forEach(function(layer) {
+        layer.getLayers().forEach(function(marker) {
+            if (!marker.options.icon) return;
+            var point = marker.getLatLng();
+            pinnedPoints[point.lat + ',' + point.lng] = true;
+        });
+    });
+    state.stationMarkers.forEach(function(marker) {
+        var point = marker.getLatLng();
+        var tooltip = marker.getTooltip();
+        tooltip.options.offset = L.point(0, pinnedPoints[point.lat + ',' + point.lng] ? -42 : -8);
+        tooltip.update();
+    });
+}
+
+function renderPlannerSelection() {
+    if (!window.metroMapState || !window.metroMapState.selectionLayer) return;
+    var layer = window.metroMapState.selectionLayer;
+    layer.clearLayers();
+    var startLine = sline.value || 'one';
+    var endLine = eline.value || 'one';
+    var points = [];
+
+    [
+        { select: getActivePickupSelect(startLine), line: startLine, kind: 'start', label: 'Route start: ' },
+        { select: getActiveDropoffSelect(endLine), line: endLine, kind: 'end', label: 'Route end: ' }
+    ].forEach(function(selection) {
+        if (!selection.select || !selection.select.value) return;
+        var station = getGeoStationByPlanner(selection.line, selection.select.value);
+        if (!station) return;
+        var point = [station.lat, station.lng];
+        createStationPin(point, selection.kind, selection.label + station.plannerName).addTo(layer);
+        points.push(point);
+    });
+    updateStationPinLabels();
+
+    if (points.length) {
+        window.metroMapState.map.fitBounds(L.latLngBounds(points), { padding: [36, 36], maxZoom: 14 });
+    }
+}
+
 function clearMapHighlights() {
     if (!window.metroMapState) return;
     if (window.metroMapState.routeLayer) {
@@ -860,6 +929,10 @@ function clearMapHighlights() {
     if (window.metroMapState.contextLayer) {
         window.metroMapState.contextLayer.clearLayers();
     }
+    if (window.metroMapState.selectionLayer) {
+        window.metroMapState.selectionLayer.clearLayers();
+    }
+    updateStationPinLabels();
 }
 
 function clampValue(value, min, max) {
@@ -1158,12 +1231,14 @@ function renderTravelVisuals(displayPoint, nearestStation, remaining, accuracyMe
                 fillOpacity: 1
             }).addTo(travelLayer),
             connector: L.polyline([[displayPoint.lat, displayPoint.lng], [nearestStation.lat, nearestStation.lng]], {
+                interactive: false,
                 color: '#90CAF9',
                 weight: 4,
                 dashArray: '8,8',
                 opacity: 0.95
             }).addTo(travelLayer),
             remainingPath: L.polyline(remaining, {
+                interactive: false,
                 color: '#FFC107',
                 weight: 5,
                 opacity: 0.95
@@ -1595,6 +1670,9 @@ function showRouteOnMap(routeStations, startLine, endLine, transferStation) {
     if (routeLayer) {
         routeLayer.clearLayers();
     }
+    if (window.metroMapState.selectionLayer) {
+        window.metroMapState.selectionLayer.clearLayers();
+    }
 
     routeStations.forEach(function(name, idx) {
         var activeLine = startLine;
@@ -1624,43 +1702,27 @@ function showRouteOnMap(routeStations, startLine, endLine, transferStation) {
         resetTravelTrackingState();
     }
     L.polyline(latLngs, {
+        interactive: false,
         color: '#9C27B0',
         weight: 6,
         opacity: 0.95
     }).addTo(routeLayer);
 
-    L.circleMarker([points[0].lat, points[0].lng], {
-        radius: 8,
-        color: '#1b5e20',
-        weight: 2,
-        fillColor: '#4CAF50',
-        fillOpacity: 1
-    }).bindPopup('Route start: ' + points[0].plannerName).addTo(routeLayer);
+    createStationPin([points[0].lat, points[0].lng], 'start', 'Route start: ' + points[0].plannerName).addTo(routeLayer);
 
     var endPoint = points[points.length - 1];
-    L.circleMarker([endPoint.lat, endPoint.lng], {
-        radius: 8,
-        color: '#8e0000',
-        weight: 2,
-        fillColor: '#F44336',
-        fillOpacity: 1
-    }).bindPopup('Route end: ' + endPoint.plannerName).addTo(routeLayer);
+    createStationPin([endPoint.lat, endPoint.lng], 'end', 'Route end: ' + endPoint.plannerName).addTo(routeLayer);
 
     // Mark transfer station on the map
     if (transferStation && transferNorm) {
-        points.forEach(function(point) {
-            if (normalizeStationName(point.plannerName) === transferNorm) {
-                L.circleMarker([point.lat, point.lng], {
-                    radius: 10,
-                    color: '#FF9800',
-                    weight: 3,
-                    fillColor: '#FFC107',
-                    fillOpacity: 1
-                }).bindPopup('Transfer station: ' + point.plannerName + ' ⇄').addTo(routeLayer);
+        points.forEach(function(point, index) {
+            if (index > 0 && index < points.length - 1 && normalizeStationName(point.plannerName) === transferNorm) {
+                createStationPin([point.lat, point.lng], 'transfer', 'Transfer station: ' + point.plannerName + ' ⇄').addTo(routeLayer);
             }
         });
     }
 
+    updateStationPinLabels();
     map.fitBounds(L.latLngBounds(latLngs), { padding: [36, 36] });
 }
 
@@ -1682,21 +1744,17 @@ function showNearestPointOnMap(userLat, userLng, nearest) {
         fillOpacity: 1
     }).bindPopup('Your position').addTo(contextLayer);
 
-    L.circleMarker(stationPoint, {
-        radius: 8,
-        color: '#1b5e20',
-        weight: 2,
-        fillColor: '#66BB6A',
-        fillOpacity: 1
-    }).bindPopup('Closest station: ' + nearest.name + ' (' + nearest.lineId + ')').addTo(contextLayer);
+    createStationPin(stationPoint, 'selected', 'Closest station: ' + nearest.name + ' (' + nearest.lineId + ')').addTo(contextLayer);
 
     L.polyline([userPoint, stationPoint], {
+        interactive: false,
         color: '#81D4FA',
         weight: 4,
         dashArray: '8,8',
         opacity: 0.9
     }).addTo(contextLayer);
 
+    updateStationPinLabels();
     map.fitBounds(L.latLngBounds([userPoint, stationPoint]), { padding: [42, 42] });
 }
 
@@ -1728,23 +1786,12 @@ function showNearestStartEndOnMap(curLat, curLng, dstLat, dstLng, nearestStart, 
         fillOpacity: 1
     }).bindPopup('Destination coordinate').addTo(contextLayer);
 
-    L.circleMarker(startStationPoint, {
-        radius: 8,
-        color: '#1b5e20',
-        weight: 2,
-        fillColor: '#4CAF50',
-        fillOpacity: 1
-    }).bindPopup('Closest start station: ' + nearestStart.name).addTo(contextLayer);
+    createStationPin(startStationPoint, 'start', 'Closest start station: ' + nearestStart.name).addTo(contextLayer);
 
-    L.circleMarker(endStationPoint, {
-        radius: 8,
-        color: '#8e0000',
-        weight: 2,
-        fillColor: '#F44336',
-        fillOpacity: 1
-    }).bindPopup('Closest end station: ' + nearestEnd.name).addTo(contextLayer);
+    createStationPin(endStationPoint, 'end', 'Closest end station: ' + nearestEnd.name).addTo(contextLayer);
 
     L.polyline([currentPoint, startStationPoint], {
+        interactive: false,
         color: '#80DEEA',
         weight: 4,
         dashArray: '8,8',
@@ -1752,12 +1799,14 @@ function showNearestStartEndOnMap(curLat, curLng, dstLat, dstLng, nearestStart, 
     }).addTo(contextLayer);
 
     L.polyline([destinationPoint, endStationPoint], {
+        interactive: false,
         color: '#FFAB91',
         weight: 4,
         dashArray: '8,8',
         opacity: 0.9
     }).addTo(contextLayer);
 
+    updateStationPinLabels();
     map.fitBounds(L.latLngBounds([currentPoint, destinationPoint, startStationPoint, endStationPoint]), { padding: [42, 42] });
 }
 
@@ -2804,6 +2853,16 @@ function buildStationMap() {
                 className: 'station-label'
             });
 
+            marker.on('click', function() {
+                var selectionLayer = window.metroMapState.selectionLayer;
+                selectionLayer.clearLayers();
+                createStationPin(latlng, 'selected', st.name)
+                    .bindPopup(marker.getPopup().getContent())
+                    .addTo(selectionLayer)
+                    .openPopup();
+                updateStationPinLabels();
+            });
+
             labelMarkers.push(marker);
         });
 
@@ -2816,6 +2875,7 @@ function buildStationMap() {
 
                 if (segLatLngs.length > 1) {
                     L.polyline(segLatLngs, {
+                        interactive: false,
                         color: line.color,
                         weight: 4,
                         opacity: 0.9
@@ -2824,6 +2884,7 @@ function buildStationMap() {
             });
         } else if (latlngs.length > 1) {
             L.polyline(latlngs, {
+                interactive: false,
                 color: line.color,
                 weight: 4,
                 opacity: 0.9
@@ -2857,14 +2918,17 @@ function buildStationMap() {
     window.metroGeoStations = geoStations;
     window.metroMapState = {
         map: map,
+        stationMarkers: labelMarkers,
         routeLayer: L.layerGroup().addTo(map),
         contextLayer: L.layerGroup().addTo(map),
+        selectionLayer: L.layerGroup().addTo(map),
         travelLayer: L.layerGroup().addTo(map),
         stationAreaLayer: L.layerGroup().addTo(map)
     };
 
     addStationAreaToggleControl(map);
     renderStationAreasOverlay();
+    renderPlannerSelection();
 
     loadLocalStationAreas();
 }

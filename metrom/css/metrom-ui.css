@@ -68,6 +68,29 @@ html[dir="rtl"] .planner-brand > span {
     font-size: 0.85rem;
 }
 
+.station-pin {
+    border: 0;
+    background: transparent;
+    color: var(--line-one);
+    filter: drop-shadow(0 3px 3px rgba(9, 17, 15, 0.5));
+}
+
+.station-pin svg {
+    display: block;
+}
+
+.station-pin-start {
+    color: var(--forest-bright);
+}
+
+.station-pin-end {
+    color: var(--line-two);
+}
+
+.station-pin-transfer {
+    color: var(--gold);
+}
+
 html[dir="rtl"] .leaflet-tooltip,
 html[dir="rtl"] .leaflet-popup-content {
     direction: rtl;
