@@ -58,6 +58,10 @@ Arabic uses right-to-left layout; coordinates and map geometry stay left-to-righ
 The preference is stored locally and shared between the two public pages.
 The separate GPS data recorder utility remains English-only.
 
+The overview's artwork and shading follow the interface direction: artwork sits
+opposite the desktop copy, with the darkest shading behind the text. Narrow
+screens use vertical shading in both languages.
+
 Translations are maintained in `js/metrom-i18n.js`: exact UI messages, station
 names/aliases and templates for dynamic results. Translation changes only display
 text and accessibility attributes, never station IDs, select values or route data.

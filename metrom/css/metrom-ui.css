@@ -303,12 +303,17 @@ select:focus-visible {
     background-size: 72px 72px;
 }
 
+html[dir="rtl"] .landing-page .hero {
+    --hero-overlay-angle: 270deg;
+    --hero-art-position: left center;
+}
+
 .landing-page .hero::after {
     content: "";
     position: absolute;
     inset: 0;
     z-index: 1;
-    background: linear-gradient(90deg, rgba(9, 17, 15, 0.98) 0%, rgba(9, 17, 15, 0.84) 35%, rgba(9, 17, 15, 0.18) 74%, rgba(9, 17, 15, 0.08) 100%);
+    background: linear-gradient(var(--hero-overlay-angle, 90deg), rgba(9, 17, 15, 0.98) 0%, rgba(9, 17, 15, 0.84) 35%, rgba(9, 17, 15, 0.18) 74%, rgba(9, 17, 15, 0.08) 100%);
     pointer-events: none;
 }
 
@@ -322,7 +327,7 @@ select:focus-visible {
     align-items: flex-start;
     justify-content: center;
     color: var(--white);
-    text-align: left;
+    text-align: start;
 }
 
 .landing-page .hero-text > .eyebrow {
@@ -420,7 +425,8 @@ select:focus-visible {
 
 .landing-page .parallax {
     position: absolute !important;
-    inset: 3% -3% 3% 35%;
+    inset-block: 3%;
+    inset-inline: 35% -3%;
     z-index: 0;
     width: auto !important;
     max-width: none !important;
@@ -436,11 +442,11 @@ select:focus-visible {
     height: 100%;
 }
 
-.landing-page .parallax-layer img {
+.landing-page .hero .parallax .parallax-layer img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    object-position: right center;
+    object-position: var(--hero-art-position, right center);
 }
 
 .network-summary {
@@ -464,7 +470,7 @@ select:focus-visible {
 }
 
 .network-summary span + span {
-    border-left: 1px solid var(--line-dark);
+    border-inline-start: 1px solid var(--line-dark);
 }
 
 .network-summary strong {
@@ -1465,7 +1471,8 @@ select:focus-visible {
     }
 
     .landing-page .parallax {
-        inset: 24% -8% 4% 8%;
+        inset-block: 24% 4%;
+        inset-inline: 8% -8%;
         opacity: 0.46;
     }
 
@@ -1535,7 +1542,8 @@ select:focus-visible {
     }
 
     .landing-page .parallax {
-        inset: 34% -18% 8% 0;
+        inset-block: 34% 8%;
+        inset-inline: 0 -18%;
         opacity: 0.38;
     }
 
@@ -1553,7 +1561,7 @@ select:focus-visible {
 
     .network-summary span + span {
         border-top: 1px solid var(--line-dark);
-        border-left: 0;
+        border-inline-start: 0;
     }
 
     .landing-page .features {

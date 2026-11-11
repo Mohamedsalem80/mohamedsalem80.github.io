@@ -267,7 +267,7 @@ test('service worker caches all local assets and removes only obsolete Metrom ca
         },
         caches: {
             open: async () => ({ addAll: async values => { assets = values; } }),
-            keys: async () => ['metrom-static-v7', 'metrom-tiles-v1', 'metrom-static-v8', 'metrom-static-v9', 'metrom-static-v10', 'metrom-static-v11', 'other-app'],
+            keys: async () => ['metrom-static-v7', 'metrom-tiles-v1', 'metrom-static-v8', 'metrom-static-v9', 'metrom-static-v10', 'metrom-static-v11', 'metrom-static-v12', 'other-app'],
             delete: async key => { deleted.push(key); }
         }
     });
@@ -280,5 +280,5 @@ test('service worker caches all local assets and removes only obsolete Metrom ca
     assert.ok(assets.includes('./js/metrom-i18n.js'));
     handlers.activate(event);
     await pending;
-    assert.deepEqual(deleted, ['metrom-static-v7', 'metrom-tiles-v1', 'metrom-static-v8', 'metrom-static-v9', 'metrom-static-v10']);
+    assert.deepEqual(deleted, ['metrom-static-v7', 'metrom-tiles-v1', 'metrom-static-v8', 'metrom-static-v9', 'metrom-static-v10', 'metrom-static-v11']);
 });
